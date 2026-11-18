@@ -13,14 +13,21 @@
   // Any slot left empty keeps its gold placeholder artwork.
   var MEDIA = {
     logo: '',        // e.g. 'assets/img/logo.svg' (replaces the text wordmark)
-    hero: '',        // e.g. 'assets/img/hero.jpg' (wide, 2400px+)
-    about1: '',      // tall portrait
-    about2: '',      // small landscape
-    service1: '', service2: '', service3: '', service4: '',
-    statement: '',   // wide background
-    gallery1: '', gallery2: '', gallery3: '', gallery4: '', gallery5: '', gallery6: ''
+    hero: 'assets/img/gala-dinner.jpg',
+    about1: 'assets/img/conference-opening.jpg',
+    about2: 'assets/img/led-stage.jpg',
+    service1: 'assets/img/conference-opening.jpg',
+    service2: '',
+    service3: 'assets/img/showroom-reception.jpg',
+    service4: 'assets/img/production-desk.jpg',
+    statement: 'assets/img/production-desk.jpg',
+    gallery1: 'assets/img/gala-dinner.jpg',
+    gallery2: '',
+    gallery3: 'assets/img/showroom-reception.jpg',
+    gallery4: 'assets/img/conference-opening.jpg',
+    gallery5: '',
+    gallery6: 'assets/img/production-desk.jpg'
   };
-
   /* ------------------------------------------------------------------ */
 
   var doc = document, root = doc.documentElement, body = doc.body;
