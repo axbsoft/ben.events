@@ -143,6 +143,16 @@
     });
   }
 
+  /* ---------- Services: expanding cards ---------- */
+  var rows = $$('.srv__row');
+  function activate(row) { rows.forEach(function (r) { r.classList.toggle('is-active', r === row); }); }
+  rows.forEach(function (r) {
+    r.addEventListener('mouseenter', function () { if (fine) activate(r); });
+    r.addEventListener('click', function () { activate(r); });
+    r.addEventListener('focus', function () { activate(r); });
+  });
+  if (rows[0]) activate(rows[0]);
+
   /* ---------- Menu ---------- */
   var burger = $('.burger'), menu = $('.menu');
   function toggleMenu(open) {
@@ -222,7 +232,7 @@
       requestAnimationFrame(loop);
     })();
     doc.addEventListener('mouseover', function (e) {
-      var hit = e.target.closest && e.target.closest('a, button, .srv__row, .card, input, textarea, select');
+      var hit = e.target.closest && e.target.closest('a, button, .srv__row, .card');
       body.classList.toggle('cursor-hover', !!hit);
     });
     doc.addEventListener('mouseleave', function () { body.classList.add('cursor-out'); });
@@ -248,7 +258,7 @@
     });
   }
 
-  /* ---------- Hero canvas: drifting gold light ---------- */
+  /* ---------- Hero canvas: drifting brand-coloured light ---------- */
   var canvas = $('.hero__canvas');
   if (canvas && !reduced) {
     var ctx = canvas.getContext('2d'), W, H, dpr, motes = [], running = true, hero = $('.hero');
@@ -268,6 +278,7 @@
         x: Math.random() * W, y: anywhere ? Math.random() * H : H + 20,
         r: 0.6 + z * z * 3.2, z: z,
         vy: -(0.08 + z * 0.35), vx: (Math.random() - 0.5) * 0.15,
+        c: ['249,178,78', '233,75,91', '0,173,176', '93,190,163'][Math.floor(Math.random() * 4)],
         a: 0.15 + Math.random() * 0.55, tw: Math.random() * Math.PI * 2, ts: 0.006 + Math.random() * 0.02
       };
     }
@@ -281,9 +292,9 @@
         if (m.y < -20 || m.x < -20 || m.x > W + 20) { motes[i] = mote(false); continue; }
         var a = m.a * (0.55 + 0.45 * Math.sin(m.tw));
         var g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 5);
-        g.addColorStop(0, 'rgba(240,214,160,' + a.toFixed(3) + ')');
-        g.addColorStop(0.25, 'rgba(201,169,106,' + (a * 0.45).toFixed(3) + ')');
-        g.addColorStop(1, 'rgba(201,169,106,0)');
+        g.addColorStop(0, 'rgba(255,255,255,' + a.toFixed(3) + ')');
+        g.addColorStop(0.25, 'rgba(' + m.c + ',' + (a * 0.5).toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(' + m.c + ',0)');
         ctx.fillStyle = g;
         ctx.beginPath(); ctx.arc(m.x, m.y, m.r * 5, 0, 6.2832); ctx.fill();
       }
