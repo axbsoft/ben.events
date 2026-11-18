@@ -1,4 +1,4 @@
-/* Ben Events — interactions. Vanilla JS, no dependencies. */
+/* benevents agency — interactions. Vanilla JS, no dependencies. */
 (function () {
   'use strict';
 
@@ -12,21 +12,23 @@
   // Photos and logo. Put files in assets/img/ and set the path here.
   // Any slot left empty keeps its gold placeholder artwork.
   var MEDIA = {
-    logo: '',        // e.g. 'assets/img/logo.svg' (replaces the text wordmark)
+    logo: '',        // e.g. 'assets/img/logo-white.svg' (replaces the drawn wordmark)
     hero: 'assets/img/gala-dinner.jpg',
-    about1: 'assets/img/conference-opening.jpg',
-    about2: 'assets/img/led-stage.jpg',
+    about1: 'assets/img/led-stage-set.jpg',
+    about2: 'assets/img/forum-panel.jpg',
     service1: 'assets/img/conference-opening.jpg',
-    service2: '',
+    service2: 'assets/img/graduation-ceremony.jpg',
     service3: 'assets/img/showroom-reception.jpg',
     service4: 'assets/img/production-desk.jpg',
-    statement: 'assets/img/production-desk.jpg',
+    statement: 'assets/img/awards-celebration.jpg',
     gallery1: 'assets/img/gala-dinner.jpg',
-    gallery2: '',
-    gallery3: 'assets/img/showroom-reception.jpg',
-    gallery4: 'assets/img/conference-opening.jpg',
-    gallery5: '',
-    gallery6: 'assets/img/production-desk.jpg'
+    gallery2: 'assets/img/graduation-ceremony.jpg',
+    gallery3: 'assets/img/forum-panel.jpg',
+    gallery4: 'assets/img/awards-celebration.jpg',
+    gallery5: 'assets/img/led-stage-set.jpg',
+    gallery6: 'assets/img/showroom-reception.jpg',
+    gallery7: 'assets/img/conference-opening.jpg',
+    gallery8: 'assets/img/production-desk.jpg'
   };
   /* ------------------------------------------------------------------ */
 
