@@ -104,6 +104,7 @@
       <img class="deck__img" alt="" draggable="false" decoding="async">
       <img class="deck__img" alt="" draggable="false" decoding="async">
       <div class="deck__links"></div>
+      <a class="deck__try deck__try--in" href="#demo" hidden><span data-t="deck.try">Essayer cette animation</span><i aria-hidden="true"></i></a>
       <span class="deck__load" aria-hidden="true"></span>
       <button class="deck__exit" type="button" data-act="full" aria-label="Quitter le plein écran" data-t-aria="deck.exit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
       <span class="deck__badge" aria-hidden="true"></span>
@@ -114,6 +115,7 @@
   <div class="deck__foot">
     <div class="deck__dots" role="group" aria-label="Diapositives" data-t-aria="deck.dots"></div>
     <p class="deck__hint"><span class="deck__hint-keys" data-t="deck.hint">← → pour naviguer · F plein écran · G vue d’ensemble</span><span class="deck__hint-touch" data-t="deck.hinttouch">Balayez pour naviguer · tournez votre téléphone pour agrandir</span></p>
+    <a class="deck__try deck__try--out" href="#demo" hidden><span data-t="deck.try">Essayer cette animation</span><i aria-hidden="true"></i></a>
     <p class="deck__note" role="status" aria-live="polite"></p>
   </div>
 
@@ -122,7 +124,7 @@
   </div>
 
   <!-- Demonstration: the visitor's first name in Chinese calligraphy (assets/js/calligraphy.js) -->
-  <section class="calli" aria-labelledby="calli-title">
+  <section class="calli" id="demo" aria-labelledby="calli-title">
     <div class="calli__intro">
       <p class="eyebrow"><i></i><span data-t="calli.eyebrow">Démonstration · Animation EXEED</span></p>
       <h2 class="calli__title" id="calli-title"><span data-t="calli.title1">Votre prénom en</span> <em data-t="calli.title2">calligraphie chinoise</em></h2>

@@ -8,7 +8,8 @@
    print cannot differ from what was approved and does not depend on installed fonts.
 
    Data: assets/calligraphy/data.json (built by tools/calligraphy/build.py)
-   Templates: the three SVG files in assets/calligraphy/templates/, used as supplied. */
+   Templates: assets/calligraphy/templates/. A template is either a picture (JPEG, printed as
+   the background) or an SVG file (drawn as vector shapes); the name is drawn on top. */
 (function () {
   'use strict';
 
@@ -20,9 +21,14 @@
   var LOGO = '';                    // e.g. 'assets/calligraphy/logo.svg' : the official logo file
   var EXAMPLE = 'Yassine';          // shown before the visitor types anything
   var MAX_LENGTH = 24;
-  // box: the room for the characters, in mm (width, height), around the centre given in the file
+  // box: the room for the characters, in mm (width, height), around their centre
+  // A picture template gives everything in mm from its top left corner:
+  //   size (w, h), han (centre of the characters), line (the rule the visitor's name sits on:
+  //   its height, the gap between its two dashes, the smallest size before the name moves
+  //   under the rule), edge (the paper colour, used for the bleed).
   var TEMPLATES = [
-    { id: 'bookmark', file: 'templates/bookmark_60x180mm.svg', flow: 'v', box: [34, 62], name: 8, nameMax: 42, logo: [14.5, 2.5] },   // narrow: the branch reaches x = 22
+    { id: 'bookmark', image: 'templates/exeed-bookmark_60x180mm.jpg', w: 60, h: 180, flow: 'v', box: [30, 56], han: [30, 72],
+      name: 5.6, nameMax: 40, line: { y: 107.55, gap: [20.6, 39.7], min: 4.3, below: 113.9 }, edge: [249, 224, 187], seal: false, brand: false },
     { id: 'card', file: 'templates/calligraphy_card_A6_105x148mm.svg', flow: 'h', box: [78, 42], name: 9.5, nameMax: 76, logo: [34, 4.2] },
     { id: 'charm', file: 'templates/lucky_charm_70x120mm.svg', flow: 'v', box: [44, 38], name: 7.5, nameMax: 48, logo: [25, 3.2] }
   ];
@@ -473,17 +479,25 @@
     ink = ink.map(function (g) { return move(g, [1, 0, 0, 1, dx, dy]); });
     ink.forEach(function (g) { shapes.push({ segs: g, fill: INK, ink: true }); });
     b = [b[0] + dx, b[1] + dy, b[2] + dx, b[3] + dy];
-    // a small red seal with the last character, lower right of the name
-    var side = Math.max(4.4, Math.min(7.5, em * .26)), sx = Math.min(b[2] + 1.4, art.w - 6.6 - side), sy = b[3] - side - em * .04;
-    shapes.push({ segs: box(sx, sy, side, side, side * .14), fill: SEAL });
-    var last = total.charAt(total.length - 1), k = side * .78 / D.zh.upm, lb = bounds([han(last)]);
-    shapes.push({ segs: move(han(last), [k, 0, 0, k, sx + side / 2 - (lb[0] + lb[2]) / 2 * k, sy + side / 2 - (lb[1] + lb[3]) / 2 * k]), fill: art.paper || [255, 255, 255] });
+    // a small red seal with the last character, lower right of the name (unless the template has its own)
+    if (tpl.seal !== false) {
+      var side = Math.max(4.4, Math.min(7.5, em * .26)), sx = Math.min(b[2] + 1.4, art.w - 6.6 - side), sy = b[3] - side - em * .04;
+      shapes.push({ segs: box(sx, sy, side, side, side * .14), fill: SEAL });
+      var last = total.charAt(total.length - 1), k = side * .78 / D.zh.upm, lb = bounds([han(last)]);
+      shapes.push({ segs: move(han(last), [k, 0, 0, k, sx + side / 2 - (lb[0] + lb[2]) / 2 * k, sy + side / 2 - (lb[1] + lb[3]) / 2 * k]), fill: art.paper || [255, 255, 255] });
+    }
     // the visitor's own name
-    var fs = tpl.name, run = glyphs(D.la, res.name, fs, 0);
+    var fs = tpl.name, run = glyphs(D.la, res.name, fs, 0), nx = art.w / 2, ny = art.notes.name;
+    if (tpl.line) {                   // between the two dashes of a rule, or under it when it is too long
+      var room = tpl.line.gap[1] - tpl.line.gap[0] - 2.2;
+      if (run.width > room) { fs = Math.max(tpl.line.min, fs * room / run.width); run = glyphs(D.la, res.name, fs, 0); }
+      nx = (tpl.line.gap[0] + tpl.line.gap[1]) / 2; ny = tpl.line.y + fs * .2;
+      if (run.width > room + .05) { fs = tpl.name; run = glyphs(D.la, res.name, fs, 0); nx = art.w / 2; ny = tpl.line.below; }
+    }
     if (run.width > tpl.nameMax) { fs *= tpl.nameMax / run.width; run = glyphs(D.la, res.name, fs, 0); }
-    run.list.forEach(function (g) { shapes.push({ segs: move(g, [1, 0, 0, 1, art.w / 2 - run.width / 2, art.notes.name]), fill: INK }); });
+    run.list.forEach(function (g) { shapes.push({ segs: move(g, [1, 0, 0, 1, nx - run.width / 2, ny]), fill: INK }); });
     // the logo area
-    if (tpl.mark) {
+    if (tpl.brand === false) { /* the logo is part of the picture */ } else if (tpl.mark) {
       var mb = tpl.mark.box, ms = Math.min(tpl.logo[0] / (mb[2] - mb[0]), tpl.logo[1] * 1.6 / (mb[3] - mb[1]));
       tpl.mark.shapes.forEach(function (sh) {
         var o = {}; for (var key in sh) o[key] = sh[key];
@@ -496,7 +510,7 @@
       if (br.width > tpl.logo[0]) { cap *= tpl.logo[0] / br.width; br = glyphs(D.caps, BRAND, cap, .2); }
       br.list.forEach(function (g) { shapes.push({ segs: move(g, [1, 0, 0, 1, art.notes.logo[0] - br.width / 2, art.notes.logo[1] + cap * .36]), fill: GOLD }); });
     }
-    return { w: art.w, h: art.h, shapes: shapes, paper: art.paper };
+    return { w: art.w, h: art.h, shapes: shapes, paper: art.paper, pic: tpl.pic || null };
   }
   function size(tpl, lines) {
     var longest = Math.max.apply(null, lines.map(function (l) { return l.length; }));
@@ -514,7 +528,8 @@
       if (sh.rule === 'evenodd') a += ' fill-rule="evenodd"';
       return '<path' + (sh.ink ? ' class="ink"' : '') + a + ' d="' + dOf(sh.segs) + '"/>';
     }).join('');
-    return '<svg class="' + cls + '" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + page.w + ' ' + page.h + '" role="img">' + body + '</svg>';
+    var pic = page.pic ? '<image href="' + page.pic.url + '" x="0" y="0" width="' + page.w + '" height="' + page.h + '" preserveAspectRatio="none"/>' : '';
+    return '<svg class="' + cls + '" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + page.w + ' ' + page.h + '" role="img">' + pic + body + '</svg>';
   }
 
   var MM = 72 / 25.4;
@@ -524,6 +539,10 @@
     var rgb = function (col) { return col.map(function (v) { return n(v / 255); }).join(' '); };
     // work in millimetres, y pointing down, origin at the top left corner of the finished size
     c.push('q ' + n(MM) + ' 0 0 ' + n(-MM) + ' ' + n(pad * MM) + ' ' + n(H - pad * MM) + ' cm 4 M');
+    if (page.pic) {                   // the picture, at the finished size; its paper colour fills the bleed
+      if (shop) c.push(rgb(page.paper) + ' rg ' + [-BLEED, -BLEED, page.w + 2 * BLEED, page.h + 2 * BLEED].map(n).join(' ') + ' re f');
+      c.push('q ' + n(page.w) + ' 0 0 ' + n(-page.h) + ' 0 ' + n(page.h) + ' cm /Im0 Do Q');
+    }
     page.shapes.forEach(function (sh) {
       var segs = sh.segs, ops = [], x = 0, y = 0;
       if (sh.paper && shop) segs = box(-BLEED, -BLEED, page.w + 2 * BLEED, page.h + 2 * BLEED, 0);   // the paper colour runs into the bleed
@@ -559,18 +578,37 @@
     var objs = [
       '<< /Type /Catalog /Pages 2 0 R >>',
       '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
-      '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + n(W) + ' ' + n(H) + '] /TrimBox ' + boxOf(pad) + ' /BleedBox ' + boxOf(shop ? MARKS : 0) + ' /Resources << >> /Contents 4 0 R >>',
+      '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + n(W) + ' ' + n(H) + '] /TrimBox ' + boxOf(pad) + ' /BleedBox ' + boxOf(shop ? MARKS : 0) + ' /Resources << ' + (page.pic ? '/XObject << /Im0 6 0 R >> ' : '') + '>> /Contents 4 0 R >>',
       '<< /Length ' + stream.length + ' >>\nstream\n' + stream + '\nendstream',
       '<< /Title ' + hex(title) + ' /Creator (benevents agency) /Producer (benevents calligraphy) /CreationDate (' + stamp + ') >>'
     ];
-    var out = '%PDF-1.4\n%âãÏÓ\n', at = [];
-    objs.forEach(function (o, i) { at.push(out.length); out += (i + 1) + ' 0 obj\n' + o + '\nendobj\n'; });
-    var xref = out.length;
-    out += 'xref\n0 ' + (objs.length + 1) + '\n0000000000 65535 f \n' + at.map(function (a) { return ('0000000000' + a).slice(-10) + ' 00000 n \n'; }).join('');
-    out += 'trailer\n<< /Size ' + (objs.length + 1) + ' /Root 1 0 R /Info 5 0 R >>\nstartxref\n' + xref + '\n%%EOF\n';
-    var bytes = new Uint8Array(out.length);
-    for (var i = 0; i < out.length; i++) bytes[i] = out.charCodeAt(i) & 255;
+    if (page.pic) objs.push(['<< /Type /XObject /Subtype /Image /Width ' + page.pic.px[0] + ' /Height ' + page.pic.px[1] + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + page.pic.bytes.length + ' >>\nstream\n', page.pic.bytes, '\nendstream']);
+    // the file, byte by byte (the picture is binary)
+    var parts = [], total = 0, at = [];
+    var put = function (x) {
+      if (typeof x === 'string') { var u = new Uint8Array(x.length); for (var i = 0; i < x.length; i++) u[i] = x.charCodeAt(i) & 255; x = u; }
+      parts.push(x); total += x.length;
+    };
+    put('%PDF-1.4\n%\u00e2\u00e3\u00cf\u00d3\n');
+    objs.forEach(function (o, i) { at.push(total); put((i + 1) + ' 0 obj\n'); [].concat(o).forEach(put); put('\nendobj\n'); });
+    var xref = total;
+    put('xref\n0 ' + (objs.length + 1) + '\n0000000000 65535 f \n' + at.map(function (a) { return ('0000000000' + a).slice(-10) + ' 00000 n \n'; }).join(''));
+    put('trailer\n<< /Size ' + (objs.length + 1) + ' /Root 1 0 R /Info 5 0 R >>\nstartxref\n' + xref + '\n%%EOF\n');
+    var bytes = new Uint8Array(total), pos = 0;
+    parts.forEach(function (u) { bytes.set(u, pos); pos += u.length; });
     return bytes;
+  }
+
+  // width and height of a JPEG picture, read from its header
+  function jpegSize(u) {
+    var i = 2;
+    while (i + 9 < u.length) {
+      if (u[i] !== 255) { i++; continue; }
+      var m = u[i + 1];
+      if (m >= 192 && m <= 207 && m !== 196 && m !== 200 && m !== 204) return [(u[i + 7] << 8) | u[i + 8], (u[i + 5] << 8) | u[i + 6]];
+      i += 2 + ((u[i + 2] << 8) | u[i + 3]);
+    }
+    return null;
   }
 
   /* ==================================================================
@@ -588,12 +626,18 @@
   function load() {
     if (state.loading) return state.loading;
     say(t('loading'));
-    var get = function (u, as) { return fetch(BASE + u).then(function (r) { if (!r.ok) throw new Error(u); return as === 'json' ? r.json() : r.text(); }); };
-    var jobs = [get('data.json', 'json')].concat(TEMPLATES.map(function (tp) { return get(tp.file); }));
+    var get = function (u, as) { return fetch(BASE + u).then(function (r) { if (!r.ok) throw new Error(u); return as === 'json' ? r.json() : as === 'bytes' ? r.arrayBuffer() : r.text(); }); };
+    var jobs = [get('data.json', 'json')].concat(TEMPLATES.map(function (tp) { return tp.image ? get(tp.image, 'bytes') : get(tp.file); }));
     if (LOGO) jobs.push(fetch(LOGO).then(function (r) { return r.ok ? r.text() : ''; }, function () { return ''; }));
     state.loading = Promise.all(jobs).then(function (got) {
       D = got[0];
-      TEMPLATES.forEach(function (tp, i) { tp.art = readSvg(got[i + 1]); });
+      TEMPLATES.forEach(function (tp, i) {
+        if (!tp.image) { tp.art = readSvg(got[i + 1]); return; }
+        var bytes = new Uint8Array(got[i + 1]), px = jpegSize(bytes);
+        if (!px) throw new Error(tp.image);
+        tp.pic = { bytes: bytes, px: px, url: URL.createObjectURL(new Blob([bytes], { type: 'image/jpeg' })) };
+        tp.art = { w: tp.w, h: tp.h, shapes: [], paper: tp.edge, notes: { han: tp.han, name: tp.h * .7, logo: [tp.w / 2, tp.h * .1] } };
+      });
       if (LOGO && got[TEMPLATES.length + 1]) {
         var mark = readSvg(got[TEMPLATES.length + 1]);
         mark.shapes = mark.shapes.filter(function (s) { return !s.paper; });

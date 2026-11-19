@@ -9,6 +9,7 @@
 
   var DIR = 'assets/m-automotiv/';          // encrypted files and their manifest
   var STORE = 'ben-client-m-automotiv';     // keeps the page open while the browser tab lives
+  var DEMO_SLIDE = 12;                      // the slide of the calligraphy activity: it offers the demonstration below
   var CHECK = 'benevents:open';
 
   var doc = document, root = doc.documentElement, body = doc.body;
@@ -47,6 +48,7 @@
       'deck.close': 'Fermer',
       'deck.slide': 'Diapositive {i} sur {n}',
       'deck.goto': 'Aller à la diapositive {i}',
+      'deck.try': 'Essayer cette animation',
       'deck.hint': '← → pour naviguer · F plein écran · G vue d’ensemble',
       'deck.hinttouch': 'Balayez pour naviguer · tournez votre téléphone pour agrandir',
       'deck.rotate': 'Tournez votre téléphone pour agrandir',
@@ -94,6 +96,7 @@
       'deck.close': 'Close',
       'deck.slide': 'Slide {i} of {n}',
       'deck.goto': 'Go to slide {i}',
+      'deck.try': 'Try this activity',
       'deck.hint': '← → to navigate · F full screen · G overview',
       'deck.hinttouch': 'Swipe to navigate · turn your phone sideways for a larger view',
       'deck.rotate': 'Turn your phone sideways for a larger view',
@@ -243,7 +246,16 @@
   var dots = $('.deck__dots'), countNow = $('.deck__count b'), countAll = $('.deck__count span'), badge = $('.deck__badge');
   var dnote = $('.deck__note'), grid = $('.deck__grid'), gridIn = $('.deck__grid-in'), prog = $('.progress b');
   var prevBtn = $('.deck__nav--prev'), nextBtn = $('.deck__nav--next'), gridBtn = $('.cbar [data-act="grid"]');
-  var links = $('.deck__links', frame);
+  var links = $('.deck__links', frame), tryLinks = $$('.deck__try');
+  tryLinks.forEach(function (a) {
+    a.addEventListener('click', function (e) {         // down to the demonstration, without losing the slide
+      e.preventDefault();
+      e.stopPropagation();
+      var demo = $('#demo'), field = $('#demo input');
+      demo.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      if (field && fine) setTimeout(function () { field.focus({ preventScroll: true }); }, 700);
+    });
+  });
   var N = 0, cur = -1, top = 0, turn = 0, urls = {}, sprites = {}, META = null, built = false, gridBuilt = false, swiped = 0, shown = '';
 
   // the edition on screen: the page's language when the presentation exists in it
@@ -322,6 +334,7 @@
     $$('.thumb', gridIn).forEach(function (b, i) {
       if (i === cur) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
     });
+    tryLinks.forEach(function (a) { a.hidden = cur !== DEMO_SLIDE - 1; });
     prevBtn.disabled = cur <= 0;
     nextBtn.disabled = cur >= N - 1;
     if (prog) prog.style.transform = 'scaleX(' + ((cur + 1) / N) + ')';
