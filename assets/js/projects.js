@@ -60,6 +60,11 @@
       kind: KIND.masterclass,
       client: 'CANAL+ University · Fondation CANAL+',
       city: 'rabat',
+      date: { en: '13 January 2026', fr: '13 janvier 2026' },
+      did: {
+        en: ['Stage with a wide curved LED wall', 'Lectern, armchairs and branded plinths for the keynote and the panels', 'Lighting of the set, in the colours of the event', 'Sound and microphones for the speakers'],
+        fr: ['Scène avec grand mur LED incurvé', 'Pupitre, fauteuils et totems habillés pour la keynote et les tables rondes', 'Mise en lumière du plateau aux couleurs de l’événement', 'Sonorisation et micros pour les intervenants']
+      },
       intro: {
         en: 'A masterclass on the impact of women in football, held in Rabat during the Africa Cup of Nations with CANAL+ University and Fondation CANAL+. Curved LED wall, keynotes and panel discussions.',
         fr: 'Une masterclass sur l’impact des femmes dans le football, organisée à Rabat pendant la Coupe d’Afrique des Nations avec CANAL+ University et la Fondation CANAL+. Mur LED incurvé, keynotes et tables rondes.'
@@ -80,6 +85,10 @@
       title: 'Tech Fest Maroc · OneCloud',
       kind: KIND.tech,
       client: 'OneCloud',
+      did: {
+        en: ['Stage with a printed skirt in the colours of the event', 'LED screen and lectern', 'Armchairs and side tables for the talks', 'Blue lighting design with moving heads', 'Sound for a room set in theatre style'],
+        fr: ['Scène avec jupe imprimée aux couleurs de l’événement', 'Écran LED et pupitre', 'Fauteuils et tables d’appoint pour les interventions', 'Mise en lumière bleue avec projecteurs asservis', 'Sonorisation d’une salle en configuration théâtre']
+      },
       intro: {
         en: 'The first edition of OneCloud’s Tech Fest Maroc, dedicated to AI, cloud and cybersecurity: stage, LED wall and a room bathed in blue.',
         fr: 'Première édition du Tech Fest Maroc de OneCloud, consacrée à l’IA, au cloud et à la cybersécurité : scène, mur LED et salle baignée de bleu.'
@@ -95,6 +104,10 @@
       title: { en: 'Cocktail Evening · Marrakech', fr: 'Soirée cocktail · Marrakech' },
       kind: KIND.reception,
       city: 'marrakech',
+      did: {
+        en: ['Warm amber lighting of the atrium', 'DJ set-up and sound', 'Dressed cocktail tables and lounge areas'],
+        fr: ['Mise en lumière ambrée de l’atrium', 'Installation DJ et sonorisation', 'Mange-debout habillés et espaces lounge']
+      },
       intro: {
         en: 'A cocktail evening under a canopy of golden lanterns in Marrakech, with a live DJ set and warm amber lighting.',
         fr: 'Une soirée cocktail sous une nuée de lanternes dorées à Marrakech, avec DJ set en direct et lumière ambrée.'
@@ -114,6 +127,11 @@
       city: 'tangier',
       venue: 'Fairmont Tazi Palace',
       cover: 'center 30%',
+      date: { en: '7 to 10 November 2023', fr: '7 au 10 novembre 2023' },
+      did: {
+        en: ['Plenary stage with a centre LED wall and portrait LED panels', 'Lighting: moving heads, colour wash and wall uplights', 'The same room turned from plenary to gala dinner', 'LED artwork as the backdrop of the dinner', 'Sound, light and video control'],
+        fr: ['Scène de plénière avec mur LED central et panneaux LED verticaux', 'Lumière : projecteurs asservis, ambiance colorée et éclairage des murs', 'La même salle transformée de plénière en dîner de gala', 'Visuels artistiques sur mur LED en fond de dîner', 'Régie son, lumière et vidéo']
+      },
       intro: {
         en: 'A cycle meeting at the Fairmont Tazi Palace in Tangier: plenary sessions on stage by day, gala dinner in front of a wall of LED artwork by night.',
         fr: 'Un cycle meeting au Fairmont Tazi Palace de Tanger : plénières sur scène en journée, dîner de gala devant un mur LED aux visuels artistiques en soirée.'
@@ -130,9 +148,13 @@
       title: 'A Chance to Reset · EFE Maroc',
       kind: KIND.ceremony,
       client: 'EFE Maroc',
+      did: {
+        en: ['Stage and LED wall: three screens for the annual ceremony, one wide wall for the closing ceremony', 'Lectern in the colours of the project', 'Lighting and room dressing, round tables included', 'Three-camera filming and live direction', 'Production desk: vision mixing, sound and wireless microphones'],
+        fr: ['Scène et mur LED : trois écrans pour la cérémonie annuelle, un grand mur pour la cérémonie de clôture', 'Pupitre aux couleurs du projet', 'Mise en lumière et habillage de la salle, tables rondes comprises', 'Captation à trois caméras et réalisation en direct', 'Régie : mélange vidéo, son et micros HF']
+      },
       intro: {
-        en: 'The closing ceremony of EFE Maroc’s “A Chance to Reset” project: opening address, panel discussions, laureates’ testimonies and a graduation on stage.',
-        fr: 'La cérémonie de clôture du projet « A Chance to Reset » d’EFE Maroc : mot d’ouverture, tables rondes, paroles de lauréats et remise de diplômes sur scène.'
+        en: 'Two ceremonies for EFE Maroc’s “A Chance to Reset” project, the annual ceremony and the closing ceremony: opening address, panel discussions, laureates’ testimonies and a graduation on stage.',
+        fr: 'Deux cérémonies pour le projet « A Chance to Reset » d’EFE Maroc, la cérémonie annuelle et la cérémonie de clôture : mot d’ouverture, tables rondes, paroles de lauréats et remise de diplômes sur scène.'
       },
       photos: [
         ['assets/img/graduation-ceremony.jpg', 2000, 1330],
@@ -150,6 +172,10 @@
       kind: KIND.convention,
       client: 'RMA',
       cover: 'center 45%',
+      did: {
+        en: ['Curved LED wall between two printed backdrops', 'A runway leading to a circular centre stage', 'Numbered dinner tables all around the stage', 'Branded totems along the walls', 'Blue lighting design', 'Sound, light and video run from our control desk'],
+        fr: ['Mur LED incurvé entre deux fonds imprimés', 'Passerelle menant à une scène centrale circulaire', 'Tables de dîner numérotées tout autour de la scène', 'Totems habillés le long des murs', 'Mise en lumière bleue', 'Son, lumière et vidéo pilotés depuis notre régie']
+      },
       intro: {
         en: 'A convention for RMA under the banner “Ensemble, construisons l’avenir”: a circular centre stage, a runway to the LED wall and dinner tables all around.',
         fr: 'Une convention RMA sous le signe « Ensemble, construisons l’avenir » : scène centrale circulaire, passerelle jusqu’au mur LED et tables de dîner tout autour.'
@@ -164,6 +190,10 @@
       id: 'uae-morocco-forum',
       title: 'UAE–Morocco Forum for Economic Partnership',
       kind: KIND.institutional,
+      did: {
+        en: ['Stage with a wide curved LED backdrop', 'Lectern with a built-in screen', 'Armchairs and branded plinths for the speakers', 'Round tables with name cards, flowers and the flags of both countries'],
+        fr: ['Scène avec grand fond LED incurvé', 'Pupitre avec écran intégré', 'Fauteuils et totems habillés pour les intervenants', 'Tables rondes avec chevalets, fleurs et drapeaux des deux pays']
+      },
       intro: {
         en: 'A forum on business and investment opportunities between the United Arab Emirates and Morocco, with a curved LED backdrop, stage and round-table seating.',
         fr: 'Un forum consacré aux opportunités d’affaires et d’investissement entre les Émirats arabes unis et le Maroc, avec fond de scène LED incurvé, scène et tables rondes.'
@@ -177,6 +207,10 @@
       title: 'GSK Day',
       kind: KIND.conference,
       client: 'GSK',
+      did: {
+        en: ['Centre LED wall and portrait LED side screens', 'Stage, lectern and armchairs', 'Chair covers and banners in the brand’s colours', 'Pink and orange lighting washes, moving heads on stage', 'Plenary seating in theatre style'],
+        fr: ['Mur LED central et écrans LED verticaux latéraux', 'Scène, pupitre et fauteuils', 'Housses de chaises et kakémonos aux couleurs de la marque', 'Ambiances lumineuses rose et orange, projecteurs asservis sur scène', 'Plénière en configuration théâtre']
+      },
       intro: {
         en: 'GSK Day, “Pour un avenir en santé”: a plenary room dressed in the brand’s colours, from the LED stage to the chair covers.',
         fr: 'GSK Day, « Pour un avenir en santé » : une plénière habillée aux couleurs de la marque, de la scène LED aux housses de chaises.'
@@ -191,6 +225,11 @@
       title: 'Sustainable Innovation Fest · Enactus',
       kind: KIND.final,
       client: 'Enactus Morocco',
+      date: '2024',
+      did: {
+        en: ['Stage with three LED screens', 'Lighting: moving heads, haze and beams', 'Giant 3D letters and boards at the foot of the stage', 'Live direction and playback from our production desk', 'Sound for the final and the closing ceremony'],
+        fr: ['Scène à trois écrans LED', 'Lumière : projecteurs asservis, brume et faisceaux', 'Lettres 3D géantes et panneaux au pied de la scène', 'Réalisation en direct et diffusion depuis notre régie', 'Sonorisation de la finale et de la cérémonie de clôture']
+      },
       intro: {
         en: 'The national competition final and closing ceremony of Enactus Morocco’s Sustainable Innovation Fest, with a triple-screen stage and live direction.',
         fr: 'Finale de la compétition nationale et cérémonie de clôture du Sustainable Innovation Fest d’Enactus Morocco, avec scène à trois écrans et réalisation en direct.'
@@ -206,6 +245,10 @@
       title: 'Fanzone CAN 2025',
       kind: KIND.fanzone,
       cover: 'center 30%',
+      did: {
+        en: ['Giant LED screen for the matches', 'Flags of the African nations overhead', 'Seating lit in red and green, rugs and lounge areas', 'Lighting of the hall', 'Branded wall and stage set-up'],
+        fr: ['Écran LED géant pour les matchs', 'Drapeaux des nations africaines au plafond', 'Assises éclairées en rouge et vert, tapis et salons', 'Mise en lumière de la halle', 'Mur habillé et installation scénique']
+      },
       intro: {
         en: 'A fan zone in the colours of the Africa Cup of Nations: giant LED screen, flags overhead and lounge seating for match days.',
         fr: 'Une fan zone aux couleurs de la Coupe d’Afrique des Nations : écran LED géant, drapeaux au plafond et salons pour les jours de match.'
@@ -220,6 +263,10 @@
       kind: KIND.experience,
       client: 'Gillette',
       cover: 'center 60%',
+      did: {
+        en: ['Giant LED screen with illuminated brand signs', 'Printed side panels and giant product standees', 'Bean-bag seating facing the screen', 'Deep blue lighting and sound', 'Control desk for the live broadcast and the tombola'],
+        fr: ['Écran LED géant avec enseignes lumineuses', 'Panneaux imprimés et PLV géante aux formes du produit', 'Poufs face à l’écran', 'Mise en lumière bleu profond et sonorisation', 'Régie pour la retransmission en direct et la tombola']
+      },
       intro: {
         en: 'A match-day watch party for Gillette: giant screen, bean-bag seating, a tombola and live control of the broadcast.',
         fr: 'Une watch party Gillette les jours de match : écran géant, poufs, tombola et régie pour la retransmission en direct.'
@@ -235,6 +282,11 @@
       title: 'LEO Distributor Regional Conference',
       kind: KIND.conference,
       client: 'LEO',
+      date: '2026',
+      did: {
+        en: ['Three LED screens: a wide centre screen and two side screens', 'Classroom layout for the delegates', 'Illuminated 3D letters at the stage front', 'Lighting on towers and patterns on the ceiling', 'Sound'],
+        fr: ['Trois écrans LED : un grand écran central et deux écrans latéraux', 'Disposition classe pour les participants', 'Lettres 3D lumineuses en avant-scène', 'Lumière sur tours et motifs projetés au plafond', 'Sonorisation']
+      },
       intro: {
         en: '“Empowering Future, Sharing New Journey”: LEO’s regional distributor conference for the Middle East and Africa, in classroom layout facing a triple LED screen.',
         fr: '« Empowering Future, Sharing New Journey » : la conférence régionale des distributeurs LEO pour le Moyen-Orient et l’Afrique, en disposition classe face à un triple écran LED.'
@@ -251,6 +303,11 @@
       kind: KIND.forum,
       city: 'casablanca',
       venue: 'Barceló Anfa',
+      date: { en: '17 October 2023', fr: '17 octobre 2023' },
+      did: {
+        en: ['Stage, printed backdrops and 3D letters', 'Armchairs and tables for the panels', 'Multi-camera filming', 'Live direction from our production desk', 'Sound, wireless microphones and lighting'],
+        fr: ['Scène, fonds imprimés et lettres 3D', 'Fauteuils et tables pour les tables rondes', 'Captation multicaméra', 'Réalisation en direct depuis notre régie', 'Sonorisation, micros HF et lumière']
+      },
       intro: {
         en: 'A forum on social innovation at the Barceló Anfa Casablanca: panel discussions on stage, filmed and directed live from our control desk.',
         fr: 'Un forum sur l’innovation sociale au Barceló Anfa Casablanca : tables rondes sur scène, captées et réalisées en direct depuis notre régie.'
@@ -266,9 +323,13 @@
       kind: KIND.brand,
       client: 'Volvo',
       cover: 'center 25%',
+      did: {
+        en: ['Stage with LED screen and printed backdrops', 'Lectern in the colours of the anniversary', 'Cocktail tables made of oil drums in the brand’s colours, with high stools', 'Deep blue lighting of the hall', 'Sound'],
+        fr: ['Scène avec écran LED et fonds imprimés', 'Pupitre aux couleurs de l’anniversaire', 'Mange-debout réalisés à partir de fûts aux couleurs de la marque, avec tabourets hauts', 'Mise en lumière bleu profond de la halle', 'Sonorisation']
+      },
       intro: {
-        en: 'An evening for Volvo under the theme “Built on Trust. Driving Morocco Forward.”, in an industrial hall with LED screen and branded cocktail tables.',
-        fr: 'Une soirée Volvo sur le thème « Built on Trust. Driving Morocco Forward. », dans une halle industrielle avec écran LED et mange-debout aux couleurs de la marque.'
+        en: 'An evening for Volvo marking a 70th anniversary, under the theme “Built on Trust. Driving Morocco Forward.”, in an industrial hall with LED screen and branded cocktail tables.',
+        fr: 'Une soirée Volvo placée sous le signe d’un 70e anniversaire, sur le thème « Built on Trust. Driving Morocco Forward. », dans une halle industrielle avec écran LED et mange-debout aux couleurs de la marque.'
       },
       photos: [
         ['assets/img/volvo-built-on-trust.jpg', 960, 1280],
@@ -280,6 +341,10 @@
       title: 'Centrale Automobile Chérifienne',
       kind: KIND.corporate,
       client: 'Centrale Automobile Chérifienne',
+      did: {
+        en: ['LED screen for the presentation', 'High tables, stools and café seating', 'Lighting accents in the showroom'],
+        fr: ['Écran LED pour la présentation', 'Mange-debout, tabourets et assises café', 'Touches de lumière dans le showroom']
+      },
       intro: {
         en: 'A corporate reception at the Centrale Automobile Chérifienne showroom, around the presentation “Une vision orientée clients”.',
         fr: 'Une réception d’entreprise au showroom de la Centrale Automobile Chérifienne, autour de la présentation « Une vision orientée clients ».'
@@ -293,6 +358,10 @@
       title: 'Onco-Days · H&N Session',
       kind: KIND.science,
       cover: 'center 30%',
+      did: {
+        en: ['Full-width LED wall', 'Stage, lectern with a built-in screen and lounge set', 'Giant 3D letters at the stage front', 'Lighting: moving heads, blue wash and patterns on the ceiling', 'Dressed round tables and chair covers', 'Sound'],
+        fr: ['Mur LED pleine largeur', 'Scène, pupitre avec écran intégré et salon', 'Lettres 3D géantes en avant-scène', 'Lumière : projecteurs asservis, ambiance bleue et motifs projetés au plafond', 'Tables rondes habillées et housses de chaises', 'Sonorisation']
+      },
       intro: {
         en: 'The H&N Session of Onco-Days: a scientific meeting with a full-width LED stage, lectern, lounge set and branded dinner tables.',
         fr: 'La H&N Session des Onco-Days : une rencontre scientifique avec scène LED pleine largeur, pupitre, salon et tables habillées.'
