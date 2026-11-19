@@ -10,13 +10,16 @@
           --lang fr --slides <folder of 01.webp, 02.webp …> --thumbs <thumbs.webp> \
                     --pdf <file.pdf> --pdf-name "Name.pdf" \
           --lang en --slides … --thumbs … --pdf … --pdf-name "Name.pdf" \
-          --meta <meta.json>
+          --meta <meta.json> --live 13
 
    --thumbs  one image holding every slide as a small tile, 6 per row, in order.
    --meta    optional: { "fr": [ { "text": "words of slide 1", "links": [ { "href": "mailto:…",
              "label": "…", "box": [left, top, width, height] } ] }, … ], "en": [ … ] }
              (box in % of the slide). The text is read out by screen readers; links become
              clickable areas on the slide.
+   --live    optional: the numbers of the slides the page brings to life, separated by commas
+             (slide 13 is the calligraphy demonstration, assets/js/calligraphy.js). Their picture
+             is still needed: it is the thumbnail, and what shows if the demonstration cannot load.
    The code is not case sensitive: capitals and the spaces around it are ignored. */
 import { createCipheriv, pbkdf2Sync, randomBytes } from 'node:crypto';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -91,6 +94,11 @@ for (const s of sets) {
 if (args.meta) {
   writeFileSync(join(args.out, 'meta.bin'), lock(readFileSync(args.meta)));
   manifest.meta = true;
+}
+if (args.live) {
+  manifest.live = args.live.split(',').map(n => parseInt(n, 10));
+  const most = Math.min(...Object.values(manifest.langs).map(l => l.count));
+  if (manifest.live.some(n => !(n >= 1 && n <= most))) { console.error('--live: slide numbers must be between 1 and ' + most); process.exit(1); }
 }
 writeFileSync(join(args.out, 'manifest.json'), JSON.stringify(manifest, null, 1) + '\n');
 console.log('locked -> ' + args.out);

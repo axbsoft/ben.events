@@ -1,16 +1,16 @@
 {
  "v": 2,
- "rev": "572fc0e8",
+ "rev": "61259b8a",
  "kdf": {
   "name": "PBKDF2",
   "hash": "SHA-256",
   "iterations": 600000,
-  "salt": "jsBXckZxP3NB9NeWPnnD/A=="
+  "salt": "g55nRboqpMijuWPmjelCFg=="
  },
- "check": "X9ozi0jfL8EtBn91a36azPYgwDcHbRicU6+GTZUdZ/iC0OnLBY6Z7SEo",
+ "check": "DM6S9sTUbqQTTt2Gp1A15WidZQxKfs1tlyTwi9cuhvepp0CjPWq/bxSp",
  "langs": {
   "fr": {
-   "count": 18,
+   "count": 19,
    "type": "image/webp",
    "thumbs": {
     "type": "image/webp",
@@ -21,7 +21,7 @@
    }
   },
   "en": {
-   "count": 18,
+   "count": 19,
    "type": "image/webp",
    "thumbs": {
     "type": "image/webp",
@@ -32,5 +32,8 @@
    }
   }
  },
- "meta": true
+ "meta": true,
+ "live": [
+  13
+ ]
 }

@@ -11,9 +11,8 @@ Fonts (both under the SIL Open Font License, see assets/calligraphy/NOTICE.txt):
   --brush  Ma Shan Zheng (Chinese brush script), e.g. from the npm package
            @fontsource/ma-shan-zheng: files/ma-shan-zheng-chinese-simplified-400-normal.woff2
   --latin  Instrument Serif Italic (the visitor's own name), .ttf or .woff2
-  --caps   Inter Tight SemiBold (small capitals of the brand line), .ttf or .woff2
 
-usage:  python3 tools/calligraphy/build.py --brush <file> --latin <file> --caps <file>
+usage:  python3 tools/calligraphy/build.py --brush <file> --latin <file>
 needs:  pip install fonttools brotli pypinyin uharfbuzz
 """
 import argparse
@@ -33,7 +32,6 @@ OUT = os.path.join(HERE, '..', '..', 'assets', 'calligraphy', 'data.json')
 ap = argparse.ArgumentParser()
 ap.add_argument('--brush', required=True)
 ap.add_argument('--latin', required=True)
-ap.add_argument('--caps', required=True)
 args = ap.parse_args()
 
 
@@ -183,9 +181,6 @@ for a in letters:
         if delta:
             kern[a + b] = delta
 
-CAPS = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789·&-'
-_, upm_c, top_c, caps, missing = outlines(args.caps, CAPS, True)
-
 if problems:
     print('\n'.join('PROBLEM: ' + p for p in problems))
     sys.exit(1)
@@ -199,7 +194,6 @@ data = {
     'pinyin': py,
     'zh': {'upm': upm_b, 'top': top_b, 'glyphs': zh},
     'la': {'upm': upm_l, 'top': top_l, 'glyphs': la, 'kern': kern},
-    'caps': {'upm': upm_c, 'top': top_c, 'glyphs': caps},
 }
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 with open(OUT, 'w', encoding='utf-8') as f:

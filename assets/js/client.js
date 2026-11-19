@@ -9,7 +9,7 @@
 
   var DIR = 'assets/m-automotiv/';          // encrypted files and their manifest
   var STORE = 'ben-client-m-automotiv';     // keeps the page open while the browser tab lives
-  var DEMO_SLIDE = 12;                      // the slide of the calligraphy activity: it offers the demonstration below
+  var LIVE_MIN = 900;                       // px: a narrower frame shows a live slide as a tall card instead of a scaled slide
   var CHECK = 'benevents:open';
 
   var doc = document, root = doc.documentElement, body = doc.body;
@@ -58,17 +58,26 @@
       'cta.eyebrow': 'Et maintenant',
       'cta.title': 'Une question sur cette proposition ?',
       'cta.btn': 'Contacter benevents',
-      'calli.eyebrow': 'Démonstration · Animation EXEED',
       'calli.title1': 'Votre prénom en',
       'calli.title2': 'calligraphie chinoise',
-      'calli.lede': 'Sur le stand, chaque visiteur saisit son prénom sur une tablette et repart avec un souvenir imprimé à son nom. Essayez avec le vôtre.',
+      'calli.cap1': 'Le visiteur saisit son prénom',
+      'calli.cap2': 'Il reçoit d’abord sa calligraphie par e-mail',
+      'calli.cap3': 'Puis son marque-page est imprimé sur place',
       'calli.label': 'Votre prénom',
       'calli.go': 'Révéler',
-      'calli.formats': 'Format du souvenir',
+      'calli.maillabel': 'Votre e-mail',
+      'calli.send': 'Envoyer',
+      'calli.consent': 'J’accepte d’être recontacté(e) par M-Automotiv.',
+      'calli.print': 'Imprimer le marque-page',
       'calli.pdf': 'Télécharger le PDF',
-      'calli.print': 'Ouvrir pour imprimer',
-      'calli.shop': 'Version imprimeur : fond perdu 3 mm et traits de coupe',
-      'calli.foot': 'Démonstration. Sur l’événement, une borne imprime le souvenir automatiquement et l’équipe valide les prénoms rares avant impression.'
+      'calli.shop': 'Version imprimeur',
+      'calli.side': 'Côté M-Automotiv',
+      'calli.leadtitle': 'Une animation qui collecte des contacts',
+      'calli.leadtext': 'Chaque participation laisse un prénom et un e-mail, recueillis avec l’accord du visiteur.',
+      'calli.listtitle': 'Contacts collectés',
+      'calli.none': 'Le premier contact apparaîtra ici.',
+      'calli.csv': 'Exporter la liste (CSV)',
+      'calli.demo': 'Démonstration : aucun e-mail n’est envoyé et rien n’est conservé.'
     },
     en: {
       'gate.eyebrow': 'Client area · Private access',
@@ -106,17 +115,26 @@
       'cta.eyebrow': 'What next',
       'cta.title': 'A question about this proposal?',
       'cta.btn': 'Contact benevents',
-      'calli.eyebrow': 'Demonstration · EXEED activity',
       'calli.title1': 'Your first name in',
       'calli.title2': 'Chinese calligraphy',
-      'calli.lede': 'At the stand, each visitor types their first name on a tablet and leaves with a souvenir printed in their name. Try it with yours.',
+      'calli.cap1': 'The visitor types their first name',
+      'calli.cap2': 'They first receive their calligraphy by email',
+      'calli.cap3': 'Then their bookmark is printed on the spot',
       'calli.label': 'Your first name',
       'calli.go': 'Reveal',
-      'calli.formats': 'Souvenir format',
+      'calli.maillabel': 'Your email',
+      'calli.send': 'Send',
+      'calli.consent': 'I agree to be contacted by M-Automotiv.',
+      'calli.print': 'Print the bookmark',
       'calli.pdf': 'Download the PDF',
-      'calli.print': 'Open to print',
-      'calli.shop': 'Print-shop version: 3 mm bleed and crop marks',
-      'calli.foot': 'Demonstration. At the event, a kiosk prints the souvenir automatically and the team checks unusual names before printing.'
+      'calli.shop': 'Print-shop version',
+      'calli.side': 'On M-Automotiv’s side',
+      'calli.leadtitle': 'An activity that collects contacts',
+      'calli.leadtext': 'Every participation leaves a first name and an email address, collected with the visitor’s consent.',
+      'calli.listtitle': 'Contacts collected',
+      'calli.none': 'The first contact will appear here.',
+      'calli.csv': 'Export the list (CSV)',
+      'calli.demo': 'Demonstration: no email is sent and nothing is kept.'
     }
   };
   var lang = 'fr';
@@ -246,14 +264,12 @@
   var dots = $('.deck__dots'), countNow = $('.deck__count b'), countAll = $('.deck__count span'), badge = $('.deck__badge');
   var dnote = $('.deck__note'), grid = $('.deck__grid'), gridIn = $('.deck__grid-in'), prog = $('.progress b');
   var prevBtn = $('.deck__nav--prev'), nextBtn = $('.deck__nav--next'), gridBtn = $('.cbar [data-act="grid"]');
-  var links = $('.deck__links', frame), tryLinks = $$('.deck__try');
+  var links = $('.deck__links', frame), tryLinks = $$('.deck__try'), calli = $('.calli', frame);
   tryLinks.forEach(function (a) {
-    a.addEventListener('click', function (e) {         // down to the demonstration, without losing the slide
+    a.addEventListener('click', function (e) {         // on to the slide where the activity can be tried
       e.preventDefault();
       e.stopPropagation();
-      var demo = $('#demo'), field = $('#demo input');
-      demo.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
-      if (field && fine) setTimeout(function () { field.focus({ preventScroll: true }); }, 700);
+      go(liveIndex());
     });
   });
   var N = 0, cur = -1, top = 0, turn = 0, urls = {}, sprites = {}, META = null, built = false, gridBuilt = false, swiped = 0, shown = '';
@@ -276,7 +292,7 @@
     if (cur < 0) return;
     var a = about(cur), label = t('deck.slide', { i: cur + 1, n: N });
     frame.setAttribute('aria-label', label);
-    layers[top].alt = a && a.text ? label + ' — ' + a.text : label;
+    layers[top].alt = frame.classList.contains('is-live') ? '' : a && a.text ? label + ' — ' + a.text : label;   // a live slide speaks for itself
     links.textContent = '';
     ((a && a.links) || []).forEach(function (l) {
       if (!/^(mailto:|tel:|https:\/\/)/.test(l.href)) return;
@@ -298,6 +314,30 @@
     go(i, 1, true);
     thumbs();
   }
+
+  /* A slide that is alive (the manifest lists them): the demonstration takes the place of its picture.
+     In a wide frame it is drawn as a slide, on a 1856 x 1044 canvas scaled to the frame;
+     in a narrow one it becomes a tall card and the frame grows with it. */
+  var liveNow = '';
+  function liveAt(i) { return !!(M && M.live && M.live.indexOf(i + 1) > -1); }
+  function liveIndex() { return M && M.live && M.live.length ? M.live[0] - 1 : -1; }
+  function live() {
+    if (!calli || !built) return;
+    var on = cur >= 0 && liveAt(cur) && !!window.BEN_CALLI, w = frame.clientWidth, skin = !on ? '' : w >= LIVE_MIN ? 'slide' : 'tall';   // without its script, the picture stays
+    var near = !on && (liveAt(cur + 1) || liveAt(cur - 1)), now = skin + '|' + cur + '|' + near;
+    if (skin === 'slide') calli.style.setProperty('--k', (w / 1856).toFixed(5));
+    if (now === liveNow) return;
+    liveNow = now;
+    calli.hidden = !on;
+    if (on) { calli.setAttribute('data-skin', skin); $('.calli__page b', calli).textContent = cur + 1; }
+    frame.classList.toggle('is-live', on);
+    frame.classList.toggle('is-tall', skin === 'tall');
+    stage.classList.toggle('has-live', on);
+    stage.classList.toggle('has-tall', skin === 'tall');
+    doc.dispatchEvent(new CustomEvent('ben:live', { detail: { on: on, near: near } }));
+  }
+  if (window.ResizeObserver) new ResizeObserver(function () { requestAnimationFrame(live); }).observe(frame);
+  else window.addEventListener('resize', live);
 
   function relabel() {
     eye.setAttribute('aria-label', t(input.type === 'password' ? 'gate.show' : 'gate.hide'));
@@ -334,7 +374,8 @@
     $$('.thumb', gridIn).forEach(function (b, i) {
       if (i === cur) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
     });
-    tryLinks.forEach(function (a) { a.hidden = cur !== DEMO_SLIDE - 1; });
+    tryLinks.forEach(function (a) { a.hidden = !(liveIndex() > 0 && cur === liveIndex() - 1); });
+    live();
     prevBtn.disabled = cur <= 0;
     nextBtn.disabled = cur >= N - 1;
     if (prog) prog.style.transform = 'scaleX(' + ((cur + 1) / N) + ')';
@@ -441,7 +482,7 @@
   stage.addEventListener('touchstart', wake, { passive: true });
 
   /* every slide at a glance */
-  var behind = $$('.cbar, .deck__stage, .deck__foot, .calli, .deck__cta');
+  var behind = $$('.cbar, .deck__stage, .deck__foot, .deck__cta');
   function buildGrid() {
     if (gridBuilt) return;
     gridBuilt = true;
@@ -534,13 +575,13 @@
     else if (act === 'pdf') savePdf(target);
   });
   frame.addEventListener('click', function (e) {
-    if (e.target.closest('button, a') || Date.now() - swiped < 450) return;
+    if (e.target.closest('button, a, .calli') || Date.now() - swiped < 450) return;      // a live slide is not a "next" button
     var r = frame.getBoundingClientRect();
     go(cur + ((e.clientX - r.left) / r.width < 0.3 ? -1 : 1));    // the left third goes back
   });
   var sx = null, sy = 0;
   frame.addEventListener('touchstart', function (e) {
-    if (e.touches.length === 1) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; } else sx = null;
+    if (e.touches.length === 1 && !e.target.closest('input, textarea, select')) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; } else sx = null;
   }, { passive: true });
   frame.addEventListener('touchend', function (e) {
     if (sx === null) return;
