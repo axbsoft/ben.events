@@ -1,18 +1,22 @@
-/* benevents agency — client page: a presentation opened with an access code.
-   Vanilla JS, no dependencies.
+/* benevents agency — a presentation, slide by slide. Vanilla JS, no dependencies.
+   Two kinds of page use this file (tools/lock-presentation.mjs prepares the files of both):
 
-   The slides, their thumbnails and the PDF are stored encrypted (tools/lock-presentation.mjs).
-   The code a visitor types is turned into a key in their browser; a wrong code opens nothing.
-   The code is not written anywhere in this file or in the site. */
+   - a client page, opened with an access code (m-automotiv.html). The slides, their thumbnails and
+     the PDF are stored encrypted. The code a visitor types is turned into a key in their browser;
+     a wrong code opens nothing. The code is not written anywhere in this file or in the site.
+   - an open presentation, made to be shared (presentation.html): no code, plain files.
+     A page is of this kind when it has no access form.
+
+   The page says where its files are: <body data-deck="assets/<folder>/">. */
 (function () {
   'use strict';
 
-  var DIR = 'assets/m-automotiv/';          // encrypted files and their manifest
-  var STORE = 'ben-client-m-automotiv';     // keeps the page open while the browser tab lives
+  var doc = document, root = doc.documentElement, body = doc.body;
+  var DIR = body.getAttribute('data-deck') || 'assets/m-automotiv/';      // the files of the presentation and their manifest
+  var STORE = 'ben-client-' + DIR.replace(/^assets\/|\/$/g, '');           // keeps a locked page open while the browser tab lives
   var LIVE_MIN = 900;                       // px: a narrower frame shows a live slide as a tall card instead of a scaled slide
   var CHECK = 'benevents:open';
 
-  var doc = document, root = doc.documentElement, body = doc.body;
   var $ = function (s, c) { return (c || doc).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); };
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -55,6 +59,11 @@
       'deck.pdfwait': 'Préparation du PDF…',
       'deck.pdfdone': 'Le PDF est prêt.',
       'deck.error': 'Cette diapositive n’a pas pu être chargée. Vérifiez votre connexion.',
+      'deck.share': 'Partager la présentation',
+      'deck.copied': 'Lien copié : il ne reste qu’à le coller dans un message.',
+      'deck.nocopy': 'Le lien n’a pas pu être copié : copiez l’adresse de cette page.',
+      'open.cta.title': 'Un événement en préparation ?',
+      'open.cta.btn': 'Parlons de votre événement',
       'cta.eyebrow': 'Et maintenant',
       'cta.title': 'Une question sur cette proposition ?',
       'cta.btn': 'Contacter benevents',
@@ -112,6 +121,11 @@
       'deck.pdfwait': 'Preparing the PDF…',
       'deck.pdfdone': 'The PDF is ready.',
       'deck.error': 'This slide could not be loaded. Check your connection.',
+      'deck.share': 'Share the presentation',
+      'deck.copied': 'Link copied: all that is left is to paste it into a message.',
+      'deck.nocopy': 'The link could not be copied: copy the address of this page.',
+      'open.cta.title': 'An event in the works?',
+      'open.cta.btn': 'Talk to us about your event',
       'cta.eyebrow': 'What next',
       'cta.title': 'A question about this proposal?',
       'cta.btn': 'Contact benevents',
@@ -149,6 +163,9 @@
     $$('[data-t-ph]').forEach(function (n) { n.setAttribute('placeholder', t(n.getAttribute('data-t-ph'))); });
     $$('[data-t-aria]').forEach(function (n) { n.setAttribute('aria-label', t(n.getAttribute('data-t-aria'))); });
     root.lang = lang;
+    var title = body.getAttribute('data-title-' + lang);
+    if (title) doc.title = title;
+    $$('[data-home]').forEach(function (a) { a.href = './?lang=' + lang + a.getAttribute('data-home'); });     // the site, in the same language
     $$('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
     if (save) { try { localStorage.setItem('ben-lang', lang); } catch (e) {} }
     relabel();
@@ -194,9 +211,20 @@
       return r.arrayBuffer();
     }).then(function (buf) { return unseal(KEY, new Uint8Array(buf)); });
   }
+  // an open presentation: its files are read as they are
+  // (a full address: the sheet of thumbnails is handed to the style sheet, which would otherwise read it from its own folder)
+  function plainUrl(name) { return new URL(DIR + name + '?v=' + M.rev, doc.baseURI).href; }
+  function pictureAt(url) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      img.onload = function () { resolve(url); };
+      img.onerror = function () { reject(new Error('file')); };
+      img.src = url;
+    });
+  }
 
-  /* ---------- Gate ---------- */
-  var gate = $('.gate'), form = $('.gate__form'), input = form.elements.code, note = $('.gate__note'), eye = $('.gate__eye');
+  /* ---------- Gate (client pages only) ---------- */
+  var gate = $('.gate'), form = $('.gate__form'), input = form ? form.elements.code : null, note = $('.gate__note'), eye = $('.gate__eye');
   var deck = $('.deck');
 
   function say(msg, bad) { note.textContent = msg; note.classList.toggle('is-error', !!bad); }
@@ -224,7 +252,7 @@
     }).then(function (ok) { return ok; }, function () { return false; });
   }
 
-  form.addEventListener('submit', function (e) {
+  if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (form.classList.contains('is-busy')) return;
     var code = input.value;
@@ -250,8 +278,8 @@
       say(t('gate.offline'), true);
     });
   });
-  input.addEventListener('input', function () { form.classList.remove('is-wrong'); if (note.classList.contains('is-error')) say(''); });
-  eye.addEventListener('click', function () {
+  if (form) input.addEventListener('input', function () { form.classList.remove('is-wrong'); if (note.classList.contains('is-error')) say(''); });
+  if (form) eye.addEventListener('click', function () {
     var show = input.type === 'password';
     input.type = show ? 'text' : 'password';
     eye.setAttribute('aria-pressed', String(show));
@@ -279,7 +307,7 @@
   function slideUrl(i) {
     var e = ed(), set = urls[e] || (urls[e] = []);
     if (!set[i]) {
-      set[i] = fileOf(e + '/' + pad(i + 1) + '.bin').then(function (buf) {
+      set[i] = M.open ? pictureAt(plainUrl(e + '/' + pad(i + 1) + '.' + M.langs[e].ext)) : fileOf(e + '/' + pad(i + 1) + '.bin').then(function (buf) {
         return URL.createObjectURL(new Blob([buf], { type: M.langs[e].type }));
       });
       set[i].catch(function () { set[i] = null; });        // a failed slide can be asked for again
@@ -360,7 +388,7 @@
   else window.addEventListener('resize', live);
 
   function relabel() {
-    eye.setAttribute('aria-label', t(input.type === 'password' ? 'gate.show' : 'gate.hide'));
+    if (form) eye.setAttribute('aria-label', t(input.type === 'password' ? 'gate.show' : 'gate.hide'));
     stage.setAttribute('data-rotate', t('deck.rotate'));
     if (!built) return;
     $$('button', dots).forEach(function (b, i) { b.setAttribute('aria-label', t('deck.goto', { i: i + 1 })); });
@@ -453,7 +481,7 @@
   function openDeck(instant) {
     build();
     var show = function () {
-      gate.hidden = true;
+      if (gate) gate.hidden = true;
       deck.hidden = false;
       body.classList.add('is-open');
       body.classList.remove('is-leaving', 'is-restoring');
@@ -463,8 +491,9 @@
       go(m ? parseInt(m[1], 10) - 1 : 0, 1, true);
       frame.focus({ preventScroll: true });
       doc.dispatchEvent(new CustomEvent('ben:open'));
-      if (M.meta && !META) fileOf('meta.bin').then(function (buf) {
-        META = JSON.parse(new TextDecoder().decode(buf));
+      if (M.meta && !META) (M.open ? fetch(plainUrl('meta.json')).then(function (r) { if (!r.ok) throw new Error('file'); return r.json(); })
+        : fileOf('meta.bin').then(function (buf) { return JSON.parse(new TextDecoder().decode(buf)); })).then(function (meta) {
+        META = meta;
         describe();
       }).catch(function () {});
     };
@@ -536,7 +565,7 @@
     if (!gridBuilt) return;
     var e = ed();
     if (!sprites[e]) {
-      sprites[e] = fileOf(e + '/thumbs.bin').then(function (buf) {
+      sprites[e] = M.open ? Promise.resolve(plainUrl(e + '/' + M.langs[e].thumbs.file)) : fileOf(e + '/thumbs.bin').then(function (buf) {
         return URL.createObjectURL(new Blob([buf], { type: M.langs[e].thumbs.type }));
       });
       sprites[e].catch(function () { sprites[e] = null; });
@@ -560,6 +589,15 @@
   /* the PDF */
   var pdfBusy = false;
   function savePdf(btn) {
+    if (M.open) {                                 // a plain file: the browser downloads it
+      var e0 = ed(), a0 = doc.createElement('a');
+      a0.href = plainUrl(e0 + '/' + M.langs[e0].pdf.file);
+      a0.download = M.langs[e0].pdf.name;
+      body.appendChild(a0);
+      a0.click();
+      body.removeChild(a0);
+      return;
+    }
     if (pdfBusy) return;
     pdfBusy = true;
     btn.classList.add('is-busy');
@@ -581,6 +619,31 @@
     }).then(function () { pdfBusy = false; btn.classList.remove('is-busy'); });
   }
 
+  /* sharing an open presentation: the phone's own share sheet, or the link copied */
+  var said = 0;
+  function tell(key, bad) {
+    dnote.classList.toggle('is-error', !!bad);
+    dnote.textContent = t(key);
+    clearTimeout(said);
+    said = setTimeout(function () { if (dnote.textContent === t(key)) { dnote.textContent = ''; dnote.classList.remove('is-error'); } }, 6000);
+  }
+  function share() {
+    var url = location.origin + location.pathname + '?lang=' + lang;
+    var byHand = function () {
+      try {
+        var i = doc.createElement('input');
+        i.value = url; i.setAttribute('readonly', ''); i.style.cssText = 'position:fixed;left:-999px;top:0';
+        body.appendChild(i); i.select();
+        var ok = doc.execCommand('copy');
+        body.removeChild(i);
+        tell(ok ? 'deck.copied' : 'deck.nocopy', !ok);
+      } catch (e) { tell('deck.nocopy', true); }
+    };
+    if (navigator.share && !fine) { navigator.share({ title: doc.title, url: url }).catch(function () {}); return; }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(function () { tell('deck.copied'); }, byHand);
+    else byHand();
+  }
+
   /* controls */
   doc.addEventListener('click', function (e) {
     var target = e.target.closest ? e.target.closest('[data-act], [data-go]') : null;
@@ -596,6 +659,7 @@
     else if (act === 'grid') toggleGrid();
     else if (act === 'full') toggleFull();
     else if (act === 'pdf') savePdf(target);
+    else if (act === 'share') share();
   });
   frame.addEventListener('click', function (e) {
     if (e.target.closest('button, a, .calli') || Date.now() - swiped < 450) return;      // a live slide is not a "next" button
@@ -647,10 +711,27 @@
   /* ---------- Go ---------- */
   var asked = /[?&]lang=(en|fr)\b/.exec(location.search), kept = null;
   try { kept = localStorage.getItem('ben-lang'); } catch (e) {}
-  setLang((asked && asked[1]) || (kept === 'en' ? 'en' : 'fr'), false);
-  restore().then(function (ok) {
-    if (ok) return openDeck(true);
-    body.classList.remove('is-restoring');
-    if (fine) input.focus({ preventScroll: true });
-  });
+  if (form) {
+    // a client page: French first, as the presentation is; then the access form, or straight in if this tab already opened it
+    setLang((asked && asked[1]) || (kept === 'en' ? 'en' : 'fr'), false);
+    restore().then(function (ok) {
+      if (ok) return openDeck(true);
+      body.classList.remove('is-restoring');
+      if (fine) input.focus({ preventScroll: true });
+    });
+  } else {
+    // an open presentation: the language asked for, else the one chosen on the site, else the browser's; then straight in
+    setLang((asked && asked[1]) || kept || ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en'), false);
+    manifest.then(function (m) {
+      if (!m.open) throw new Error('locked');
+      M = m;
+      openDeck(true);
+      if (!reduced) { deck.classList.add('is-in'); setTimeout(function () { deck.classList.remove('is-in'); }, 1600); }
+    }).catch(function () {
+      deck.hidden = false;
+      $('.deck__stage').hidden = true;
+      dnote.textContent = t('gate.offline');
+      dnote.classList.add('is-error');
+    });
+  }
 })();

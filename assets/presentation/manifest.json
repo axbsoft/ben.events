@@ -1,0 +1,36 @@
+{
+ "v": 2,
+ "rev": "8bd9fbb2",
+ "open": true,
+ "langs": {
+  "fr": {
+   "count": 15,
+   "type": "image/webp",
+   "thumbs": {
+    "type": "image/webp",
+    "columns": 6,
+    "file": "thumbs.webp"
+   },
+   "pdf": {
+    "name": "benevents-agency-presentation-fr.pdf",
+    "file": "benevents-agency-presentation-fr.pdf"
+   },
+   "ext": "webp"
+  },
+  "en": {
+   "count": 15,
+   "type": "image/webp",
+   "thumbs": {
+    "type": "image/webp",
+    "columns": 6,
+    "file": "thumbs.webp"
+   },
+   "pdf": {
+    "name": "benevents-agency-presentation-en.pdf",
+    "file": "benevents-agency-presentation-en.pdf"
+   },
+   "ext": "webp"
+  }
+ },
+ "meta": true
+}
