@@ -623,7 +623,7 @@ ${cta(l, cw.endTitle(name), w.endText)}
 </section>` : ''}
 <section class="pg__sec">
   <h2 class="pg__h2">${esc(a.where)}</h2>
-  <p class="pg__lede pg__lede--wide">${esc(a.whereText)}${office ? ' ' + esc(office) + '.' : ''}</p>
+  <p class="pg__lede pg__lede--wide">${esc(a.whereText)}${office ? ' ' + esc(a.office) + ' ' + esc(office) + '.' : ''}</p>
   <div class="pcards pcards--three">
     ${CITIES.map(c => cityCard(l, c)).join('\n    ')}
   </div>
@@ -631,7 +631,7 @@ ${cta(l, cw.endTitle(name), w.endText)}
 <section class="pg__sec">
   <h2 class="pg__h2">${esc(a.team)}</h2>
   <ul class="pg__team">
-    ${TEAM.map(m => `<li>${m.photo ? img(m.photo, m.name, ' loading="lazy"', 'card') : ''}<b>${esc(m.name)}</b><span>${esc(tr(m.role || '', l))}</span></li>`).join('\n    ')}
+    ${TEAM.map(m => `<li>${m.photo ? img(m.photo, m.name, ' loading="lazy"', 'card') : `<span class="pg__team-ph" aria-hidden="true">${esc(m.name.split(/\s+/).slice(0, 2).map(x => x[0]).join(''))}</span>`}<b>${esc(m.name)}</b><span>${esc(tr(m.role || '', l))}</span></li>`).join('\n    ')}
   </ul>
 </section>` : ''}
 <section class="pg__sec">

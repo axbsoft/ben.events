@@ -189,6 +189,7 @@ export const AGENCY = {
     ],
     values: 'How we work', where: 'Where we work',
     whereText: 'We work in Casablanca, Rabat and Marrakech, and wherever in Morocco your event takes place: we have also produced in Tangier.',
+    office: 'Our office:',
     city: n => 'Event agency in ' + n, crafts: 'What we create', clients: 'They trust us', figures: 'In figures', quotes: 'In their words', team: 'The team',
     film: 'See the team at work: the film', work: 'See our projects', endTitle: 'An event in preparation?', logo: n => n + ', a client of benevents agency', cover: 'A convention stage designed and produced by benevents agency'
   },
@@ -203,6 +204,7 @@ export const AGENCY = {
     ],
     values: 'Notre façon de travailler', where: 'Où nous travaillons',
     whereText: 'Nous travaillons à Casablanca, Rabat et Marrakech, et partout au Maroc où votre événement a lieu : nous avons aussi produit à Tanger.',
+    office: 'Notre bureau :',
     city: n => 'Agence événementielle à ' + n, crafts: 'Ce que nous créons', clients: 'Ils nous font confiance', figures: 'En chiffres', quotes: 'Ils en parlent', team: 'L’équipe',
     film: 'Voir l’équipe à l’œuvre : le film', work: 'Voir nos réalisations', endTitle: 'Un événement en préparation ?', logo: n => n + ', client de benevents agency', cover: 'Une scène de convention conçue et produite par benevents agency'
   }
