@@ -157,7 +157,9 @@ window.BEN_I18N = {
     'ft.explore': 'Explorer',
     'ft.contact': 'Contact',
     'ft.rights': 'Tous droits réservés.',
-    'ft.top': 'Haut de page'
+    'ft.top': 'Haut de page',
+    'ft.instagram': 'benevents agency sur Instagram',
+    'ft.linkedin': 'benevents agency sur LinkedIn'
   },
   /* Strings used only from JavaScript */
   js: {
