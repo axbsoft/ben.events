@@ -31,7 +31,6 @@
 
 <div class="progress" aria-hidden="true"><b></b></div>
 <div class="grain" aria-hidden="true"></div>
-<div class="cursor" aria-hidden="true"><i class="cursor__dot"></i><i class="cursor__ring"></i></div>
 
 <!-- Header -->
 <header class="nav">
@@ -143,10 +142,10 @@
       <figure class="frame frame--small" data-reveal="clip">
         <div class="media media--b" data-img="about2" data-parallax="-0.06"></div>
       </figure>
-      <div class="seal" aria-hidden="true">
-        <svg viewBox="0 0 120 120"><defs><path id="sealPath" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><text><textPath href="#sealPath">BENEVENTS AGENCY ✦ EVENT DESIGN ✦ PRODUCTION ✦ </textPath></text></svg>
-        <span>b</span>
-      </div>
+      <a class="seal magnetic" href="#contact" aria-label="Start a project" data-i18n-aria="nav.cta">
+        <svg class="seal__ring" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="sealPath" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><text><textPath href="#sealPath" data-i18n="seal.ring">START YOUR PROJECT ✦ LET’S TALK ABOUT IT ✦&nbsp;</textPath></text></svg>
+        <span class="seal__core" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
@@ -226,60 +225,14 @@
       </div>
       <p class="gallery__hint" data-reveal><span data-i18n="gal.hint">Keep scrolling</span><i></i></p>
     </header>
+    <!-- the project cards are built from assets/js/projects.js -->
     <div class="gallery__track">
-      <figure class="card" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery1"></div><button class="card__open" type="button" data-zoom="gallery1"></button></div>
-        <figcaption><em>01</em><b>MTA Cycle Meeting</b><span data-i18n="gal.c.seminar">Seminar</span></figcaption>
-      </figure>
-      <figure class="card card--low" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery2"></div><button class="card__open" type="button" data-zoom="gallery2"></button></div>
-        <figcaption><em>02</em><b>Tech Fest Maroc · OneCloud</b><span data-i18n="gal.c.tech">Tech event</span></figcaption>
-      </figure>
-      <figure class="card" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery3"></div><button class="card__open" type="button" data-zoom="gallery3"></button></div>
-        <figcaption><em>03</em><b>Femmes en jeu · Canal+ University</b><span data-i18n="gal.c.stage">Stage design</span></figcaption>
-      </figure>
-      <figure class="card card--low" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery4"></div><button class="card__open" type="button" data-zoom="gallery4"></button></div>
-        <figcaption><em>04</em><b>Sustainable Innovation Fest · Enactus</b><span data-i18n="gal.c.awards">Awards</span></figcaption>
-      </figure>
-      <figure class="card" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery5"></div><button class="card__open" type="button" data-zoom="gallery5"></button></div>
-        <figcaption><em>05</em><b>GSK Day</b><span data-i18n="gal.c.conf">Conference</span></figcaption>
-      </figure>
-      <figure class="card card--low" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery6"></div><button class="card__open" type="button" data-zoom="gallery6"></button></div>
-        <figcaption><em>06</em><b>UAE–Morocco Forum for Economic Partnership</b><span data-i18n="gal.c.institutional">Institutional forum</span></figcaption>
-      </figure>
-      <figure class="card" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery7"></div><button class="card__open" type="button" data-zoom="gallery7"></button></div>
-        <figcaption><em>07</em><b>Volvo · Built on Trust</b><span data-i18n="gal.c.brand">Brand event</span></figcaption>
-      </figure>
-      <figure class="card card--low" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery8"></div><button class="card__open" type="button" data-zoom="gallery8"></button></div>
-        <figcaption><em>08</em><b>Fanzone CAN 2025</b><span data-i18n="gal.c.fanzone">Fan zone</span></figcaption>
-      </figure>
-      <figure class="card" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery9"></div><button class="card__open" type="button" data-zoom="gallery9"></button></div>
-        <figcaption><em>09</em><b>WeXchange Forum</b><span data-i18n="gal.c.forum">Forum</span></figcaption>
-      </figure>
-      <figure class="card card--low" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery10"></div><button class="card__open" type="button" data-zoom="gallery10"></button></div>
-        <figcaption><em>10</em><b>LEO Distributor Regional Conference</b><span data-i18n="gal.c.conf">Conference</span></figcaption>
-      </figure>
-      <figure class="card" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery11"></div><button class="card__open" type="button" data-zoom="gallery11"></button></div>
-        <figcaption><em>11</em><b>Onco-Days · H&amp;N Session</b><span data-i18n="gal.c.science">Scientific meeting</span></figcaption>
-      </figure>
-      <figure class="card card--low" data-tilt>
-        <div class="card__media"><div class="media" data-img="gallery12"></div><button class="card__open" type="button" data-zoom="gallery12"></button></div>
-        <figcaption><em>12</em><b>Centrale Automobile Chérifienne</b><span data-i18n="gal.c.reception">Corporate reception</span></figcaption>
-      </figure>
       <a class="card card--cta" href="#contact">
         <span data-i18n="gal.cta">Your event could be next</span>
         <i></i>
       </a>
     </div>
+    <div class="gallery__bar wrap" aria-hidden="true"><i><b></b></i></div>
   </div>
 </section>
 
@@ -291,10 +244,34 @@
       <h2 class="h2" data-reveal data-i18n="pr.title">From first conversation to final toast.</h2>
     </header>
     <ol class="steps">
-      <li data-reveal><em>I</em><h3 data-i18n="pr.1.t">Listen</h3><p data-i18n="pr.1.d">We begin with you: the occasion, the guests, the feeling you want people to carry home.</p></li>
-      <li data-reveal><em>II</em><h3 data-i18n="pr.2.t">Imagine</h3><p data-i18n="pr.2.d">A creative concept, mood boards and a clear budget, presented before a single supplier is booked.</p></li>
-      <li data-reveal><em>III</em><h3 data-i18n="pr.3.t">Orchestrate</h3><p data-i18n="pr.3.d">Venues, artisans, technicians and schedules, coordinated by one dedicated producer.</p></li>
-      <li data-reveal><em>IV</em><h3 data-i18n="pr.4.t">Deliver</h3><p data-i18n="pr.4.d">On the day, our team runs every cue so that you are free to simply be present.</p></li>
+      <li data-reveal>
+        <div class="steps__top">
+          <span class="steps__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M20 4H4a1.5 1.5 0 0 0-1.5 1.5v10A1.5 1.5 0 0 0 4 17h3v3.5l4.5-3.5H20a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 20 4z"/><path pathLength="1" d="M8 9.5v2"/><path pathLength="1" d="M12 8v5"/><path pathLength="1" d="M16 9.5v2"/></svg></span>
+          <span class="steps__n" aria-hidden="true">01</span>
+        </div>
+        <h3 data-i18n="pr.1.t">Listen</h3><p data-i18n="pr.1.d">We begin with you: the occasion, the guests, the feeling you want people to carry home.</p>
+      </li>
+      <li data-reveal>
+        <div class="steps__top">
+          <span class="steps__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M10 3.5c.6 3.9 2.1 5.4 6 6-3.9.6-5.4 2.1-6 6-.6-3.9-2.1-5.4-6-6 3.9-.6 5.4-2.1 6-6z"/><path pathLength="1" d="M18 14c.3 1.9 1.1 2.7 3 3-1.9.3-2.7 1.1-3 3-.3-1.9-1.1-2.7-3-3 1.9-.3 2.7-1.1 3-3z"/><path pathLength="1" d="M18.5 3.5v3"/><path pathLength="1" d="M17 5h3"/></svg></span>
+          <span class="steps__n" aria-hidden="true">02</span>
+        </div>
+        <h3 data-i18n="pr.2.t">Imagine</h3><p data-i18n="pr.2.d">A creative concept, mood boards and a clear budget, presented before a single supplier is booked.</p>
+      </li>
+      <li data-reveal>
+        <div class="steps__top">
+          <span class="steps__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M6 3.5V9"/><path pathLength="1" d="M6 13v7.5"/><path pathLength="1" d="M12 3.5v2"/><path pathLength="1" d="M12 9.5v11"/><path pathLength="1" d="M18 3.5V13"/><path pathLength="1" d="M18 17v3.5"/><circle pathLength="1" cx="6" cy="11" r="2"/><circle pathLength="1" cx="12" cy="7.5" r="2"/><circle pathLength="1" cx="18" cy="15" r="2"/></svg></span>
+          <span class="steps__n" aria-hidden="true">03</span>
+        </div>
+        <h3 data-i18n="pr.3.t">Orchestrate</h3><p data-i18n="pr.3.d">Venues, artisans, technicians and schedules, coordinated by one dedicated producer.</p>
+      </li>
+      <li data-reveal>
+        <div class="steps__top">
+          <span class="steps__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect pathLength="1" x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path pathLength="1" d="M3.5 9.5h17"/><path pathLength="1" d="M8 3v4"/><path pathLength="1" d="M16 3v4"/><path pathLength="1" d="m8.5 14.5 2.5 2.5 4.5-5"/></svg></span>
+          <span class="steps__n" aria-hidden="true">04</span>
+        </div>
+        <h3 data-i18n="pr.4.t">Deliver</h3><p data-i18n="pr.4.d">On the day, our team runs every cue so that you are free to simply be present.</p>
+      </li>
     </ol>
   </div>
 </section>
@@ -389,6 +366,10 @@
     </div>
 
     <form class="form" data-reveal novalidate>
+      <p class="form__ref field--full" tabindex="-1" hidden>
+        <span><span data-i18n="f.ref">About the project</span> <b class="form__ref-name"></b></span>
+        <button class="form__ref-x" type="button" aria-label="Remove this reference" data-i18n-aria="f.ref.x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </p>
       <label class="field"><span data-i18n="f.name">Your name</span><input name="name" type="text" autocomplete="name" required></label>
       <label class="field"><span data-i18n="f.email">Email</span><input name="email" type="email" autocomplete="email" required></label>
       <label class="field"><span data-i18n="f.phone">Phone</span><input name="phone" type="tel" autocomplete="tel"></label>
@@ -415,40 +396,85 @@
 </main>
 
 <footer class="footer">
-  <div class="footer__big" aria-hidden="true"><span>benevents</span></div>
-  <div class="wrap footer__grid">
-    <div>
-      <a class="logo logo--footer" href="#top" aria-label="benevents agency"><span class="logo__text"><span class="brand"><span class="brand__w"><b>ben</b>events</span><span class="brand__bar"><i></i><i></i><i></i><i></i></span><span class="brand__a">agency</span></span></span></a>
-      <p class="footer__tag" data-i18n="ft.tag">Corporate event design and production.</p>
-    </div>
-    <nav aria-label="Footer">
-      <h4 data-i18n="ft.explore">Explore</h4>
-      <a href="#about" data-i18n="nav.about">The Agency</a>
-      <a href="#services" data-i18n="nav.services">Services</a>
-      <a href="#gallery" data-i18n="nav.gallery">Portfolio</a>
-      <a href="#process" data-i18n="nav.process">Approach</a>
-    </nav>
-    <div>
-      <h4 data-i18n="ft.contact">Contact</h4>
-      <a data-mail href="#"></a>
-      <a href="#contact" data-i18n="nav.cta">Start a project</a>
-    </div>
-    <div>
-      <h4 data-i18n="ft.lang">Language</h4>
-      <div class="lang lang--footer" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-pressed="true">English</button>
-        <span>·</span>
-        <button type="button" data-lang="fr" aria-pressed="false">Français</button>
+  <div class="footer__panel">
+    <div class="footer__aura" aria-hidden="true"></div>
+    <div class="footer__stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="footer__top">
+      <div class="footer__lead">
+        <a class="logo logo--footer" href="#top" aria-label="benevents agency"><span class="logo__text"><span class="brand"><span class="brand__w"><b>ben</b>events</span><span class="brand__bar"><i></i><i></i><i></i><i></i></span><span class="brand__a">agency</span></span></span></a>
+        <a class="footer__cta" href="#contact">
+          <span class="footer__cta-text"><span data-i18n="ft.cta1">Your next event</span> <em data-i18n="ft.cta2">starts here.</em><i aria-hidden="true"></i></span>
+        </a>
+      </div>
+      <nav class="footer__col" aria-label="Footer">
+        <h4 data-i18n="ft.explore">Explore</h4>
+        <a href="#about" data-i18n="nav.about">The Agency</a>
+        <a href="#services" data-i18n="nav.services">Services</a>
+        <a href="#gallery" data-i18n="nav.gallery">Portfolio</a>
+        <a href="#process" data-i18n="nav.process">Approach</a>
+        <a href="#wall" data-i18n="wall.eyebrow">In pictures</a>
+      </nav>
+      <div class="footer__col">
+        <h4 data-i18n="ft.contact">Contact</h4>
+        <a data-mail href="#"></a>
+        <a href="#contact" data-i18n="nav.cta">Start a project</a>
       </div>
     </div>
-  </div>
-  <div class="wrap footer__base">
-    <span>© <span data-year></span> benevents agency. <span data-i18n="ft.rights">All rights reserved.</span></span>
-    <a href="#top" class="to-top"><span data-i18n="ft.top">Back to top</span> ↑</a>
+    <div class="footer__big" aria-hidden="true"><span class="footer__ghost">benevents</span><span class="footer__lit">benevents</span></div>
+    <div class="footer__base">
+      <span>© <span data-year></span> benevents agency. <span data-i18n="ft.rights">All rights reserved.</span></span>
+      <span class="footer__tag" data-i18n="ft.tag">Corporate event design and production.</span>
+      <a href="#top" class="to-top"><span data-i18n="ft.top">Back to top</span><i aria-hidden="true"></i></a>
+    </div>
   </div>
 </footer>
 
+<!-- Project page: opens over the site from a portfolio card. Its content comes from assets/js/projects.js -->
+<div class="pj" id="project" role="dialog" aria-modal="true" aria-labelledby="pj-title">
+  <div class="pj__bar">
+    <button class="pj__back" type="button" data-pj-close><i aria-hidden="true"></i><span data-i18n="pj.back">All projects</span></button>
+    <span class="pj__pos" aria-hidden="true"></span>
+    <div class="pj__nav">
+      <button class="pj__btn" type="button" data-pj-step="-1" aria-label="Previous project" data-i18n-aria="pj.prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
+      <button class="pj__btn" type="button" data-pj-step="1" aria-label="Next project" data-i18n-aria="pj.next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button>
+      <button class="pj__btn pj__x" type="button" data-pj-close aria-label="Close" data-i18n-aria="pj.close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="pj__scroll">
+    <article class="pj__page">
+      <header class="pj__top wrap">
+        <div class="pj__head">
+          <p class="eyebrow"><i></i><span class="pj__kind"></span></p>
+          <h2 class="pj__title" id="pj-title" tabindex="-1"></h2>
+          <p class="pj__intro"></p>
+          <p class="pj__count"></p>
+        </div>
+        <button class="pj__ph pj__cover" type="button" data-pj-photo="0"><img alt=""></button>
+      </header>
+      <div class="pj__rows wrap"></div>
+      <section class="pj__cta wrap">
+        <div class="pj__cta-in">
+          <div class="pj__cta-main">
+            <p class="eyebrow"><i></i><span data-i18n="pj.cta.eyebrow">Your turn</span></p>
+            <h3 class="pj__cta-title" data-i18n="pj.cta.title">Planning something similar?</h3>
+            <p class="pj__cta-text" data-i18n="pj.cta.text">Tell us about your event. We will take this project as the starting point and come back to you with first ideas.</p>
+          </div>
+          <div class="pj__cta-side">
+            <a class="btn magnetic" href="#contact" data-pj-contact><span data-i18n="pj.cta.btn">Contact us about this project</span></a>
+            <a class="pj__mail" data-mail href="#"></a>
+          </div>
+        </div>
+      </section>
+      <a class="pj__next" href="#gallery" data-pj-step="1">
+        <span class="pj__next-media media" aria-hidden="true"></span>
+        <span class="pj__next-in wrap"><small data-i18n="pj.nextlabel">Next project</small><b class="pj__next-title"></b><i aria-hidden="true"></i></span>
+      </a>
+    </article>
+  </div>
+</div>
+
 <script src="assets/js/i18n.js"></script>
+<script src="assets/js/projects.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

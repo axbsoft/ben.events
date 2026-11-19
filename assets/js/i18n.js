@@ -48,6 +48,7 @@ window.BEN_I18N = {
     'about.v2': 'Une équipe, un calendrier, chaque détail maîtrisé.',
     'about.k3': 'Discret',
     'about.v3': 'Nous restons en coulisses pour que votre message occupe la scène.',
+    'seal.ring': 'DÉMARRER VOTRE PROJET ✦ PARLONS-EN ENSEMBLE ✦\u00a0',
 
     'srv.eyebrow': 'Ce que nous créons',
     'srv.title': 'Quatre savoir-faire. Une seule exigence.',
@@ -77,18 +78,19 @@ window.BEN_I18N = {
     'gal.eyebrow': 'Réalisations',
     'gal.title': 'Événements choisis',
     'gal.hint': 'Continuez à défiler',
-    'gal.c.seminar': 'Séminaire',
-    'gal.c.tech': 'Événement tech',
-    'gal.c.stage': 'Scénographie',
-    'gal.c.awards': 'Remise de prix',
-    'gal.c.conf': 'Conférence',
-    'gal.c.institutional': 'Forum institutionnel',
-    'gal.c.brand': 'Événement de marque',
-    'gal.c.fanzone': 'Fan zone',
-    'gal.c.forum': 'Forum',
-    'gal.c.science': 'Rencontre scientifique',
-    'gal.c.reception': 'Réception d’entreprise',
+    'gal.view': 'Voir le projet',
     'gal.cta': 'Le prochain sera peut-être le vôtre',
+
+    /* project pages: titles, labels and introductions are in projects.js */
+    'pj.back': 'Tous les projets',
+    'pj.prev': 'Projet précédent',
+    'pj.next': 'Projet suivant',
+    'pj.close': 'Fermer',
+    'pj.cta.eyebrow': 'À vous',
+    'pj.cta.title': 'Un projet similaire en tête ?',
+    'pj.cta.text': 'Parlez-nous de votre événement. Nous partirons de ce projet pour revenir vers vous avec de premières idées.',
+    'pj.cta.btn': 'Nous contacter pour ce projet',
+    'pj.nextlabel': 'Projet suivant',
 
     'wall.eyebrow': 'En images',
     'wall.title': 'En coulisses, sur scène.',
@@ -146,11 +148,14 @@ window.BEN_I18N = {
     'f.guests': 'Nombre d’invités',
     'f.msg': 'Parlez-nous de votre événement',
     'f.send': 'Envoyer la demande',
+    'f.ref': 'À propos du projet',
+    'f.ref.x': 'Retirer cette référence',
 
     'ft.tag': 'Conception et production d’événements d’entreprise.',
+    'ft.cta1': 'Votre prochain événement',
+    'ft.cta2': 'commence ici.',
     'ft.explore': 'Explorer',
     'ft.contact': 'Contact',
-    'ft.lang': 'Langue',
     'ft.rights': 'Tous droits réservés.',
     'ft.top': 'Haut de page'
   },
@@ -160,15 +165,17 @@ window.BEN_I18N = {
       required: 'Please add your name, a valid email and a few words about your event.',
       opening: 'Your email app is opening with your enquiry. Thank you.',
       subject: 'Event enquiry',
-      labels: { name: 'Name', email: 'Email', phone: 'Phone', type: 'Event type', date: 'Preferred date', guests: 'Guests' },
-      viewer: { label: 'Photo viewer', close: 'Close', prev: 'Previous photo', next: 'Next photo', open: 'Enlarge photo' }
+      labels: { name: 'Name', email: 'Email', phone: 'Phone', type: 'Event type', date: 'Preferred date', guests: 'Guests', project: 'Reference project' },
+      viewer: { label: 'Photo viewer', close: 'Close', prev: 'Previous photo', next: 'Next photo', open: 'Enlarge photo' },
+      project: { photos: 'photos', photo: 'Photo' }
     },
     fr: {
       required: 'Merci d’indiquer votre nom, un e-mail valide et quelques mots sur votre événement.',
       opening: 'Votre messagerie s’ouvre avec votre demande. Merci.',
       subject: 'Demande d’événement',
-      labels: { name: 'Nom', email: 'E-mail', phone: 'Téléphone', type: 'Type d’événement', date: 'Date souhaitée', guests: 'Invités' },
-      viewer: { label: 'Visionneuse de photos', close: 'Fermer', prev: 'Photo précédente', next: 'Photo suivante', open: 'Agrandir la photo' }
+      labels: { name: 'Nom', email: 'E-mail', phone: 'Téléphone', type: 'Type d’événement', date: 'Date souhaitée', guests: 'Invités', project: 'Projet de référence' },
+      viewer: { label: 'Visionneuse de photos', close: 'Fermer', prev: 'Photo précédente', next: 'Photo suivante', open: 'Agrandir la photo' },
+      project: { photos: 'photos', photo: 'Photo' }
     }
   }
 };
