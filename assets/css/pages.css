@@ -73,6 +73,11 @@
 .pg__all { padding: 12px 20px; border-radius: 99px; font-size: 14.5px; font-weight: 500; color: var(--mute); white-space: nowrap; transition: color .3s; }
 .pg__all:hover, .pg__all:focus-visible { color: var(--text); }
 
+/* the page shown when an address does not exist */
+.lost { min-height: 100svh; display: grid; align-items: center; }
+.lost .eyebrow { margin-bottom: clamp(18px, 2vw, 28px); }
+.lost__links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 30px; margin-top: clamp(28px, 3.4vw, 44px); }
+
 /* the foot of these pages */
 .pfoot { border-top: 1px solid var(--line); background: var(--bg-2); }
 .pfoot__in { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 36px clamp(24px, 4vw, 70px); padding-top: clamp(40px, 5vw, 72px); padding-bottom: clamp(30px, 4vw, 54px); }

@@ -430,6 +430,8 @@
     try { history.replaceState(null, '', '#' + (cur + 1)); } catch (e) {}
   }
 
+  // what visitors do, counted without identifying anyone (assets/js/stats.js, on the open presentation only)
+  var seenEnd = false, count = function (name, props) { if (window.benCount) window.benCount(name, props); };
   // dir: 1 forwards, -1 backwards (worked out when left empty)
   function go(i, dir, instant) {
     i = Math.max(0, Math.min(N - 1, i));
@@ -437,6 +439,7 @@
     var my = ++turn, e = ed();
     if (!dir) dir = i > cur ? 1 : -1;
     cur = i;
+    if (i === N - 1 && !seenEnd) { seenEnd = true; count('presentation_finished'); }
     links.textContent = '';
     chrome();
     var slow = setTimeout(function () { if (my === turn) frame.classList.add('is-loading'); }, 180);
@@ -590,6 +593,7 @@
   var pdfBusy = false;
   function savePdf(btn) {
     if (M.open) {                                 // a plain file: the browser downloads it
+      count('presentation_pdf', { language: ed() });
       var e0 = ed(), a0 = doc.createElement('a');
       a0.href = plainUrl(e0 + '/' + M.langs[e0].pdf.file);
       a0.download = M.langs[e0].pdf.name;
@@ -628,6 +632,7 @@
     said = setTimeout(function () { if (dnote.textContent === t(key)) { dnote.textContent = ''; dnote.classList.remove('is-error'); } }, 6000);
   }
   function share() {
+    count('presentation_share');
     var url = location.origin + location.pathname + '?lang=' + lang;
     var byHand = function () {
       try {

@@ -9,6 +9,7 @@
      fr/services/<slug>.html                the same in French                           -> /fr/services/<slug>
      projects.html, projects/<id>.html      the list of projects and one page each       -> /projects, /projects/<id>
      fr/realisations.html, fr/realisations/<id>.html   the same in French                -> /fr/realisations, …
+     404.html                               what a visitor sees when an address does not exist
      sitemap.xml                            the list of all of them
 
    It also rewrites, in index.html, the lines between "head:seo" and "/head:seo" (title, description,
@@ -85,7 +86,7 @@ const W = {
     endTitle: 'An event like this in mind?', endText: 'Give us the date, the place and the number of guests: we will come back with first ideas.',
     pjEndTitle: 'Planning something similar?', pjEndText: 'Tell us about your event. We will take this project as the starting point and come back to you with first ideas.',
     fServices: 'Services', fAgency: 'The agency', fContact: 'Contact', approach: 'Our approach', contact: 'Contact', rights: 'All rights reserved.',
-    privacy: 'Privacy policy', terms: 'Terms of use', whatsapp: 'WhatsApp', onInstagram: 'benevents agency on Instagram', onLinkedin: 'benevents agency on LinkedIn',
+    privacy: 'Privacy policy', terms: 'Terms of use', deck: 'Our presentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency on Instagram', onLinkedin: 'benevents agency on LinkedIn',
     photoOf: t => `Photo of the event: ${t}`, serviceImg: t => `${t}: an event produced by benevents agency`
   },
   fr: {
@@ -98,7 +99,7 @@ const W = {
     endTitle: 'Un événement de ce type en tête ?', endText: 'Donnez-nous la date, le lieu et le nombre d’invités : nous revenons vers vous avec de premières idées.',
     pjEndTitle: 'Un projet similaire en préparation ?', pjEndText: 'Parlez-nous de votre événement. Nous partirons de cette réalisation pour revenir vers vous avec de premières idées.',
     fServices: 'Savoir-faire', fAgency: 'L’agence', fContact: 'Contact', approach: 'Notre approche', contact: 'Contact', rights: 'Tous droits réservés.',
-    privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency sur Instagram', onLinkedin: 'benevents agency sur LinkedIn',
+    privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation', deck: 'Notre présentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency sur Instagram', onLinkedin: 'benevents agency sur LinkedIn',
     photoOf: t => `Photo de l’événement : ${t}`, serviceImg: t => `${t} : un événement produit par benevents agency`
   }
 };
@@ -275,6 +276,7 @@ ${main}
       <a href="${U.home(l)}">${esc(w.homeName)}</a>
       <a href="${U.projects(l)}">${esc(w.work)}</a>
       <a href="${U.at(l, '#process')}">${esc(w.approach)}</a>
+      <a href="/presentation?lang=${l}">${esc(w.deck)}</a>
       <a href="${U.at(l, '#contact')}">${esc(w.contact)}</a>
     </nav>
     <div class="pfoot__col">
@@ -292,6 +294,7 @@ ${main}
     <nav aria-label="Legal"><a href="${U.legal(l, 'privacy')}">${esc(w.privacy)}</a><a href="${U.legal(l, 'terms')}">${esc(w.terms)}</a></nav>
   </div>
 </footer>
+<script src="/assets/js/stats.js"></script>
 <script>document.querySelectorAll('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>
@@ -437,7 +440,66 @@ ${cta(l, w.endTitle, w.endText)}`;
   }
 }
 
-/* ---------- 3. the list of pages, for search engines ---------- */
+/* ---------- 3. the page shown when an address does not exist ----------
+   One file for both languages (the hosting serves 404.html for every unknown address): a few lines of script
+   show the French words when the address or the visitor's language says so. */
+{
+  const L = {
+    en: { doc: 'Page not found | benevents agency', title: ['This page', 'is not on the programme.'], text: 'The address may have changed, or the link was mistyped. Here is where to go next.', home: 'Back to the home page', work: 'See our projects' },
+    fr: { doc: 'Page introuvable | benevents agency', title: ['Cette page', 'n’est pas au programme.'], text: 'L’adresse a peut-être changé, ou le lien contient une erreur. Voici où aller ensuite.', home: 'Retour à l’accueil', work: 'Voir nos réalisations' }
+  };
+  const block = l => `<div lang="${l}" data-lost="${l}"${l === 'fr' ? ' hidden' : ''}>
+    <h1 class="pg__title">${esc(L[l].title[0])} <em>${esc(L[l].title[1])}</em></h1>
+    <p class="pg__lede">${esc(L[l].text)}</p>
+    <p class="lost__links"><a class="btn" href="${U.home(l)}"><span>${esc(L[l].home)}</span></a><a class="link-arrow" href="${U.projects(l)}">${esc(L[l].work)}</a><a class="link-arrow" href="${U.at(l, '#contact')}">${esc(W[l].talk)}</a></p>
+  </div>`;
+  write('404.html', `<!doctype html>
+<!-- Written by tools/site/build.mjs: change it there, then run it again. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(L.en.doc)}</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#08080a">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/pages.css">
+${STATS}
+</head>
+<body class="page">
+<div class="grain" aria-hidden="true"></div>
+<header class="nav">
+  <a class="logo" href="/" data-lost-home aria-label="benevents agency"><span class="logo__text">${BRAND}</span></a>
+</header>
+<main id="main" class="pg lost">
+<div class="wrap">
+  <p class="eyebrow"><i></i><span>404</span></p>
+  ${LANGS.map(block).join('\n  ')}
+</div>
+</main>
+<script src="/assets/js/stats.js"></script>
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('ben-lang'); } catch (e) {}
+  var fr = /^\\/fr(\\/|$)/.test(location.pathname) || (!/^\\/(services|projects)(\\/|$)/.test(location.pathname) && (stored ? stored === 'fr' : /^(fr|ar-ma)/i.test(navigator.language || '')));
+  if (!fr) return;
+  document.documentElement.lang = 'fr';
+  document.title = ${JSON.stringify(L.fr.doc)};
+  document.querySelector('[data-lost-home]').setAttribute('href', '/fr');
+  [].forEach.call(document.querySelectorAll('[data-lost]'), function (n) { n.hidden = n.getAttribute('data-lost') !== 'fr'; });
+})();
+</script>
+</body>
+</html>
+`);
+}
+
+/* ---------- 4. the list of pages, for search engines ---------- */
 const entry = (loc, links) => `  <url>\n    <loc>${SITE + loc}</loc>\n${links.map(([k, href]) => `    <xhtml:link rel="alternate" hreflang="${k}" href="${SITE + href}"/>`).join('\n')}\n  </url>`;
 const urls = [];
 for (const l of LANGS) urls.push(entry(U.home(l), [['en', '/'], ['fr', '/fr'], ['x-default', '/']]));
@@ -456,4 +518,4 @@ for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations']) {
   if (!existsSync(join(ROOT, dir))) continue;
   for (const f of readdirSync(join(ROOT, dir))) if (f.endsWith('.html') && !kept.has(dir + '/' + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + '/' + f); }
 }
-console.log(`written: fr.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);
+console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);

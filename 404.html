@@ -1,0 +1,52 @@
+<!doctype html>
+<!-- Written by tools/site/build.mjs: change it there, then run it again. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | benevents agency</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#08080a">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/pages.css">
+<script src="https://app.rybbit.io/api/script.js?siteId=5ad12948434d" defer></script>
+</head>
+<body class="page">
+<div class="grain" aria-hidden="true"></div>
+<header class="nav">
+  <a class="logo" href="/" data-lost-home aria-label="benevents agency"><span class="logo__text"><span class="brand"><span class="brand__w"><b>ben</b>events</span><span class="brand__bar"><i></i><i></i><i></i><i></i></span><span class="brand__a">agency</span></span></span></a>
+</header>
+<main id="main" class="pg lost">
+<div class="wrap">
+  <p class="eyebrow"><i></i><span>404</span></p>
+  <div lang="en" data-lost="en">
+    <h1 class="pg__title">This page <em>is not on the programme.</em></h1>
+    <p class="pg__lede">The address may have changed, or the link was mistyped. Here is where to go next.</p>
+    <p class="lost__links"><a class="btn" href="/"><span>Back to the home page</span></a><a class="link-arrow" href="/projects">See our projects</a><a class="link-arrow" href="/#contact">Talk to us about your event</a></p>
+  </div>
+  <div lang="fr" data-lost="fr" hidden>
+    <h1 class="pg__title">Cette page <em>n’est pas au programme.</em></h1>
+    <p class="pg__lede">L’adresse a peut-être changé, ou le lien contient une erreur. Voici où aller ensuite.</p>
+    <p class="lost__links"><a class="btn" href="/fr"><span>Retour à l’accueil</span></a><a class="link-arrow" href="/fr/realisations">Voir nos réalisations</a><a class="link-arrow" href="/fr#contact">Parlons de votre événement</a></p>
+  </div>
+</div>
+</main>
+<script src="/assets/js/stats.js"></script>
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('ben-lang'); } catch (e) {}
+  var fr = /^\/fr(\/|$)/.test(location.pathname) || (!/^\/(services|projects)(\/|$)/.test(location.pathname) && (stored ? stored === 'fr' : /^(fr|ar-ma)/i.test(navigator.language || '')));
+  if (!fr) return;
+  document.documentElement.lang = 'fr';
+  document.title = "Page introuvable | benevents agency";
+  document.querySelector('[data-lost-home]').setAttribute('href', '/fr');
+  [].forEach.call(document.querySelectorAll('[data-lost]'), function (n) { n.hidden = n.getAttribute('data-lost') !== 'fr'; });
+})();
+</script>
+</body>
+</html>

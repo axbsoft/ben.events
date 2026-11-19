@@ -8,7 +8,7 @@
    without touching the site. The address is never sent to the visitor's browser.
 
    What the webhook receives:
-     { "name", "email", "phone", "type", "date", "guests", "message",
+     { "name", "email", "phone", "type", "date", "guests", "city", "budget", "message",
        "project"   the portfolio project the enquiry refers to, when there is one,
        "lang"      "en" or "fr", the language the visitor was reading,
        "page"      the address of the page, "sent_at" the time (ISO 8601), "source": "ben.events" }
@@ -16,7 +16,7 @@
    Until the variable is set this function answers 503 and the form falls back to opening
    the visitor's mail app, as it always did. */
 
-const LIMITS = { name: 120, email: 160, phone: 40, type: 80, date: 80, guests: 40, project: 160, message: 5000, lang: 2, page: 300 };
+const LIMITS = { name: 120, email: 160, phone: 40, type: 80, date: 80, guests: 40, city: 80, budget: 60, project: 160, message: 5000, lang: 2, page: 300 };
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // one field of the enquiry as plain text of a reasonable length

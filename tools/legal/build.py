@@ -23,7 +23,7 @@ PAGES = {
             ('Who is responsible for your data', [
                 'benevents agency, an event design and production agency based in Morocco, is responsible for the data collected on this website. For any question, write to ' + M + '.']),
             ('What we collect', [
-                ['<b>When you write to us through the contact form:</b> your name, your email address, your phone number if you give it, the type of event, the date you have in mind, the number of guests and your message. With them come the language of the site, the page the enquiry was sent from, the project it refers to if any, and the date and time it was sent.',
+                ['<b>When you write to us through the contact form:</b> your name, your email address, your phone number if you give it, the type of event, the date you have in mind, the number of guests, the city of the event and the budget range if you give them, and your message. With them come the language of the site, the page the enquiry was sent from, the project it refers to if any, and the date and time it was sent.',
                  '<b>When you contact us by email, by phone or on WhatsApp:</b> the information you choose to give us.',
                  '<b>When you browse the site:</b> like any website, our hosting provider records technical data (IP address, type of browser, pages requested, date and time) needed to deliver the pages and keep them secure.'],
                 'We ask for no sensitive data, and the site is not intended for minors.']),
@@ -37,7 +37,7 @@ PAGES = {
                 'For as long as it takes to handle your enquiry and follow our exchanges, then for the length of our relationship if we work together, and beyond that where the law requires it (accounting records, for example). You can ask us to delete it at any time.']),
             ('Cookies and outside services', [
                 'The site uses no advertising cookie and no advertising tracker. It keeps a single piece of information in your browser: the language you chose. The private presentations we share with our clients by means of a code keep the access open for the length of your session; the code is checked in your browser and is not sent to us.',
-                'We measure how the site is used with Rybbit, an audience measurement tool that works without cookies. It records the pages viewed, where the visit comes from, the type of device and browser and an approximate location. To tell one visitor from another, it works out an identifier from the IP address and the browser.',
+                'We measure how the site is used with Rybbit, an audience measurement tool that works without cookies. It records the pages viewed, where the visit comes from, the type of device and browser and an approximate location. It also counts a few actions, such as sending the contact form (with the type of event, the city and the budget range, never your name, your contact details or your message) or opening WhatsApp from the site. To tell one visitor from another, it works out an identifier from the IP address and the browser.',
                 'A few elements come from other services, which then receive your IP address and apply their own rules:',
                 ['audience measurement is provided by Rybbit (rybbit.io);',
                  'the typefaces are supplied by Google Fonts;',
@@ -57,7 +57,7 @@ PAGES = {
             ('Qui est responsable de vos données', [
                 'benevents agency, agence de conception et de production d’événements établie au Maroc, est responsable des données recueillies sur ce site. Pour toute question, écrivez à ' + M + '.']),
             ('Ce que nous recueillons', [
-                ['<b>Quand vous nous écrivez par le formulaire de contact :</b> votre nom, votre adresse e-mail, votre téléphone si vous l’indiquez, le type d’événement, la date envisagée, le nombre d’invités et votre message. S’y ajoutent la langue du site, la page d’où la demande est partie, la réalisation à laquelle elle se rapporte le cas échéant, ainsi que la date et l’heure d’envoi.',
+                ['<b>Quand vous nous écrivez par le formulaire de contact :</b> votre nom, votre adresse e-mail, votre téléphone si vous l’indiquez, le type d’événement, la date envisagée, le nombre d’invités, la ville de l’événement et le budget envisagé si vous les indiquez, et votre message. S’y ajoutent la langue du site, la page d’où la demande est partie, la réalisation à laquelle elle se rapporte le cas échéant, ainsi que la date et l’heure d’envoi.',
                  '<b>Quand vous nous contactez par e-mail, par téléphone ou sur WhatsApp :</b> les informations que vous choisissez de nous donner.',
                  '<b>Quand vous consultez le site :</b> comme pour tout site, notre hébergeur enregistre des données techniques (adresse IP, type de navigateur, pages demandées, date et heure) nécessaires à l’affichage des pages et à leur sécurité.'],
                 'Nous ne demandons aucune donnée sensible, et le site ne s’adresse pas aux mineurs.']),
@@ -71,7 +71,7 @@ PAGES = {
                 'Le temps de traiter votre demande et de suivre nos échanges, puis pendant la durée de notre relation si nous travaillons ensemble, et au-delà lorsque la loi l’impose (pièces comptables, par exemple). Vous pouvez nous demander de les supprimer à tout moment.']),
             ('Cookies et services extérieurs', [
                 'Le site n’utilise ni cookie publicitaire ni traceur publicitaire. Il garde une seule information dans votre navigateur : la langue que vous avez choisie. Les présentations privées que nous partageons avec nos clients au moyen d’un code gardent l’accès ouvert le temps de votre session ; le code est vérifié dans votre navigateur et ne nous est pas transmis.',
-                'Nous mesurons la fréquentation du site avec Rybbit, un outil de mesure d’audience qui fonctionne sans cookie. Il enregistre les pages consultées, la provenance de la visite, le type d’appareil et de navigateur et une localisation approximative. Pour distinguer un visiteur d’un autre, il calcule un identifiant à partir de l’adresse IP et du navigateur.',
+                'Nous mesurons la fréquentation du site avec Rybbit, un outil de mesure d’audience qui fonctionne sans cookie. Il enregistre les pages consultées, la provenance de la visite, le type d’appareil et de navigateur et une localisation approximative. Il compte aussi quelques actions, comme l’envoi du formulaire de contact (avec le type d’événement, la ville et la fourchette de budget, jamais votre nom, vos coordonnées ni votre message) ou l’ouverture de WhatsApp depuis le site. Pour distinguer un visiteur d’un autre, il calcule un identifiant à partir de l’adresse IP et du navigateur.',
                 'Quelques éléments viennent d’autres services, qui reçoivent alors votre adresse IP et appliquent leurs propres règles :',
                 ['la mesure d’audience est assurée par Rybbit (rybbit.io) ;',
                  'les polices de caractères sont fournies par Google Fonts ;',
@@ -197,6 +197,7 @@ def page(key):
 <script src="assets/js/legal.js"></script>
 <!-- audience measurement (Rybbit), without cookies -->
 <script src="https://app.rybbit.io/api/script.js?siteId=5ad12948434d" defer></script>
+<script src="assets/js/stats.js"></script>
 </head>
 <!-- This page is written by tools/legal/build.py, which holds its text in both languages: change the text there, then run it again. -->
 <body class="legal-page" data-title-en="{title_en}" data-title-fr="{title_fr}" data-desc-en="{desc_en}" data-desc-fr="{desc_fr}">

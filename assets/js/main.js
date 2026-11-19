@@ -48,6 +48,8 @@
     return n;
   };
   var plainClick = function (e) { return !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button); };
+  // what visitors do, counted without identifying anyone (assets/js/stats.js); where that file is absent nothing happens
+  var count = function (name, props) { if (window.benCount) window.benCount(name, props); };
 
   var I18N = window.BEN_I18N || { fr: {}, meta: {}, js: {} };
   var PROJECTS = window.BEN_PROJECTS || [];
@@ -72,6 +74,7 @@
       reelFrame.appendChild(player);
       reelPlay.hidden = true;
       player.focus();
+      count('film_play');
     });
   }
 
@@ -297,7 +300,7 @@
     waLinks();
     voicesText();
     svText();
-    $$('[data-legal]').forEach(function (a) { a.href = a.getAttribute('data-legal') + '?lang=' + lang; });   // the legal pages open in the same language
+    $$('[data-legal]').forEach(function (a) { a.href = a.getAttribute('data-legal') + '?lang=' + lang; });   // the legal pages and the presentation open in the same language
     // the pages of the services and projects, in the language on screen (a plain press still opens them over the site)
     $$('[data-page]').forEach(function (a) { var v = a.getAttribute('data-page').split(':'); a.href = pageUrl(v[0], v[1]); });
     $$('a[data-project]').forEach(function (a) { a.href = pageUrl('project', a.getAttribute('data-project')); });
@@ -867,6 +870,7 @@
   function pjShow(p, opener) {
     if (!pj || !p || p === pjCur) return;
     pjTurn++;
+    count('project_open', { project: p.id });
     if (pjCur) {                                   // already open: change project
       if (reduced) return pjFill(p);
       pjCur = p;
@@ -1015,6 +1019,7 @@
     if (!sv || !s) return;
     var was = svCur, m = mediaOf('service' + (s.index + 1));
     svTurn++;
+    if (s !== was) count('service_open', { service: s.id });
     svCur = s;
     svText();
     svE.media.style.backgroundImage = m ? 'url("' + m.src + '")' : '';
@@ -1138,15 +1143,27 @@
     refText();
   }
   if (form) {
-    var fields = $$('input, textarea, select', form), sending = false;
+    var fields = $$('input, textarea, select', form), sending = false, started = false;
     var filled = function () { fields.forEach(function (f) { f.parentNode.classList.toggle('is-filled', !!f.value); }); };
     fields.forEach(function (f) { f.addEventListener('input', filled); f.addEventListener('change', filled); });
+    form.addEventListener('input', function (e) {                     // counted once: someone began to write
+      if (started || !e.target || e.target.name === 'hp') return;
+      started = true;
+      count('enquiry_started');
+    });
+    // the same words whatever the language on screen: the place of the choice in its list
+    var KINDS = ['conference', 'ceremony', 'brand event', 'audiovisual', 'other'], BUDGETS = ['', 'under 100k', '100k to 300k', '300k to 1M', 'over 1M'];
+    var about = function () {
+      return { kind: KINDS[form.elements.type.selectedIndex], budget: BUDGETS[form.elements.budget.selectedIndex], city: (form.elements.city.value || '').trim().slice(0, 40),
+        project: refProject ? refProject.id : '', language: lang };
+    };
     filled();
     var refX = $('.form__ref-x', form);
     if (refX) refX.addEventListener('click', function () { setRef(null); form.elements.name.focus(); });
     // the enquiry written out as an e-mail, in the visitor's own mail app
     var byMail = function (d, s) {
-      var L = s.labels, lines = [L.name + ': ' + d.name, L.email + ': ' + d.email, L.phone + ': ' + d.phone, L.type + ': ' + d.type, L.date + ': ' + d.date, L.guests + ': ' + d.guests];
+      var L = s.labels, lines = [L.name + ': ' + d.name, L.email + ': ' + d.email, L.phone + ': ' + d.phone, L.type + ': ' + d.type, L.date + ': ' + d.date, L.guests + ': ' + d.guests,
+        L.city + ': ' + d.city, L.budget + ': ' + d.budget];
       if (d.project) lines.push(L.project + ': ' + d.project);
       lines.push('', d.message);
       var url = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(s.subject + ' — ' + d.name + (d.project ? ' (' + d.project + ')' : '')) +
@@ -1166,8 +1183,10 @@
       var ok = v('name') && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email')) && v('message');
       note.classList.toggle('is-error', !ok);
       if (!ok) { note.textContent = s.required; return; }
-      var d = { name: v('name'), email: v('email'), phone: v('phone'), type: v('type'), date: v('date'), guests: v('guests'), message: v('message'),
+      var d = { name: v('name'), email: v('email'), phone: v('phone'), type: v('type'), date: v('date'), guests: v('guests'), city: v('city'),
+        budget: form.elements.budget.selectedIndex ? v('budget') : '', message: v('message'),
         project: refProject ? tr(refProject.title) : '', lang: lang, page: location.origin + location.pathname, hp: v('hp') };
+      var what = about();
       sending = true;
       form.classList.add('is-sending');
       note.textContent = s.sending;
@@ -1175,11 +1194,13 @@
         return r.ok ? r.json() : Promise.reject(r.status);
       }).then(function (out) {
         if (!out || !out.ok) return Promise.reject(0);
+        if (!d.hp) count('enquiry_sent', what);
         form.reset();
         setRef(null);
         filled();
         note.textContent = (I18N.js[lang] || I18N.js.en).sent;
       }).catch(function () {
+        count('enquiry_by_email', what);
         byMail(d, s);                               // not set up, or out of reach
       }).then(function () {
         sending = false;
