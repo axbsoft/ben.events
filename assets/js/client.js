@@ -55,7 +55,18 @@
       'deck.error': 'Cette diapositive n’a pas pu être chargée. Vérifiez votre connexion.',
       'cta.eyebrow': 'Et maintenant',
       'cta.title': 'Une question sur cette proposition ?',
-      'cta.btn': 'Contacter benevents'
+      'cta.btn': 'Contacter benevents',
+      'calli.eyebrow': 'Démonstration · Animation EXEED',
+      'calli.title1': 'Votre prénom en',
+      'calli.title2': 'calligraphie chinoise',
+      'calli.lede': 'Sur le stand, chaque visiteur saisit son prénom sur une tablette et repart avec un souvenir imprimé à son nom. Essayez avec le vôtre.',
+      'calli.label': 'Votre prénom',
+      'calli.go': 'Révéler',
+      'calli.formats': 'Format du souvenir',
+      'calli.pdf': 'Télécharger le PDF',
+      'calli.print': 'Ouvrir pour imprimer',
+      'calli.shop': 'Version imprimeur : fond perdu 3 mm et traits de coupe',
+      'calli.foot': 'Démonstration. Sur l’événement, une borne imprime le souvenir automatiquement et l’équipe valide les prénoms rares avant impression.'
     },
     en: {
       'gate.eyebrow': 'Client area · Private access',
@@ -91,7 +102,18 @@
       'deck.error': 'This slide could not be loaded. Check your connection.',
       'cta.eyebrow': 'What next',
       'cta.title': 'A question about this proposal?',
-      'cta.btn': 'Contact benevents'
+      'cta.btn': 'Contact benevents',
+      'calli.eyebrow': 'Demonstration · EXEED activity',
+      'calli.title1': 'Your first name in',
+      'calli.title2': 'Chinese calligraphy',
+      'calli.lede': 'At the stand, each visitor types their first name on a tablet and leaves with a souvenir printed in their name. Try it with yours.',
+      'calli.label': 'Your first name',
+      'calli.go': 'Reveal',
+      'calli.formats': 'Souvenir format',
+      'calli.pdf': 'Download the PDF',
+      'calli.print': 'Open to print',
+      'calli.shop': 'Print-shop version: 3 mm bleed and crop marks',
+      'calli.foot': 'Demonstration. At the event, a kiosk prints the souvenir automatically and the team checks unusual names before printing.'
     }
   };
   var lang = 'fr';
@@ -110,6 +132,7 @@
     if (save) { try { localStorage.setItem('ben-lang', lang); } catch (e) {} }
     relabel();
     if (built && !deck.hidden) edition();
+    doc.dispatchEvent(new CustomEvent('ben:lang', { detail: lang }));
   }
   $$('[data-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-lang'), true); }); });
 
@@ -362,6 +385,7 @@
       var m = /^#(\d+)$/.exec(location.hash);
       go(m ? parseInt(m[1], 10) - 1 : 0, 1, true);
       frame.focus({ preventScroll: true });
+      doc.dispatchEvent(new CustomEvent('ben:open'));
       if (M.meta && !META) fileOf('meta.bin').then(function (buf) {
         META = JSON.parse(new TextDecoder().decode(buf));
         describe();
@@ -404,7 +428,7 @@
   stage.addEventListener('touchstart', wake, { passive: true });
 
   /* every slide at a glance */
-  var behind = $$('.cbar, .deck__stage, .deck__foot, .deck__cta');
+  var behind = $$('.cbar, .deck__stage, .deck__foot, .calli, .deck__cta');
   function buildGrid() {
     if (gridBuilt) return;
     gridBuilt = true;

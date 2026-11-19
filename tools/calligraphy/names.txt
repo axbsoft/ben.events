@@ -1,0 +1,347 @@
+# benevents agency — Chinese calligraphy experience: first names with an established Chinese form.
+#
+# One line per name:   汉字[/other accepted form]: spelling spelling spelling
+# Spellings are written without accents, in lower case; capitals, accents, hyphens and
+# spaces in what the visitor types are ignored when looking a name up.
+# These are phonetic renderings (the sound of the name), never a translation of its meaning.
+# A name that is not listed here is rendered by the syllable table (syllables.txt) and
+# shown as a proposal to be checked.
+#
+# After editing, run:  python3 tools/calligraphy/build.py   (see the top of that file)
+
+# ---- Arabic-origin names, men
+穆罕默德: mohamed mohammed muhammad mohammad mohamad mouhamed mouhammad muhammed mohamd mohammed
+艾哈迈德: ahmed ahmad
+优素福: youssef youssouf yousef yusuf youcef yousuf youssof yousef yussef
+阿里: ali aly
+奥马尔: omar oumar umar
+哈桑: hassan hasan hassane hassen
+侯赛因: hussein hussain houcine hocine houssine hossein houssein lhoucine housseine
+易卜拉欣: ibrahim ibrahime ibrahima
+卜拉欣: brahim
+伊斯梅尔: ismail ismael ismaël ismaïl
+卡里姆: karim kareem
+拉希德: rachid rashid rachide
+赛义德: said saeed saied
+穆斯塔法: mustapha mustafa mostafa moustapha mostapha moustafa
+阿卜杜拉: abdellah abdallah abdullah abdoullah abdelah abdella
+阿卜杜勒阿齐兹: abdelaziz abdulaziz abdelazize
+阿卜杜拉赫曼: abderrahmane abderrahman abdulrahman abdelrahman abderahmane abderrahmen
+阿卜杜勒卡德尔: abdelkader abdelkadir abdulqadir abdelqader
+阿卜杜勒卡里姆: abdelkrim abdelkarim abdulkarim
+阿卜杜勒哈克: abdelhak abdelhaq
+阿卜杜勒马吉德: abdelmajid abdelmadjid abdulmajid
+哈姆扎: hamza hamzah
+阿明: amine amin
+拉明: lamine lamin
+迈赫迪: mehdi mahdi mehdy
+尤尼斯: younes youness younesse younous yunus younis
+扎卡里亚: zakaria zakariya zakarya zacharia zakariae
+亚辛: yassine yassin yacine yasin yassen yacin
+阿纳斯: anas anass
+比拉勒: bilal billal bilel
+哈立德: khalid khaled
+纳比勒: nabil nabile
+萨米尔: samir
+塔里克: tarik tariq tarek
+阿迪勒: adil adel
+伊德里斯: idriss idris idrisse
+德里斯: driss dris
+希沙姆: hicham hichem hisham
+贾迈勒: jamal djamel jamel gamal djamal
+卡迈勒: kamal kamel
+穆尼尔: mounir munir
+努尔丁: noureddine nordine nourdine noureddin nouredine nourredine
+奥斯曼: othmane othman otmane outhmane osman usman othmen otman
+里达: reda rida redha
+萨利姆: salim selim
+索菲扬/苏菲安: soufiane sofiane sofyan soufian sofian sufyan soufyane
+瓦利德: walid oualid waleed
+叶海亚: yahya yahia
+阿什拉夫: achraf ashraf
+哈基姆: hakim hakeem
+阿尤布: ayoub ayyoub ayub
+伊利亚斯: ilyas ilyass ilias ilyes ilies ilyasse
+艾曼: ayman aymane aymen aimane
+马尔万: marouane marwan marouan marwane merouane
+奥萨马: oussama osama oussema ousama
+萨阿德: saad
+塔哈: taha
+巴德尔: badr bader
+纳西姆: nassim nacim nasim
+萨米: sami samy
+拉扬: rayan rayane rayen
+亚当: adam
+阿米尔: amir ameer
+安瓦尔: anouar anwar
+阿齐兹: aziz
+福阿德: fouad fuad
+法里德: farid
+费萨尔: faycal faisal faysal fayssal
+哈比卜: habib
+哈米德: hamid
+伊马德: imad imed
+伊萨姆: issam isam
+贾拉勒: jalal
+贾瓦德: jawad jaouad
+拉赫森: lahcen lahcene
+拉尔比: larbi
+穆拉德: mourad murad
+穆赫辛: mohcine mohsin mouhcine mohssine mohsine
+尼扎尔: nizar
+里德万: redouane redouan ridouane radouane ridwan
+萨拉赫: salah
+苏莱曼: soulaimane souleymane slimane sulaiman soulayman suleiman souleimane
+亚齐德: yazid
+祖海尔: zouhair zouheir zuhair
+齐亚德: ziad zyad ziyad
+纳赛尔: nasser nacer naser
+曼苏尔: mansour mansur
+穆萨: moussa musa
+伊萨: issa
+哈伦: haroun harun
+达乌德: daoud dawud daoued
+苏海勒: souhail suhail sohail souheil
+瓦西姆: wassim wasim
+扎伊德: zaid zayd
+沙基卜: chakib
+卡西姆: kacem kassem qasim kassim
+马哈茂德: mahmoud mahmud
+马吉德: majid
+马利克: malik
+陶菲克: toufik taoufik tawfik taoufiq tewfik
+齐内丁: zineddine zinedine
+法赫德: fahd fahad
+
+# ---- Arabic-origin names, women
+法蒂玛: fatima fatma fatema
+哈迪贾/赫蒂彻: khadija khadidja khadiga
+阿伊莎: aicha aisha aysha aycha
+泽纳布: zineb zaynab zainab zeineb zeyneb
+萨尔玛: salma
+萨拉/莎拉: sara sarah sarra
+玛丽亚姆: meryem mariam maryam meriem meriam mariem maryem
+米里亚姆: myriam miriam
+纳迪亚/娜迪亚: nadia nadya
+莱拉: leila layla laila leyla
+伊曼: imane iman imen imene
+哈杰尔: hajar hajer hadjer
+哈南: hanane hanan hanen
+胡达: houda huda hoda
+伊克拉姆: ikram ikrame
+肯扎: kenza
+拉米娅: lamia lamya lamiae
+拉蒂法: latifa latifah
+卢布娜: loubna lubna
+马利卡/玛丽卡: malika
+穆娜: mouna muna
+莫娜: mona
+奈玛: naima nayma
+纳瓦尔: nawal naoual nawel
+拉尼娅: rania ranya raniya
+萨娜: sanae sanaa sana
+西哈姆: siham sihem sihame
+苏凯娜: soukaina sokaina soukayna sukaina
+瓦法: wafae wafa wafaa ouafae
+雅斯敏/亚斯明: yasmine yasmin
+雅斯米娜: yasmina
+扎赫拉: zahra zahrae zahraa
+佐赫拉: zohra
+阿迈勒: amal amel amale
+阿斯玛: asmae asma asmaa esma
+布什拉: bouchra bushra bochra
+沙伊玛: chaimae chaima chaimaa shaima chaymae cheima
+杜尼娅: dounia dunia dounya dunya
+吉塔: ghita
+希巴: hiba
+伊内斯: ines iness inas
+吉汉: jihane jihan jihene djihane
+卡里玛: karima
+丽姆/里姆: rim rime reem rym
+萨法: safae safa safaa
+萨米拉: samira
+苏阿德: souad suad
+努尔: nour noor nur
+诺拉: nora norah
+努拉: noura
+莉娜: lina lyna
+玛雅: maya
+玛丽亚: maria
+玛尔瓦: marwa maroua marwah
+哈斯娜: hasna hasnae hasnaa hassna
+哈比巴: habiba
+哈夫萨: hafsa hafssa
+哈莉玛: halima
+欣德: hind
+伊尔哈姆: ilham ilhame
+贾米拉: jamila djamila
+豪拉: khaoula khawla khaola
+马吉达: majda
+米娜: mina
+娜达: nada
+纳迪娜: nadine
+尼斯琳: nisrine nesrine nisrin
+乌迈玛: oumaima oumayma omaima
+拉希达: rachida
+拉贾: rajae rajaa raja
+萨巴赫: sabah
+萨布丽娜: sabrina sabrine
+萨利玛: salima
+萨米娅: samia samya
+索菲亚: sofia sophia sofya
+苏海拉: souhaila souhayla
+尤斯拉: yousra yusra
+扎基娅: zakia
+祖拜达: zoubida zoubeida
+纳比拉: nabila
+法拉赫: farah
+法德瓦: fadwa fadoua
+法蒂哈: fatiha
+福齐娅: fouzia fawzia faouzia
+吉兹兰: ghizlane ghizlan
+哈亚特: hayat
+哈娜: hanae hana hanaa
+玛拉克: malak
+努哈: noha nouha
+拉赫玛: rahma
+萨尔瓦: saloua salwa
+
+# ---- French and international names
+皮埃尔: pierre
+让: jean
+雅克: jacques
+玛丽: marie mary
+保罗: paul
+路易: louis
+路易丝: louise
+索菲: sophie
+朱莉: julie
+朱利安: julien
+托马: thomas
+尼古拉: nicolas
+卡米耶: camille
+莱娅: lea
+艾玛: emma
+雨果: hugo
+卢卡: lucas luca
+安托万: antoine
+克莱尔: claire
+劳拉: laura
+大卫: david
+丹尼尔: daniel
+米歇尔: michel
+菲利普: philippe
+弗朗索瓦: francois
+卡特琳: catherine
+伊莎贝尔: isabelle
+娜塔莉: nathalie
+亚历山大: alexandre alexander
+马克西姆: maxime
+克洛伊: chloe
+夏尔: charles
+文森特: vincent
+洛朗: laurent
+奥利维耶: olivier
+塞巴斯蒂安: sebastien
+纪尧姆: guillaume
+马蒂厄: mathieu matthieu
+亚瑟: arthur
+加布里埃尔: gabriel
+拉斐尔: raphael
+莱奥: leo
+朱尔: jules
+玛侬: manon
+安娜: anna
+安妮: anne
+伊娃: eva
+妮娜: nina
+洛拉: lola
+佐伊: zoe
+克拉拉: clara
+夏洛特: charlotte
+朱丽叶: juliette
+玛戈: margaux margot
+波利娜: pauline
+埃里克: eric
+马克: marc mark
+吕克: luc
+伊夫: yves
+阿兰: alain
+罗曼: romain
+帕特里克: patrick
+克里斯托夫: christophe
+克里斯蒂安: christian
+克里斯蒂娜: christine christina
+多米尼克: dominique
+布鲁诺: bruno
+贝尔纳: bernard
+罗伯特: robert
+理查德: richard
+亨利: henri henry
+乔治: georges george
+维克多: victor
+西蒙: simon
+马丁: martin
+阿德里安: adrien adrian
+阿梅莉: amelie
+席琳: celine
+埃米莉: emilie emily
+埃洛迪: elodie
+玛丽昂: marion
+梅拉妮: melanie
+桑德琳: sandrine
+斯蒂芬妮: stephanie
+斯特凡: stephane stefan
+西尔维: sylvie
+瓦莱丽: valerie
+爱丽丝: alice
+约翰: john
+詹姆斯: james
+迈克尔: michael
+威廉: william
+彼得: peter
+凯文: kevin
+瑞安: ryan
+亚历克斯: alex
+马克斯: max
+萨姆: sam
+汤姆: tom
+杰克: jack
+莉莉: lily
+露西: lucy lucie
+米娅: mia
+诺亚: noah noe
+利亚姆: liam
+埃琳娜: elena
+卡洛斯: carlos
+何塞: jose
+胡安: juan
+安东尼奥: antonio
+马尔科: marco
+迭戈: diego
+丽塔: rita
+伯努瓦: benoit
+热拉尔: gerard
+格扎维埃: xavier
+阿涅丝: agnes
+埃洛伊丝: eloise heloise
+马泰奥: matheo mateo matteo
+泰奥: theo
+克里斯托弗: christopher
+克莱芒: clement
+弗洛里安: florian
+基利安: kylian kilian killian
+恩佐: enzo
+内森: nathan
+伊桑: ethan
+
+# ---- more Arabic-origin names
+阿雅: aya
+瑙法勒: naoufal nawfal naoufel noufal
+考塔尔: kawtar kaoutar kaouthar kawthar
+维亚姆: wiam wiame
+维萨尔: wissal wisal
+维达德: widad
+绍基: chaouki chawki
+福齐: fawzi faouzi fouzi
+丁: eddine edine

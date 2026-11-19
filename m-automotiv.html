@@ -121,6 +121,41 @@
     <div class="deck__grid-in"></div>
   </div>
 
+  <!-- Demonstration: the visitor's first name in Chinese calligraphy (assets/js/calligraphy.js) -->
+  <section class="calli" aria-labelledby="calli-title">
+    <div class="calli__intro">
+      <p class="eyebrow"><i></i><span data-t="calli.eyebrow">Démonstration · Animation EXEED</span></p>
+      <h2 class="calli__title" id="calli-title"><span data-t="calli.title1">Votre prénom en</span> <em data-t="calli.title2">calligraphie chinoise</em></h2>
+      <p class="calli__lede" data-t="calli.lede">Sur le stand, chaque visiteur saisit son prénom sur une tablette et repart avec un souvenir imprimé à son nom. Essayez avec le vôtre.</p>
+      <form class="calli__form" novalidate>
+        <label class="calli__field">
+          <span class="sr" data-t="calli.label">Votre prénom</span>
+          <input type="text" name="name" maxlength="24" autocomplete="off" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Votre prénom" data-t-ph="calli.label">
+        </label>
+        <button class="btn magnetic" type="submit"><span data-t="calli.go">Révéler</span></button>
+      </form>
+      <p class="calli__note" role="status" aria-live="polite"></p>
+      <div class="calli__result" hidden>
+        <div class="calli__han" role="img"></div>
+        <p class="calli__pinyin"></p>
+        <p class="calli__meta"><span class="calli__chip"></span><span class="calli__chipnote"></span></p>
+        <div class="calli__alts"></div>
+      </div>
+    </div>
+    <div class="calli__souvenir">
+      <div class="calli__tabs" role="tablist" aria-label="Format du souvenir" data-t-aria="calli.formats"></div>
+      <div class="calli__stage"><div class="calli__paper"></div></div>
+      <p class="calli__specs"></p>
+      <div class="calli__actions" hidden>
+        <button class="btn magnetic" type="button" data-calli="pdf"><span data-t="calli.pdf">Télécharger le PDF</span></button>
+        <button class="btn btn--ghost" type="button" data-calli="print"><span data-t="calli.print">Ouvrir pour imprimer</span></button>
+        <label class="calli__shop"><input type="checkbox"><span data-t="calli.shop">Version imprimeur : fond perdu 3 mm et traits de coupe</span></label>
+      </div>
+      <p class="calli__anote" role="status" aria-live="polite"></p>
+    </div>
+    <p class="calli__foot" data-t="calli.foot">Démonstration. Sur l’événement, une borne imprime le souvenir automatiquement et l’équipe valide les prénoms rares avant impression.</p>
+  </section>
+
   <div class="deck__cta">
     <div>
       <p class="eyebrow"><i></i><span data-t="cta.eyebrow">Et maintenant</span></p>
@@ -133,5 +168,6 @@
 </main>
 
 <script src="assets/js/client.js"></script>
+<script src="assets/js/calligraphy.js"></script>
 </body>
 </html>

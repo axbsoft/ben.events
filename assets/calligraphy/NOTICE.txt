@@ -1,0 +1,15 @@
+benevents agency — Chinese calligraphy experience
+
+data.json holds the outlines of the characters and letters this page draws.
+They come from three open-source typefaces, each under the SIL Open Font License 1.1
+(https://openfontlicense.org):
+
+  Ma Shan Zheng      Copyright 2018 The MaShanZheng Project Authors
+                     https://github.com/googlefonts/mashanzheng
+  Instrument Serif   Copyright 2022 The Instrument Serif Project Authors
+                     https://github.com/Instrument/instrument-serif
+  Inter Tight        Copyright 2022 The Inter Project Authors
+                     https://github.com/rsms/inter
+
+The three souvenir templates in templates/ are the files supplied for the project,
+unchanged. The name list and the syllable table are in tools/calligraphy/.

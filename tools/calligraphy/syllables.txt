@@ -1,0 +1,31 @@
+# benevents agency — Chinese calligraphy experience: syllable table.
+#
+# Used for first names that are not in names.txt. A name is cut into syllables
+# (a consonant, then a vowel) and each syllable is written with the character
+# conventionally used to transcribe that sound in Chinese. Columns are consonants,
+# rows are vowels; "_" means "none". A cell may hold two characters.
+#
+#     _  b  p  d  t  g  k  v  w  f  z  ts s  zh sh j  ch h  m  n  l  r  y
+_     -  布 普 德 特 格 克 夫 乌 夫 兹 茨 斯 日 什 吉 奇 赫 姆 恩 尔 尔 伊
+a     阿 巴 帕 达 塔 加 卡 瓦 瓦 法 扎 察 萨 扎 沙 贾 查 哈 马 纳 拉 拉 亚
+e     埃 贝 佩 德 特 盖 凯 韦 韦 费 泽 策 塞 热 谢 杰 切 赫 梅 内 莱 雷 耶
+er    厄 伯 珀 德 特 格 克 弗 沃 弗 泽 策 瑟 热 舍 哲 彻 赫 默 纳 勒 勒 耶
+i     伊 比 皮 迪 蒂 吉 基 维 维 菲 齐 齐 西 日 希 吉 奇 希 米 尼 利 里 伊
+o     奥 博 波 多 托 戈 科 沃 沃 福 佐 措 索 若 肖 乔 乔 霍 莫 诺 洛 罗 约
+u     乌 布 普 杜 图 古 库 武 伍 富 祖 楚 苏 茹 舒 朱 楚 胡 穆 努 卢 鲁 尤
+ai    艾 拜 派 代 泰 盖 凯 瓦伊 怀 法伊 宰 蔡 赛 扎伊 夏 贾伊 柴 海 迈 奈 莱 赖 亚伊
+au    奥 鲍 保 道 陶 高 考 沃 沃 福 藻 曹 绍 饶 肖 焦 乔 豪 毛 瑙 劳 劳 尧
+an    安 班 潘 丹 坦 甘 坎 万 万 凡 赞 灿 桑 让 尚 詹 钱 汉 曼 南 兰 兰 扬
+en    恩 本 彭 登 滕 根 肯 文 文 芬 曾 岑 森 任 申 真 琴 亨 门 嫩 伦 伦 延
+in    因 宾 平 丁 廷 金 金 温 温 芬 津 欣 辛 任 欣 金 钦 欣 明 宁 林 林 因
+ong   翁 邦 蓬 东 通 贡 孔 翁 翁 丰 宗 聪 松 容 雄 琼 琼 洪 蒙 农 隆 龙 永
+un    温 本 蓬 敦 通 贡 昆 文 文 丰 尊 聪 孙 容 顺 准 春 洪 蒙 农 伦 伦 云
+
+# A name's last "l" is written 勒 rather than 尔.
+final-l 勒
+
+# Characters often preferred for women's names, offered as a second spelling.
+feminine 马玛 纳娜 利莉 里丽 尼妮 亚娅 沙莎 林琳 罗萝 西茜 维薇 雷蕾 代黛
+
+# Readings to show (pinyin) where a character has several.
+pinyin 什shí 茜xī 塞sài 曾zēng 卜bǔ 阿ā 贾jiǎ 查chá 叶yè 约yuē 任rén 肖xiāo 蒙méng 藏zàng 宰zǎi 大dà 卫wèi 翰hàn 莎shā 娜nà 那nà 朱zhū 柏bó 朴pǔ 侬nóng 茨cí 吕lǚ 雨yǔ 何hé 华huá 乐lè 尧yáo 勒lè 丽lì 瑟sè 色sè 泽zé 策cè 厄è 伯bó 珀pò 哲zhé 彻chè 舍shě 默mò 塔tǎ 帕pà 加jiā 卡kǎ 扎zhā 察chá 萨sà 哈hā 耶yē
