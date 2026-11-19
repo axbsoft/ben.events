@@ -164,17 +164,18 @@
 </section>
 
 <!-- About -->
-<!-- The film: it plays in place. Nothing is asked of YouTube until the visitor presses play.
-     Which film: REEL, at the top of assets/js/main.js. Its cover: MEDIA.reel, same place. -->
+<!-- The film. The play button is a link to the film's own page; when the address of its player is set
+     (FILM_PLAYER, at the top of assets/js/main.js) the film plays here instead, in the frame.
+     Nothing is asked of the video hosting before the visitor presses play. The cover: MEDIA.reel, same file. -->
 <section class="reel" id="reel">
   <div class="wrap">
     <div class="reel__frame" data-reveal="clip">
-      <button class="reel__play" type="button" aria-label="Play the film" data-i18n-aria="reel.play">
+      <a class="reel__play" href="https://livid.com/watch/L6GCH7EFgl4D" target="_blank" rel="noopener" aria-label="Watch the film (opens in a new tab)" data-i18n-aria="reel.open">
         <span class="reel__media media" data-img="reel"></span>
         <span class="reel__shade" aria-hidden="true"></span>
         <span class="reel__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.6 5.6v12.8L19 12z"/></svg></span>
-        <span class="reel__text"><b data-i18n="reel.title">Watch the film</b><i data-i18n="reel.sub">Our events, in motion</i></span>
-      </button>
+        <span class="reel__text"><b data-i18n="reel.title">Behind the scenes</b><i data-i18n="reel.sub">Our team at work, in one minute</i></span>
+      </a>
     </div>
   </div>
 </section>

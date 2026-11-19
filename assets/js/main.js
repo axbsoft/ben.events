@@ -10,7 +10,7 @@
   // Address that receives enquiries from the contact form.
   var CONTACT_EMAIL = 'contact@ben.events';
   var WHATSAPP = '+212 661 11 85 90';       // the number WhatsApp opens, with its country code; empty: no WhatsApp links
-  var REEL = 'tJG5Xzzjb1Q';                 // the film of the "Watch the film" section: the code that ends its YouTube address; empty: no such section
+  var FILM_PLAYER = 'https://livid.com/embed/L6GCH7EFgl4D';     // the address of the film's player, the "src" of the embed code its hosting gives; empty: the play button opens the film's own page
 
   // Photos and logo. Put files in assets/img/ and set the path here.
   // Any slot left empty keeps its coloured placeholder artwork.
@@ -27,7 +27,7 @@
     service3: 'assets/img/reception-golden-spheres.jpg',
     service4: 'assets/img/production-desk.jpg',
     statement: ['assets/img/light-beams.jpg', 'center 22%'],
-    reel: ['assets/img/tech-fest-maroc.jpg', 'center 46%']      // the cover shown before the film plays
+    reel: 'assets/img/film-cover.jpg'                           // the cover shown before the film plays
   };
   /* ------------------------------------------------------------------ */
 
@@ -55,18 +55,19 @@
   function tr(v) { return v == null ? '' : typeof v === 'string' ? v : (v[lang] || v.en || ''); }
 
   /* ---------- The film: it plays in place, once the visitor asks for it ---------- */
-  var reel = $('.reel'), reelFrame = $('.reel__frame'), reelPlay = $('.reel__play');
-  if (reel && !/^[\w-]{6,20}$/.test(REEL)) reel.hidden = true;
-  else if (reel) {
-    reelPlay.addEventListener('click', function () {
+  var reelFrame = $('.reel__frame'), reelPlay = $('.reel__play');
+  if (reelPlay && /^https:\/\//.test(FILM_PLAYER)) {
+    reelPlay.setAttribute('data-i18n-aria', 'reel.play');
+    reelPlay.setAttribute('aria-label', 'Play the film');
+    reelPlay.addEventListener('click', function (e) {
+      e.preventDefault();
       var player = doc.createElement('iframe');
-      player.src = 'https://www.youtube-nocookie.com/embed/' + REEL + '?autoplay=1&rel=0&playsinline=1';
-      player.title = reelPlay.getAttribute('aria-label');
-      player.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      player.src = FILM_PLAYER + (FILM_PLAYER.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1';       // the visitor has just pressed play
+      player.title = $('.reel__text b', reelPlay).textContent + ' — benevents agency';
+      player.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture; web-share';
       player.setAttribute('allowfullscreen', '');
-      player.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');     // the player refuses to start without knowing which site shows it
+      player.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       reelFrame.appendChild(player);
-      reelFrame.classList.add('is-playing');
       reelPlay.hidden = true;
       player.focus();
     });

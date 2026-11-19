@@ -160,9 +160,10 @@ window.BEN_I18N = {
     'ft.top': 'Haut de page',
     'ft.instagram': 'benevents agency sur Instagram',
     'ft.whatsapp': 'benevents agency sur WhatsApp',
-    'reel.title': 'Voir le film',
-    'reel.sub': 'Nos événements, en mouvement',
+    'reel.title': 'Dans les coulisses',
+    'reel.sub': 'Notre équipe à l’œuvre, en une minute',
     'reel.play': 'Lire le film',
+    'reel.open': 'Voir le film (nouvel onglet)',
     'wa.cta': 'Écrivez-nous sur WhatsApp',
     'ft.linkedin': 'benevents agency sur LinkedIn'
   },
