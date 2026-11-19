@@ -63,7 +63,7 @@
       e.preventDefault();
       var player = doc.createElement('iframe');
       player.src = FILM_PLAYER + (FILM_PLAYER.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1';       // the visitor has just pressed play
-      player.title = $('.reel__text b', reelPlay).textContent + ' — benevents agency';
+      player.title = $('.reel__title').textContent + ' — benevents agency';
       player.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture; web-share';
       player.setAttribute('allowfullscreen', '');
       player.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
@@ -289,6 +289,8 @@
     refText();
     waLinks();
     voicesText();
+    svText();
+    $$('[data-legal]').forEach(function (a) { a.href = a.getAttribute('data-legal') + '?lang=' + lang; });   // the legal pages open in the same language
     labelViewer();
     root.lang = lang;
     var m = I18N.meta[lang];
@@ -350,10 +352,20 @@
   /* ---------- Services: expanding cards ---------- */
   var rows = $$('.srv__row');
   function activate(row) { rows.forEach(function (r) { r.classList.toggle('is-active', r === row); }); }
-  rows.forEach(function (r) {
+  rows.forEach(function (r, i) {
+    var open = false;                               // was the card already open when it was pressed?
     r.addEventListener('mouseenter', function () { if (fine) activate(r); });
-    r.addEventListener('click', function () { activate(r); });
+    r.addEventListener('pointerdown', function () { open = r.classList.contains('is-active'); });
+    r.addEventListener('click', function (e) {
+      var link = e.target.closest ? e.target.closest('.srv__more') : null;
+      if (link && !plainClick(e)) return;           // let the link open in a new tab
+      if (!open && !link) { open = true; return activate(r); }    // on a touch screen the first tap opens the card, the next one its page
+      if (sv && SERVICES[i]) { e.preventDefault(); svGo(SERVICES[i], link || r); }
+    });
     r.addEventListener('focus', function () { activate(r); });
+    r.addEventListener('keydown', function (e) {
+      if (e.target === r && (e.key === 'Enter' || e.key === ' ') && sv && SERVICES[i]) { e.preventDefault(); svGo(SERVICES[i], r); }
+    });
   });
   if (rows[0]) activate(rows[0]);
 
@@ -851,7 +863,7 @@
     pjCur = null;
     pj.classList.remove('is-open');
     body.classList.remove('pj-open');
-    behind.forEach(function (n) { n.removeAttribute('inert'); });
+    if (!svCur) behind.forEach(function (n) { n.removeAttribute('inert'); });
     if (pjReturn && pjReturn.focus && doc.contains(pjReturn)) pjReturn.focus({ preventScroll: true });
     pjReturn = null;
     update();
@@ -928,6 +940,130 @@
     window.addEventListener('hashchange', pjSync);
   }
 
+  /* ---------- Service pages: a card of "What we create" opens its page over the site ---------- */
+  var sv = $('.sv'), SERVICES = window.BEN_SERVICES || [], SV_HASH = /^#service\/([\w-]+)$/;
+  var svCur = null, svReturn = null, svTurn = 0;
+  var svE = sv ? {
+    back: $('.pj__back', sv), pos: $('.pj__pos', sv), scroll: $('.pj__scroll', sv), media: $('.sv__media', sv),
+    title: $('.sv__title', sv), intro: $('.sv__intro', sv), does: $('.sv__does ul', sv), cards: $('.sv__cards', sv)
+  } : null;
+  SERVICES.forEach(function (s, i) { s.index = i; s.row = rows[i] || null; });
+  function svOf(id) { return SERVICES.filter(function (s) { return s.id === id && s.row; })[0] || null; }
+
+  function svText() {                               // everything the page says, in the language of the site
+    if (!svCur) return;
+    var s = svCur, parts = $('h3', s.row).textContent.split(' & ');
+    svE.pos.textContent = two(s.index + 1) + ' / ' + two(SERVICES.length);
+    svE.title.textContent = '';
+    svE.title.appendChild(el('span', '', parts[0]));
+    if (parts.length > 1) {
+      svE.title.appendChild(doc.createTextNode(' '));
+      svE.title.appendChild(el('em', '', '& ' + parts.slice(1).join(' & ')));
+    }
+    svE.intro.textContent = $('.srv__body p', s.row).textContent;
+    svE.does.textContent = '';
+    (s.does[lang] || s.does.en).forEach(function (line) { svE.does.appendChild(el('li', '', line)); });
+    svE.cards.textContent = '';
+    s.ideas.forEach(function (idea) {
+      var p = byId[idea.project], card = el(p ? 'a' : 'div', 'sv__idea'), text = el('span', 'sv__idea-in');
+      if (p) {
+        card.href = '#project/' + p.id;
+        card.setAttribute('data-sv-project', p.id);
+        var ph = el('span', 'sv__idea-ph'), img = doc.createElement('img');
+        img.alt = ''; img.loading = 'lazy'; img.src = p.photos[0][0];
+        ph.appendChild(img);
+        card.appendChild(ph);
+      }
+      text.appendChild(el('b', '', tr(idea.title)));
+      text.appendChild(el('span', '', tr(idea.text)));
+      if (p) text.appendChild(el('small', '', ui().seen + ' ' + tr(p.title).split(' · ')[0]));
+      card.appendChild(text);
+      svE.cards.appendChild(card);
+    });
+  }
+
+  function svShow(s, opener) {
+    if (!sv || !s) return;
+    var was = svCur, m = mediaOf('service' + (s.index + 1));
+    svTurn++;
+    svCur = s;
+    svText();
+    svE.media.style.backgroundImage = m ? 'url("' + m.src + '")' : '';
+    svE.scroll.scrollTop = 0;
+    if (was) return;                                // already open: another service takes its place
+    svReturn = opener || doc.activeElement;
+    toggleMenu(false);
+    sv.classList.add('is-open');
+    body.classList.add('sv-open');
+    behind.forEach(function (n) { n.setAttribute('inert', ''); });
+    svE.back.focus({ preventScroll: true });
+  }
+  function svHide() {
+    if (!svCur) return;
+    svTurn++;
+    svCur = null;
+    sv.classList.remove('is-open');
+    body.classList.remove('sv-open');
+    if (!pjCur) behind.forEach(function (n) { n.removeAttribute('inert'); });
+    if (svReturn && svReturn.focus && doc.contains(svReturn)) svReturn.focus({ preventScroll: true });
+    svReturn = null;
+    update();
+  }
+  // the address decides what is shown, so the browser's back button closes a service page
+  function svSync() {
+    var m = SV_HASH.exec(location.hash), s = m ? svOf(m[1]) : null;
+    if (s) svShow(s); else svHide();
+  }
+  function svGo(s, opener, replace) {
+    if (replace) history.replaceState(history.state, '', '#service/' + s.id);
+    else history.pushState({ sv: true }, '', '#service/' + s.id);
+    svShow(s, opener);
+  }
+  function svClose() {
+    if (!svCur) return;
+    var turn = svTurn, drop = function () { history.replaceState(null, '', location.pathname + location.search); svHide(); };
+    if (!(history.state && history.state.sv)) return drop();
+    history.back();                                // step back over the entry this page added
+    setTimeout(function () { if (svCur && turn === svTurn) drop(); }, 700);
+  }
+  function svStep(d) {
+    if (!svCur) return;
+    var n = SERVICES.length;
+    svGo(SERVICES[(svCur.index + d + n) % n], null, true);
+  }
+  function svContact() {                            // "talk to us about your event": the form, with this kind of event chosen
+    var s = svCur, target = $('#contact'), type = form && form.elements.type;
+    if (!s) return;
+    if (type && type.options[s.index]) { type.selectedIndex = s.index; type.dispatchEvent(new Event('change')); }
+    history.replaceState(null, '', '#contact');
+    svReturn = null;
+    svHide();
+    if (target) {
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, Math.round(target.getBoundingClientRect().top + window.pageYOffset));
+      root.style.scrollBehavior = '';
+    }
+    if (form) form.elements.name.focus({ preventScroll: true });
+  }
+  if (sv) {
+    sv.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target.closest('[data-sv-close], [data-sv-step], [data-sv-contact], [data-sv-project]') : null;
+      if (!t || !svCur) return;
+      if (t.hasAttribute('data-sv-close')) return svClose();
+      if (t.hasAttribute('data-sv-step')) return svStep(+t.getAttribute('data-sv-step'));
+      if (!plainClick(e)) return;                   // let a link open in a new tab
+      e.preventDefault();
+      if (t.hasAttribute('data-sv-contact')) return svContact();
+      var p = byId[t.getAttribute('data-sv-project')];   // an idea opens the project it was seen in; "back" returns here
+      if (!p) return;
+      history.pushState({ pj: true }, '', '#project/' + p.id);
+      svHide();
+      pjShow(p);
+    });
+    window.addEventListener('popstate', svSync);
+    window.addEventListener('hashchange', svSync);
+  }
+
   /* ---------- Keyboard: the topmost layer answers ---------- */
   doc.addEventListener('keydown', function (e) {
     if (lbIndex > -1) {
@@ -946,6 +1082,14 @@
       if (e.key === 'Escape') pjClose();
       else if (e.key === 'ArrowRight') pjStep(1);
       else if (e.key === 'ArrowLeft') pjStep(-1);
+      return;
+    }
+    if (svCur) {
+      if (e.altKey || e.metaKey || e.ctrlKey) return;
+      var typing = /^(input|textarea|select)$/i.test(e.target.tagName || '');
+      if (e.key === 'Escape') svClose();
+      else if (e.key === 'ArrowRight' && !typing) svStep(1);
+      else if (e.key === 'ArrowLeft' && !typing) svStep(-1);
       return;
     }
     if (e.key === 'Escape') toggleMenu(false);
@@ -1019,4 +1163,5 @@
   setLang(initial, false);
   measure();
   if (pj) pjSync();
+  if (sv) svSync();
 })();

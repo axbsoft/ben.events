@@ -164,22 +164,6 @@
 </section>
 
 <!-- About -->
-<!-- The film. The play button is a link to the film's own page; when the address of its player is set
-     (FILM_PLAYER, at the top of assets/js/main.js) the film plays here instead, in the frame.
-     Nothing is asked of the video hosting before the visitor presses play. The cover: MEDIA.reel, same file. -->
-<section class="reel" id="reel">
-  <div class="wrap">
-    <div class="reel__frame" data-reveal="clip">
-      <a class="reel__play" href="https://livid.com/watch/L6GCH7EFgl4D" target="_blank" rel="noopener" aria-label="Watch the film (opens in a new tab)" data-i18n-aria="reel.open">
-        <span class="reel__media media" data-img="reel"></span>
-        <span class="reel__shade" aria-hidden="true"></span>
-        <span class="reel__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.6 5.6v12.8L19 12z"/></svg></span>
-        <span class="reel__text"><b data-i18n="reel.title">Behind the scenes</b><i data-i18n="reel.sub">Our team at work, in one minute</i></span>
-      </a>
-    </div>
-  </div>
-</section>
-
 <section class="about section" id="about">
   <div class="wrap about__grid">
     <div class="about__text">
@@ -217,45 +201,49 @@
     </header>
 
     <div class="srv">
-      <article class="srv__row" data-reveal tabindex="0">
+      <article class="srv__row" data-reveal tabindex="0" data-service="conferences">
         <span class="srv__num">01</span>
         <div class="srv__body">
           <h3 data-i18n="srv.1.t">Conferences &amp; Conventions</h3>
           <p data-i18n="srv.1.d">Forums, annual conventions, panels and seminars, staged so that every speaker is heard and every message lands.</p>
           <ul><li data-i18n="srv.1.a">Forums</li><li data-i18n="srv.1.b">Conventions</li><li data-i18n="srv.1.c">Seminars</li></ul>
+          <a class="srv__more" href="#service/conferences" data-i18n="srv.more">See the ideas</a>
         </div>
         <div class="srv__media"><div class="media media--c" data-img="service1"></div></div>
         <span class="srv__arrow" aria-hidden="true"></span>
       </article>
 
-      <article class="srv__row" data-reveal tabindex="0">
+      <article class="srv__row" data-reveal tabindex="0" data-service="ceremonies">
         <span class="srv__num">02</span>
         <div class="srv__body">
           <h3 data-i18n="srv.2.t">Ceremonies &amp; Gala Evenings</h3>
           <p data-i18n="srv.2.d">Award and graduation ceremonies, gala dinners and anniversary evenings, with show direction and live entertainment.</p>
           <ul><li data-i18n="srv.2.a">Ceremonies</li><li data-i18n="srv.2.b">Gala dinners</li><li data-i18n="srv.2.c">Live shows</li></ul>
+          <a class="srv__more" href="#service/ceremonies" data-i18n="srv.more">See the ideas</a>
         </div>
         <div class="srv__media"><div class="media media--d" data-img="service2"></div></div>
         <span class="srv__arrow" aria-hidden="true"></span>
       </article>
 
-      <article class="srv__row" data-reveal tabindex="0">
+      <article class="srv__row" data-reveal tabindex="0" data-service="receptions">
         <span class="srv__num">03</span>
         <div class="srv__body">
           <h3 data-i18n="srv.3.t">Brand &amp; Corporate Receptions</h3>
           <p data-i18n="srv.3.d">Product launches, inaugurations, press events and networking receptions that bring your brand and your guests together.</p>
           <ul><li data-i18n="srv.3.a">Launches</li><li data-i18n="srv.3.b">Inaugurations</li><li data-i18n="srv.3.c">Receptions</li></ul>
+          <a class="srv__more" href="#service/receptions" data-i18n="srv.more">See the ideas</a>
         </div>
         <div class="srv__media"><div class="media media--e" data-img="service3"></div></div>
         <span class="srv__arrow" aria-hidden="true"></span>
       </article>
 
-      <article class="srv__row" data-reveal tabindex="0">
+      <article class="srv__row" data-reveal tabindex="0" data-service="production">
         <span class="srv__num">04</span>
         <div class="srv__body">
           <h3 data-i18n="srv.4.t">Stage &amp; Audiovisual Production</h3>
           <p data-i18n="srv.4.d">LED walls, stage design, lighting, sound, multi-camera capture and live direction, run by our own technical team.</p>
           <ul><li data-i18n="srv.4.a">LED &amp; staging</li><li data-i18n="srv.4.b">Light &amp; sound</li><li data-i18n="srv.4.c">Live video</li></ul>
+          <a class="srv__more" href="#service/production" data-i18n="srv.more">See the ideas</a>
         </div>
         <div class="srv__media"><div class="media media--f" data-img="service4"></div></div>
         <span class="srv__arrow" aria-hidden="true"></span>
@@ -331,6 +319,24 @@
         <h3 data-i18n="pr.4.t">Deliver</h3><p data-i18n="pr.4.d">On the day, our team runs every cue so that you are free to simply be present.</p>
       </li>
     </ol>
+
+    <!-- The film. The play button is a link to the film's own page; when the address of its player is set
+         (FILM_PLAYER, at the top of assets/js/main.js) the film plays here instead, in the frame.
+         Nothing is asked of the video hosting before the visitor presses play. The cover: MEDIA.reel, same file. -->
+    <div class="reel" id="reel" data-reveal>
+      <div class="reel__say">
+        <p class="reel__kicker" data-i18n="reel.kicker">The film</p>
+        <h3 class="reel__title" data-i18n="reel.title">Behind the scenes</h3>
+        <p class="reel__sub" data-i18n="reel.sub">Our team at work, in one minute</p>
+      </div>
+      <div class="reel__frame">
+        <a class="reel__play" href="https://livid.com/watch/L6GCH7EFgl4D" target="_blank" rel="noopener" aria-label="Watch the film (opens in a new tab)" data-i18n-aria="reel.open">
+          <span class="reel__media media" data-img="reel"></span>
+          <span class="reel__shade" aria-hidden="true"></span>
+          <span class="reel__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.6 5.6v12.8L19 12z"/></svg></span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -455,6 +461,7 @@
         <button class="btn magnetic" type="submit"><span data-i18n="f.send">Send enquiry</span></button>
         <p class="form__note" role="status" aria-live="polite"></p>
       </div>
+      <p class="form__legal field--full"><span data-i18n="f.legal">Your details are only used to answer your enquiry.</span> <a href="privacy" data-legal="privacy" data-i18n="ft.privacy">Privacy policy</a></p>
     </form>
   </div>
 </section>
@@ -499,7 +506,12 @@
     </div>
     <div class="footer__big" aria-hidden="true"><span class="footer__ghost">benevents</span><span class="footer__lit">benevents</span></div>
     <div class="footer__base">
-      <span>© <span data-year></span> benevents agency. <span data-i18n="ft.rights">All rights reserved.</span></span>
+      <!-- the copyright line and, beside it, the two legal pages (privacy.html, terms.html) -->
+      <div class="footer__legal">
+        <span>© <span data-year></span> benevents agency. <span data-i18n="ft.rights">All rights reserved.</span></span>
+        <a href="privacy" data-legal="privacy" data-i18n="ft.privacy">Privacy policy</a>
+        <a href="terms" data-legal="terms" data-i18n="ft.terms">Terms of use</a>
+      </div>
       <span class="footer__tag" data-i18n="ft.tag">Corporate event design and production.</span>
       <a href="#top" class="to-top"><span data-i18n="ft.top">Back to top</span><i aria-hidden="true"></i></a>
     </div>
@@ -556,9 +568,57 @@
   </div>
 </div>
 
+<!-- Service page: opens over the site from a card of "What we create". Its content comes from assets/js/services.js -->
+<div class="sv" id="service" role="dialog" aria-modal="true" aria-labelledby="sv-title">
+  <div class="pj__bar">
+    <button class="pj__back" type="button" data-sv-close><i aria-hidden="true"></i><span data-i18n="sv.back">All services</span></button>
+    <span class="pj__pos" aria-hidden="true"></span>
+    <div class="pj__nav">
+      <button class="pj__btn" type="button" data-sv-step="-1" aria-label="Previous service" data-i18n-aria="sv.prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
+      <button class="pj__btn" type="button" data-sv-step="1" aria-label="Next service" data-i18n-aria="sv.next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button>
+      <button class="pj__btn pj__x" type="button" data-sv-close aria-label="Close" data-i18n-aria="pj.close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="pj__scroll">
+    <article class="pj__page">
+      <header class="sv__top">
+        <div class="sv__media" aria-hidden="true"></div>
+        <div class="wrap">
+          <p class="eyebrow"><i></i><span data-i18n="srv.eyebrow">What we create</span></p>
+          <h2 class="pj__title sv__title" id="sv-title" tabindex="-1"></h2>
+          <p class="pj__intro sv__intro"></p>
+          <a class="btn magnetic" href="#contact" data-sv-contact><span data-i18n="sv.cta">Talk to us about your event</span></a>
+        </div>
+      </header>
+      <div class="wrap sv__body">
+        <section class="sv__does">
+          <h3 class="sv__h" data-i18n="sv.does">What we take care of</h3>
+          <ul></ul>
+        </section>
+        <section class="sv__ideas">
+          <h3 class="sv__h" data-i18n="sv.ideas">Ideas, seen in our projects</h3>
+          <div class="sv__cards"></div>
+        </section>
+      </div>
+      <section class="pj__cta wrap">
+        <div class="pj__cta-in">
+          <div>
+            <h3 class="pj__cta-title" data-i18n="sv.end.title">An event like this in mind?</h3>
+            <p class="pj__cta-text" data-i18n="sv.end.text">Give us the date, the place and the number of guests: we will come back with first ideas.</p>
+          </div>
+          <div class="pj__cta-side">
+            <a class="btn magnetic" href="#contact" data-sv-contact><span data-i18n="sv.cta">Talk to us about your event</span></a>
+          </div>
+        </div>
+      </section>
+    </article>
+  </div>
+</div>
+
 <script src="assets/js/i18n.js"></script>
 <script src="assets/js/projects.js"></script>
 <script src="assets/js/voices.js"></script>
+<script src="assets/js/services.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

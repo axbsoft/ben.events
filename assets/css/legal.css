@@ -1,0 +1,38 @@
+/* benevents agency — the two legal pages (privacy.html, terms.html).
+   They sit on the look of the site (style.css) and hold their text in both languages:
+   the one that does not match the language of the page is hidden. */
+html[lang="en"] [lang="fr"], html[lang="fr"] [lang="en"] { display: none !important; }
+
+.legal-page .nav { background: rgba(14, 14, 17, .68); border-color: var(--line); -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); }
+
+/* no menu on these pages: the language switch stays in the header at every width */
+.legal-page .nav .lang { display: flex; }
+.legal-page .nav { padding-right: 16px; }
+
+.legal { padding: clamp(132px, 19vh, 210px) 0 clamp(56px, 8vw, 120px); }
+.legal__in { max-width: 860px; }
+.legal__back { display: inline-flex; align-items: center; gap: 12px; margin-bottom: clamp(28px, 4vw, 52px); font-size: 14.5px; font-weight: 500; color: var(--mute); transition: color .3s; }
+.legal__back::before { content: ""; width: 30px; height: 1px; background: currentColor; transition: width .5s var(--ease); }
+.legal__back:hover, .legal__back:focus-visible { color: var(--text); }
+.legal__back:hover::before { width: 46px; }
+.legal__title { font-family: var(--display); font-weight: 500; font-size: clamp(40px, 5.6vw, 84px); letter-spacing: -.035em; line-height: 1; text-wrap: balance; }
+.legal__date { margin-top: 18px; font-size: 14px; color: var(--mute); }
+.legal__lede { margin-top: clamp(24px, 3vw, 40px); font-size: clamp(18px, 1.5vw, 22px); line-height: 1.5; letter-spacing: -.01em; }
+
+.legal__text h2 { margin-top: clamp(40px, 5vw, 64px); padding-top: clamp(24px, 3vw, 34px); border-top: 1px solid var(--line); font-family: var(--display); font-weight: 500; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.025em; line-height: 1.15; }
+.legal__text p, .legal__text li { font-size: 16.5px; line-height: 1.7; color: rgba(246, 245, 241, .8); }
+.legal__text h2 + p, .legal__text h2 + ul { margin-top: 14px; }
+.legal__text p + p, .legal__text ul + p, .legal__text p + ul { margin-top: 12px; }
+.legal__text li { position: relative; padding-left: 24px; }
+.legal__text li + li { margin-top: 8px; }
+.legal__text li::before { content: ""; position: absolute; left: 2px; top: .72em; width: 7px; height: 7px; border-radius: 50%; background: var(--c1); }
+.legal__text li:nth-child(4n + 2)::before { background: var(--c2); } .legal__text li:nth-child(4n + 3)::before { background: var(--c3); } .legal__text li:nth-child(4n)::before { background: var(--c4); }
+.legal__text a, .legal__lede a { color: var(--text); text-decoration: underline; text-decoration-color: rgba(246, 245, 241, .4); text-underline-offset: 3px; transition: text-decoration-color .3s; }
+.legal__text a:hover, .legal__lede a:hover { text-decoration-color: currentColor; }
+.legal__text b { font-weight: 600; color: var(--text); }
+
+.legal__foot { border-top: 1px solid var(--line); }
+.legal__foot .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px 30px; flex-wrap: wrap; padding-top: 20px; padding-bottom: 26px; font-size: 13.5px; color: var(--mute); }
+.legal__foot nav { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+.legal__foot a { transition: color .3s; }
+.legal__foot a:hover, .legal__foot a:focus-visible, .legal__foot a[aria-current] { color: var(--text); }
