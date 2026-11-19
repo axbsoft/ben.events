@@ -266,6 +266,54 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations"/>
   </url>
   <url>
+    <loc>https://www.ben.events/event-agency-casablanca</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-casablanca"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-casablanca"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-casablanca"/>
+  </url>
+  <url>
+    <loc>https://www.ben.events/fr/agence-evenementielle-casablanca</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-casablanca"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-casablanca"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-casablanca"/>
+  </url>
+  <url>
+    <loc>https://www.ben.events/event-agency-rabat</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-rabat"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-rabat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-rabat"/>
+  </url>
+  <url>
+    <loc>https://www.ben.events/fr/agence-evenementielle-rabat</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-rabat"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-rabat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-rabat"/>
+  </url>
+  <url>
+    <loc>https://www.ben.events/event-agency-marrakech</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-marrakech"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-marrakech"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-marrakech"/>
+  </url>
+  <url>
+    <loc>https://www.ben.events/fr/agence-evenementielle-marrakech</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-marrakech"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-marrakech"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-marrakech"/>
+  </url>
+  <url>
+    <loc>https://www.ben.events/agency</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/agency"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence"/>
+  </url>
+  <url>
+    <loc>https://www.ben.events/fr/agence</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/agency"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence"/>
+  </url>
+  <url>
     <loc>https://www.ben.events/privacy</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/privacy?lang=en"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/privacy?lang=fr"/>

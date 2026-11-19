@@ -9,13 +9,20 @@
      fr/services/<slug>.html                the same in French                           -> /fr/services/<slug>
      projects.html, projects/<id>.html      the list of projects and one page each       -> /projects, /projects/<id>
      fr/realisations.html, fr/realisations/<id>.html   the same in French                -> /fr/realisations, …
+     agency.html, fr/agence.html            the page about the agency                    -> /agency, /fr/agence
+     event-agency-<city>.html               one page per city where we work              -> /event-agency-<city>
+     fr/agence-evenementielle-<city>.html   the same in French                           -> /fr/agence-evenementielle-<city>
      404.html                               what a visitor sees when an address does not exist
      sitemap.xml                            the list of all of them
 
    It also rewrites, in index.html, the lines between "head:seo" and "/head:seo" (title, description,
    addresses of the two languages, data for search engines), from assets/js/i18n.js (meta).
 
-   Run it from the root of the site after changing index.html, assets/js/i18n.js, projects.js or services.js:
+   The words of the agency page and of the cities are in tools/site/pages.mjs; the key figures and the
+   quotes of clients (assets/js/voices.js) are shown on the agency page too.
+
+   Run it from the root of the site after changing index.html, assets/js/i18n.js, projects.js, services.js,
+   voices.js or tools/site/pages.mjs:
 
        node tools/site/build.mjs
 
@@ -24,6 +31,7 @@ import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync, existsSync
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
+import { CITIES, CITY_WORDS, AGENCY, TEAM, COMPANY } from './pages.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = 'https://www.ben.events';
@@ -41,8 +49,13 @@ const write = (f, s) => { mkdirSync(dirname(join(ROOT, f)), { recursive: true })
 /* ---------- what the site says ---------- */
 const box = { window: {} };
 vm.createContext(box);
-for (const f of ['i18n.js', 'projects.js', 'services.js']) vm.runInContext(read('assets/js/' + f), box, { filename: f });
-const I18N = box.window.BEN_I18N, PROJECTS = box.window.BEN_PROJECTS, SERVICES = box.window.BEN_SERVICES;
+for (const f of ['i18n.js', 'projects.js', 'services.js', 'voices.js']) vm.runInContext(read('assets/js/' + f), box, { filename: f });
+const I18N = box.window.BEN_I18N, PROJECTS = box.window.BEN_PROJECTS, SERVICES = box.window.BEN_SERVICES, PLACES = box.window.BEN_PLACES || {};
+const FIGURES = (box.window.BEN_FIGURES || []).slice(0, 4), QUOTES = box.window.BEN_QUOTES || [];
+for (const pr of PROJECTS) if (pr.city && !PLACES[pr.city]) throw new Error(`projects.js: the city "${pr.city}" of "${pr.id}" is not in the list of places`);
+// the cities that have a page are the same on both sides: PLACES (projects.js, "page: true") and CITIES (pages.mjs)
+for (const c of CITIES) if (!PLACES[c.id] || !PLACES[c.id].page) throw new Error(`the city "${c.id}" has a page (tools/site/pages.mjs) but is not marked "page: true" in the places of projects.js`);
+for (const k of Object.keys(PLACES)) if (PLACES[k].page && !CITIES.some(c => c.id === k)) throw new Error(`projects.js marks the place "${k}" as having a page, but tools/site/pages.mjs has no city of that name`);
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const att = s => esc(s).replace(/"/g, '&quot;');
@@ -70,6 +83,8 @@ const U = {
   service: (l, s) => (l === 'fr' ? '/fr/services/' : '/services/') + s.slug[l],
   project: (l, p) => (l === 'fr' ? '/fr/realisations/' : '/projects/') + p.id,
   projects: l => l === 'fr' ? '/fr/realisations' : '/projects',
+  agency: l => (l === 'fr' ? '/fr/' : '/') + AGENCY[l].slug,
+  city: (l, c) => (l === 'fr' ? '/fr/' : '/') + CITY_WORDS[l].slug + c.id,
   legal: (l, k) => '/' + k + '?lang=' + l
 };
 const fileOf = path => (path === '/' ? 'index' : path.slice(1)) + '.html';
@@ -87,7 +102,8 @@ const W = {
     pjEndTitle: 'Planning something similar?', pjEndText: 'Tell us about your event. We will take this project as the starting point and come back to you with first ideas.',
     fServices: 'Services', fAgency: 'The agency', fContact: 'Contact', approach: 'Our approach', contact: 'Contact', rights: 'All rights reserved.',
     privacy: 'Privacy policy', terms: 'Terms of use', deck: 'Our presentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency on Instagram', onLinkedin: 'benevents agency on LinkedIn',
-    photoOf: t => `Photo of the event: ${t}`, serviceImg: t => `${t}: an event produced by benevents agency`
+    photoOf: t => `Photo of the event: ${t}`, serviceImg: t => `${t}: an event produced by benevents agency`,
+    cities: 'Where we work', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
   },
   fr: {
     skip: 'Aller au contenu', nav: 'Principal', language: 'Langue', crumbs: 'Vous êtes ici', homeName: 'Accueil', cta: 'Démarrer un projet',
@@ -100,7 +116,8 @@ const W = {
     pjEndTitle: 'Un projet similaire en préparation ?', pjEndText: 'Parlez-nous de votre événement. Nous partirons de cette réalisation pour revenir vers vous avec de premières idées.',
     fServices: 'Savoir-faire', fAgency: 'L’agence', fContact: 'Contact', approach: 'Notre approche', contact: 'Contact', rights: 'Tous droits réservés.',
     privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation', deck: 'Notre présentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency sur Instagram', onLinkedin: 'benevents agency sur LinkedIn',
-    photoOf: t => `Photo de l’événement : ${t}`, serviceImg: t => `${t} : un événement produit par benevents agency`
+    photoOf: t => `Photo de l’événement : ${t}`, serviceImg: t => `${t} : un événement produit par benevents agency`,
+    cities: 'Nos villes', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
   }
 };
 
@@ -113,6 +130,7 @@ const KIND = {
 const servicesOf = p => SERVICES.filter(s => (KIND[s.id] || []).includes(p.kind.en) || s.ideas.some(i => i.project === p.id));
 const projectsOf = s => PROJECTS.filter(p => servicesOf(p).includes(s));
 const byId = Object.fromEntries(PROJECTS.map(p => [p.id, p]));
+const cityOf = p => CITIES.find(c => c.id === p.city);        // the city of a project, when it has a page
 const short = (s, n = 158) => s.length <= n ? s : s.slice(0, s.lastIndexOf(' ', n - 1)).replace(/[\s,;:.–—-]+$/, '') + '…';
 const titleParts = t => { const k = t.indexOf(' · '); return k < 0 ? [t, ''] : [t.slice(0, k), t.slice(k + 3)]; };
 
@@ -122,7 +140,10 @@ const ld = o => '<script type="application/ld+json">\n' + JSON.stringify(o, null
 const crumbs = (l, items) => ({ '@type': 'BreadcrumbList', itemListElement: items.map(([name, path], i) => Object.assign({ '@type': 'ListItem', position: i + 1, name }, path ? { item: SITE + path } : {})) });
 const agency = l => ({
   '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/', logo: SITE + '/assets/img/logo.png', image: SITE + '/assets/img/og.jpg',
-  description: I18N.meta[l].desc, email: MAIL, telephone: PHONE.replace(/\s/g, ''), areaServed: { '@type': 'Country', name: l === 'fr' ? 'Maroc' : 'Morocco' },
+  description: I18N.meta[l].desc, email: MAIL, telephone: PHONE.replace(/\s/g, ''),
+  ...(COMPANY.legalName ? { legalName: COMPANY.legalName } : {}),
+  address: Object.assign({ '@type': 'PostalAddress', addressCountry: 'MA' }, COMPANY.address ? { streetAddress: COMPANY.address } : {}, COMPANY.postalCode ? { postalCode: COMPANY.postalCode } : {}, COMPANY.city ? { addressLocality: COMPANY.city } : {}),
+  areaServed: [...CITIES.map(c => ({ '@type': 'City', name: tr(c.name, l) })), { '@type': 'Country', name: l === 'fr' ? 'Maroc' : 'Morocco' }],
   contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email: MAIL, telephone: PHONE.replace(/\s/g, ''), areaServed: 'MA', availableLanguage: ['fr', 'en'] },
   knowsAbout: SERVICES.map((s, i) => T[l]['srv.' + (i + 1) + '.t']), sameAs: [SOCIAL.instagram, SOCIAL.linkedin],
   hasOfferCatalog: { '@type': 'OfferCatalog', name: T[l]['srv.eyebrow'], itemListElement: SERVICES.map((s, i) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: T[l]['srv.' + (i + 1) + '.t'], description: T[l]['srv.' + (i + 1) + '.d'], url: SITE + U.service(l, s) } })) }
@@ -193,6 +214,8 @@ function pageHref(l, page) {
   if (kind === 'service') return U.service(l, SERVICES.find(s => s.id === id));
   if (kind === 'project') return U.project(l, byId[id]);
   if (kind === 'projects') return U.projects(l);
+  if (kind === 'agency') return U.agency(l);
+  if (kind === 'city') return U.city(l, CITIES.find(c => c.id === id));
   throw new Error('unknown page: ' + page);
 }
 write('fr.html', french(home));
@@ -212,6 +235,16 @@ function img([src, w, h], alt, more = '', sizes = 'card') {
   if (!COPIES.includes(w) || !set.some(c => c.endsWith(' ' + w + 'w'))) set.push(`/${src} ${w}w`);      // the photo itself, unless a lighter copy has its width
   const offer = set.length > 1 ? ` srcset="${set.join(', ')}" sizes="${SIZES[sizes]}"` : '';
   return `<img src="/${src}"${offer} width="${w}" height="${h}" alt="${att(alt)}"${more}>`;
+}
+
+// the size of a logo, read from its file: a PNG says it in its first bytes, an SVG in its viewBox
+function sizeOf(src) {
+  const file = readFileSync(join(ROOT, src));
+  if (/\.png$/i.test(src)) return [file.readUInt32BE(16), file.readUInt32BE(20)];
+  const box = /viewBox="([^"]+)"/.exec(file.toString('utf8'));
+  if (!box) throw new Error('no size found for ' + src);
+  const v = box[1].trim().split(/[\s,]+/).map(Number);
+  return [Math.round(v[2]), Math.round(v[3])];
 }
 
 function shell({ l, head, alt, main }) {
@@ -240,7 +273,7 @@ ${STATS}
 <header class="nav">
   <a class="logo" href="${U.home(l)}" aria-label="benevents agency"><span class="logo__text">${BRAND}</span></a>
   <nav class="nav__links" aria-label="${att(w.nav)}">
-    <a href="${U.at(l, '#about')}">${esc(t['nav.about'])}</a>
+    <a href="${U.agency(l)}">${esc(t['nav.about'])}</a>
     <a href="${U.at(l, '#services')}">${esc(t['nav.services'])}</a>
     <a href="${U.projects(l)}">${esc(t['nav.gallery'])}</a>
     <a href="${U.at(l, '#process')}">${esc(t['nav.process'])}</a>
@@ -274,15 +307,19 @@ ${main}
     <nav class="pfoot__col" aria-label="${att(w.fAgency)}">
       <h2>${esc(w.fAgency)}</h2>
       <a href="${U.home(l)}">${esc(w.homeName)}</a>
+      <a href="${U.agency(l)}">${esc(AGENCY[l].name)}</a>
       <a href="${U.projects(l)}">${esc(w.work)}</a>
       <a href="${U.at(l, '#process')}">${esc(w.approach)}</a>
       <a href="/presentation?lang=${l}">${esc(w.deck)}</a>
-      <a href="${U.at(l, '#contact')}">${esc(w.contact)}</a>
+    </nav>
+    <nav class="pfoot__col" aria-label="${att(w.cities)}">
+      <h2>${esc(w.cities)}</h2>
+      ${CITIES.map(c => `<a href="${U.city(l, c)}">${esc(tr(c.name, l))}</a>`).join('\n      ')}
     </nav>
     <div class="pfoot__col">
       <h2>${esc(w.fContact)}</h2>
       <a href="mailto:${MAIL}">${MAIL}</a>
-      <a href="${WA}" target="_blank" rel="noopener">${esc(w.whatsapp)} · ${PHONE}</a>
+      <a href="${WA}" target="_blank" rel="noopener">${esc(w.whatsapp)} · <span class="pfoot__tel">${PHONE}</span></a>
       <div class="footer__social">
         <a href="${SOCIAL.instagram}" target="_blank" rel="noopener" aria-label="${att(w.onInstagram)}">${ICON.instagram}</a>
         <a href="${SOCIAL.linkedin}" target="_blank" rel="noopener" aria-label="${att(w.onLinkedin)}">${ICON.linkedin}</a>
@@ -314,6 +351,7 @@ const cta = (l, title, text) => `<section class="pj__cta pg__cta">
     </div>
   </div>
 </section>`;
+const quoteBlock = (l, q) => `<figure class="pg__quote"><blockquote>${esc(tr(q.text, l))}</blockquote><figcaption><b>${esc(q.name || '')}</b><span>${esc([tr(q.role || '', l), q.company].filter(Boolean).join(' · '))}</span></figcaption></figure>`;
 const projectCard = (l, p, text) => {
   const title = tr(p.title, l);
   return `<a class="pcard" href="${U.project(l, p)}">
@@ -383,10 +421,21 @@ PROJECTS.forEach((p, i) => {
     const w = W[l], title = tr(p.title, l), kind = tr(p.kind, l), intro = tr(p.intro, l), parts = titleParts(title), n = p.photos.length;
     const prev = PROJECTS[(i + PROJECTS.length - 1) % PROJECTS.length], next = PROJECTS[(i + 1) % PROJECTS.length];
     const trail = [[w.homeName, U.home(l)], [w.work, U.projects(l)], [title]];
+    // the facts of the case, each shown only when projects.js gives it
+    const place = p.city ? tr(PLACES[p.city], l) : '', city = cityOf(p);
+    const facts = [
+      p.client && [w.fFor, esc(p.client)],
+      (place || p.venue) && [w.fWhere, [p.venue && esc(p.venue), place && (city ? `<a href="${U.city(l, city)}">${esc(place)}</a>` : esc(place))].filter(Boolean).join(', ')],
+      p.date && [w.fWhen, esc(tr(p.date, l))],
+      p.guests && [w.fGuests, esc(String(p.guests))]
+    ].filter(Boolean);
+    const did = p.did && p.did[l], story = p.story && p.story[l];
+    const named = place && !title.includes(place) ? ' ' + w.inCity(place) : '';
     const head = seoHead({
-      l, title: `${title} — ${kind} | benevents agency, ${l === 'fr' ? 'Maroc' : 'Morocco'}`, desc: short(intro), alt, xdef: alt.fr, image: '/' + p.photos[0][0], imageAlt: w.photoOf(title),
-      data: [{ '@type': 'WebPage', '@id': SITE + alt[l] + '#page', name: title, description: intro, url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, about: { '@id': ORG },
+      l, title: `${title} — ${kind}${named} | benevents agency${named ? '' : ', ' + (l === 'fr' ? 'Maroc' : 'Morocco')}`, desc: short(intro), alt, xdef: alt.fr, image: '/' + p.photos[0][0], imageAlt: w.photoOf(title),
+      data: [Object.assign({ '@type': 'WebPage', '@id': SITE + alt[l] + '#page', name: title, description: intro, url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, about: { '@id': ORG },
         primaryImageOfPage: { '@type': 'ImageObject', url: SITE + '/' + p.photos[0][0], width: p.photos[0][1], height: p.photos[0][2] }, image: p.photos.map(ph => SITE + '/' + ph[0]) },
+      place ? { contentLocation: { '@type': 'Place', name: p.venue || place, address: { '@type': 'PostalAddress', addressLocality: place, addressCountry: 'MA' } } } : {}),
         { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/' }, crumbs(l, trail)]
     });
     const main = `${crumbNav(l, trail)}
@@ -394,14 +443,37 @@ PROJECTS.forEach((p, i) => {
   <div>
     <p class="eyebrow"><i></i><span>${esc(kind)}</span></p>
     <h1 class="pg__title">${esc(parts[0])}${parts[1] ? ` <em>${esc(parts[1])}</em>` : ''}</h1>
-    <p class="pg__lede">${esc(intro)}</p>
+    <p class="pg__lede">${esc(intro)}</p>${facts.length ? `
+    <dl class="pg__facts">${facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join('')}</dl>` : ''}
     <p class="pg__tags"><span>${esc(w.crafts)}</span>${servicesOf(p).map(s => `<a href="${U.service(l, s)}">${esc(T[l]['srv.' + (SERVICES.indexOf(s) + 1) + '.t'])}</a>`).join('')}</p>
     <a class="btn" href="${U.at(l, '#contact')}"><span>${esc(w.talk)}</span></a>
   </div>
   <figure class="pg__cover">${img(p.photos[0], w.photos(title, 1, n), ' fetchpriority="high"', 'cover')}</figure>
-</header>${n > 1 ? `
+</header>${story ? `
+<section class="pg__cols">
+  <div class="pg__text">
+    <h2 class="pg__h2">${esc(w.story)}</h2>
+    ${story.map(s => `<p>${esc(s)}</p>`).join('\n    ')}${p.result ? `
+    <p class="pg__result"><b>${esc(w.result)}</b> ${esc(tr(p.result, l))}</p>` : ''}
+  </div>${did ? `
+  <div class="pg__does">
+    <h2 class="pg__h">${esc(w.did)}</h2>
+    <ul>
+      ${did.map(d => `<li>${esc(d)}</li>`).join('\n      ')}
+    </ul>
+  </div>` : ''}
+</section>` : did ? `
+<section class="pg__sec pg__does pg__does--wide">
+  <h2 class="pg__h">${esc(w.did)}</h2>
+  <ul>
+    ${did.map(d => `<li>${esc(d)}</li>`).join('\n    ')}
+  </ul>
+</section>` : ''}${n > 1 ? `
 <section class="pg__photos" aria-label="${att(title)}">
   ${p.photos.slice(1).map((ph, k) => `<figure style="--r:${(ph[1] / ph[2]).toFixed(4)}">${img(ph, w.photos(title, k + 2, n), ' loading="lazy"', 'photo')}</figure>`).join('\n  ')}
+</section>` : ''}${p.quote ? `
+<section class="pg__sec">
+  ${quoteBlock(l, p.quote)}
 </section>` : ''}
 ${cta(l, w.pjEndTitle, w.pjEndText)}
 <nav class="pg__pn" aria-label="${att(w.work)}">
@@ -440,7 +512,151 @@ ${cta(l, w.endTitle, w.endText)}`;
   }
 }
 
-/* ---------- 3. the page shown when an address does not exist ----------
+/* ---------- 3. the agency and the cities where it works (their words are in tools/site/pages.mjs) ---------- */
+const cityCard = (l, c) => `<a class="pcard" href="${U.city(l, c)}">
+      <span class="pcard__ph">${img(c.image, CITY_WORDS[l].cover(tr(c.name, l)), ' loading="lazy"', 'card')}</span>
+      <span class="pcard__in"><b>${esc(tr(c.name, l))}</b><span>${esc(tr(c.card, l))}</span><small>${esc(AGENCY[l].city(tr(c.name, l)))}</small></span>
+    </a>`;
+const serviceLinks = l => SERVICES.map((s, i) => `<a href="${U.service(l, s)}">${esc(T[l]['srv.' + (i + 1) + '.t'])}</a>`).join('\n  ');
+
+for (const c of CITIES) {
+  const alt = Object.fromEntries(LANGS.map(l => [l, U.city(l, c)]));
+  pages.push({ alt, xdef: alt.fr, kind: 'city' });
+  for (const l of LANGS) {
+    const w = W[l], cw = CITY_WORDS[l], name = tr(c.name, l), title = cw.title(name);
+    const trail = [[w.homeName, U.home(l)], [AGENCY[l].name, U.agency(l)], [name]];
+    const here = PROJECTS.filter(p => p.city === c.id);
+    const head = seoHead({
+      l, title: c.seo.title[l], desc: c.seo.desc[l], alt, xdef: alt.fr, image: '/' + c.image[0], imageAlt: cw.cover(name),
+      data: [{ '@type': 'Service', '@id': SITE + alt[l] + '#service', name: cw.service(name), serviceType: l === 'fr' ? 'Agence événementielle' : 'Event agency', description: c.seo.desc[l], url: SITE + alt[l],
+        image: SITE + '/' + c.image[0], provider: { '@id': ORG }, areaServed: { '@type': 'City', name, containedInPlace: { '@type': 'Country', name: l === 'fr' ? 'Maroc' : 'Morocco' } } },
+        { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/' }, crumbs(l, trail)]
+    });
+    const main = `${crumbNav(l, trail)}
+<header class="pg__head">
+  <div>
+    <p class="eyebrow"><i></i><span>${esc(cw.eyebrow)} · ${esc(name)}</span></p>
+    <h1 class="pg__title">${esc(title[0])} <em>${esc(title[1])}</em></h1>
+    <p class="pg__lede">${esc(tr(c.lede, l))}</p>
+    <a class="btn" href="${U.at(l, '#contact')}"><span>${esc(w.talk)}</span></a>
+  </div>
+  <figure class="pg__cover">${img(c.image, cw.cover(name), ' fetchpriority="high"', 'cover')}</figure>
+</header>
+<section class="pg__cols">
+  <div class="pg__text">
+    <h2 class="pg__h2">${esc(cw.organise(name))}</h2>
+    ${c.text[l].map(p => `<p>${esc(p)}</p>`).join('\n    ')}
+  </div>
+  <div class="pg__does">
+    <h2 class="pg__h">${esc(cw.kinds(name))}</h2>
+    <ul>
+      ${c.kinds.map(([id, words]) => `<li><a href="${U.service(l, SERVICES.find(s => s.id === id))}">${esc(tr(words, l))}</a></li>`).join('\n      ')}
+    </ul>
+  </div>
+</section>${here.length ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(cw.done(name))}</h2>
+  <div class="pcards${here.length < 3 ? ' pcards--few' : ''}">
+    ${here.map(p => projectCard(l, p)).join('\n    ')}
+  </div>
+  <p class="pg__more"><a class="link-arrow" href="${U.projects(l)}">${esc(cw.allWork)}</a></p>
+</section>` : ''}
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(cw.good)}</h2>
+  <ul class="pg__notes">
+    ${c.good[l].map(g => `<li>${esc(g)}</li>`).join('\n    ')}
+  </ul>
+</section>
+${cta(l, cw.endTitle(name), w.endText)}
+<nav class="pg__others" aria-label="${att(cw.also)}">
+  <h2 class="pg__h">${esc(cw.also)}</h2>
+  ${CITIES.filter(o => o !== c).map(o => `<a href="${U.city(l, o)}">${esc(tr(o.name, l))}</a>`).join('\n  ')}
+  <a href="${U.agency(l)}">${esc(AGENCY[l].name)}</a>
+</nav>`;
+    write(fileOf(alt[l]), shell({ l, head, alt, main }));
+  }
+}
+
+{
+  const alt = Object.fromEntries(LANGS.map(l => [l, U.agency(l)]));
+  pages.push({ alt, xdef: alt.fr, kind: 'agency' });
+  // the logos of the home page, in its order
+  const logos = [...new Map([...home.matchAll(/<div class="client"><img src="(assets\/img\/clients\/[^"]+)" alt="([^"]+)"/g)].map(m => [m[1], unesc(m[2])])).entries()];
+  const cover = ['assets/img/stage-runway.jpg', 960, 1280];
+  for (const l of LANGS) {
+    const w = W[l], t = T[l], a = AGENCY[l], trail = [[w.homeName, U.home(l)], [a.name]];
+    const office = [COMPANY.address, [COMPANY.postalCode, COMPANY.city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+    const head = seoHead({
+      l, title: a.seo[0], desc: a.seo[1], alt, xdef: alt.fr, image: '/' + cover[0], imageAlt: a.cover,
+      data: [{ '@type': 'AboutPage', '@id': SITE + alt[l] + '#page', name: a.name, description: a.seo[1], url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, mainEntity: { '@id': ORG } },
+        agency(l), crumbs(l, trail)]
+    });
+    const main = `${crumbNav(l, trail)}
+<header class="pg__head pg__head--tall">
+  <div>
+    <p class="eyebrow"><i></i><span>${esc(a.name)}</span></p>
+    <h1 class="pg__title">${esc(a.title[0])} <em>${esc(a.title[1])}</em></h1>
+    <p class="pg__lede">${esc(t['about.p1'])}</p>
+    <a class="btn" href="${U.at(l, '#contact')}"><span>${esc(w.talk)}</span></a>
+  </div>
+  <figure class="pg__cover">${img(cover, a.cover, ' fetchpriority="high"', 'cover')}</figure>
+</header>
+<section class="pg__cols">
+  <div class="pg__text">
+    <h2 class="pg__h2">${esc(a.oneTeam)}</h2>
+    <p>${esc(t['about.p2'])}</p>
+    ${a.text.map(p => `<p>${esc(p)}</p>`).join('\n    ')}
+    <p class="pg__more"><a class="link-arrow" href="${U.at(l, '#process')}">${esc(a.film)}</a></p>
+  </div>
+  <div class="pg__does pg__does--said">
+    <h2 class="pg__h">${esc(a.values)}</h2>
+    <ul>
+      ${[1, 2, 3].map(k => `<li><span><b>${esc(t['about.k' + k])}</b>${esc(t['about.v' + k])}</span></li>`).join('\n      ')}
+    </ul>
+  </div>
+</section>${FIGURES.length ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(a.figures)}</h2>
+  <ul class="pg__figures">
+    ${FIGURES.map(f => `<li><b>${esc((f.before || '') + Number(f.value).toLocaleString(l === 'fr' ? 'fr-FR' : 'en-US') + (f.after || ''))}</b><span>${esc(tr(f.label, l))}</span></li>`).join('\n    ')}
+  </ul>
+</section>` : ''}
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(a.where)}</h2>
+  <p class="pg__lede pg__lede--wide">${esc(a.whereText)}${office ? ' ' + esc(office) + '.' : ''}</p>
+  <div class="pcards pcards--three">
+    ${CITIES.map(c => cityCard(l, c)).join('\n    ')}
+  </div>
+</section>${TEAM.length ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(a.team)}</h2>
+  <ul class="pg__team">
+    ${TEAM.map(m => `<li>${m.photo ? img(m.photo, m.name, ' loading="lazy"', 'card') : ''}<b>${esc(m.name)}</b><span>${esc(tr(m.role || '', l))}</span></li>`).join('\n    ')}
+  </ul>
+</section>` : ''}
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(a.clients)}</h2>
+  <ul class="pg__logos">
+    ${logos.map(([src, name]) => `<li><img src="/${src}" alt="${att(a.logo(name))}" width="${sizeOf(src)[0]}" height="${sizeOf(src)[1]}" loading="lazy"></li>`).join('\n    ')}
+  </ul>
+</section>${QUOTES.length ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(a.quotes)}</h2>
+  <div class="pg__quotes">
+    ${QUOTES.map(q => quoteBlock(l, q)).join('\n    ')}
+  </div>
+</section>` : ''}
+${cta(l, a.endTitle, w.endText)}
+<nav class="pg__others" aria-label="${att(a.crafts)}">
+  <h2 class="pg__h">${esc(a.crafts)}</h2>
+  ${serviceLinks(l)}
+  <a href="${U.projects(l)}">${esc(a.work)}</a>
+</nav>`;
+    write(fileOf(alt[l]), shell({ l, head, alt, main }));
+  }
+}
+
+/* ---------- 4. the page shown when an address does not exist ----------
    One file for both languages (the hosting serves 404.html for every unknown address): a few lines of script
    show the French words when the address or the visitor's language says so. */
 {
@@ -499,7 +715,7 @@ ${STATS}
 `);
 }
 
-/* ---------- 4. the list of pages, for search engines ---------- */
+/* ---------- 5. the list of pages, for search engines ---------- */
 const entry = (loc, links) => `  <url>\n    <loc>${SITE + loc}</loc>\n${links.map(([k, href]) => `    <xhtml:link rel="alternate" hreflang="${k}" href="${SITE + href}"/>`).join('\n')}\n  </url>`;
 const urls = [];
 for (const l of LANGS) urls.push(entry(U.home(l), [['en', '/'], ['fr', '/fr'], ['x-default', '/']]));
@@ -518,4 +734,8 @@ for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations']) {
   if (!existsSync(join(ROOT, dir))) continue;
   for (const f of readdirSync(join(ROOT, dir))) if (f.endsWith('.html') && !kept.has(dir + '/' + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + '/' + f); }
 }
-console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);
+// the same for the page of a city that is no longer in tools/site/pages.mjs
+for (const [dir, start] of [['', CITY_WORDS.en.slug], ['fr/', CITY_WORDS.fr.slug]]) {
+  for (const f of readdirSync(join(ROOT, dir))) if (f.startsWith(start) && f.endsWith('.html') && !kept.has(dir + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + f); }
+}
+console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, the agency, ${CITIES.length} cities, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);

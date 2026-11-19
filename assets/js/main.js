@@ -52,7 +52,7 @@
   var count = function (name, props) { if (window.benCount) window.benCount(name, props); };
 
   var I18N = window.BEN_I18N || { fr: {}, meta: {}, js: {} };
-  var PROJECTS = window.BEN_PROJECTS || [];
+  var PROJECTS = window.BEN_PROJECTS || [], PLACES = window.BEN_PLACES || {};
   var lang = 'en';
   function ui() { return I18N.js[lang] || I18N.js.en || {}; }
   // text of a value that is either a string or { en: '…', fr: '…' }
@@ -325,6 +325,8 @@
       return (fr ? 'fr/services/' : 'services/') + (s && s.slug ? s.slug[lang] || s.slug.en : id);
     }
     if (kind === 'project') return (fr ? 'fr/realisations/' : 'projects/') + id;
+    if (kind === 'agency') return fr ? 'fr/agence' : 'agency';
+    if (kind === 'city') return (fr ? 'fr/agence-evenementielle-' : 'event-agency-') + id;
     return fr ? 'fr/realisations' : 'projects';
   }
 
@@ -747,6 +749,7 @@
   var pjE = pj ? {
     back: $('.pj__back', pj), pos: $('.pj__pos', pj), page: $('.pj__page', pj), top: $('.pj__top', pj),
     kind: $('.pj__kind', pj), title: $('.pj__title', pj), intro: $('.pj__intro', pj), count: $('.pj__count', pj),
+    facts: $('.pj__facts', pj), did: $('.pj__did', pj),
     cover: $('.pj__cover', pj), rows: $('.pj__rows', pj), mail: $('.pj__mail', pj),
     next: $('.pj__next', pj), nextTitle: $('.pj__next-title', pj), nextMedia: $('.pj__next-media', pj)
   } : null;
@@ -812,6 +815,31 @@
     pjE.kind.textContent = tr(p.kind);
     pjHeading(pjE.title, tr(p.title));
     pjE.intro.textContent = tr(p.intro);
+    // the facts of the case: who for, where, when, how many guests, each shown only when projects.js gives it
+    var L = ui().project || {}, place = p.city ? PLACES[p.city] : null;
+    pjE.facts.textContent = '';
+    var fact = function (label, value) {
+      var row = el('div'), dd = el('dd');
+      row.appendChild(el('dt', '', label));
+      (Array.isArray(value) ? value : [value]).forEach(function (v) { dd.appendChild(typeof v === 'string' ? doc.createTextNode(v) : v); });
+      row.appendChild(dd);
+      pjE.facts.appendChild(row);
+    };
+    if (p.client) fact(L.client, p.client);
+    if (place || p.venue) {
+      var spot = [];
+      if (p.venue) spot.push(p.venue + (place ? ', ' : ''));
+      if (place && place.page) { var a = el('a', '', tr(place)); a.href = pageUrl('city', p.city); spot.push(a); }
+      else if (place) spot.push(tr(place));
+      fact(L.where, spot);
+    }
+    if (p.date) fact(L.when, tr(p.date));
+    if (p.guests) fact(L.guests, String(p.guests));
+    pjE.facts.hidden = !pjE.facts.firstChild;
+    var did = p.did && (p.did[lang] || p.did.en), list = $('ul', pjE.did);
+    list.textContent = '';
+    (did || []).forEach(function (line) { list.appendChild(el('li', '', line)); });
+    pjE.did.hidden = !did || !did.length;
     pjE.count.textContent = n > 1 ? n + ' ' + (ui().project || {}).photos : '';
     pjE.pos.textContent = two(p.index + 1) + ' / ' + two(PROJECTS.length);
     pjE.mail.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent((ui().subject || '') + ' — ' + tr(p.title));

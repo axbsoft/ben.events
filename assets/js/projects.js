@@ -10,6 +10,17 @@
             (any CSS background-position, optional)
    photos : every photo of the project, the first one is the cover: ['path', width, height]
 
+   The facts of the case, all optional: what is not given is simply left out of the page.
+   client : who the event was for, as they agree to be named
+   city   : where it took place: one of the places listed below (PLACES)
+   venue  : the place itself: 'Fairmont Tazi Palace'
+   date   : when: '2025', or { en: 'March 2025', fr: 'Mars 2025' }
+   guests : how many guests: 300 or '300+'
+   did    : what we delivered, a short list: { en: ['…', '…'], fr: ['…', '…'] }
+   story  : the brief and how it went, one text per paragraph: { en: ['…'], fr: ['…'] }
+   result : what came out of it, one sentence: { en: '…', fr: '…' }
+   quote  : what the client said, with their agreement: { text: { en: '…', fr: '…' }, name: '…', role: { en: '…', fr: '…' }, company: '…' }
+
    Each project also has a page of its own (projects/<id>, fr/realisations/<id>), written from this file
    by tools/site/build.mjs: run it after a change. */
 (function () {
@@ -33,11 +44,22 @@
     science: { en: 'Scientific meeting', fr: 'Rencontre scientifique' }
   };
 
+  // The places a project can name. page: true for the cities that have a page of their own
+  // (their words are in tools/site/pages.mjs).
+  window.BEN_PLACES = {
+    casablanca: { en: 'Casablanca', fr: 'Casablanca', page: true },
+    rabat: { en: 'Rabat', fr: 'Rabat', page: true },
+    marrakech: { en: 'Marrakech', fr: 'Marrakech', page: true },
+    tangier: { en: 'Tangier', fr: 'Tanger' }
+  };
+
   window.BEN_PROJECTS = [
     {
       id: 'femmes-en-jeu',
       title: 'Femmes en jeu · Canal+ University',
       kind: KIND.masterclass,
+      client: 'CANAL+ University · Fondation CANAL+',
+      city: 'rabat',
       intro: {
         en: 'A masterclass on the impact of women in football, held in Rabat during the Africa Cup of Nations with CANAL+ University and Fondation CANAL+. Curved LED wall, keynotes and panel discussions.',
         fr: 'Une masterclass sur l’impact des femmes dans le football, organisée à Rabat pendant la Coupe d’Afrique des Nations avec CANAL+ University et la Fondation CANAL+. Mur LED incurvé, keynotes et tables rondes.'
@@ -57,6 +79,7 @@
       id: 'tech-fest-maroc',
       title: 'Tech Fest Maroc · OneCloud',
       kind: KIND.tech,
+      client: 'OneCloud',
       intro: {
         en: 'The first edition of OneCloud’s Tech Fest Maroc, dedicated to AI, cloud and cybersecurity: stage, LED wall and a room bathed in blue.',
         fr: 'Première édition du Tech Fest Maroc de OneCloud, consacrée à l’IA, au cloud et à la cybersécurité : scène, mur LED et salle baignée de bleu.'
@@ -71,6 +94,7 @@
       id: 'marrakech-cocktail',
       title: { en: 'Cocktail Evening · Marrakech', fr: 'Soirée cocktail · Marrakech' },
       kind: KIND.reception,
+      city: 'marrakech',
       intro: {
         en: 'A cocktail evening under a canopy of golden lanterns in Marrakech, with a live DJ set and warm amber lighting.',
         fr: 'Une soirée cocktail sous une nuée de lanternes dorées à Marrakech, avec DJ set en direct et lumière ambrée.'
@@ -87,6 +111,8 @@
       id: 'mta-cycle-meeting',
       title: 'MTA Cycle Meeting',
       kind: KIND.seminar,
+      city: 'tangier',
+      venue: 'Fairmont Tazi Palace',
       cover: 'center 30%',
       intro: {
         en: 'A cycle meeting at the Fairmont Tazi Palace in Tangier: plenary sessions on stage by day, gala dinner in front of a wall of LED artwork by night.',
@@ -103,6 +129,7 @@
       id: 'a-chance-to-reset',
       title: 'A Chance to Reset · EFE Maroc',
       kind: KIND.ceremony,
+      client: 'EFE Maroc',
       intro: {
         en: 'The closing ceremony of EFE Maroc’s “A Chance to Reset” project: opening address, panel discussions, laureates’ testimonies and a graduation on stage.',
         fr: 'La cérémonie de clôture du projet « A Chance to Reset » d’EFE Maroc : mot d’ouverture, tables rondes, paroles de lauréats et remise de diplômes sur scène.'
@@ -121,6 +148,7 @@
       id: 'rma-convention',
       title: { en: 'RMA Convention', fr: 'Convention RMA' },
       kind: KIND.convention,
+      client: 'RMA',
       cover: 'center 45%',
       intro: {
         en: 'A convention for RMA under the banner “Ensemble, construisons l’avenir”: a circular centre stage, a runway to the LED wall and dinner tables all around.',
@@ -148,6 +176,7 @@
       id: 'gsk-day',
       title: 'GSK Day',
       kind: KIND.conference,
+      client: 'GSK',
       intro: {
         en: 'GSK Day, “Pour un avenir en santé”: a plenary room dressed in the brand’s colours, from the LED stage to the chair covers.',
         fr: 'GSK Day, « Pour un avenir en santé » : une plénière habillée aux couleurs de la marque, de la scène LED aux housses de chaises.'
@@ -161,6 +190,7 @@
       id: 'sustainable-innovation-fest',
       title: 'Sustainable Innovation Fest · Enactus',
       kind: KIND.final,
+      client: 'Enactus Morocco',
       intro: {
         en: 'The national competition final and closing ceremony of Enactus Morocco’s Sustainable Innovation Fest, with a triple-screen stage and live direction.',
         fr: 'Finale de la compétition nationale et cérémonie de clôture du Sustainable Innovation Fest d’Enactus Morocco, avec scène à trois écrans et réalisation en direct.'
@@ -188,6 +218,7 @@
       id: 'gillette-watch-party',
       title: 'Gillette Watch Party',
       kind: KIND.experience,
+      client: 'Gillette',
       cover: 'center 60%',
       intro: {
         en: 'A match-day watch party for Gillette: giant screen, bean-bag seating, a tombola and live control of the broadcast.',
@@ -203,6 +234,7 @@
       id: 'leo-regional-conference',
       title: 'LEO Distributor Regional Conference',
       kind: KIND.conference,
+      client: 'LEO',
       intro: {
         en: '“Empowering Future, Sharing New Journey”: LEO’s regional distributor conference for the Middle East and Africa, in classroom layout facing a triple LED screen.',
         fr: '« Empowering Future, Sharing New Journey » : la conférence régionale des distributeurs LEO pour le Moyen-Orient et l’Afrique, en disposition classe face à un triple écran LED.'
@@ -217,6 +249,8 @@
       id: 'wexchange-forum',
       title: 'WeXchange Forum',
       kind: KIND.forum,
+      city: 'casablanca',
+      venue: 'Barceló Anfa',
       intro: {
         en: 'A forum on social innovation at the Barceló Anfa Casablanca: panel discussions on stage, filmed and directed live from our control desk.',
         fr: 'Un forum sur l’innovation sociale au Barceló Anfa Casablanca : tables rondes sur scène, captées et réalisées en direct depuis notre régie.'
@@ -230,6 +264,7 @@
       id: 'volvo-built-on-trust',
       title: 'Volvo · Built on Trust',
       kind: KIND.brand,
+      client: 'Volvo',
       cover: 'center 25%',
       intro: {
         en: 'An evening for Volvo under the theme “Built on Trust. Driving Morocco Forward.”, in an industrial hall with LED screen and branded cocktail tables.',
@@ -244,6 +279,7 @@
       id: 'centrale-automobile-cherifienne',
       title: 'Centrale Automobile Chérifienne',
       kind: KIND.corporate,
+      client: 'Centrale Automobile Chérifienne',
       intro: {
         en: 'A corporate reception at the Centrale Automobile Chérifienne showroom, around the presentation “Une vision orientée clients”.',
         fr: 'Une réception d’entreprise au showroom de la Centrale Automobile Chérifienne, autour de la présentation « Une vision orientée clients ».'

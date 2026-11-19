@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- head:seo: written by tools/site/build.mjs from assets/js/i18n.js (meta); do not edit these lines by hand -->
 <title>Event Agency in Morocco | benevents agency</title>
-<meta name="description" content="Event agency in Morocco: we design and produce conventions, conferences, ceremonies, gala evenings and brand events, with in-house stage and audiovisual production.">
+<meta name="description" content="Event agency in Casablanca, Rabat and Marrakech: we design and produce conventions, conferences, ceremonies, gala evenings and brand events across Morocco.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://www.ben.events/">
 <!-- the two languages of the page, for search engines -->
@@ -17,7 +17,7 @@
 <link rel="alternate" hreflang="x-default" href="https://www.ben.events/">
 <!-- what shows when a link to the page is shared -->
 <meta property="og:title" content="Event Agency in Morocco | benevents agency">
-<meta property="og:description" content="Event agency in Morocco: we design and produce conventions, conferences, ceremonies, gala evenings and brand events, with in-house stage and audiovisual production.">
+<meta property="og:description" content="Event agency in Casablanca, Rabat and Marrakech: we design and produce conventions, conferences, ceremonies, gala evenings and brand events across Morocco.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="benevents agency">
 <meta property="og:url" content="https://www.ben.events/">
@@ -41,13 +41,31 @@
    "url": "https://www.ben.events/",
    "logo": "https://www.ben.events/assets/img/logo.png",
    "image": "https://www.ben.events/assets/img/og.jpg",
-   "description": "Event agency in Morocco: we design and produce conventions, conferences, ceremonies, gala evenings and brand events, with in-house stage and audiovisual production.",
+   "description": "Event agency in Casablanca, Rabat and Marrakech: we design and produce conventions, conferences, ceremonies, gala evenings and brand events across Morocco.",
    "email": "contact@ben.events",
    "telephone": "+212661118590",
-   "areaServed": {
-    "@type": "Country",
-    "name": "Morocco"
+   "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "MA"
    },
+   "areaServed": [
+    {
+     "@type": "City",
+     "name": "Casablanca"
+    },
+    {
+     "@type": "City",
+     "name": "Rabat"
+    },
+    {
+     "@type": "City",
+     "name": "Marrakech"
+    },
+    {
+     "@type": "Country",
+     "name": "Morocco"
+    }
+   ],
    "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "sales",
@@ -259,6 +277,9 @@
         <li><b data-i18n="about.k2">Meticulous</b><span data-i18n="about.v2">One team, one timeline, every detail accounted for.</span></li>
         <li><b data-i18n="about.k3">Discreet</b><span data-i18n="about.v3">We stay in the wings so that your message takes the stage.</span></li>
       </ul>
+      <!-- where we work: each city has a page of its own (tools/site/pages.mjs) -->
+      <p class="about__where" data-reveal><span data-i18n="about.where">We work in</span> <a href="event-agency-casablanca" data-page="city:casablanca">Casablanca</a>, <a href="event-agency-rabat" data-page="city:rabat">Rabat</a> <span data-i18n="about.and">and</span> <a href="event-agency-marrakech" data-page="city:marrakech">Marrakech</a><span data-i18n="about.where2">, and wherever in Morocco your event takes place.</span></p>
+      <p class="about__more" data-reveal><a class="link-arrow" href="agency" data-page="agency" data-i18n="about.more">More about the agency</a></p>
     </div>
     <div class="about__visual">
       <figure class="frame frame--tall" data-reveal="clip">
@@ -515,6 +536,7 @@
       <div class="contact__direct" data-reveal>
         <a class="contact__mail" data-mail href="#"></a>
         <a class="contact__wa" data-wa hidden target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="wa-ring" d="M12 3a9 9 0 0 0-7.75 13.58L3 21l4.56-1.2A9 9 0 1 0 12 3z"/><path class="wa-phone" d="M9.3 7.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.300s1 2.700 1.100 2.900c.1.200 1.900 3 4.700 4.100 2.300.9 2.800.7 3.300.7s1.600-.7 1.800-1.300c.2-.6.2-1.200.2-1.300-.1-.1-.3-.2-.5-.3l-1.900-.9c-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.100-.4-2.100-1.300-.8-.7-1.300-1.600-1.500-1.800-.1-.3 0-.4.1-.5l.4-.5c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5l-.8-1.900z"/></svg><span data-i18n="wa.cta">Message us on WhatsApp</span></a>
+        <p class="contact__where"><a href="event-agency-casablanca" data-page="city:casablanca">Casablanca</a><i aria-hidden="true">·</i><a href="event-agency-rabat" data-page="city:rabat">Rabat</a><i aria-hidden="true">·</i><a href="event-agency-marrakech" data-page="city:marrakech">Marrakech</a></p>
       </div>
     </div>
 
@@ -582,6 +604,13 @@
         <a href="#wall" data-i18n="wall.eyebrow">In pictures</a>
         <a href="presentation" data-legal="presentation" data-i18n="ft.deck">Our presentation</a>
       </nav>
+      <nav class="footer__col" aria-label="Where we work" data-i18n-aria="ft.where">
+        <h4 data-i18n="ft.where">Where we work</h4>
+        <a href="event-agency-casablanca" data-page="city:casablanca">Casablanca</a>
+        <a href="event-agency-rabat" data-page="city:rabat">Rabat</a>
+        <a href="event-agency-marrakech" data-page="city:marrakech">Marrakech</a>
+        <a href="agency" data-page="agency" data-i18n="ft.agency">About the agency</a>
+      </nav>
       <div class="footer__col">
         <h4 data-i18n="ft.contact">Contact</h4>
         <a data-mail href="#"></a>
@@ -637,10 +666,15 @@
           <p class="eyebrow"><i></i><span class="pj__kind"></span></p>
           <h2 class="pj__title" id="pj-title" tabindex="-1"></h2>
           <p class="pj__intro"></p>
+          <dl class="pj__facts"></dl>
           <p class="pj__count"></p>
         </div>
         <button class="pj__ph pj__cover" type="button" data-pj-photo="0"><img alt=""></button>
       </header>
+      <section class="pj__did wrap" hidden>
+        <h3 class="pj__did-h" data-i18n="pj.did">What we delivered</h3>
+        <ul></ul>
+      </section>
       <div class="pj__rows wrap"></div>
       <section class="pj__cta wrap">
         <div class="pj__cta-in">

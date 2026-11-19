@@ -8,11 +8,11 @@ window.BEN_I18N = {
   meta: {
     en: {
       title: 'Event Agency in Morocco | benevents agency',
-      desc: 'Event agency in Morocco: we design and produce conventions, conferences, ceremonies, gala evenings and brand events, with in-house stage and audiovisual production.'
+      desc: 'Event agency in Casablanca, Rabat and Marrakech: we design and produce conventions, conferences, ceremonies, gala evenings and brand events across Morocco.'
     },
     fr: {
       title: 'Agence événementielle au Maroc | benevents agency',
-      desc: 'Agence événementielle au Maroc : nous concevons et produisons conventions, conférences, cérémonies, soirées de gala et événements de marque, scène et audiovisuel inclus.'
+      desc: 'Agence événementielle à Casablanca, Rabat et Marrakech : conventions, conférences, cérémonies, soirées de gala et événements de marque, conçus et produits au Maroc.'
     }
   },
   fr: {
@@ -52,6 +52,10 @@ window.BEN_I18N = {
     'about.v2': 'Une équipe, un calendrier, chaque détail maîtrisé.',
     'about.k3': 'Discret',
     'about.v3': 'Nous restons en coulisses pour que votre message occupe la scène.',
+    'about.where': 'Nous travaillons à',
+    'about.and': 'et',
+    'about.where2': ', et partout au Maroc où votre événement a lieu.',
+    'about.more': 'En savoir plus sur l’agence',
     'seal.ring': 'DÉMARRER VOTRE PROJET ✦ PARLONS-EN ENSEMBLE ✦\u00a0',
 
     'srv.eyebrow': 'Ce que nous créons',
@@ -184,6 +188,9 @@ window.BEN_I18N = {
     'ft.top': 'Haut de page',
     'ft.allwork': 'Toutes les réalisations',
     'ft.deck': 'Notre présentation',
+    'ft.where': 'Nos villes',
+    'ft.agency': 'À propos de l’agence',
+    'pj.did': 'Ce que nous avons réalisé',
     'ft.instagram': 'benevents agency sur Instagram',
     'ft.whatsapp': 'benevents agency sur WhatsApp',
     'reel.kicker': 'Le film',
@@ -207,7 +214,7 @@ window.BEN_I18N = {
       subject: 'Event enquiry',
       labels: { name: 'Name', email: 'Email', phone: 'Phone', type: 'Event type', date: 'Preferred date', guests: 'Guests', city: 'City', budget: 'Budget', project: 'Reference project' },
       viewer: { label: 'Photo viewer', close: 'Close', prev: 'Previous photo', next: 'Next photo', open: 'Enlarge photo' },
-      project: { photos: 'photos', photo: 'Photo' }
+      project: { photos: 'photos', photo: 'Photo', client: 'For', where: 'Where', when: 'When', guests: 'Guests' }
     },
     fr: {
       required: 'Merci d’indiquer votre nom, un e-mail valide et quelques mots sur votre événement.',
@@ -220,7 +227,7 @@ window.BEN_I18N = {
       subject: 'Demande d’événement',
       labels: { name: 'Nom', email: 'E-mail', phone: 'Téléphone', type: 'Type d’événement', date: 'Date souhaitée', guests: 'Invités', city: 'Ville', budget: 'Budget', project: 'Projet de référence' },
       viewer: { label: 'Visionneuse de photos', close: 'Fermer', prev: 'Photo précédente', next: 'Photo suivante', open: 'Agrandir la photo' },
-      project: { photos: 'photos', photo: 'Photo' }
+      project: { photos: 'photos', photo: 'Photo', client: 'Pour', where: 'Lieu', when: 'Date', guests: 'Invités' }
     }
   }
 };
