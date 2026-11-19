@@ -15,7 +15,7 @@
       ]
     },
     {
-      "source": "/m-automotive",
+      "source": "/m-automotiv",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "source": "/assets/m-automotive/(.*)",
+      "source": "/assets/m-automotiv/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -52,8 +52,8 @@
   ],
   "redirects": [
     {
-      "source": "/m-automotiv",
-      "destination": "/m-automotive",
+      "source": "/m-automotive",
+      "destination": "/m-automotiv",
       "permanent": false
     }
   ]

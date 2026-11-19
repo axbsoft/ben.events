@@ -1,0 +1,36 @@
+{
+ "v": 2,
+ "rev": "572fc0e8",
+ "kdf": {
+  "name": "PBKDF2",
+  "hash": "SHA-256",
+  "iterations": 600000,
+  "salt": "jsBXckZxP3NB9NeWPnnD/A=="
+ },
+ "check": "X9ozi0jfL8EtBn91a36azPYgwDcHbRicU6+GTZUdZ/iC0OnLBY6Z7SEo",
+ "langs": {
+  "fr": {
+   "count": 18,
+   "type": "image/webp",
+   "thumbs": {
+    "type": "image/webp",
+    "columns": 6
+   },
+   "pdf": {
+    "name": "Journees-Portes-Ouvertes-M-Automotiv.pdf"
+   }
+  },
+  "en": {
+   "count": 18,
+   "type": "image/webp",
+   "thumbs": {
+    "type": "image/webp",
+    "columns": 6
+   },
+   "pdf": {
+    "name": "Open-House-Days-M-Automotiv.pdf"
+   }
+  }
+ },
+ "meta": true
+}

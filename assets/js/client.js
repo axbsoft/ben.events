@@ -7,8 +7,8 @@
 (function () {
   'use strict';
 
-  var DIR = 'assets/m-automotive/';         // encrypted files and their manifest
-  var STORE = 'ben-client-m-automotive';    // keeps the page open while the browser tab lives
+  var DIR = 'assets/m-automotiv/';          // encrypted files and their manifest
+  var STORE = 'ben-client-m-automotiv';     // keeps the page open while the browser tab lives
   var CHECK = 'benevents:open';
 
   var doc = document, root = doc.documentElement, body = doc.body;
@@ -41,7 +41,6 @@
       'deck.full': 'Plein écran',
       'deck.exit': 'Quitter le plein écran',
       'deck.pdf': 'Télécharger le PDF',
-      'deck.lock': 'Verrouiller',
       'deck.prev': 'Diapositive précédente',
       'deck.next': 'Diapositive suivante',
       'deck.dots': 'Diapositives',
@@ -78,7 +77,6 @@
       'deck.full': 'Full screen',
       'deck.exit': 'Leave full screen',
       'deck.pdf': 'Download the PDF',
-      'deck.lock': 'Lock',
       'deck.prev': 'Previous slide',
       'deck.next': 'Next slide',
       'deck.dots': 'Slides',
@@ -111,6 +109,7 @@
     $$('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
     if (save) { try { localStorage.setItem('ben-lang', lang); } catch (e) {} }
     relabel();
+    if (built && !deck.hidden) edition();
   }
   $$('[data-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-lang'), true); }); });
 
@@ -220,17 +219,49 @@
   var stage = $('.deck__stage'), frame = $('.deck__frame'), layers = $$('.deck__img', frame);
   var dots = $('.deck__dots'), countNow = $('.deck__count b'), countAll = $('.deck__count span'), badge = $('.deck__badge');
   var dnote = $('.deck__note'), grid = $('.deck__grid'), gridIn = $('.deck__grid-in'), prog = $('.progress b');
-  var prevBtn = $('.deck__nav--prev'), nextBtn = $('.deck__nav--next'), gridBtn = $('[data-act="grid"]', deck);
-  var N = 0, cur = -1, top = 0, turn = 0, urls = [], built = false, gridBuilt = false, swiped = 0;
+  var prevBtn = $('.deck__nav--prev'), nextBtn = $('.deck__nav--next'), gridBtn = $('.cbar [data-act="grid"]');
+  var links = $('.deck__links', frame);
+  var N = 0, cur = -1, top = 0, turn = 0, urls = {}, sprites = {}, META = null, built = false, gridBuilt = false, swiped = 0, shown = '';
 
+  // the edition on screen: the page's language when the presentation exists in it
+  function ed() { return M.langs[lang] ? lang : Object.keys(M.langs)[0]; }
   function slideUrl(i) {
-    if (!urls[i]) {
-      urls[i] = fileOf(pad(i + 1) + '.bin').then(function (buf) {
-        return URL.createObjectURL(new Blob([buf], { type: M.slides.type }));
+    var e = ed(), set = urls[e] || (urls[e] = []);
+    if (!set[i]) {
+      set[i] = fileOf(e + '/' + pad(i + 1) + '.bin').then(function (buf) {
+        return URL.createObjectURL(new Blob([buf], { type: M.langs[e].type }));
       });
-      urls[i].catch(function () { urls[i] = null; });      // a failed slide can be asked for again
+      set[i].catch(function () { set[i] = null; });        // a failed slide can be asked for again
     }
-    return urls[i];
+    return set[i];
+  }
+  // what each slide says and where its links are (for screen readers and for the clickable contact)
+  function about(i) { var m = META && META[ed()]; return (m && m[i]) || null; }
+  function describe() {
+    if (cur < 0) return;
+    var a = about(cur), label = t('deck.slide', { i: cur + 1, n: N });
+    frame.setAttribute('aria-label', label);
+    layers[top].alt = a && a.text ? label + ' — ' + a.text : label;
+    links.textContent = '';
+    ((a && a.links) || []).forEach(function (l) {
+      if (!/^(mailto:|tel:|https:\/\/)/.test(l.href)) return;
+      var el = doc.createElement('a');
+      el.href = l.href;
+      el.setAttribute('aria-label', l.label);
+      el.title = l.label;
+      el.style.left = l.box[0] + '%'; el.style.top = l.box[1] + '%';
+      el.style.width = l.box[2] + '%'; el.style.height = l.box[3] + '%';
+      if (/^https:/.test(l.href)) { el.target = '_blank'; el.rel = 'noopener'; }
+      links.appendChild(el);
+    });
+  }
+  // the language changed while the presentation is open: same slide, other edition
+  function edition() {
+    if (shown === ed() || cur < 0) return;
+    var i = cur;
+    cur = -1;
+    go(i, 1, true);
+    thumbs();
   }
 
   function relabel() {
@@ -241,16 +272,13 @@
     $$('.thumb', gridIn).forEach(function (b, i) { b.setAttribute('aria-label', t('deck.goto', { i: i + 1 })); });
     var x = $('.deck__grid-x', grid);
     if (x) x.setAttribute('aria-label', t('deck.close'));
-    if (cur > -1) {
-      frame.setAttribute('aria-label', t('deck.slide', { i: cur + 1, n: N }));
-      layers[top].alt = t('deck.slide', { i: cur + 1, n: N });
-    }
+    describe();
   }
 
   function build() {
     if (built) return;
     built = true;
-    N = M.slides.count;
+    N = M.langs[ed()].count;
     countAll.textContent = pad(N);
     for (var i = 0; i < N; i++) {
       var b = doc.createElement('button');
@@ -274,7 +302,6 @@
     prevBtn.disabled = cur <= 0;
     nextBtn.disabled = cur >= N - 1;
     if (prog) prog.style.transform = 'scaleX(' + ((cur + 1) / N) + ')';
-    frame.setAttribute('aria-label', t('deck.slide', { i: cur + 1, n: N }));
     try { history.replaceState(null, '', '#' + (cur + 1)); } catch (e) {}
   }
 
@@ -282,9 +309,10 @@
   function go(i, dir, instant) {
     i = Math.max(0, Math.min(N - 1, i));
     if (i === cur) return;
-    var my = ++turn;
+    var my = ++turn, e = ed();
     if (!dir) dir = i > cur ? 1 : -1;
     cur = i;
+    links.textContent = '';
     chrome();
     var slow = setTimeout(function () { if (my === turn) frame.classList.add('is-loading'); }, 180);
     slideUrl(i).then(function (url) {
@@ -309,8 +337,9 @@
           prev.className = 'deck__img is-leave';
         }
         prev.alt = '';
-        next.alt = t('deck.slide', { i: i + 1, n: N });
         top = 1 - top;
+        shown = e;
+        describe();
         [i + 1, i - 1].forEach(function (j) { if (j >= 0 && j < N) slideUrl(j).catch(function () {}); });   // neighbours ready
       });
     }, function () {
@@ -333,6 +362,10 @@
       var m = /^#(\d+)$/.exec(location.hash);
       go(m ? parseInt(m[1], 10) - 1 : 0, 1, true);
       frame.focus({ preventScroll: true });
+      if (M.meta && !META) fileOf('meta.bin').then(function (buf) {
+        META = JSON.parse(new TextDecoder().decode(buf));
+        describe();
+      }).catch(function () {});
     };
     if (instant || reduced) show();
     else { body.classList.add('is-leaving'); setTimeout(show, 520); }
@@ -371,11 +404,11 @@
   stage.addEventListener('touchstart', wake, { passive: true });
 
   /* every slide at a glance */
-  var behind = $$('.cbar, .deck__top, .deck__stage, .deck__foot, .deck__cta');
+  var behind = $$('.cbar, .deck__stage, .deck__foot, .deck__cta');
   function buildGrid() {
     if (gridBuilt) return;
     gridBuilt = true;
-    var cols = M.thumbs.columns, rows = Math.ceil(N / cols);
+    var cols = M.langs[ed()].thumbs.columns, rows = Math.ceil(N / cols);
     var x = doc.createElement('button');
     x.type = 'button';
     x.className = 'tool deck__grid-x';
@@ -394,11 +427,20 @@
       b.appendChild(n);
       gridIn.appendChild(b);
     }
-    fileOf('thumbs.bin').then(function (buf) {
-      gridIn.style.setProperty('--thumbs', 'url("' + URL.createObjectURL(new Blob([buf], { type: M.thumbs.type })) + '")');
-    }, function () {});
+    thumbs();
     relabel();
     chrome();
+  }
+  function thumbs() {
+    if (!gridBuilt) return;
+    var e = ed();
+    if (!sprites[e]) {
+      sprites[e] = fileOf(e + '/thumbs.bin').then(function (buf) {
+        return URL.createObjectURL(new Blob([buf], { type: M.langs[e].thumbs.type }));
+      });
+      sprites[e].catch(function () { sprites[e] = null; });
+    }
+    sprites[e].then(function (url) { if (e === ed()) gridIn.style.setProperty('--thumbs', 'url("' + url + '")'); }, function () {});
   }
   function toggleGrid(open) {
     if (open === undefined) open = grid.hidden;
@@ -422,10 +464,11 @@
     btn.classList.add('is-busy');
     dnote.classList.remove('is-error');
     dnote.textContent = t('deck.pdfwait');
-    fileOf('deck.bin').then(function (buf) {
+    var e = ed();
+    fileOf(e + '/deck.bin').then(function (buf) {
       var url = URL.createObjectURL(new Blob([buf], { type: 'application/pdf' })), a = doc.createElement('a');
       a.href = url;
-      a.download = M.pdf.name;
+      a.download = M.langs[e].pdf.name;
       body.appendChild(a);
       a.click();
       body.removeChild(a);
@@ -435,11 +478,6 @@
       dnote.textContent = t('gate.offline');
       dnote.classList.add('is-error');
     }).then(function () { pdfBusy = false; btn.classList.remove('is-busy'); });
-  }
-
-  function lock() {
-    try { sessionStorage.removeItem(STORE); } catch (e) {}
-    location.href = location.pathname + location.search;      // back to the gate, nothing kept in memory
   }
 
   /* controls */
@@ -457,10 +495,9 @@
     else if (act === 'grid') toggleGrid();
     else if (act === 'full') toggleFull();
     else if (act === 'pdf') savePdf(target);
-    else if (act === 'lock') lock();
   });
   frame.addEventListener('click', function (e) {
-    if (e.target.closest('button') || Date.now() - swiped < 450) return;
+    if (e.target.closest('button, a') || Date.now() - swiped < 450) return;
     var r = frame.getBoundingClientRect();
     go(cur + ((e.clientX - r.left) / r.width < 0.3 ? -1 : 1));    // the left third goes back
   });
