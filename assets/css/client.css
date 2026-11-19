@@ -428,7 +428,7 @@
   .cbar .deck__tools { gap: 5px; }
   .cbar .deck__count { display: none; }
   .cbar .tool { width: 40px; height: 40px; }
-  .cbar .tool--text { padding: 0; }
+  .cbar .tool--text { padding: 0; justify-content: center; }
   .cbar .tool--text span { display: none; }
   .cbar .lang button { padding: 8px 10px; }
   .is-open .cbar { padding-left: 14px; }

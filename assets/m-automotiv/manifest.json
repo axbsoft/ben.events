@@ -1,16 +1,16 @@
 {
  "v": 2,
- "rev": "61259b8a",
+ "rev": "3fa8683f",
  "kdf": {
   "name": "PBKDF2",
   "hash": "SHA-256",
   "iterations": 600000,
-  "salt": "g55nRboqpMijuWPmjelCFg=="
+  "salt": "sV7xORbZloGYdu/IPeBtkQ=="
  },
- "check": "DM6S9sTUbqQTTt2Gp1A15WidZQxKfs1tlyTwi9cuhvepp0CjPWq/bxSp",
+ "check": "Nlz8pUwQYTOTdDVdtaW9+yw9IE/0fu04EN50G6PgptQQsoXYf2R4LkTS",
  "langs": {
   "fr": {
-   "count": 19,
+   "count": 20,
    "type": "image/webp",
    "thumbs": {
     "type": "image/webp",
@@ -21,7 +21,7 @@
    }
   },
   "en": {
-   "count": 19,
+   "count": 20,
    "type": "image/webp",
    "thumbs": {
     "type": "image/webp",
