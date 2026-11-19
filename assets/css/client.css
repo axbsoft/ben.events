@@ -220,8 +220,10 @@
 .is-full.has-live .deck__nav--prev { left: calc(50% - 112px); }
 .is-full.has-live .deck__nav--next { right: calc(50% - 112px); }
 
-.calli { --red: #c84c48; --gold: #d8b06a; position: absolute; inset: 0; z-index: 4; overflow: hidden; background: #0e0e0e; color: var(--text); text-align: left; animation: calli-in .5s both; }
+.calli { --red: #c84c48; --gold: #d8b06a; position: absolute; inset: 0; z-index: 4; overflow: hidden; background: #0e0e0e; color: var(--text); text-align: left; animation: calli-in .5s; transition: opacity .45s; }
 .calli[hidden] { display: none; }
+.calli.is-leaving { pointer-events: none; }     /* the presentation has moved on: it waits for the next slide, then fades into it */
+.calli.is-out { opacity: 0; }
 .calli::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(118deg, rgba(200, 76, 72, .2), rgba(14, 14, 14, 0) 46%, rgba(216, 176, 106, .16)); }
 @keyframes calli-in { from { opacity: 0; } }
 .calli__canvas { position: relative; }

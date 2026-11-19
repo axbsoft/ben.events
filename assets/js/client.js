@@ -317,8 +317,10 @@
 
   /* A slide that is alive (the manifest lists them): the demonstration takes the place of its picture.
      In a wide frame it is drawn as a slide, on a 1856 x 1044 canvas scaled to the frame;
-     in a narrow one it becomes a tall card and the frame grows with it. */
-  var liveNow = '';
+     in a narrow one it becomes a tall card and the frame grows with it.
+     Its picture is never shown while the demonstration works: the picture stays unseen underneath,
+     and when the presentation moves on, the demonstration waits for the next slide and fades into it. */
+  var liveNow = '', liveOut = 0;
   function liveAt(i) { return !!(M && M.live && M.live.indexOf(i + 1) > -1); }
   function liveIndex() { return M && M.live && M.live.length ? M.live[0] - 1 : -1; }
   function live() {
@@ -328,13 +330,31 @@
     if (skin === 'slide') calli.style.setProperty('--k', (w / 1856).toFixed(5));
     if (now === liveNow) return;
     liveNow = now;
-    calli.hidden = !on;
-    if (on) { calli.setAttribute('data-skin', skin); $('.calli__page b', calli).textContent = cur + 1; }
-    frame.classList.toggle('is-live', on);
-    frame.classList.toggle('is-tall', skin === 'tall');
-    stage.classList.toggle('has-live', on);
-    stage.classList.toggle('has-tall', skin === 'tall');
+    if (on) {
+      clearTimeout(liveOut);
+      calli.classList.remove('is-leaving', 'is-out');
+      calli.hidden = false;
+      calli.setAttribute('data-skin', skin);
+      $('.calli__page b', calli).textContent = cur + 1;
+      frame.classList.add('is-live');
+      frame.classList.toggle('is-tall', skin === 'tall');
+      stage.classList.add('has-live');
+      stage.classList.toggle('has-tall', skin === 'tall');
+    } else if (!calli.hidden) calli.classList.add('is-leaving');       // it leaves when the next slide is ready: see liveGone
     doc.dispatchEvent(new CustomEvent('ben:live', { detail: { on: on, near: near } }));
+  }
+  // the next slide is ready (or could not be loaded): the demonstration that was leaving goes, or stays as it was
+  function liveGone(loaded, instant) {
+    if (!calli || !calli.classList.contains('is-leaving')) return;
+    if (!loaded) { calli.classList.remove('is-leaving'); return; }
+    var tall = calli.getAttribute('data-skin') === 'tall';
+    frame.classList.remove('is-live', 'is-tall');
+    stage.classList.remove('has-live', 'has-tall');
+    clearTimeout(liveOut);
+    var end = function () { calli.hidden = true; calli.classList.remove('is-leaving', 'is-out'); };
+    if (tall || instant || reduced) return end();
+    calli.classList.add('is-out');
+    liveOut = setTimeout(end, 480);
   }
   if (window.ResizeObserver) new ResizeObserver(function () { requestAnimationFrame(live); }).observe(frame);
   else window.addEventListener('resize', live);
@@ -404,13 +424,15 @@
         frame.classList.remove('is-loading');
         dnote.textContent = ''; dnote.classList.remove('is-error');
         frame.style.setProperty('--dir', dir);
+        liveGone(true, instant);
+        var unseen = liveAt(i) && frame.classList.contains('is-live');    // a live slide shows itself, not its picture
         if (instant || reduced) {
           prev.className = 'deck__img';
-          next.className = 'deck__img is-cur';
+          next.className = unseen ? 'deck__img' : 'deck__img is-cur';
         } else {
-          next.className = 'deck__img is-enter';
+          next.className = unseen ? 'deck__img' : 'deck__img is-enter';
           void next.offsetWidth;
-          next.className = 'deck__img is-cur';
+          if (!unseen) next.className = 'deck__img is-cur';
           prev.className = 'deck__img is-leave';
         }
         prev.alt = '';
@@ -423,6 +445,7 @@
       if (my !== turn) return;
       clearTimeout(slow);
       frame.classList.remove('is-loading');
+      liveGone(false);
       dnote.textContent = t('deck.error'); dnote.classList.add('is-error');
     });
   }
