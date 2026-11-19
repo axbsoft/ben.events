@@ -10,6 +10,7 @@
   // Address that receives enquiries from the contact form.
   var CONTACT_EMAIL = 'contact@ben.events';
   var WHATSAPP = '+212 661 11 85 90';       // the number WhatsApp opens, with its country code; empty: no WhatsApp links
+  var REEL = 'tJG5Xzzjb1Q';                 // the film of the "Watch the film" section: the code that ends its YouTube address; empty: no such section
 
   // Photos and logo. Put files in assets/img/ and set the path here.
   // Any slot left empty keeps its coloured placeholder artwork.
@@ -25,7 +26,8 @@
     service2: 'assets/img/graduation-ceremony.jpg',
     service3: 'assets/img/reception-golden-spheres.jpg',
     service4: 'assets/img/production-desk.jpg',
-    statement: ['assets/img/light-beams.jpg', 'center 22%']
+    statement: ['assets/img/light-beams.jpg', 'center 22%'],
+    reel: ['assets/img/tech-fest-maroc.jpg', 'center 46%']      // the cover shown before the film plays
   };
   /* ------------------------------------------------------------------ */
 
@@ -51,6 +53,24 @@
   function ui() { return I18N.js[lang] || I18N.js.en || {}; }
   // text of a value that is either a string or { en: '…', fr: '…' }
   function tr(v) { return v == null ? '' : typeof v === 'string' ? v : (v[lang] || v.en || ''); }
+
+  /* ---------- The film: it plays in place, once the visitor asks for it ---------- */
+  var reel = $('.reel'), reelFrame = $('.reel__frame'), reelPlay = $('.reel__play');
+  if (reel && !/^[\w-]{6,20}$/.test(REEL)) reel.hidden = true;
+  else if (reel) {
+    reelPlay.addEventListener('click', function () {
+      var player = doc.createElement('iframe');
+      player.src = 'https://www.youtube-nocookie.com/embed/' + REEL + '?autoplay=1&rel=0&playsinline=1';
+      player.title = reelPlay.getAttribute('aria-label');
+      player.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      player.setAttribute('allowfullscreen', '');
+      player.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');     // the player refuses to start without knowing which site shows it
+      reelFrame.appendChild(player);
+      reelFrame.classList.add('is-playing');
+      reelPlay.hidden = true;
+      player.focus();
+    });
+  }
 
   /* ---------- Key figures and client quotes, built from voices.js ---------- */
   var voices = $('.voices'), figBox = $('.figures'), quoteBox = $('.quotes');
