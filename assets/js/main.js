@@ -9,6 +9,7 @@
 
   // Address that receives enquiries from the contact form.
   var CONTACT_EMAIL = 'contact@ben.events';
+  var WHATSAPP = '';                        // the number WhatsApp opens, with its country code (e.g. '+212 6 00 00 00 00'); empty: no WhatsApp links
 
   // Photos and logo. Put files in assets/img/ and set the path here.
   // Any slot left empty keeps its coloured placeholder artwork.
@@ -50,6 +51,58 @@
   function ui() { return I18N.js[lang] || I18N.js.en || {}; }
   // text of a value that is either a string or { en: '…', fr: '…' }
   function tr(v) { return v == null ? '' : typeof v === 'string' ? v : (v[lang] || v.en || ''); }
+
+  /* ---------- Key figures and client quotes, built from voices.js ---------- */
+  var voices = $('.voices'), figBox = $('.figures'), quoteBox = $('.quotes');
+  var FIGURES = (window.BEN_FIGURES || []).slice(0, 4), QUOTES = window.BEN_QUOTES || [];
+  function figureText(f, v) { return (f.before || '') + v.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US') + (f.after || ''); }
+  function voicesText() {                              // everything that depends on the language
+    if (!voices || voices.hidden) return;
+    $$('.figure', figBox).forEach(function (n, i) {
+      $('b', n).textContent = figureText(FIGURES[i], FIGURES[i].value);
+      $('span', n).textContent = tr(FIGURES[i].label);
+    });
+    $$('.quote', quoteBox).forEach(function (n, i) {
+      $('blockquote', n).textContent = tr(QUOTES[i].text);
+      $('figcaption span', n).textContent = [tr(QUOTES[i].role), QUOTES[i].company].filter(Boolean).join(' · ');
+    });
+  }
+  if (voices && (FIGURES.length || QUOTES.length)) {
+    FIGURES.forEach(function () {
+      var li = doc.createElement('li');
+      li.className = 'figure';
+      li.setAttribute('data-reveal', '');
+      li.innerHTML = '<b></b><span></span>';
+      figBox.appendChild(li);
+    });
+    QUOTES.forEach(function (q) {
+      var fig = doc.createElement('figure');
+      fig.className = 'quote';
+      fig.setAttribute('data-reveal', '');
+      fig.innerHTML = '<blockquote></blockquote><figcaption><b></b><span></span></figcaption>';
+      $('figcaption b', fig).textContent = q.name || '';
+      quoteBox.appendChild(fig);
+    });
+    figBox.hidden = !FIGURES.length;
+    quoteBox.hidden = !QUOTES.length;
+    voices.hidden = false;
+    // each number counts up the first time it is seen
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var counted = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          counted.unobserve(e.target);
+          var f = FIGURES[$$('.figure', figBox).indexOf(e.target)], b = $('b', e.target), t0 = performance.now();
+          (function step(now) {
+            var p = Math.max(0, Math.min(1, (now - t0) / 1400));
+            b.textContent = figureText(f, Math.round(f.value * (1 - Math.pow(1 - p, 3))));
+            if (p < 1) requestAnimationFrame(step);
+          })(t0);
+        });
+      }, { threshold: 0.4 });
+      $$('.figure', figBox).forEach(function (n) { counted.observe(n); });
+    }
+  }
 
   /* ---------- Portfolio cards, built from projects.js ---------- */
   var track = $('.gallery__track'), byId = {};
@@ -146,6 +199,19 @@
 
   /* ---------- Contact email ---------- */
   $$('[data-mail]').forEach(function (a) { a.href = 'mailto:' + CONTACT_EMAIL; a.textContent = CONTACT_EMAIL; });
+  // WhatsApp opens on a first line written in the visitor's language
+  function waLinks() {
+    var number = WHATSAPP.replace(/\D/g, '');
+    $$('[data-wa]').forEach(function (a) {
+      a.hidden = !number;
+      if (number) a.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent((I18N.js[lang] || I18N.js.en).wa);
+    });
+  }
+  // the floating button steps aside where the footer shows its own WhatsApp link
+  var waFloat = $('.wa'), footTop = $('.footer__top');
+  if (waFloat && footTop && hasIO) {
+    new IntersectionObserver(function (es) { waFloat.classList.toggle('is-away', es[0].isIntersecting); }, { rootMargin: '0px 0px -80px 0px' }).observe(footTop);
+  }
   $$('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });
 
   /* ---------- Language ---------- */
@@ -200,6 +266,8 @@
     fitSeal();
     pjText();
     refText();
+    waLinks();
+    voicesText();
     labelViewer();
     root.lang = lang;
     var m = I18N.meta[lang];

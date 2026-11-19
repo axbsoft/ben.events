@@ -159,6 +159,8 @@ window.BEN_I18N = {
     'ft.rights': 'Tous droits réservés.',
     'ft.top': 'Haut de page',
     'ft.instagram': 'benevents agency sur Instagram',
+    'ft.whatsapp': 'benevents agency sur WhatsApp',
+    'wa.cta': 'Écrivez-nous sur WhatsApp',
     'ft.linkedin': 'benevents agency sur LinkedIn'
   },
   /* Strings used only from JavaScript */
@@ -167,6 +169,7 @@ window.BEN_I18N = {
       required: 'Please add your name, a valid email and a few words about your event.',
       opening: 'Your email app is opening with your enquiry. Thank you.',
       again: 'Nothing opened? Send it by email.',
+      wa: 'Hello benevents, I would like to talk about an event.',
       sending: 'Sending your enquiry…',
       sent: 'Thank you. Your enquiry has been sent; we will get back to you shortly.',
       subject: 'Event enquiry',
@@ -178,6 +181,7 @@ window.BEN_I18N = {
       required: 'Merci d’indiquer votre nom, un e-mail valide et quelques mots sur votre événement.',
       opening: 'Votre messagerie s’ouvre avec votre demande. Merci.',
       again: 'Rien ne s’ouvre ? Envoyez-la par e-mail.',
+      wa: 'Bonjour benevents, je souhaite échanger au sujet d’un événement.',
       sending: 'Envoi de votre demande…',
       sent: 'Merci. Votre demande est envoyée ; nous revenons vers vous très vite.',
       subject: 'Demande d’événement',
