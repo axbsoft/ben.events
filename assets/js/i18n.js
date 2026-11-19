@@ -1,14 +1,18 @@
 /* benevents agency — translations. English lives in the HTML and is captured at
-   load; add or edit French strings here. Keys match data-i18n attributes. */
+   load; add or edit French strings here. Keys match data-i18n attributes.
+
+   "meta" holds the title and the description search engines show for the home page.
+   The French home page (fr.html) is written from index.html and this file by tools/site/build.mjs:
+   run it after a change (node tools/site/build.mjs). */
 window.BEN_I18N = {
   meta: {
     en: {
-      title: 'benevents agency — Corporate Event Design & Production',
-      desc: 'benevents agency designs and produces conferences, conventions, ceremonies, gala evenings and brand events, with full stage and audiovisual production.'
+      title: 'Event Agency in Morocco | benevents agency',
+      desc: 'Event agency in Morocco: we design and produce conventions, conferences, ceremonies, gala evenings and brand events, with in-house stage and audiovisual production.'
     },
     fr: {
-      title: 'benevents agency — Conception & production d’événements d’entreprise',
-      desc: 'benevents agency conçoit et produit conférences, conventions, cérémonies, soirées de gala et événements de marque, avec scénographie et production audiovisuelle complètes.'
+      title: 'Agence événementielle au Maroc | benevents agency',
+      desc: 'Agence événementielle au Maroc : nous concevons et produisons conventions, conférences, cérémonies, soirées de gala et événements de marque, scène et audiovisuel inclus.'
     }
   },
   fr: {
@@ -22,7 +26,7 @@ window.BEN_I18N = {
     'nav.contact': 'Contact',
     'nav.cta': 'Démarrer un projet',
 
-    'hero.eyebrow': 'Agence de conception & production événementielle',
+    'hero.eyebrow': 'Agence événementielle au Maroc',
     'hero.l1': 'Nous composons',
     'hero.l2': 'des instants',
     'hero.l3': 'qui restent.',
@@ -170,6 +174,7 @@ window.BEN_I18N = {
     'ft.terms': 'Conditions d’utilisation',
     'f.legal': 'Vos informations servent uniquement à répondre à votre demande.',
     'ft.top': 'Haut de page',
+    'ft.allwork': 'Toutes les réalisations',
     'ft.instagram': 'benevents agency sur Instagram',
     'ft.whatsapp': 'benevents agency sur WhatsApp',
     'reel.kicker': 'Le film',

@@ -1,62 +1,144 @@
 <!doctype html>
+<!-- The home page, written in English. Its French words are in assets/js/i18n.js.
+     After changing this page, its words, the projects or the services, run:   node tools/site/build.mjs
+     It rewrites the French page (fr.html), the pages of the services and projects, and the sitemap. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>benevents agency — Corporate Event Design &amp; Production</title>
-<meta name="description" content="benevents agency designs and produces conferences, conventions, ceremonies, gala evenings and brand events, with full stage and audiovisual production.">
-<meta name="theme-color" content="#08080a">
-<meta property="og:title" content="benevents agency — Corporate Event Design &amp; Production">
-<meta property="og:description" content="Conferences, conventions, ceremonies, gala evenings and brand events, with full stage and audiovisual production.">
+<!-- head:seo: written by tools/site/build.mjs from assets/js/i18n.js (meta); do not edit these lines by hand -->
+<title>Event Agency in Morocco | benevents agency</title>
+<meta name="description" content="Event agency in Morocco: we design and produce conventions, conferences, ceremonies, gala evenings and brand events, with in-house stage and audiovisual production.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://www.ben.events/">
+<!-- the two languages of the page, for search engines -->
+<link rel="alternate" hreflang="en" href="https://www.ben.events/">
+<link rel="alternate" hreflang="fr" href="https://www.ben.events/fr">
+<link rel="alternate" hreflang="x-default" href="https://www.ben.events/">
+<!-- what shows when a link to the page is shared -->
+<meta property="og:title" content="Event Agency in Morocco | benevents agency">
+<meta property="og:description" content="Event agency in Morocco: we design and produce conventions, conferences, ceremonies, gala evenings and brand events, with in-house stage and audiovisual production.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="benevents agency">
 <meta property="og:url" content="https://www.ben.events/">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="fr_FR">
-<!-- the picture shown when a link to the site is shared -->
 <meta property="og:image" content="https://www.ben.events/assets/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="benevents agency: corporate event design and production">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.ben.events/assets/img/og.jpg">
-<!-- the two languages of the site, for search engines -->
-<link rel="alternate" hreflang="en" href="https://www.ben.events/?lang=en">
-<link rel="alternate" hreflang="fr" href="https://www.ben.events/?lang=fr">
-<link rel="alternate" hreflang="x-default" href="https://www.ben.events/">
-<!-- who we are, in the form search engines read -->
+<!-- who we are and what the page is, in the form search engines read -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://www.ben.events/#agency",
-      "name": "benevents agency",
-      "url": "https://www.ben.events/",
-      "logo": "https://www.ben.events/assets/img/logo.png",
-      "image": "https://www.ben.events/assets/img/og.jpg",
-      "description": "Event design and production agency: conferences, conventions, ceremonies, gala evenings and brand events, with full stage and audiovisual production.",
-      "areaServed": { "@type": "Country", "name": "Morocco" },
-      "knowsAbout": ["Corporate events", "Conferences and conventions", "Ceremonies and gala evenings", "Brand launches and receptions", "Scenography", "Audiovisual production"],
-      "sameAs": ["https://www.instagram.com/benevents.agency", "https://www.linkedin.com/company/benevents/"]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.ben.events/#site",
-      "name": "benevents agency",
-      "url": "https://www.ben.events/",
-      "inLanguage": ["en", "fr"],
-      "publisher": { "@id": "https://www.ben.events/#agency" }
-    }
-  ]
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://www.ben.events/#agency",
+   "name": "benevents agency",
+   "url": "https://www.ben.events/",
+   "logo": "https://www.ben.events/assets/img/logo.png",
+   "image": "https://www.ben.events/assets/img/og.jpg",
+   "description": "Event agency in Morocco: we design and produce conventions, conferences, ceremonies, gala evenings and brand events, with in-house stage and audiovisual production.",
+   "email": "contact@ben.events",
+   "telephone": "+212661118590",
+   "areaServed": {
+    "@type": "Country",
+    "name": "Morocco"
+   },
+   "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "email": "contact@ben.events",
+    "telephone": "+212661118590",
+    "areaServed": "MA",
+    "availableLanguage": [
+     "fr",
+     "en"
+    ]
+   },
+   "knowsAbout": [
+    "Conferences & Conventions",
+    "Ceremonies & Gala Evenings",
+    "Brand & Corporate Receptions",
+    "Stage & Audiovisual Production"
+   ],
+   "sameAs": [
+    "https://www.instagram.com/benevents.agency",
+    "https://www.linkedin.com/company/benevents/"
+   ],
+   "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "What we create",
+    "itemListElement": [
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Conferences & Conventions",
+       "description": "Forums, annual conventions, panels and seminars, staged so that every speaker is heard and every message lands.",
+       "url": "https://www.ben.events/services/conferences-conventions"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Ceremonies & Gala Evenings",
+       "description": "Award and graduation ceremonies, gala dinners and anniversary evenings, with show direction and live entertainment.",
+       "url": "https://www.ben.events/services/ceremonies-gala-evenings"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Brand & Corporate Receptions",
+       "description": "Product launches, inaugurations, press events and networking receptions that bring your brand and your guests together.",
+       "url": "https://www.ben.events/services/brand-corporate-receptions"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Stage & Audiovisual Production",
+       "description": "LED walls, stage design, lighting, sound, multi-camera capture and live direction, run by our own technical team.",
+       "url": "https://www.ben.events/services/stage-audiovisual-production"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://www.ben.events/#site",
+   "name": "benevents agency",
+   "url": "https://www.ben.events/",
+   "inLanguage": [
+    "en",
+    "fr"
+   ],
+   "publisher": {
+    "@id": "https://www.ben.events/#agency"
+   }
+  }
+ ]
 }
 </script>
+<!-- /head:seo -->
+<meta name="theme-color" content="#08080a">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- the first picture of the page is asked for at once -->
+<link rel="preload" as="image" href="assets/img/gala-dinner.webp" type="image/webp" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<!-- audience measurement (Rybbit), without cookies -->
+<script src="https://app.rybbit.io/api/script.js?siteId=5ad12948434d" defer></script>
 </head>
 <body class="is-loading">
 
@@ -123,12 +205,13 @@
   <div class="hero__veil" aria-hidden="true"></div>
 
   <div class="hero__content">
-    <p class="eyebrow hero__eyebrow"><i></i><span data-i18n="hero.eyebrow">Event design &amp; production agency</span></p>
-    <h1 class="hero__title">
+    <!-- the main heading of the page, for people and for search engines; the large line under it is its signature -->
+    <h1 class="eyebrow hero__eyebrow"><i></i><span data-i18n="hero.eyebrow">Event agency in Morocco</span></h1>
+    <p class="hero__title">
       <span class="line"><span data-i18n="hero.l1">We compose</span></span>
       <span class="line"><span><em data-i18n="hero.l2">moments</em></span></span>
       <span class="line"><span data-i18n="hero.l3">worth remembering.</span></span>
-    </h1>
+    </p>
     <div class="hero__foot">
       <p class="hero__lede" data-i18n="hero.lede">From conventions and forums to ceremonies and gala evenings, benevents agency designs, stages and produces corporate events with precision, from the first brief to the last cue.</p>
       <div class="hero__actions">
@@ -207,7 +290,7 @@
           <h3 data-i18n="srv.1.t">Conferences &amp; Conventions</h3>
           <p data-i18n="srv.1.d">Forums, annual conventions, panels and seminars, staged so that every speaker is heard and every message lands.</p>
           <ul><li data-i18n="srv.1.a">Forums</li><li data-i18n="srv.1.b">Conventions</li><li data-i18n="srv.1.c">Seminars</li></ul>
-          <a class="srv__more" href="#service/conferences" data-i18n="srv.more">See the ideas</a>
+          <a class="srv__more" href="services/conferences-conventions" data-page="service:conferences" data-i18n="srv.more">See the ideas</a>
         </div>
         <div class="srv__media"><div class="media media--c" data-img="service1"></div></div>
         <span class="srv__arrow" aria-hidden="true"></span>
@@ -219,7 +302,7 @@
           <h3 data-i18n="srv.2.t">Ceremonies &amp; Gala Evenings</h3>
           <p data-i18n="srv.2.d">Award and graduation ceremonies, gala dinners and anniversary evenings, with show direction and live entertainment.</p>
           <ul><li data-i18n="srv.2.a">Ceremonies</li><li data-i18n="srv.2.b">Gala dinners</li><li data-i18n="srv.2.c">Live shows</li></ul>
-          <a class="srv__more" href="#service/ceremonies" data-i18n="srv.more">See the ideas</a>
+          <a class="srv__more" href="services/ceremonies-gala-evenings" data-page="service:ceremonies" data-i18n="srv.more">See the ideas</a>
         </div>
         <div class="srv__media"><div class="media media--d" data-img="service2"></div></div>
         <span class="srv__arrow" aria-hidden="true"></span>
@@ -231,7 +314,7 @@
           <h3 data-i18n="srv.3.t">Brand &amp; Corporate Receptions</h3>
           <p data-i18n="srv.3.d">Product launches, inaugurations, press events and networking receptions that bring your brand and your guests together.</p>
           <ul><li data-i18n="srv.3.a">Launches</li><li data-i18n="srv.3.b">Inaugurations</li><li data-i18n="srv.3.c">Receptions</li></ul>
-          <a class="srv__more" href="#service/receptions" data-i18n="srv.more">See the ideas</a>
+          <a class="srv__more" href="services/brand-corporate-receptions" data-page="service:receptions" data-i18n="srv.more">See the ideas</a>
         </div>
         <div class="srv__media"><div class="media media--e" data-img="service3"></div></div>
         <span class="srv__arrow" aria-hidden="true"></span>
@@ -243,7 +326,7 @@
           <h3 data-i18n="srv.4.t">Stage &amp; Audiovisual Production</h3>
           <p data-i18n="srv.4.d">LED walls, stage design, lighting, sound, multi-camera capture and live direction, run by our own technical team.</p>
           <ul><li data-i18n="srv.4.a">LED &amp; staging</li><li data-i18n="srv.4.b">Light &amp; sound</li><li data-i18n="srv.4.c">Live video</li></ul>
-          <a class="srv__more" href="#service/production" data-i18n="srv.more">See the ideas</a>
+          <a class="srv__more" href="services/stage-audiovisual-production" data-page="service:production" data-i18n="srv.more">See the ideas</a>
         </div>
         <div class="srv__media"><div class="media media--f" data-img="service4"></div></div>
         <span class="srv__arrow" aria-hidden="true"></span>
@@ -484,6 +567,7 @@
         <a href="#about" data-i18n="nav.about">The Agency</a>
         <a href="#services" data-i18n="nav.services">Services</a>
         <a href="#gallery" data-i18n="nav.gallery">Portfolio</a>
+        <a href="projects" data-page="projects" data-i18n="ft.allwork">All projects</a>
         <a href="#process" data-i18n="nav.process">Approach</a>
         <a href="#wall" data-i18n="wall.eyebrow">In pictures</a>
       </nav>

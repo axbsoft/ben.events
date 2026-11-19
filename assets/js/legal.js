@@ -18,8 +18,8 @@
     if (title) doc.title = title;
     if (desc && meta) meta.content = desc;
     each('[data-lang]', function (n) { n.setAttribute('aria-pressed', String(n.getAttribute('data-lang') === lang)); });
-    // the links to the site and to the other page keep the language
-    each('[data-href]', function (a) { a.href = a.getAttribute('data-href') + '?lang=' + lang; });
+    // the links to the site and to the other page keep the language (the home page is / in English, /fr in French)
+    each('[data-href]', function (a) { var to = a.getAttribute('data-href'); a.href = to === './' ? (lang === 'fr' ? 'fr' : './') : to + '?lang=' + lang; });
     if (save) {
       try { localStorage.setItem('ben-lang', lang); } catch (e) {}
       try { history.replaceState(null, '', location.pathname + '?lang=' + lang + location.hash); } catch (e) {}

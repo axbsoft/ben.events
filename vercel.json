@@ -4,6 +4,7 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/assets/img/(.*)",
@@ -77,6 +78,18 @@
       "source": "/m-automotive",
       "destination": "/m-automotiv",
       "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "fr"
+        }
+      ],
+      "destination": "/fr",
+      "permanent": true
     }
   ]
 }

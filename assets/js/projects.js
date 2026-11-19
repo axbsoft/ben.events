@@ -8,7 +8,10 @@
    intro  : one or two sentences shown at the top of the project page
    cover  : which part of the first photo stays in view on the portfolio card
             (any CSS background-position, optional)
-   photos : every photo of the project, the first one is the cover: ['path', width, height] */
+   photos : every photo of the project, the first one is the cover: ['path', width, height]
+
+   Each project also has a page of its own (projects/<id>, fr/realisations/<id>), written from this file
+   by tools/site/build.mjs: run it after a change. */
 (function () {
   'use strict';
 

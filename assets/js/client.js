@@ -165,7 +165,7 @@
     root.lang = lang;
     var title = body.getAttribute('data-title-' + lang);
     if (title) doc.title = title;
-    $$('[data-home]').forEach(function (a) { a.href = './?lang=' + lang + a.getAttribute('data-home'); });     // the site, in the same language
+    $$('[data-home]').forEach(function (a) { a.href = (lang === 'fr' ? 'fr' : './') + a.getAttribute('data-home'); });     // the site, in the same language (/ or /fr)
     $$('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
     if (save) { try { localStorage.setItem('ben-lang', lang); } catch (e) {} }
     relabel();

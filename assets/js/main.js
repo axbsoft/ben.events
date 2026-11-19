@@ -19,7 +19,7 @@
   // The photo wall is listed in index.html, not here.
   var MEDIA = {
     logo: '',        // e.g. 'assets/img/logo-white.svg' (replaces the drawn wordmark)
-    hero: 'assets/img/gala-dinner.jpg',
+    hero: 'assets/img/gala-dinner.webp',     // a lighter copy of gala-dinner.jpg, made by tools/site/images.py
     about1: 'assets/img/stage-runway.jpg',
     about2: 'assets/img/control-desk-ballroom.jpg',
     service1: 'assets/img/conference-opening.jpg',
@@ -29,6 +29,8 @@
     statement: ['assets/img/light-beams.jpg', 'center 22%'],
     reel: 'assets/img/film-cover.jpg'                           // the cover shown before the film plays
   };
+  // the photo of each service is given with the service (assets/js/services.js)
+  (window.BEN_SERVICES || []).forEach(function (s, i) { if (s.image) MEDIA['service' + (i + 1)] = s.image[0]; });
   /* ------------------------------------------------------------------ */
 
   var doc = document, root = doc.documentElement, body = doc.body;
@@ -236,11 +238,16 @@
   $$('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });
 
   /* ---------- Language ---------- */
-  var en = {}, enPh = {}, enAlt = {}, enAria = {};
+  // The English words are those of index.html. The French page (fr.html, written by tools/site/build.mjs)
+  // is the same page already in French: it brings the English words along, in window.BEN_EN.
+  var EN = window.BEN_EN || {};
+  var en = EN.text || {}, enPh = EN.ph || {}, enAlt = EN.alt || {}, enAria = EN.aria || {};
+  // what is not handed over is read from the page: all of it on index.html, and everywhere the parts
+  // this script has just built (the project cards), which are in English at this point
   $$('[data-i18n]').forEach(function (n) { var k = n.getAttribute('data-i18n'); if (!(k in en)) en[k] = n.textContent; });
-  $$('[data-i18n-ph]').forEach(function (n) { enPh[n.getAttribute('data-i18n-ph')] = n.getAttribute('placeholder'); });
-  $$('[data-i18n-alt]').forEach(function (n) { enAlt[n.getAttribute('data-i18n-alt')] = n.getAttribute('alt'); });
-  $$('[data-i18n-aria]').forEach(function (n) { enAria[n.getAttribute('data-i18n-aria')] = n.getAttribute('aria-label'); });
+  $$('[data-i18n-ph]').forEach(function (n) { var k = n.getAttribute('data-i18n-ph'); if (!(k in enPh)) enPh[k] = n.getAttribute('placeholder'); });
+  $$('[data-i18n-alt]').forEach(function (n) { var k = n.getAttribute('data-i18n-alt'); if (!(k in enAlt)) enAlt[k] = n.getAttribute('alt'); });
+  $$('[data-i18n-aria]').forEach(function (n) { var k = n.getAttribute('data-i18n-aria'); if (!(k in enAria)) enAria[k] = n.getAttribute('aria-label'); });
 
   function splitWords(el) {
     var words = el.textContent.trim().split(/\s+/);
@@ -291,19 +298,41 @@
     voicesText();
     svText();
     $$('[data-legal]').forEach(function (a) { a.href = a.getAttribute('data-legal') + '?lang=' + lang; });   // the legal pages open in the same language
+    // the pages of the services and projects, in the language on screen (a plain press still opens them over the site)
+    $$('[data-page]').forEach(function (a) { var v = a.getAttribute('data-page').split(':'); a.href = pageUrl(v[0], v[1]); });
+    $$('a[data-project]').forEach(function (a) { a.href = pageUrl('project', a.getAttribute('data-project')); });
     labelViewer();
     root.lang = lang;
     var m = I18N.meta[lang];
     if (m) { doc.title = m.title; var d = $('meta[name="description"]'); if (d) d.content = m.desc; }
     $$('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
     if (save) { try { localStorage.setItem('ben-lang', lang); } catch (e) {} }
+    // each language has its address (/ in English, /fr in French): the address bar follows the language on screen
+    if (CLEAN) {
+      var want = lang === 'fr' ? '/fr' : '/';
+      if (location.pathname !== want || /[?&]lang=/.test(location.search)) { try { history.replaceState(history.state, '', want + location.hash); } catch (e) {} }
+    }
     measure();
+  }
+  // the address of the page of a service, of a project, or of the list of projects
+  function pageUrl(kind, id) {
+    var fr = lang === 'fr';
+    if (kind === 'service') {
+      var s = (window.BEN_SERVICES || []).filter(function (x) { return x.id === id; })[0];
+      return (fr ? 'fr/services/' : 'services/') + (s && s.slug ? s.slug[lang] || s.slug.en : id);
+    }
+    if (kind === 'project') return (fr ? 'fr/realisations/' : 'projects/') + id;
+    return fr ? 'fr/realisations' : 'projects';
   }
 
   var stored = null;
   try { stored = localStorage.getItem('ben-lang'); } catch (e) {}
   var qs = /[?&]lang=(en|fr)\b/.exec(location.search);
-  var initial = (qs && qs[1]) || stored || ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
+  var CLEAN = /^\/(fr)?$/.test(location.pathname);                    // served at its own address (not opened as a file)
+  var FRENCH = /\/fr(\.html)?$/.test(location.pathname);              // the French page
+  // on the French page, French; elsewhere the language asked for, else the one chosen before, else the browser's
+  // (a browser set to Moroccan Arabic gets French rather than English)
+  var initial = FRENCH ? 'fr' : (qs && qs[1]) || stored || (/^(fr|ar-ma)/i.test(navigator.language || '') ? 'fr' : 'en');
 
   $$('[data-lang]').forEach(function (b) {
     b.addEventListener('click', function () {

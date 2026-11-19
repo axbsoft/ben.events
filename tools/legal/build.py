@@ -36,9 +36,11 @@ PAGES = {
             ('How long we keep it', [
                 'For as long as it takes to handle your enquiry and follow our exchanges, then for the length of our relationship if we work together, and beyond that where the law requires it (accounting records, for example). You can ask us to delete it at any time.']),
             ('Cookies and outside services', [
-                'The site uses no advertising cookie, no audience measurement and no tracker. It keeps a single piece of information in your browser: the language you chose. The private presentations we share with our clients by means of a code keep the access open for the length of your session; the code is checked in your browser and is not sent to us.',
+                'The site uses no advertising cookie and no advertising tracker. It keeps a single piece of information in your browser: the language you chose. The private presentations we share with our clients by means of a code keep the access open for the length of your session; the code is checked in your browser and is not sent to us.',
+                'We measure how the site is used with Rybbit, an audience measurement tool that works without cookies. It records the pages viewed, where the visit comes from, the type of device and browser and an approximate location. To tell one visitor from another, it works out an identifier from the IP address and the browser.',
                 'A few elements come from other services, which then receive your IP address and apply their own rules:',
-                ['the typefaces are supplied by Google Fonts;',
+                ['audience measurement is provided by Rybbit (rybbit.io);',
+                 'the typefaces are supplied by Google Fonts;',
                  'the film is only loaded from its video host (livid.com) if you press play;',
                  'the WhatsApp, Instagram and LinkedIn links only take you there if you click them.']]),
             ('Photos and videos of our events', [
@@ -68,9 +70,11 @@ PAGES = {
             ('Combien de temps nous les gardons', [
                 'Le temps de traiter votre demande et de suivre nos échanges, puis pendant la durée de notre relation si nous travaillons ensemble, et au-delà lorsque la loi l’impose (pièces comptables, par exemple). Vous pouvez nous demander de les supprimer à tout moment.']),
             ('Cookies et services extérieurs', [
-                'Le site n’utilise ni cookie publicitaire, ni mesure d’audience, ni traceur. Il garde une seule information dans votre navigateur : la langue que vous avez choisie. Les présentations privées que nous partageons avec nos clients au moyen d’un code gardent l’accès ouvert le temps de votre session ; le code est vérifié dans votre navigateur et ne nous est pas transmis.',
+                'Le site n’utilise ni cookie publicitaire ni traceur publicitaire. Il garde une seule information dans votre navigateur : la langue que vous avez choisie. Les présentations privées que nous partageons avec nos clients au moyen d’un code gardent l’accès ouvert le temps de votre session ; le code est vérifié dans votre navigateur et ne nous est pas transmis.',
+                'Nous mesurons la fréquentation du site avec Rybbit, un outil de mesure d’audience qui fonctionne sans cookie. Il enregistre les pages consultées, la provenance de la visite, le type d’appareil et de navigateur et une localisation approximative. Pour distinguer un visiteur d’un autre, il calcule un identifiant à partir de l’adresse IP et du navigateur.',
                 'Quelques éléments viennent d’autres services, qui reçoivent alors votre adresse IP et appliquent leurs propres règles :',
-                ['les polices de caractères sont fournies par Google Fonts ;',
+                ['la mesure d’audience est assurée par Rybbit (rybbit.io) ;',
+                 'les polices de caractères sont fournies par Google Fonts ;',
                  'le film n’est chargé depuis son hébergeur vidéo (livid.com) que si vous appuyez sur lecture ;',
                  'les liens WhatsApp, Instagram et LinkedIn ne vous y conduisent que si vous cliquez dessus.']]),
             ('Photos et vidéos de nos événements', [
@@ -191,6 +195,8 @@ def page(key):
 <link rel="stylesheet" href="assets/css/legal.css">
 <!-- the page holds its text in English and in French; this shows the right one -->
 <script src="assets/js/legal.js"></script>
+<!-- audience measurement (Rybbit), without cookies -->
+<script src="https://app.rybbit.io/api/script.js?siteId=5ad12948434d" defer></script>
 </head>
 <!-- This page is written by tools/legal/build.py, which holds its text in both languages: change the text there, then run it again. -->
 <body class="legal-page" data-title-en="{title_en}" data-title-fr="{title_fr}" data-desc-en="{desc_en}" data-desc-fr="{desc_fr}">
