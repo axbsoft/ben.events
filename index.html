@@ -385,6 +385,8 @@
       <label class="field"><span data-i18n="f.date">Preferred date</span><input name="date" type="text" data-i18n-ph="f.date.ph" placeholder="e.g. June 2027"></label>
       <label class="field"><span data-i18n="f.guests">Number of guests</span><input name="guests" type="text" inputmode="numeric"></label>
       <label class="field field--full"><span data-i18n="f.msg">Tell us about your event</span><textarea name="message" rows="4" required></textarea></label>
+      <!-- not for people: left empty by a visitor, filled in by a robot (see api/contact.js) -->
+      <label class="form__trap" aria-hidden="true">Leave this field empty<input name="hp" type="text" tabindex="-1" autocomplete="off"></label>
       <div class="form__foot field--full">
         <button class="btn magnetic" type="submit"><span data-i18n="f.send">Send enquiry</span></button>
         <p class="form__note" role="status" aria-live="polite"></p>

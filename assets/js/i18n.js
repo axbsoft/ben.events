@@ -166,6 +166,9 @@ window.BEN_I18N = {
     en: {
       required: 'Please add your name, a valid email and a few words about your event.',
       opening: 'Your email app is opening with your enquiry. Thank you.',
+      again: 'Nothing opened? Send it by email.',
+      sending: 'Sending your enquiry…',
+      sent: 'Thank you. Your enquiry has been sent; we will get back to you shortly.',
       subject: 'Event enquiry',
       labels: { name: 'Name', email: 'Email', phone: 'Phone', type: 'Event type', date: 'Preferred date', guests: 'Guests', project: 'Reference project' },
       viewer: { label: 'Photo viewer', close: 'Close', prev: 'Previous photo', next: 'Next photo', open: 'Enlarge photo' },
@@ -174,6 +177,9 @@ window.BEN_I18N = {
     fr: {
       required: 'Merci d’indiquer votre nom, un e-mail valide et quelques mots sur votre événement.',
       opening: 'Votre messagerie s’ouvre avec votre demande. Merci.',
+      again: 'Rien ne s’ouvre ? Envoyez-la par e-mail.',
+      sending: 'Envoi de votre demande…',
+      sent: 'Merci. Votre demande est envoyée ; nous revenons vers vous très vite.',
       subject: 'Demande d’événement',
       labels: { name: 'Nom', email: 'E-mail', phone: 'Téléphone', type: 'Type d’événement', date: 'Date souhaitée', guests: 'Invités', project: 'Projet de référence' },
       viewer: { label: 'Visionneuse de photos', close: 'Fermer', prev: 'Photo précédente', next: 'Photo suivante', open: 'Agrandir la photo' },

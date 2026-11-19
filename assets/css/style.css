@@ -406,6 +406,9 @@ ul, ol { padding: 0; list-style: none; }
 .form__foot { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; padding-top: 8px; }
 .form__note { font-size: 14px; color: var(--c4); min-height: 1.4em; flex: 1 1 220px; }
 .form__note.is-error { color: #ff8f8f; }
+.form__note a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+.form__trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.form.is-sending .btn { opacity: .6; pointer-events: none; }
 .form__ref { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 9px 9px 9px 18px; border-radius: 16px; border: 1px solid transparent; background: linear-gradient(var(--card-2), var(--card-2)) padding-box, var(--grad) border-box; font-size: 14.5px; line-height: 1.4; outline-offset: 3px; }
 .form__ref > span > span { color: var(--mute); margin-right: 4px; }
 .form__ref b { font-weight: 600; }

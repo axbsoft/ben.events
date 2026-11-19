@@ -862,7 +862,10 @@
     if (e.key === 'Escape') toggleMenu(false);
   });
 
-  /* ---------- Contact form (opens the visitor's mail app) ---------- */
+  /* ---------- Contact form ----------
+     The enquiry goes to the site's own /api/contact, which passes it on to the webhook chosen
+     for the site (see api/contact.js). Where that is not set up, or cannot be reached, the
+     visitor's mail app opens with the enquiry instead, so that it is never lost. */
   var form = $('.form'), note = $('.form__note');
   var refBox = $('.form__ref'), refName = $('.form__ref-name'), refProject = null;
   function refText() { if (refName && refProject) refName.textContent = tr(refProject.title); }
@@ -873,27 +876,53 @@
     refText();
   }
   if (form) {
-    $$('input, textarea, select', form).forEach(function (f) {
-      var sync = function () { f.parentNode.classList.toggle('is-filled', !!f.value); };
-      f.addEventListener('input', sync); f.addEventListener('change', sync); sync();
-    });
+    var fields = $$('input, textarea, select', form), sending = false;
+    var filled = function () { fields.forEach(function (f) { f.parentNode.classList.toggle('is-filled', !!f.value); }); };
+    fields.forEach(function (f) { f.addEventListener('input', filled); f.addEventListener('change', filled); });
+    filled();
     var refX = $('.form__ref-x', form);
     if (refX) refX.addEventListener('click', function () { setRef(null); form.elements.name.focus(); });
+    // the enquiry written out as an e-mail, in the visitor's own mail app
+    var byMail = function (d, s) {
+      var L = s.labels, lines = [L.name + ': ' + d.name, L.email + ': ' + d.email, L.phone + ': ' + d.phone, L.type + ': ' + d.type, L.date + ': ' + d.date, L.guests + ': ' + d.guests];
+      if (d.project) lines.push(L.project + ': ' + d.project);
+      lines.push('', d.message);
+      var url = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(s.subject + ' — ' + d.name + (d.project ? ' (' + d.project + ')' : '')) +
+        '&body=' + encodeURIComponent(lines.join('\n'));
+      // a browser may refuse to open the mail app by itself: the same e-mail is one click away
+      var again = doc.createElement('a');
+      again.href = url;
+      again.textContent = s.again;
+      note.textContent = s.opening + ' ';
+      note.appendChild(again);
+      location.href = url;
+    };
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (sending) return;
       var s = I18N.js[lang] || I18N.js.en, v = function (n) { return (form.elements[n].value || '').trim(); };
       var ok = v('name') && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email')) && v('message');
       note.classList.toggle('is-error', !ok);
       if (!ok) { note.textContent = s.required; return; }
-      var L = s.labels, about = refProject ? tr(refProject.title) : '', lines = [
-        L.name + ': ' + v('name'), L.email + ': ' + v('email'), L.phone + ': ' + v('phone'),
-        L.type + ': ' + v('type'), L.date + ': ' + v('date'), L.guests + ': ' + v('guests')
-      ];
-      if (about) lines.push(L.project + ': ' + about);
-      lines.push('', v('message'));
-      note.textContent = s.opening;
-      location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(s.subject + ' — ' + v('name') + (about ? ' (' + about + ')' : '')) +
-        '&body=' + encodeURIComponent(lines.join('\n'));
+      var d = { name: v('name'), email: v('email'), phone: v('phone'), type: v('type'), date: v('date'), guests: v('guests'), message: v('message'),
+        project: refProject ? tr(refProject.title) : '', lang: lang, page: location.origin + location.pathname, hp: v('hp') };
+      sending = true;
+      form.classList.add('is-sending');
+      note.textContent = s.sending;
+      fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) }).then(function (r) {
+        return r.ok ? r.json() : Promise.reject(r.status);
+      }).then(function (out) {
+        if (!out || !out.ok) return Promise.reject(0);
+        form.reset();
+        setRef(null);
+        filled();
+        note.textContent = (I18N.js[lang] || I18N.js.en).sent;
+      }).catch(function () {
+        byMail(d, s);                               // not set up, or out of reach
+      }).then(function () {
+        sending = false;
+        form.classList.remove('is-sending');
+      });
     });
   }
 
