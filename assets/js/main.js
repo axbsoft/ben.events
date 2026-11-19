@@ -9,7 +9,7 @@
 
   // Address that receives enquiries from the contact form.
   var CONTACT_EMAIL = 'contact@ben.events';
-  var WHATSAPP = '';                        // the number WhatsApp opens, with its country code (e.g. '+212 6 00 00 00 00'); empty: no WhatsApp links
+  var WHATSAPP = '+212 661 11 85 90';       // the number WhatsApp opens, with its country code; empty: no WhatsApp links
 
   // Photos and logo. Put files in assets/img/ and set the path here.
   // Any slot left empty keeps its coloured placeholder artwork.
