@@ -11,7 +11,7 @@
    photos : every photo of the project, the first one is the cover: ['path', width, height]
 
    The facts of the case, all optional: what is not given is simply left out of the page.
-   client : who the event was for, as they agree to be named
+   client : who the event was for, as they agree to be named: 'Name', or { en: '…', fr: '…' } when it needs translating
    city   : where it took place: one of the places listed below (PLACES)
    venue  : the place itself: 'Fairmont Tazi Palace'
    date   : when: '2025', or { en: 'March 2025', fr: 'Mars 2025' }
@@ -124,6 +124,7 @@
       id: 'mta-cycle-meeting',
       title: 'MTA Cycle Meeting',
       kind: KIND.seminar,
+      client: 'Novartis',
       city: 'tangier',
       venue: 'Fairmont Tazi Palace',
       cover: 'center 30%',
@@ -190,6 +191,7 @@
       id: 'uae-morocco-forum',
       title: 'UAE–Morocco Forum for Economic Partnership',
       kind: KIND.institutional,
+      client: { en: 'Embassy of the United Arab Emirates in Rabat', fr: 'Ambassade des Émirats arabes unis à Rabat' },
       did: {
         en: ['Stage with a wide curved LED backdrop', 'Lectern with a built-in screen', 'Armchairs and branded plinths for the speakers', 'Round tables with name cards, flowers and the flags of both countries'],
         fr: ['Scène avec grand fond LED incurvé', 'Pupitre avec écran intégré', 'Fauteuils et totems habillés pour les intervenants', 'Tables rondes avec chevalets, fleurs et drapeaux des deux pays']
@@ -244,6 +246,7 @@
       id: 'fanzone-can-2025',
       title: 'Fanzone CAN 2025',
       kind: KIND.fanzone,
+      client: 'Cash Plus',
       cover: 'center 30%',
       did: {
         en: ['Giant LED screen for the matches', 'Flags of the African nations overhead', 'Seating lit in red and green, rugs and lounge areas', 'Lighting of the hall', 'Branded wall and stage set-up'],
@@ -357,6 +360,7 @@
       id: 'onco-days',
       title: 'Onco-Days · H&N Session',
       kind: KIND.science,
+      client: 'Merck',
       cover: 'center 30%',
       did: {
         en: ['Full-width LED wall', 'Stage, lectern with a built-in screen and lounge set', 'Giant 3D letters at the stage front', 'Lighting: moving heads, blue wash and patterns on the ceiling', 'Dressed round tables and chair covers', 'Sound'],

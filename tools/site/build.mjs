@@ -424,7 +424,7 @@ PROJECTS.forEach((p, i) => {
     // the facts of the case, each shown only when projects.js gives it
     const place = p.city ? tr(PLACES[p.city], l) : '', city = cityOf(p);
     const facts = [
-      p.client && [w.fFor, esc(p.client)],
+      p.client && [w.fFor, esc(tr(p.client, l))],
       (place || p.venue) && [w.fWhere, [p.venue && esc(p.venue), place && (city ? `<a href="${U.city(l, city)}">${esc(place)}</a>` : esc(place))].filter(Boolean).join(', ')],
       p.date && [w.fWhen, esc(tr(p.date, l))],
       p.guests && [w.fGuests, esc(String(p.guests))]

@@ -825,7 +825,7 @@
       row.appendChild(dd);
       pjE.facts.appendChild(row);
     };
-    if (p.client) fact(L.client, p.client);
+    if (p.client) fact(L.client, tr(p.client));
     if (place || p.venue) {
       var spot = [];
       if (p.venue) spot.push(p.venue + (place ? ', ' : ''));
