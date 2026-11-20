@@ -103,7 +103,7 @@ const W = {
     fServices: 'Services', fAgency: 'The agency', fContact: 'Contact', approach: 'Our approach', contact: 'Contact', rights: 'All rights reserved.',
     privacy: 'Privacy policy', terms: 'Terms of use', deck: 'Our presentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency on Instagram', onLinkedin: 'benevents agency on LinkedIn',
     photoOf: t => `Photo of the event: ${t}`, serviceImg: t => `${t}: an event produced by benevents agency`,
-    quick: 'Quick contact', call: 'Call', cities: 'Where we work', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
+    faq: 'Frequent questions', quick: 'Quick contact', call: 'Call', cities: 'Where we work', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
   },
   fr: {
     skip: 'Aller au contenu', nav: 'Principal', language: 'Langue', crumbs: 'Vous êtes ici', homeName: 'Accueil', cta: 'Démarrer un projet',
@@ -117,7 +117,7 @@ const W = {
     fServices: 'Savoir-faire', fAgency: 'L’agence', fContact: 'Contact', approach: 'Notre approche', contact: 'Contact', rights: 'Tous droits réservés.',
     privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation', deck: 'Notre présentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency sur Instagram', onLinkedin: 'benevents agency sur LinkedIn',
     photoOf: t => `Photo de l’événement : ${t}`, serviceImg: t => `${t} : un événement produit par benevents agency`,
-    quick: 'Contact rapide', call: 'Appeler', cities: 'Nos villes', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
+    faq: 'Questions fréquentes', quick: 'Contact rapide', call: 'Appeler', cities: 'Nos villes', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
   }
 };
 
@@ -377,7 +377,8 @@ for (const s of SERVICES) {
     const head = seoHead({
       l, title: s.seo.title[l], desc: s.seo.desc[l], alt, xdef: alt.fr, image: '/' + s.image[0], imageAlt: w.serviceImg(name),
       data: [{ '@type': 'Service', '@id': SITE + alt[l] + '#service', name, serviceType: name, description: s.seo.desc[l], url: SITE + alt[l], image: SITE + '/' + s.image[0], provider: { '@id': ORG }, areaServed: { '@type': 'Country', name: l === 'fr' ? 'Maroc' : 'Morocco' } },
-        { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/' }, crumbs(l, [[w.homeName, U.home(l)], [t['nav.services'], U.at(l, '#services')], [name]])]
+        { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/' }, crumbs(l, [[w.homeName, U.home(l)], [t['nav.services'], U.at(l, '#services')], [name]]),
+        ...(s.faq ? [{ '@type': 'FAQPage', '@id': SITE + alt[l] + '#faq', inLanguage: l, mainEntity: s.faq[l].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }] : [])]
     });
     const main = `${crumbNav(l, [[w.homeName, U.home(l)], [t['nav.services'], U.at(l, '#services')], [name]])}
 <header class="pg__head">
@@ -400,7 +401,14 @@ for (const s of SERVICES) {
     </ul>
   </div>
 </section>
-<section class="pg__sec">
+${s.more ? `<section class="pg__sec">
+  <h2 class="pg__h2">${esc(s.more[l].title)}</h2>
+  <p class="pg__lede pg__lede--wide">${esc(s.more[l].intro)}</p>
+  <ul class="pg__notes pg__notes--named pg__notes--n${s.more[l].points.length}">
+    ${s.more[l].points.map(([k, v]) => `<li><b>${esc(k)}</b>${esc(v)}</li>`).join('\n    ')}
+  </ul>
+</section>
+` : ''}<section class="pg__sec">
   <h2 class="pg__h2">${esc(w.ideas)}</h2>
   <div class="pcards pcards--two">
     ${s.ideas.filter(i => byId[i.project]).map(i => projectCard(l, byId[i.project], [tr(i.title, l), tr(i.text, l)])).join('\n    ')}
@@ -410,6 +418,12 @@ for (const s of SERVICES) {
   <h2 class="pg__h2">${esc(w.more)}</h2>
   <div class="pcards">
     ${mine.map(p => projectCard(l, p)).join('\n    ')}
+  </div>
+</section>` : ''}${s.faq ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(w.faq)}</h2>
+  <div class="pg__faq">
+    ${s.faq[l].map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n    ')}
   </div>
 </section>` : ''}
 ${cta(l, w.endTitle, w.endText)}

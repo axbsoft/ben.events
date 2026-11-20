@@ -8,6 +8,9 @@
    seo   : the title and the description search engines show for that page
    text  : two paragraphs for that page, in both languages
    does  : what the agency takes care of, a few short lines
+   more  : one more part of the page, optional: { en: { title, intro, points: [['name', 'sentence'], …] }, fr: { … } }
+   faq   : questions and answers shown at the foot of the page, optional: { en: [['question', 'answer'], …], fr: [ … ] }
+           Only what is true today: an answer is a promise.
    ideas : ideas for the client, each one seen in a project of the portfolio
            title, text : in both languages
            project     : the id of that project in projects.js; the idea then shows its photo and opens it 
@@ -35,6 +38,20 @@
       does: {
         en: ['Format and running order', 'Stage, LED screen and room dressing', 'Welcome of guests and speakers', 'Sound, light and video control', 'Filming and live direction'],
         fr: ['Format et déroulé de la journée', 'Scène, écran LED et habillage de la salle', 'Accueil des participants et des intervenants', 'Régie son, lumière et vidéo', 'Captation et réalisation en direct']
+      },
+      faq: {
+        en: [
+          ['Do you organise conventions outside Casablanca?', 'Yes. We work in Casablanca, Rabat and Marrakech, and wherever in Morocco your event takes place. We have, for example, produced a seminar in Tangier.'],
+          ['Can you film the conference and broadcast it?', 'Yes. Multi-camera filming and live direction are handled by our own team, from our control desk, for the room as well as for the broadcast.'],
+          ['Who is our contact while the event is being prepared?', 'One dedicated producer, from the first conversation to the day itself. They coordinate the venue, the suppliers, the technical side and the schedule.'],
+          ['When do we know the budget?', 'Before anything is booked. The concept, the mood boards and a clear budget are presented to you together.']
+        ],
+        fr: [
+          ['Organisez-vous des conventions en dehors de Casablanca ?', 'Oui. Nous travaillons à Casablanca, Rabat et Marrakech, et partout au Maroc où votre événement a lieu. Nous avons par exemple produit un séminaire à Tanger.'],
+          ['Pouvez-vous filmer la conférence et la retransmettre ?', 'Oui. La captation multicaméra et la réalisation en direct sont assurées par notre propre équipe, depuis notre régie, pour la salle comme pour la diffusion.'],
+          ['Qui est notre interlocuteur pendant la préparation ?', 'Un chef de projet dédié, de la première conversation au jour J. Il coordonne le lieu, les prestataires, la technique et le planning.'],
+          ['À quel moment connaît-on le budget ?', 'Avant toute réservation. Le concept, les planches d’ambiance et un budget clair vous sont présentés ensemble.']
+        ]
       },
       ideas: [
         { project: 'rma-convention',
@@ -70,6 +87,20 @@
         en: ['Storyline and running order', 'Staging of awards and diplomas', 'Décor, lighting and seating plan', 'Host, artists and entertainment', 'Show control and coordination on the day'],
         fr: ['Fil conducteur et déroulé de la soirée', 'Mise en scène des remises de prix et de diplômes', 'Décor, lumière et plan de salle', 'Maître de cérémonie, artistes et animations', 'Régie et coordination le jour J']
       },
+      faq: {
+        en: [
+          ['Do you write the running order of the ceremony?', 'Yes. We write the storyline, set every entrance on stage and hold show control on the day, so that each sequence arrives at the right moment.'],
+          ['Do you take care of the host and the artists?', 'Yes. Host, artists and entertainment come together under one show direction.'],
+          ['Can one room hold the plenary and then the gala dinner?', 'Yes. We did it in Tangier: plenary sessions on stage by day, then the gala dinner in the same room in the evening, in front of a wall of LED artwork.'],
+          ['Do you also work for institutions and foundations?', 'Yes. Companies, institutions and foundations trust us with their ceremonies: graduations, closing ceremonies, awards.']
+        ],
+        fr: [
+          ['Écrivez-vous le déroulé de la cérémonie ?', 'Oui. Nous écrivons le fil conducteur, réglons chaque entrée en scène et tenons la régie le jour J, pour que chaque séquence arrive au bon moment.'],
+          ['Vous chargez-vous de l’animation et des artistes ?', 'Oui. Maître de cérémonie, artistes et animations sont réunis sous une même direction de spectacle.'],
+          ['Une même salle peut-elle accueillir la plénière puis le dîner de gala ?', 'Oui. Nous l’avons fait à Tanger : plénières sur scène en journée, puis dîner de gala le soir dans la même salle, devant un mur LED aux visuels artistiques.'],
+          ['Travaillez-vous aussi pour les institutions et les fondations ?', 'Oui. Entreprises, institutions et fondations nous confient leurs cérémonies : remises de diplômes, cérémonies de clôture, remises de prix.']
+        ]
+      },
       ideas: [
         { project: 'a-chance-to-reset',
           title: { en: 'Let the laureates speak', fr: 'La parole aux lauréats' },
@@ -90,7 +121,7 @@
       slug: { en: 'brand-corporate-receptions', fr: 'receptions-evenements-de-marque' },
       image: ['assets/img/reception-golden-spheres.jpg', 1280, 720],
       seo: {
-        title: { en: 'Brand Events and Corporate Receptions in Morocco | benevents agency', fr: 'Réceptions d’entreprise et événements de marque au Maroc | benevents agency' },
+        title: { en: 'Product Launches and Corporate Receptions in Morocco | benevents agency', fr: 'Lancement de produit et réceptions d’entreprise au Maroc | benevents agency' },
         desc: { en: 'Product launches, inaugurations, press events and networking receptions in Morocco: a concept, a set in the colours of your brand and a journey for your guests.',
                 fr: 'Lancements de produit, inaugurations, événements presse et réceptions au Maroc : un concept, une scénographie aux couleurs de votre marque et un parcours pour vos invités.' }
       },
@@ -103,6 +134,18 @@
       does: {
         en: ['Concept and theme of the evening', 'Set design in the brand’s colours', 'The guests’ journey, from welcome to goodbye', 'DJ, entertainment and games', 'Furniture, lighting and screens'],
         fr: ['Concept et thème de la soirée', 'Scénographie aux couleurs de la marque', 'Parcours des invités, de l’accueil au départ', 'DJ, animations et jeux', 'Mobilier, lumière et écrans']
+      },
+      faq: {
+        en: [
+          ['Can you organise a launch in our own showroom?', 'Yes. Showroom, industrial hall, reception room or fan zone: we fit the place to the event, with the furniture, the lighting, the screens and the entertainment that give it its atmosphere.'],
+          ['Will the set carry our brand identity?', 'Yes. We start from your world to imagine a concept and a set in your colours, down to the furniture.'],
+          ['Who takes care of the DJ and the entertainment?', 'We do. DJ, entertainment and games are part of what we take care of, like the journey of your guests from the welcome to the last conversation.']
+        ],
+        fr: [
+          ['Pouvez-vous organiser un lancement dans notre showroom ?', 'Oui. Showroom, halle industrielle, salle de réception ou fan zone : nous adaptons le lieu à l’événement, avec le mobilier, la lumière, les écrans et l’animation qui lui donnent son ambiance.'],
+          ['Le décor reprendra-t-il notre identité de marque ?', 'Oui. Nous partons de votre univers pour imaginer un concept et une scénographie à vos couleurs, jusqu’au mobilier.'],
+          ['Qui s’occupe du DJ et de l’animation ?', 'Nous. DJ, animations et jeux font partie de ce que nous prenons en charge, comme le parcours de vos invités, de l’accueil au dernier échange.']
+        ]
       },
       ideas: [
         { project: 'volvo-built-on-trust',
@@ -124,9 +167,9 @@
       slug: { en: 'stage-audiovisual-production', fr: 'scene-production-audiovisuelle' },
       image: ['assets/img/production-desk.jpg', 2000, 1125],
       seo: {
-        title: { en: 'Stage, LED Screens and Audiovisual Production in Morocco | benevents agency', fr: 'Scène, écrans LED et production audiovisuelle au Maroc | benevents agency' },
-        desc: { en: 'LED walls, stage design, lighting, sound, multi-camera filming and live direction for your events in Morocco, run by our own technical team.',
-                fr: 'Murs LED, scénographie, lumière, son, captation multicaméra et réalisation en direct pour vos événements au Maroc, assurés par notre propre équipe technique.' }
+        title: { en: 'Event Audiovisual Production in Morocco | benevents agency', fr: 'Production audiovisuelle événementielle au Maroc | benevents agency' },
+        desc: { en: 'Stage design, LED walls, sound, lighting, multi-camera filming and show control for your events in Morocco, run by our own technical team.',
+                fr: 'Scénographie, murs LED, sonorisation, éclairage, captation multicaméra et régie technique pour vos événements au Maroc, assurés par notre propre équipe.' }
       },
       text: {
         en: ['The technical side should not be seen: it should carry the message. Stage design and technical plans, LED walls and screen content, lighting and sound: we draw the set-up together with the concept, not after it.',
@@ -137,6 +180,42 @@
       does: {
         en: ['Stage design and technical plans', 'LED walls and screen content', 'Lighting and sound', 'Multi-camera filming', 'Live direction from our own control desk'],
         fr: ['Conception de la scène et plans techniques', 'Murs LED et contenus d’écran', 'Lumière et sonorisation', 'Captation multicaméra', 'Réalisation en direct depuis notre régie']
+      },
+      more: {
+        en: {
+          title: 'Renting equipment, or handing over a production',
+          intro: 'An LED screen, a console and speakers can be rented anywhere. What changes on the day is everything that was decided before they were switched on.',
+          points: [
+            ['Plans before equipment', 'Where the stage, the screens, the lighting and the sound go is drawn with the concept and the scenography, not after them.'],
+            ['Content made for the screen', 'Visuals are prepared for the LED walls that show them, at the same time as the stage.'],
+            ['One control desk', 'Sound, lighting and video are run together by our own team, from a single technical desk.'],
+            ['A written running order', 'Every sequence is planned: who comes on, when, with which image and which light.'],
+            ['Filming designed with the room', 'Cameras and live direction serve the room as well as the broadcast.']
+          ]
+        },
+        fr: {
+          title: 'Louer du matériel, ou confier une production',
+          intro: 'Un écran LED, une console et des enceintes se louent partout. Ce qui change le jour J, c’est tout ce qui a été décidé avant de les allumer.',
+          points: [
+            ['Des plans avant le matériel', 'L’implantation de la scène, des écrans, de l’éclairage et de la sonorisation est dessinée avec le concept et la scénographie, pas après.'],
+            ['Des contenus faits pour l’écran', 'Les visuels sont préparés pour les murs LED qui les diffusent, en même temps que la scène.'],
+            ['Une seule régie technique', 'Sonorisation, éclairage et vidéo sont pilotés ensemble par notre propre équipe, depuis une même régie.'],
+            ['Un déroulé écrit', 'Chaque séquence est prévue : qui entre, à quel moment, avec quelle image et quelle lumière.'],
+            ['La captation pensée avec la salle', 'Les caméras et la réalisation en direct servent la salle comme la diffusion.']
+          ]
+        }
+      },
+      faq: {
+        en: [
+          ['Do you have your own technical team?', 'Yes. Sound, light and video are run by our own team, from our control desk, from the first sketch to the last cue.'],
+          ['Do you prepare what is shown on the screens?', 'Yes. The LED walls and their content are designed together, at the same time as the stage.'],
+          ['Can you film the event and broadcast it live?', 'Yes: multi-camera filming and live direction, for the room as well as for the broadcast.']
+        ],
+        fr: [
+          ['Avez-vous votre propre équipe technique ?', 'Oui. Le son, la lumière et la vidéo sont pilotés par notre propre équipe, depuis notre régie, du premier croquis au dernier top.'],
+          ['Préparez-vous les contenus diffusés sur les écrans ?', 'Oui. Les murs LED et leurs contenus sont pensés ensemble, en même temps que la scène.'],
+          ['Pouvez-vous filmer l’événement et le diffuser en direct ?', 'Oui : captation multicaméra et réalisation en direct, pour la salle comme pour la diffusion.']
+        ]
       },
       ideas: [
         { project: 'femmes-en-jeu',

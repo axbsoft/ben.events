@@ -64,6 +64,19 @@
 .pg__notes li { padding: clamp(20px, 2.2vw, 30px); border-radius: var(--r); background: var(--card); border: 1px solid var(--line); font-size: clamp(15.5px, 1.15vw, 17.5px); line-height: 1.55; color: rgba(246, 245, 241, .84); }
 .pg__notes li::before { content: ""; display: block; width: 10px; height: 10px; margin-bottom: 16px; border-radius: 50%; background: var(--c1); }
 .pg__notes li:nth-child(3n + 2)::before { background: var(--c2); } .pg__notes li:nth-child(3n)::before { background: var(--c3); }
+/* the same cards, each with a name above its sentence, as many to a row as fit */
+.pg__notes--named { grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); }
+@media (min-width: 1200px) { .pg__notes--n5 { grid-template-columns: repeat(5, minmax(0, 1fr)); } }      /* five on one row where there is room */
+.pg__notes--named b { display: block; margin-bottom: 6px; font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -.02em; line-height: 1.25; color: var(--text); }
+/* questions and answers: each opens on a tap, without any script. The plus sign is drawn, not typed. */
+.pg__faq { max-width: 980px; border-top: 1px solid var(--line); }
+.pg__faq details { border-bottom: 1px solid var(--line); }
+.pg__faq summary { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 20px 0; cursor: pointer; list-style: none; font-family: var(--display); font-weight: 500; font-size: clamp(18px, 1.5vw, 23px); letter-spacing: -.02em; line-height: 1.25; transition: color .3s; }
+.pg__faq summary::-webkit-details-marker { display: none; }
+.pg__faq summary::after { content: ""; flex: none; width: 14px; height: 14px; background: linear-gradient(currentColor, currentColor) center / 100% 1.6px no-repeat, linear-gradient(currentColor, currentColor) center / 1.6px 100% no-repeat; transition: transform .45s var(--ease); }
+.pg__faq details[open] summary::after { transform: rotate(45deg); }
+.pg__faq summary:hover, .pg__faq summary:focus-visible { color: var(--c1); }
+.pg__faq p { max-width: 68ch; padding: 0 0 22px; font-size: clamp(16px, 1.2vw, 18.5px); line-height: 1.65; color: rgba(246, 245, 241, .82); }
 /* the logos of clients, key figures, what clients said, the team */
 .pg__logos { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
 .pg__logos li { height: clamp(84px, 8.4vw, 110px); padding: 18px 26px; border-radius: 20px; background: #fff; }
