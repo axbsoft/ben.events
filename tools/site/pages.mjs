@@ -182,7 +182,7 @@ export const AGENCY = {
     slug: 'agency', name: 'The agency',
     seo: ['About benevents agency | Event Design and Production in Morocco', 'benevents agency designs and produces corporate events in Casablanca, Rabat, Marrakech and across Morocco: one team for the concept, the stage and the audiovisual production.'],
     title: ['The agency that designs your event', 'and builds it.'],
-    oneTeam: 'One team, from the idea to the last cue',
+    oneTeam: 'Why one team',
     text: [
       'Design and production are often two jobs, given to two companies. We keep them in the same hands. The team that draws your stage is the one that lights it, fills its screens and runs it from the control desk on the day: fewer go-betweens, faster decisions, and no gap between the sketch and the room.',
       'Each project has one dedicated producer, your contact from the first conversation to the final toast.'
@@ -197,7 +197,7 @@ export const AGENCY = {
     slug: 'agence', name: 'L’agence',
     seo: ['L’agence benevents : conception et production d’événements au Maroc', 'benevents agency conçoit et produit des événements d’entreprise à Casablanca, Rabat, Marrakech et partout au Maroc : une seule équipe pour le concept, la scène et l’audiovisuel.'],
     title: ['L’agence qui conçoit votre événement', 'et le produit.'],
-    oneTeam: 'Une seule équipe, de l’idée au dernier top',
+    oneTeam: 'Pourquoi une seule équipe',
     text: [
       'La conception et la production sont souvent deux métiers, confiés à deux sociétés. Chez nous, ils restent entre les mêmes mains. L’équipe qui dessine votre scène est celle qui l’éclaire, qui prépare ses contenus et qui la pilote depuis la régie le jour J : moins d’intermédiaires, des décisions plus rapides, et aucun écart entre le croquis et la salle.',
       'Chaque projet a un chef de projet dédié, votre interlocuteur de la première conversation au dernier toast.'

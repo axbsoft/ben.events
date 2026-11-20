@@ -232,6 +232,22 @@
       a.hidden = !number;
       if (number) a.href = 'https://wa.me/' + number + '?text=' + encodeURIComponent((I18N.js[lang] || I18N.js.en).wa);
     });
+    if (mbar) {
+      mbar.hidden = !number;
+      $$('[data-tel]', mbar).forEach(function (a) { a.href = 'tel:+' + number; });
+    }
+  }
+  // On phones, a bar with WhatsApp and a call stays at the bottom of the screen. It comes once the first screen
+  // is passed, and steps aside where the page has its own ways to reach us: the contact section and the footer.
+  var mbar = $('.mbar'), mbarWhy = { top: true, contact: false, foot: false };
+  if (mbar && hasIO) {
+    var mbarSet = function () { mbar.classList.toggle('is-away', mbarWhy.top || mbarWhy.contact || mbarWhy.foot); };
+    var mbarWatch = function (node, key, test, options) {
+      if (node) new IntersectionObserver(function (es) { mbarWhy[key] = test(es[es.length - 1]); mbarSet(); }, options).observe(node);
+    };
+    mbarWatch($('.hero'), 'top', function (e) { return e.intersectionRatio > .4; }, { threshold: [0, .4, 1] });
+    mbarWatch($('#contact'), 'contact', function (e) { return e.isIntersecting; }, { rootMargin: '0px 0px -30% 0px' });
+    mbarWatch($('.footer__top'), 'foot', function (e) { return e.isIntersecting; }, { rootMargin: '0px 0px -80px 0px' });
   }
   // the floating button steps aside where the footer shows its own WhatsApp link
   var waFloat = $('.wa'), footTop = $('.footer__top');

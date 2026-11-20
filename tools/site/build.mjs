@@ -95,7 +95,7 @@ const W = {
     skip: 'Skip to content', nav: 'Primary', language: 'Language', crumbs: 'You are here', homeName: 'Home', cta: 'Start a project',
     talk: 'Talk to us about your event', craft: 'What we create', does: 'What we take care of', ideas: 'Ideas, seen in our projects', see: 'See the project:',
     more: 'More events of this kind', others: 'Our other services', work: 'Portfolio', allWork: 'All projects',
-    workTitle: ['Selected', 'events'], workLede: 'Conventions, forums, ceremonies, gala evenings and brand events designed and produced by benevents agency in Morocco.',
+    workTitle: ['Events produced', 'in Morocco'], workLede: 'Conventions, forums, ceremonies, gala evenings and brand events designed and produced by benevents agency in Morocco.',
     workSeo: ['Corporate Events Produced in Morocco: Our Projects | benevents agency', 'Conventions, forums, ceremonies, gala evenings and brand events designed and produced by benevents agency in Casablanca, Rabat, Tangier, Marrakech and across Morocco.'],
     project: 'project by benevents agency', crafts: 'Services involved', photos: (t, i, n) => `${t}: photo ${i} of ${n}`, prev: 'Previous project', next: 'Next project',
     endTitle: 'An event like this in mind?', endText: 'Give us the date, the place and the number of guests: we will come back with first ideas.',
@@ -103,13 +103,13 @@ const W = {
     fServices: 'Services', fAgency: 'The agency', fContact: 'Contact', approach: 'Our approach', contact: 'Contact', rights: 'All rights reserved.',
     privacy: 'Privacy policy', terms: 'Terms of use', deck: 'Our presentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency on Instagram', onLinkedin: 'benevents agency on LinkedIn',
     photoOf: t => `Photo of the event: ${t}`, serviceImg: t => `${t}: an event produced by benevents agency`,
-    cities: 'Where we work', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
+    quick: 'Quick contact', call: 'Call', cities: 'Where we work', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
   },
   fr: {
     skip: 'Aller au contenu', nav: 'Principal', language: 'Langue', crumbs: 'Vous êtes ici', homeName: 'Accueil', cta: 'Démarrer un projet',
     talk: 'Parlons de votre événement', craft: 'Ce que nous créons', does: 'Ce que nous prenons en charge', ideas: 'Des idées, vues dans nos réalisations', see: 'Voir le projet :',
     more: 'D’autres événements de ce type', others: 'Nos autres savoir-faire', work: 'Réalisations', allWork: 'Toutes les réalisations',
-    workTitle: ['Événements', 'choisis'], workLede: 'Conventions, forums, cérémonies, soirées de gala et événements de marque conçus et produits par benevents agency au Maroc.',
+    workTitle: ['Événements réalisés', 'au Maroc'], workLede: 'Conventions, forums, cérémonies, soirées de gala et événements de marque conçus et produits par benevents agency au Maroc.',
     workSeo: ['Événements d’entreprise réalisés au Maroc : nos réalisations | benevents agency', 'Conventions, forums, cérémonies, soirées de gala et événements de marque conçus et produits par benevents agency à Casablanca, Rabat, Tanger, Marrakech et partout au Maroc.'],
     project: 'réalisation benevents agency', crafts: 'Savoir-faire mobilisés', photos: (t, i, n) => `${t} : photo ${i} sur ${n}`, prev: 'Réalisation précédente', next: 'Réalisation suivante',
     endTitle: 'Un événement de ce type en tête ?', endText: 'Donnez-nous la date, le lieu et le nombre d’invités : nous revenons vers vous avec de premières idées.',
@@ -117,7 +117,7 @@ const W = {
     fServices: 'Savoir-faire', fAgency: 'L’agence', fContact: 'Contact', approach: 'Notre approche', contact: 'Contact', rights: 'Tous droits réservés.',
     privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation', deck: 'Notre présentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency sur Instagram', onLinkedin: 'benevents agency sur LinkedIn',
     photoOf: t => `Photo de l’événement : ${t}`, serviceImg: t => `${t} : un événement produit par benevents agency`,
-    cities: 'Nos villes', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
+    quick: 'Contact rapide', call: 'Appeler', cities: 'Nos villes', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
   }
 };
 
@@ -224,7 +224,9 @@ write('fr.html', french(home));
 const BRAND = '<span class="brand"><span class="brand__w"><b>ben</b>events</span><span class="brand__bar"><i></i><i></i><i></i><i></i></span><span class="brand__a">agency</span></span>';
 const ICON = {
   instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="is-dot" cx="17.1" cy="6.9" r="1"/></svg>',
-  linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="is-dot" cx="6.6" cy="6.6" r="1.25"/><path d="M6.6 10.4v7.4M11.2 17.8v-7.4M11.2 14.1c0-2.3 1.2-3.8 3.1-3.8s3 1.4 3 3.8v3.7"/></svg>'
+  linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="is-dot" cx="6.6" cy="6.6" r="1.25"/><path d="M6.6 10.4v7.4M11.2 17.8v-7.4M11.2 14.1c0-2.3 1.2-3.8 3.1-3.8s3 1.4 3 3.8v3.7"/></svg>',
+  whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path class="wa-ring" d="M12 3a9 9 0 0 0-7.75 13.58L3 21l4.56-1.2A9 9 0 1 0 12 3z"/><path class="wa-phone" d="M9.3 7.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.300s1 2.700 1.100 2.900c.1.200 1.900 3 4.700 4.100 2.300.9 2.800.7 3.300.7s1.600-.7 1.800-1.300c.2-.6.2-1.200.2-1.300-.1-.1-.3-.2-.5-.3l-1.900-.9c-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.100-.4-2.100-1.300-.8-.7-1.300-1.600-1.500-1.800-.1-.3 0-.4.1-.5l.4-.5c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5l-.8-1.900z"/></svg>',
+  phone: '<svg class="mbar__tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 3.6h2.9l1.5 4.1-2.1 1.5a12.4 12.4 0 0 0 6.1 6.1l1.5-2.1 4.1 1.5v2.9a2 2 0 0 1-2.2 2A16.6 16.6 0 0 1 4.4 5.8a2 2 0 0 1 2-2.2z"/></svg>'
 };
 // a photo, with its lighter copies when tools/site/images.py has made them: the browser takes the one that fits
 const COPIES = [480, 960];
@@ -331,6 +333,11 @@ ${main}
     <nav aria-label="Legal"><a href="${U.legal(l, 'privacy')}">${esc(w.privacy)}</a><a href="${U.legal(l, 'terms')}">${esc(w.terms)}</a></nav>
   </div>
 </footer>
+<!-- on phones: WhatsApp and a call, fixed at the bottom of the screen -->
+<nav class="mbar" aria-label="${att(w.quick)}">
+  <a class="mbar__wa" href="${WA}" target="_blank" rel="noopener">${ICON.whatsapp}<span>WhatsApp</span></a>
+  <a class="mbar__call" href="tel:${PHONE.replace(/\s/g, '')}">${ICON.phone}<span>${esc(w.call)}</span></a>
+</nav>
 <script src="/assets/js/stats.js"></script>
 <script>document.querySelectorAll('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });</script>
 </body>
@@ -611,7 +618,7 @@ ${cta(l, cw.endTitle(name), w.endText)}
   <div class="pg__does pg__does--said">
     <h2 class="pg__h">${esc(a.values)}</h2>
     <ul>
-      ${[1, 2, 3].map(k => `<li><span><b>${esc(t['about.k' + k])}</b>${esc(t['about.v' + k])}</span></li>`).join('\n      ')}
+      ${[1, 2, 3, 4].map(k => `<li><span><b>${esc(t['about.k' + k])}</b>${esc(t['about.v' + k])}</span></li>`).join('\n      ')}
     </ul>
   </div>
 </section>${FIGURES.length ? `

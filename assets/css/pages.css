@@ -157,6 +157,9 @@
   .pg__pn { grid-template-columns: 1fr 1fr; }
   .pg__all { grid-column: 1 / -1; grid-row: 2; justify-self: center; }
 }
+@media (max-width: 700px) {
+  .pfoot__base { padding-bottom: 96px; }      /* the bar of the phones never covers the last line */
+}
 @media (max-width: 560px) {
   .pfoot__in { grid-template-columns: 1fr; }
   .pg__pn { grid-template-columns: 1fr; }
