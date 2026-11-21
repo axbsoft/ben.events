@@ -24,6 +24,7 @@
   --arrow-ne: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='4.5 4.5 15 15' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8.5 7H17v8.5'/%3E%3C/svg%3E");
   --arrow-e: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='3 5 18 14' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12h15M13.5 6l6 6-6 6'/%3E%3C/svg%3E");
   --arrow-n: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19.5v-15M6 10.5l6-6 6 6'/%3E%3C/svg%3E");
+  --cal: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.5' y='5' width='17' height='15.5' rx='3.5'/%3E%3Cpath d='M3.5 10.5h17M8 3v4M16 3v4'/%3E%3C/svg%3E");
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -79,6 +80,14 @@ ul, ol { padding: 0; list-style: none; }
 .btn--sm { padding: 11px 18px; font-size: 13.5px; }
 .btn--ghost { padding: 15px 26px; background: rgba(255, 255, 255, .06); color: var(--text); border: 1px solid var(--line); transition: transform .5s var(--ease), box-shadow .5s, color .35s, border-color .35s; }
 .btn--ghost:hover, .btn--ghost:focus-visible { color: #0a0a0a; border-color: transparent; }
+.btn--sm.btn--ghost { padding: 10px 17px; }
+/* "Book a call": the buttons that open the calendar (assets/js/booking.js) carry a small calendar in place of the arrow */
+.btn--book span { display: inline-flex; align-items: center; }
+.btn--book span::after { display: none; }
+.btn--book span::before { content: ""; flex: none; width: 1.12em; height: 1.12em; margin-right: 9px; background: currentColor; -webkit-mask: var(--cal) center / contain no-repeat; mask: var(--cal) center / contain no-repeat; }
+[data-book].is-waiting { cursor: progress; opacity: .72; }
+.btn--book.is-waiting span::before { animation: bookwait 1s ease-in-out infinite; }
+@keyframes bookwait { 50% { opacity: .2; } }
 @keyframes sheen { to { background-position: -200% 0; } }
 
 .link-arrow { display: inline-flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 500; padding: 6px 0; }
@@ -143,6 +152,12 @@ ul, ol { padding: 0; list-style: none; }
 /* the call to action of the header wears the brand colours at rest; hovering only sets them in motion */
 .nav .btn::before { opacity: 1; background-size: 125% 100%; animation: flow 3s linear infinite paused; }
 .nav .btn:hover::before, .nav .btn:focus-visible::before { animation-play-state: running; }
+.nav .btn--ghost::before { opacity: 0; }
+.nav .btn--ghost:hover::before, .nav .btn--ghost:focus-visible::before { opacity: 1; }
+/* the ghost "Book a call" of the header shows where there is room for it, on wide screens and on tablets; in between, and on phones,
+   the same button is in the menu (home page), in the contact section and in the footer */
+.nav .btn--book { display: none; }
+@media (min-width: 1241px), (min-width: 701px) and (max-width: 1100px) { .nav .btn--book { display: inline-flex; } }
 @keyframes flow { to { background-position: -500% 0; } }
 .lang { display: flex; align-items: center; gap: 2px; font-size: 13px; font-weight: 500; color: var(--mute); padding: 4px; border-radius: 99px; border: 1px solid var(--line); }
 .lang span { display: none; }
@@ -168,6 +183,7 @@ ul, ol { padding: 0; list-style: none; }
 .menu-open .menu nav a:nth-child(3) { transition-delay: .39s; } .menu-open .menu nav a:nth-child(4) { transition-delay: .46s; }
 .menu-open .menu nav a:nth-child(5) { transition-delay: .53s; }
 .lang--menu { align-self: flex-start; font-size: 14px; }
+.menu__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; }
 
 /* ---------- Media ---------- */
 .media { position: absolute; inset: -8%; background-color: var(--card-2); background-size: cover; background-position: center; will-change: transform; }
@@ -431,6 +447,7 @@ ul, ol { padding: 0; list-style: none; }
 .contact__grid { position: relative; z-index: 1; max-width: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 100px); align-items: start; padding: clamp(40px, 7vw, 110px) calc(var(--pad) - var(--gap)); border-radius: var(--r); background: rgba(20, 20, 24, .72); border: 1px solid var(--line); -webkit-backdrop-filter: blur(30px); backdrop-filter: blur(30px); }
 .contact .h1 { font-size: clamp(42px, 5.4vw, 92px); margin-bottom: 26px; max-width: 11ch; }
 .contact__direct { margin-top: 40px; }
+.contact__book { display: flex; width: fit-content; margin-bottom: 30px; }
 .contact__mail { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 2.6vw, 42px); background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 4px; transition: background-size .6s var(--ease); }
 .contact__mail:hover { background-size: 0 1px; background-position: 100% 100%; }
 .form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -495,6 +512,9 @@ ul, ol { padding: 0; list-style: none; }
 .footer__col { display: flex; flex-direction: column; align-items: flex-start; }
 .footer__col a { font-size: 17px; font-weight: 500; padding: 6px 0; overflow-wrap: anywhere; transition: color .3s, transform .5s var(--ease); }
 .footer__col a:hover { color: var(--c1); transform: translateX(6px); }
+.footer__col button { padding: 6px 0; font-size: 17px; font-weight: 500; text-align: left; transition: color .3s, transform .5s var(--ease); }
+.footer__col button:hover, .footer__col button:focus-visible { color: var(--c1); transform: translateX(6px); }
+.footer__col button.is-waiting { opacity: .6; }
 .footer__social { display: flex; gap: 10px; margin-top: 16px; }
 .footer__col .footer__social a { width: 46px; height: 46px; padding: 0; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); background: rgba(255, 255, 255, .05); transition: background .3s, color .3s, border-color .3s, transform .5s var(--ease); }
 .footer__col .footer__social a:hover, .footer__col .footer__social a:focus-visible { background: var(--text); color: #0a0a0a; border-color: transparent; transform: translateY(-3px); }
@@ -764,7 +784,7 @@ a.sv__idea:hover img { transform: scale(1.05); }
   .sv .pj__back span { overflow: hidden; text-overflow: ellipsis; }
   .figures { grid-template-columns: 1fr 1fr; gap: 10px; }
   .quotes { gap: 10px; margin-top: 10px; }
-  .footer__col a { padding: 8px 0; font-size: 16px; }
+  .footer__col a, .footer__col button { padding: 8px 0; font-size: 16px; }
   .footer__col a[data-mail] { font-size: 15px; }
   .footer__ghost { -webkit-text-stroke-width: 1.5px; }
   .footer__base { padding: 16px 20px 18px; }

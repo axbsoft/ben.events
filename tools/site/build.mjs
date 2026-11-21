@@ -285,6 +285,7 @@ ${STATS}
     <div class="lang" role="group" aria-label="${att(w.language)}">
       ${LANGS.map(k => k === l ? `<a href="${alt[k]}" aria-current="true" lang="${k}">${k.toUpperCase()}</a>` : `<a href="${alt[k]}" hreflang="${k}" lang="${k}">${k.toUpperCase()}</a>`).join('\n      <span>·</span>\n      ')}
     </div>
+    <button class="btn btn--sm btn--ghost btn--book" type="button" data-book aria-haspopup="dialog"><span>${esc(t['book.cta'])}</span></button>
     <a class="btn btn--sm" href="${U.at(l, '#contact')}"><span>${esc(w.cta)}</span></a>
   </div>
 </header>
@@ -322,6 +323,7 @@ ${main}
       <h2>${esc(w.fContact)}</h2>
       <a href="mailto:${MAIL}">${MAIL}</a>
       <a href="${WA}" target="_blank" rel="noopener">${esc(w.whatsapp)} · <span class="pfoot__tel">${PHONE}</span></a>
+      <button class="pfoot__book" type="button" data-book aria-haspopup="dialog">${esc(t['book.cta'])}</button>
       <div class="footer__social">
         <a href="${SOCIAL.instagram}" target="_blank" rel="noopener" aria-label="${att(w.onInstagram)}">${ICON.instagram}</a>
         <a href="${SOCIAL.linkedin}" target="_blank" rel="noopener" aria-label="${att(w.onLinkedin)}">${ICON.linkedin}</a>
@@ -339,6 +341,7 @@ ${main}
   <a class="mbar__call" href="tel:${PHONE.replace(/\s/g, '')}">${ICON.phone}<span>${esc(w.call)}</span></a>
 </nav>
 <script src="/assets/js/stats.js"></script>
+<script src="/assets/js/booking.js"></script>
 <script>document.querySelectorAll('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>
@@ -354,6 +357,7 @@ const cta = (l, title, text) => `<section class="pj__cta pg__cta">
     </div>
     <div class="pj__cta-side">
       <a class="btn" href="${U.at(l, '#contact')}"><span>${esc(W[l].talk)}</span></a>
+      <button class="btn btn--ghost btn--book" type="button" data-book aria-haspopup="dialog"><span>${esc(T[l]['book.cta'])}</span></button>
       <a class="pj__mail" href="mailto:${MAIL}">${MAIL}</a>
     </div>
   </div>

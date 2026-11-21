@@ -10,6 +10,7 @@
      whatsapp_click         a WhatsApp link was pressed (where on the page)
      email_click            the e-mail address was pressed (where on the page)
      phone_click            a phone number was pressed
+     call_click             a "Book a call" button was pressed (where on the page); the calendar itself is Lunacal's, see assets/js/booking.js
      project_open           a project was opened on the home page (which one)
      service_open           a service was opened on the home page (which one)
      film_play              the film was started

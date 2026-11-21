@@ -146,6 +146,9 @@
 .pfoot__col h2 { margin-bottom: 12px; font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
 .pfoot__col > a { padding: 5px 0; font-size: 16px; font-weight: 500; overflow-wrap: anywhere; transition: color .3s; }
 .pfoot__col > a:hover, .pfoot__col > a:focus-visible { color: var(--c1); }
+.pfoot__col > button { padding: 5px 0; font-size: 16px; font-weight: 500; text-align: left; transition: color .3s; }
+.pfoot__col > button:hover, .pfoot__col > button:focus-visible { color: var(--c1); }
+.pfoot__col > button.is-waiting { opacity: .6; }
 .pfoot__tel { white-space: nowrap; }
 .pfoot .footer__social { display: flex; gap: 10px; margin-top: 14px; }
 .pfoot .footer__social a { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); background: rgba(255, 255, 255, .05); transition: background .3s, color .3s; }

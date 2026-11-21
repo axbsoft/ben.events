@@ -25,6 +25,7 @@ window.BEN_I18N = {
     'nav.process': 'Approche',
     'nav.contact': 'Contact',
     'nav.cta': 'Démarrer un projet',
+    'book.cta': 'Réserver un appel',
 
     'hero.eyebrow': 'Agence événementielle au Maroc',
     'hero.l1': 'Nous composons',

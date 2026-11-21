@@ -25,6 +25,7 @@ PAGES = {
             ('What we collect', [
                 ['<b>When you write to us through the contact form:</b> your name, your email address, your phone number if you give it, the type of event, the date you have in mind, the number of guests, the city of the event and the budget range if you give them, and your message. With them come the language of the site, the page the enquiry was sent from, the project it refers to if any, and the date and time it was sent.',
                  '<b>When you contact us by email, by phone or on WhatsApp:</b> the information you choose to give us.',
+                 '<b>When you book a call with us:</b> what you enter in the booking calendar (your name, your email address, the time you choose and anything you add). The calendar is run by Lunacal, which sends us these details so that we can hold the call.',
                  '<b>When you have your first name written at one of our calligraphy activities:</b> your first name, your email address if you give it, and whether you agreed to be contacted by the brand hosting the event. Your address is used to send you your calligraphy; it is passed on to that brand only if you agreed. The page the email leads to draws your first name from its own address and records nothing. If the bookmark carries a QR code, scanning it opens a page of ours that counts the scan, like any visit to this site and without identifying you, then takes you to the brand’s offer.',
                  '<b>When you browse the site:</b> like any website, our hosting provider records technical data (IP address, type of browser, pages requested, date and time) needed to deliver the pages and keep them secure.'],
                 'We ask for no sensitive data, and the site is not intended for minors.']),
@@ -32,7 +33,7 @@ PAGES = {
                 'Only to answer your enquiry, prepare a proposal or a quote, and follow our relationship if a project goes ahead. We do not sell or rent your data, and we do not use it to send you advertising without your agreement.',
                 'This rests on your own request: you are the one getting in touch with us.']),
             ('Who has access to it', [
-                'The people at the agency who handle your enquiry, and our technical providers: the hosting provider of the site (Vercel Inc.), through which the form passes, and the tools we use to receive and follow enquiries (email, contact management). If preparing your event means passing some information on to a partner (a venue, a caterer, a technical crew), we do so for that purpose only.',
+                'The people at the agency who handle your enquiry, and our technical providers: the hosting provider of the site (Vercel Inc.), through which the form passes, and the tools we use to receive and follow enquiries (email, contact management, the calendar for booking calls). If preparing your event means passing some information on to a partner (a venue, a caterer, a technical crew), we do so for that purpose only.',
                 'Some of these providers are based outside Morocco, in the United States in particular: your data may therefore be processed there.']),
             ('How long we keep it', [
                 'For as long as it takes to handle your enquiry and follow our exchanges, then for the length of our relationship if we work together, and beyond that where the law requires it (accounting records, for example). You can ask us to delete it at any time.']),
@@ -43,6 +44,7 @@ PAGES = {
                 ['audience measurement is provided by Rybbit (rybbit.io);',
                  'the typefaces are supplied by Google Fonts;',
                  'the film is only loaded from its video host (livid.com) if you press play;',
+                 'the calendar that opens when you press “Book a call” is provided by Lunacal (lunacal.ai): it is only loaded when you point at, touch or press one of these buttons, and what you enter in it is handled by Lunacal under its own rules;',
                  'the WhatsApp, Instagram and LinkedIn links only take you there if you click them.']]),
             ('Photos and videos of our events', [
                 'The site shows images of events we have produced. If you recognise yourself in one of them and would like it removed, write to us and we will take it down.']),
@@ -60,6 +62,7 @@ PAGES = {
             ('Ce que nous recueillons', [
                 ['<b>Quand vous nous écrivez par le formulaire de contact :</b> votre nom, votre adresse e-mail, votre téléphone si vous l’indiquez, le type d’événement, la date envisagée, le nombre d’invités, la ville de l’événement et le budget envisagé si vous les indiquez, et votre message. S’y ajoutent la langue du site, la page d’où la demande est partie, la réalisation à laquelle elle se rapporte le cas échéant, ainsi que la date et l’heure d’envoi.',
                  '<b>Quand vous nous contactez par e-mail, par téléphone ou sur WhatsApp :</b> les informations que vous choisissez de nous donner.',
+                 '<b>Quand vous réservez un appel avec nous :</b> ce que vous saisissez dans le calendrier de réservation (votre nom, votre adresse e-mail, le créneau choisi et ce que vous y ajoutez). Le calendrier est exploité par Lunacal, qui nous transmet ces informations pour que nous puissions tenir l’appel.',
                  '<b>Quand vous faites tracer votre prénom lors d’une de nos animations de calligraphie :</b> votre prénom, votre adresse e-mail si vous la donnez, et votre accord ou non pour être recontacté(e) par la marque qui reçoit. Votre adresse sert à vous envoyer votre calligraphie ; elle n’est transmise à cette marque que si vous avez donné votre accord. La page vers laquelle conduit l’e-mail trace votre prénom à partir de sa propre adresse et n’enregistre rien. Si le marque-page porte un code QR, le scanner ouvre une page de notre site qui compte le scan, comme toute visite de ce site et sans vous identifier, puis vous conduit vers l’offre de la marque.',
                  '<b>Quand vous consultez le site :</b> comme pour tout site, notre hébergeur enregistre des données techniques (adresse IP, type de navigateur, pages demandées, date et heure) nécessaires à l’affichage des pages et à leur sécurité.'],
                 'Nous ne demandons aucune donnée sensible, et le site ne s’adresse pas aux mineurs.']),
@@ -67,7 +70,7 @@ PAGES = {
                 'Uniquement à répondre à votre demande, à préparer une proposition ou un devis, puis à suivre notre relation si un projet se concrétise. Nous ne vendons ni ne louons vos données, et nous ne les utilisons pas pour vous adresser de la publicité sans votre accord.',
                 'Ce traitement repose sur votre propre demande : c’est vous qui prenez contact avec nous.']),
             ('Qui y a accès', [
-                'Les personnes de l’agence qui traitent votre demande, et nos prestataires techniques : l’hébergeur du site (Vercel Inc.), par lequel transite le formulaire, et les outils que nous utilisons pour recevoir et suivre les demandes (messagerie, gestion des contacts). Si la préparation de votre événement demande de transmettre certaines informations à un partenaire (un lieu, un traiteur, une équipe technique), nous le faisons dans ce seul but.',
+                'Les personnes de l’agence qui traitent votre demande, et nos prestataires techniques : l’hébergeur du site (Vercel Inc.), par lequel transite le formulaire, et les outils que nous utilisons pour recevoir et suivre les demandes (messagerie, gestion des contacts, calendrier de réservation des appels). Si la préparation de votre événement demande de transmettre certaines informations à un partenaire (un lieu, un traiteur, une équipe technique), nous le faisons dans ce seul but.',
                 'Certains de ces prestataires sont établis hors du Maroc, notamment aux États-Unis : vos données peuvent donc y être traitées.']),
             ('Combien de temps nous les gardons', [
                 'Le temps de traiter votre demande et de suivre nos échanges, puis pendant la durée de notre relation si nous travaillons ensemble, et au-delà lorsque la loi l’impose (pièces comptables, par exemple). Vous pouvez nous demander de les supprimer à tout moment.']),
@@ -78,6 +81,7 @@ PAGES = {
                 ['la mesure d’audience est assurée par Rybbit (rybbit.io) ;',
                  'les polices de caractères sont fournies par Google Fonts ;',
                  'le film n’est chargé depuis son hébergeur vidéo (livid.com) que si vous appuyez sur lecture ;',
+                 'le calendrier qui s’ouvre quand vous appuyez sur « Réserver un appel » est fourni par Lunacal (lunacal.ai) : il n’est chargé que si vous pointez, touchez ou appuyez sur l’un de ces boutons, et ce que vous y saisissez est traité par Lunacal selon ses propres règles ;',
                  'les liens WhatsApp, Instagram et LinkedIn ne vous y conduisent que si vous cliquez dessus.']]),
             ('Photos et vidéos de nos événements', [
                 'Le site montre des images d’événements que nous avons produits. Si vous vous reconnaissez sur l’une d’elles et souhaitez son retrait, écrivez-nous : nous la retirerons.']),
@@ -110,7 +114,7 @@ PAGES = {
             ('Private presentations', [
                 'Some pages are reserved for our clients and protected by a code. Their content is confidential: it is intended only for the people the code was given to, and must not be shared or published without our agreement.']),
             ('Links to other sites', [
-                'The site links to outside services (WhatsApp, Instagram, LinkedIn, a video host). We control neither their content nor their rules, and cannot be held responsible for them.']),
+                'The site links to outside services (WhatsApp, Instagram, LinkedIn, a booking calendar, a video host). We control neither their content nor their rules, and cannot be held responsible for them.']),
             ('Liability', [
                 'We take care that the information published is accurate and that the site is available, without being able to guarantee it. Within the limits allowed by law, the agency cannot be held liable for an error, an interruption or any damage resulting from the use of the site.']),
             ('Personal data', [
@@ -134,7 +138,7 @@ PAGES = {
             ('Présentations privées', [
                 'Certaines pages sont réservées à nos clients et protégées par un code. Leur contenu est confidentiel : il est destiné aux seules personnes à qui le code a été remis, et ne doit être ni partagé ni diffusé sans notre accord.']),
             ('Liens vers d’autres sites', [
-                'Le site renvoie vers des services extérieurs (WhatsApp, Instagram, LinkedIn, un hébergeur vidéo). Nous n’en maîtrisons ni le contenu ni les règles, et ne pouvons en être tenus responsables.']),
+                'Le site renvoie vers des services extérieurs (WhatsApp, Instagram, LinkedIn, un calendrier de réservation, un hébergeur vidéo). Nous n’en maîtrisons ni le contenu ni les règles, et ne pouvons en être tenus responsables.']),
             ('Responsabilité', [
                 'Nous veillons à l’exactitude des informations publiées et à la disponibilité du site, sans pouvoir les garantir. Dans les limites permises par la loi, l’agence ne peut être tenue responsable d’une erreur, d’une interruption ou d’un dommage résultant de l’utilisation du site.']),
             ('Données personnelles', [
