@@ -16,7 +16,9 @@
      example: { text: { en: '…', fr: '…' }, name: 'First name Last name', role: { en: 'Marketing Director', fr: 'Directrice marketing' }, company: 'Company' }
 
    To show a client what their words will look like before any quote is here, open the home page with
-   ?apercu=avis at the end of its address (www.ben.events/fr?apercu=avis): three example reviews appear,
-   marked as examples. Visitors never see them, and they are gone as soon as a real quote is listed below. */
+   ?apercu=avis at the end of its address (www.ben.events/fr?apercu=avis): three drafts of reviews appear,
+   marked as drafts, with no person named (their texts are in assets/js/main.js). Visitors never see them,
+   and they are gone as soon as a real quote is listed below.
+   A draft becomes a quote here once its client has agreed to it and given the name and role to sign it with. */
 window.BEN_FIGURES = [];
 window.BEN_QUOTES = [];

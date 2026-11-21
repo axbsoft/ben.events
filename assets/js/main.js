@@ -81,23 +81,24 @@
   /* ---------- Key figures and client quotes, built from voices.js ---------- */
   var voices = $('.voices'), figBox = $('.figures'), quoteBox = $('.quotes');
   var FIGURES = (window.BEN_FIGURES || []).slice(0, 4), QUOTES = window.BEN_QUOTES || [];
-  // A preview for the agency only. With ?apercu=avis at the end of the address, example reviews show where the
-  // real ones will go, each marked as an example, to show a client what their words will look like. Visitors of
-  // the site never see them, and as soon as voices.js holds a real quote, the examples are gone for good.
+  // A preview for the agency only. With ?apercu=avis at the end of the address, drafts of reviews show where the
+  // real ones will go, each marked as a draft: texts proposed to a client, who has not yet agreed to them. No
+  // person is named. Visitors of the site never see them, and as soon as voices.js holds a real quote, the
+  // drafts are gone for good.
   var SAMPLE = !QUOTES.length && /[?&]apercu=avis\b/.test(location.search);
-  var SAMPLE_WORDS = { fr: ['Exemple', 'Aperçu : ces avis sont des exemples. Ils ne s’affichent qu’avec ce lien, jamais pour les visiteurs du site.'],
-    en: ['Example', 'Preview: these reviews are examples. They show only with this link, never to visitors of the site.'] };
+  var SAMPLE_WORDS = { fr: ['Brouillon', 'Aperçu : ces avis sont des brouillons, en attente de l’accord de chaque client. Ils ne s’affichent qu’avec ce lien, jamais pour les visiteurs du site.'],
+    en: ['Draft', 'Preview: these reviews are drafts, awaiting each client’s approval. They show only with this link, never to visitors of the site.'] };
   if (SAMPLE) {
     QUOTES = [
-      { text: { fr: 'Scène, écrans, régie : l’équipe a tout pris en main et nous avons pu nous consacrer à nos invités. Le jour J, tout s’est déroulé comme écrit.',
-          en: 'Stage, screens, control desk: the team took care of everything and we could give our time to our guests. On the day, everything ran as written.' },
-        name: 'Prénom Nom', role: { fr: 'Directrice de la communication · Société', en: 'Communications Director · Company' } },
-      { text: { fr: 'Une équipe à l’écoute, une scénographie à l’image de notre marque et un déroulé tenu à la minute. Nous leur confierons la prochaine édition.',
-          en: 'A team that listens, a set that looks like our brand and a running order kept to the minute. We will trust them with the next edition.' },
-        name: 'Prénom Nom', role: { fr: 'Responsable marketing · Société', en: 'Marketing Manager · Company' } },
-      { text: { fr: 'Du premier rendez-vous au dernier top, un seul interlocuteur et aucune mauvaise surprise. Nos invités en parlent encore.',
-          en: 'From the first meeting to the last cue, one contact and no bad surprise. Our guests are still talking about it.' },
-        name: 'Prénom Nom', role: { fr: 'Directeur général · Société', en: 'Managing Director · Company' } }
+      { text: { fr: 'Une équipe qui maîtrise parfaitement son métier. La coordination, la scénographie et la gestion technique ont été menées avec beaucoup de rigueur. Ce qui fait la différence avec benevents, c’est cette capacité à anticiper les détails tout en gardant une vraie vision d’ensemble.',
+          en: 'A team that truly masters its craft. Coordination, scenography and the technical side were handled with great rigour. What sets benevents apart is the ability to anticipate the details while keeping the whole picture in view.' },
+        name: 'Prénom Nom', role: { fr: 'RMA · Convention d’entreprise', en: 'RMA · Corporate convention' } },
+      { text: { fr: 'Nous avons particulièrement apprécié l’accompagnement de l’équipe, toujours disponible et à l’écoute. De la préparation de la scène à la gestion des interventions, tout a été pensé pour assurer le bon déroulement de nos cérémonies. Une collaboration très professionnelle.',
+          en: 'We particularly valued the support of the team, always available and attentive. From preparing the stage to managing the speakers, everything was designed so that our ceremonies would run smoothly. A very professional collaboration.' },
+        name: 'Prénom Nom', role: { fr: 'EFE Maroc · A Chance to Reset', en: 'EFE Maroc · A Chance to Reset' } },
+      { text: { fr: 'benevents a su traduire notre univers de marque en une mise en scène élégante et cohérente. L’équipe a été force de proposition tout en respectant nos attentes. Le résultat correspondait parfaitement à l’esprit que nous souhaitions donner à cette soirée.',
+          en: 'benevents translated the world of our brand into an elegant, coherent staging. The team came with ideas of its own while respecting our expectations. The result matched exactly the spirit we wanted for the evening.' },
+        name: 'Prénom Nom', role: { fr: 'Volvo · Built on Trust', en: 'Volvo · Built on Trust' } }
     ];
     var noIndex = doc.createElement('meta');             // a preview is not a page for search engines
     noIndex.name = 'robots'; noIndex.content = 'noindex';
