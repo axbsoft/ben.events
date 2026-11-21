@@ -13,6 +13,10 @@
      name    : who said it
      role    : their position, optional: '…' or { en: '…', fr: '…' }
      company : their organisation, optional
-     example: { text: { en: '…', fr: '…' }, name: 'First name Last name', role: { en: 'Marketing Director', fr: 'Directrice marketing' }, company: 'Company' } */
+     example: { text: { en: '…', fr: '…' }, name: 'First name Last name', role: { en: 'Marketing Director', fr: 'Directrice marketing' }, company: 'Company' }
+
+   To show a client what their words will look like before any quote is here, open the home page with
+   ?apercu=avis at the end of its address (www.ben.events/fr?apercu=avis): three example reviews appear,
+   marked as examples. Visitors never see them, and they are gone as soon as a real quote is listed below. */
 window.BEN_FIGURES = [];
 window.BEN_QUOTES = [];

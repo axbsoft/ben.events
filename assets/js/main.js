@@ -81,6 +81,28 @@
   /* ---------- Key figures and client quotes, built from voices.js ---------- */
   var voices = $('.voices'), figBox = $('.figures'), quoteBox = $('.quotes');
   var FIGURES = (window.BEN_FIGURES || []).slice(0, 4), QUOTES = window.BEN_QUOTES || [];
+  // A preview for the agency only. With ?apercu=avis at the end of the address, example reviews show where the
+  // real ones will go, each marked as an example, to show a client what their words will look like. Visitors of
+  // the site never see them, and as soon as voices.js holds a real quote, the examples are gone for good.
+  var SAMPLE = !QUOTES.length && /[?&]apercu=avis\b/.test(location.search);
+  var SAMPLE_WORDS = { fr: ['Exemple', 'Aperçu : ces avis sont des exemples. Ils ne s’affichent qu’avec ce lien, jamais pour les visiteurs du site.'],
+    en: ['Example', 'Preview: these reviews are examples. They show only with this link, never to visitors of the site.'] };
+  if (SAMPLE) {
+    QUOTES = [
+      { text: { fr: 'Scène, écrans, régie : l’équipe a tout pris en main et nous avons pu nous consacrer à nos invités. Le jour J, tout s’est déroulé comme écrit.',
+          en: 'Stage, screens, control desk: the team took care of everything and we could give our time to our guests. On the day, everything ran as written.' },
+        name: 'Prénom Nom', role: { fr: 'Directrice de la communication · Société', en: 'Communications Director · Company' } },
+      { text: { fr: 'Une équipe à l’écoute, une scénographie à l’image de notre marque et un déroulé tenu à la minute. Nous leur confierons la prochaine édition.',
+          en: 'A team that listens, a set that looks like our brand and a running order kept to the minute. We will trust them with the next edition.' },
+        name: 'Prénom Nom', role: { fr: 'Responsable marketing · Société', en: 'Marketing Manager · Company' } },
+      { text: { fr: 'Du premier rendez-vous au dernier top, un seul interlocuteur et aucune mauvaise surprise. Nos invités en parlent encore.',
+          en: 'From the first meeting to the last cue, one contact and no bad surprise. Our guests are still talking about it.' },
+        name: 'Prénom Nom', role: { fr: 'Directeur général · Société', en: 'Managing Director · Company' } }
+    ];
+    var noIndex = doc.createElement('meta');             // a preview is not a page for search engines
+    noIndex.name = 'robots'; noIndex.content = 'noindex';
+    doc.head.appendChild(noIndex);
+  }
   function figureText(f, v) { return (f.before || '') + v.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US') + (f.after || ''); }
   function voicesText() {                              // everything that depends on the language
     if (!voices || voices.hidden) return;
@@ -91,7 +113,9 @@
     $$('.quote', quoteBox).forEach(function (n, i) {
       $('blockquote', n).textContent = tr(QUOTES[i].text);
       $('figcaption span', n).textContent = [tr(QUOTES[i].role), QUOTES[i].company].filter(Boolean).join(' · ');
+      if (SAMPLE) n.setAttribute('data-tag', (SAMPLE_WORDS[lang] || SAMPLE_WORDS.en)[0]);
     });
+    if (SAMPLE) $('.voices__sample', voices).textContent = (SAMPLE_WORDS[lang] || SAMPLE_WORDS.en)[1];
   }
   if (voices && (FIGURES.length || QUOTES.length)) {
     FIGURES.forEach(function () {
@@ -112,6 +136,13 @@
     figBox.hidden = !FIGURES.length;
     quoteBox.hidden = !QUOTES.length;
     voices.hidden = false;
+    if (SAMPLE) {                                        // the examples say what they are, above them and on each
+      quoteBox.classList.add('quotes--sample');
+      var sampleNote = doc.createElement('p');
+      sampleNote.className = 'voices__sample';
+      sampleNote.setAttribute('role', 'note');
+      voices.insertBefore(sampleNote, quoteBox);
+    }
     // each number counts up the first time it is seen
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       var counted = new IntersectionObserver(function (es) {

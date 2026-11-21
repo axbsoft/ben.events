@@ -410,6 +410,10 @@ ul, ol { padding: 0; list-style: none; }
 .quote figcaption b { display: block; font-size: 16px; font-weight: 600; }
 .quote figcaption span { display: block; margin-top: 3px; font-size: 14px; color: var(--mute); }
 .quote figcaption span:empty { display: none; }
+/* the preview of the reviews (?apercu=avis): examples, said to be examples */
+.voices__sample { margin: 14px 0 0; padding: 12px 18px; border-radius: 14px; border: 1px dashed rgba(255, 255, 255, .32); font-size: 14px; line-height: 1.5; color: var(--mute); }
+.quotes--sample .quote { position: relative; border-style: dashed; border-color: rgba(255, 255, 255, .26); }
+.quotes--sample .quote::after { content: attr(data-tag); position: absolute; right: 18px; top: 18px; padding: 4px 10px; border-radius: 99px; border: 1px solid var(--line); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
 .clients__marquee { overflow: hidden; padding: 10px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .clients__track { display: flex; width: max-content; animation: marquee 46s linear infinite; }
 .clients__marquee:hover .clients__track { animation-play-state: paused; }
