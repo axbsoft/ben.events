@@ -134,7 +134,7 @@
   "rewrites": [
     {
       "source": "/o/:slug",
-      "destination": "/offer.html"
+      "destination": "/offer"
     }
   ],
   "redirects": [
