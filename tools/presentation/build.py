@@ -1,4 +1,4 @@
-"""The agency presentation: fifteen slides, in French and in English, written from what the site says.
+"""The agency presentation: sixteen slides, in French and in English, written from what the site says.
 Step 2 of tools/presentation/build.sh.
 
 usage: build.py SITE_JSON OUT_DIR
@@ -67,10 +67,16 @@ W = {
     'fr': {'lang': 'fr', 'deck': 'benevents agency — Présentation', 'tagline': 'Présentation de l’agence', 'craft': 'Savoir-faire', 'does': 'Ce que nous prenons en charge',
            'work': 'Réalisation', 'film': 'Le film', 'mail': 'E-mail', 'site': 'Site', 'gala': 'dîner de gala', 'desk': 'régie',
            'clients': 'Entreprises, institutions et fondations nous confient les moments qui comptent pour elles.',
+           'book': {'eyebrow': 'Prochaine étape', 'title': ['Quinze minutes', 'pour lancer votre projet.'],
+                    'lede': 'Choisissez le créneau qui vous convient. Parlez-nous de l’occasion, de vos invités, de la date et de la ville : nous revenons vers vous avec de premières idées et la suite.',
+                    'btn': 'Réserver un appel', 'note': '15 minutes, au créneau de votre choix', 'scan': 'Scannez pour réserver'},
            'split': {'about.title': 'C’est une signature.', 'srv.title': 'Une seule exigence.', 'pr.title': 'au dernier toast.', 'wall.title': 'sur scène.', 'cl.title': 'compagnie.', 'st.text': 'Voilà une production bien faite.'}},
     'en': {'lang': 'en', 'deck': 'benevents agency — Presentation', 'tagline': 'Agency presentation', 'craft': 'Craft', 'does': 'What we take care of',
            'work': 'Selected event', 'film': 'The film', 'mail': 'Email', 'site': 'Website', 'gala': 'gala dinner', 'desk': 'control desk',
            'clients': 'Companies, institutions and foundations trust us with the moments that matter to them.',
+           'book': {'eyebrow': 'Next step', 'title': ['Fifteen minutes', 'to start your event.'],
+                    'lede': 'Choose a time that suits you. Tell us about the occasion, your guests, the date and the city: we come back to you with first ideas and the next steps.',
+                    'btn': 'Book a call', 'note': '15 minutes, at a time you choose', 'scan': 'Scan to book'},
            'split': {'about.title': 'It is a signature.', 'srv.title': 'One standard.', 'pr.title': 'to final toast.', 'wall.title': 'on stage.', 'cl.title': 'company.', 'st.text': 'That is production done properly.'}},
 }
 
@@ -248,6 +254,28 @@ def deck(lang):
 </div>
 <div class="reach">%s</div>''' % (pic('contact', 'conference-opening.jpg', 1920, 1080, (.5, .5)), eyebrow(T['ct.eyebrow']), e(T['ft.cta1']), e(T['ft.cta2']), BAR, e(T['ct.lede']),
                                  ''.join('<p class="reach__row" data-href="%s" data-label="%s"><span>%s</span><b>%s</b></p>' % (e(h), e(k + ' : ' + v if lang == 'fr' else k + ': ' + v), e(k), e(v)) for k, v, h in rows))))
+
+    # 16 — book a call: the button opens the calendar (on the site, as a pop-up; in the PDF, the short link), the QR code leads to it from a screen or a printed page
+    b = w['book']
+    url = D['book']['url']
+    rows = D['book']['qr']
+    q = len(rows)
+    cells = ''.join('<rect x="%d" y="%d" width="1" height="1"/>' % (c + 4, r + 4) for r, row in enumerate(rows) for c, v in enumerate(row) if v == '1')
+    code = '<svg class="book__qr-code" viewBox="0 0 %d %d" shape-rendering="crispEdges" aria-hidden="true"><rect width="%d" height="%d" fill="#fff"/><g fill="#0a0a0c">%s</g></svg>' % (q + 8, q + 8, q + 8, q + 8, cells)
+    cal = '<svg class="book__cal" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3.5"/><path d="M3.5 10.5h17M8 3v4M16 3v4"/></svg>'
+    short = url.replace('https://www.', '')
+    S.append(page('book', '''<div class="bg" style="background-image:url(%s)"></div>
+<div class="veil veil--left veil--deep"></div>
+<div class="book__in">
+%s
+<h2 class="mega mega--sm">%s<br><span class="g">%s</span></h2>
+%s
+<p class="lede">%s</p>
+<p class="book__btn" data-href="%s" data-label="%s">%s<span>%s</span></p>
+<p class="book__note">%s</p>
+</div>
+<div class="book__qr">%s<p class="book__qr-say">%s</p><p class="book__qr-url">%s</p></div>''' % (pic('book', 'control-desk-ballroom.jpg', 1920, 1080, (.6, .5)), eyebrow(b['eyebrow']), e(b['title'][0]), e(b['title'][1]), BAR, e(b['lede']),
+                                    e(url), e(b['btn'] + (' : ' if lang == 'fr' else ': ') + short), cal, e(b['btn']), e(b['note']), code, e(b['scan']), e(short))))
 
     return '''<!doctype html>
 <html lang="%s">

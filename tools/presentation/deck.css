@@ -176,3 +176,16 @@ h1, h2, h3 { text-wrap: balance; }
 .reach__row:first-child { border-top: 0; }
 .reach__row span { font-size: 15px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
 .reach__row b { font-size: 27px; font-weight: 500; letter-spacing: -.01em; }
+
+/* 16 — book a call */
+.book__in { position: absolute; left: 96px; top: 226px; width: 1040px; }
+.book .eyebrow { margin-bottom: 38px; }
+.book .bar { margin: 46px 0 34px; }
+.book .lede { width: 760px; color: rgba(246, 245, 241, .92); }
+.book__btn { display: inline-flex; align-items: center; gap: 16px; margin-top: 52px; padding: 26px 46px 26px 38px; border-radius: 99px; background: var(--grad); color: #0a0a0a; font-size: 32px; font-weight: 600; letter-spacing: -.015em; line-height: 1; box-shadow: 0 26px 70px -24px rgba(233, 75, 91, .8); }
+.book__cal { width: 36px; height: 36px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.book__note { margin-top: 24px; font-size: 20px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.book__qr { position: absolute; right: 120px; bottom: 120px; width: 380px; padding: 30px 30px 28px; border-radius: 30px; background: rgba(14, 14, 17, .88); border: 1px solid var(--line); text-align: center; }
+.book__qr-code { display: block; width: 320px; height: 320px; border-radius: 14px; }
+.book__qr-say { margin-top: 22px; font-size: 17px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.book__qr-url { margin-top: 6px; font-size: 27px; font-weight: 500; letter-spacing: -.01em; }

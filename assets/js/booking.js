@@ -102,6 +102,8 @@
 
   // where on the page a button is, in a few plain words (never anything about the visitor)
   function where(b) {
+    if (b.closest('.deck__links')) return 'presentation slide';
+    if (b.closest('.deck')) return 'presentation';
     if (b.closest('.menu')) return 'menu';
     if (b.closest('.nav')) return 'header';
     if (b.closest('footer')) return 'footer';
@@ -113,18 +115,28 @@
     if (burger && doc.body.classList.contains('menu-open')) burger.click();      // the pop-up opens over the page, not over the menu
   }
 
-  // the buttons carry what the calendar looks for
-  Array.prototype.forEach.call(doc.querySelectorAll('[data-book]'), function (b) {
+  // the buttons carry what the calendar looks for: those of the page now, those made later (the clickable areas of a slide) when they are used
+  function arm(b) {
+    if (b.hasAttribute('data-cal-link')) return;
     b.setAttribute('data-cal-link', CAL_LINK);
     b.setAttribute('data-cal-namespace', NAMESPACE);
     b.setAttribute('data-cal-config', '{"layout":""}');
-  });
+  }
+  Array.prototype.forEach.call(doc.querySelectorAll('[data-book]'), arm);
+  // the pop-up opens over the page: a presentation shown full screen leaves it first
+  function leaveFullScreen() {
+    try {
+      if (doc.fullscreenElement && doc.exitFullscreen) doc.exitFullscreen();
+      else if (doc.webkitFullscreenElement && doc.webkitExitFullscreen) doc.webkitExitFullscreen();
+    } catch (e) {}
+  }
 
   // a visitor who goes towards a button is about to press it: the calendar starts loading now
   ['pointerover', 'focusin', 'touchstart'].forEach(function (name) {
     doc.addEventListener(name, function (e) {
       var b = e.target && e.target.closest ? e.target.closest('[data-book]') : null;
       if (!b) return;
+      arm(b);
       if (b.hasAttribute('aria-label')) b.title = b.getAttribute('aria-label');     // a button that shows only the calendar says its name on hover, in the language of the page
       load();
     }, { capture: true, passive: true });
@@ -132,9 +144,13 @@
 
   doc.addEventListener('click', function (e) {
     var b = e.target && e.target.closest ? e.target.closest('[data-book]') : null;
-    if (!b || again) return;
+    if (!b) return;
+    if (b.tagName === 'A') e.preventDefault();              // a link that books (on a slide): the pop-up, not its address
+    if (again) return;
+    arm(b);
     if (window.benCount) window.benCount('call_click', { where: where(b) });
     closeMenu();
+    leaveFullScreen();
     if (state === 'ready') return;                           // the script of the calendar takes the press from here
     e.preventDefault();
     e.stopPropagation();

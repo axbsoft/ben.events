@@ -478,3 +478,5 @@
 @media (prefers-reduced-motion: reduce) {
   .mmark__draw, .mmark__run { display: none; }
 }
+/* the end of the presentation: talk to us, or book a call (assets/js/booking.js) */
+.deck__cta-side { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }

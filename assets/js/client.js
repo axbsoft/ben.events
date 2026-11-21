@@ -64,6 +64,7 @@
       'deck.nocopy': 'Le lien n’a pas pu être copié : copiez l’adresse de cette page.',
       'open.cta.title': 'Un événement en préparation ?',
       'open.cta.btn': 'Parlons de votre événement',
+      'book.cta': 'Réserver un appel',
       'cta.eyebrow': 'Et maintenant',
       'cta.title': 'Une question sur cette proposition ?',
       'cta.btn': 'Contacter benevents',
@@ -126,6 +127,7 @@
       'deck.nocopy': 'The link could not be copied: copy the address of this page.',
       'open.cta.title': 'An event in the works?',
       'open.cta.btn': 'Talk to us about your event',
+      'book.cta': 'Book a call',
       'cta.eyebrow': 'What next',
       'cta.title': 'A question about this proposal?',
       'cta.btn': 'Contact benevents',
@@ -331,6 +333,8 @@
       el.style.left = l.box[0] + '%'; el.style.top = l.box[1] + '%';
       el.style.width = l.box[2] + '%'; el.style.height = l.box[3] + '%';
       if (/^https:/.test(l.href)) { el.target = '_blank'; el.rel = 'noopener'; }
+      // the link to book a call opens the calendar over the presentation (assets/js/booking.js, where the page has it)
+      if (l.href === 'https://www.ben.events/book' && window.BEN_BOOKING) { el.setAttribute('data-book', ''); el.setAttribute('aria-haspopup', 'dialog'); }
       links.appendChild(el);
     });
   }
