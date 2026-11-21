@@ -9,7 +9,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const [out] = process.argv.slice(2);
-const BOOK = 'https://www.ben.events/book';          // the short link to book a call, printed as a QR code on the last slide
+const BOOK = 'https://www.ben.events/book';          // the page to book a call (book.html), printed as a QR code on the last slide
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
 
 // the site, served from this folder for the time of the reading
@@ -39,7 +39,7 @@ server.listen(0, '127.0.0.1', async () => {
         data.clients = await page.evaluate(() => [...document.querySelectorAll('.clients__group:not([aria-hidden]) img')].map(i => ({ src: i.getAttribute('src'), name: i.alt })));
       }
     }
-    // the QR code of the last slide: the short link to the calendar for booking a call (vercel.json sends /book on to it)
+    // the QR code of the last slide: the site's page to book a call (book.html, which opens the calendar as a pop-up)
     const qrcode = require(path.join(ROOT, 'assets', 'js', 'qrcode.js'));
     const qr = qrcode(0, 'M');
     qr.addData(BOOK);

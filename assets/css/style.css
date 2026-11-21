@@ -82,14 +82,14 @@ ul, ol { padding: 0; list-style: none; }
 .btn--ghost:hover, .btn--ghost:focus-visible { color: #0a0a0a; border-color: transparent; }
 .btn--sm.btn--ghost { padding: 10px 17px; }
 /* "Book a call": the buttons that open the calendar (assets/js/booking.js) carry a small calendar in place of the arrow */
-.btn--book span { display: inline-flex; align-items: center; }
+.btn--book > span { display: inline-flex; align-items: center; }
 .btn--book span::after { display: none; }
-.btn--book span::before { content: ""; flex: none; width: 1.12em; height: 1.12em; margin-right: 9px; background: currentColor; -webkit-mask: var(--cal) center / contain no-repeat; mask: var(--cal) center / contain no-repeat; }
+.btn--book > span::before { content: ""; flex: none; width: 1.12em; height: 1.12em; margin-right: 9px; background: currentColor; -webkit-mask: var(--cal) center / contain no-repeat; mask: var(--cal) center / contain no-repeat; }
 /* in the header, the calendar alone: a round button the size of the menu button; its name is said by aria-label and shown on hover (title) */
 .btn.btn--icon { width: 44px; height: 44px; padding: 0; flex: none; }
-.btn--icon span::before { width: 18px; height: 18px; margin-right: 0; }
+.btn--icon > span::before { width: 18px; height: 18px; margin-right: 0; }
 [data-book].is-waiting { cursor: progress; opacity: .72; }
-.btn--book.is-waiting span::before { animation: bookwait 1s ease-in-out infinite; }
+.btn--book.is-waiting > span::before { animation: bookwait 1s ease-in-out infinite; }
 @keyframes bookwait { 50% { opacity: .2; } }
 @keyframes sheen { to { background-position: -200% 0; } }
 

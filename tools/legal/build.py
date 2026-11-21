@@ -44,7 +44,7 @@ PAGES = {
                 ['audience measurement is provided by Rybbit (rybbit.io);',
                  'the typefaces are supplied by Google Fonts;',
                  'the film is only loaded from its video host (livid.com) if you press play;',
-                 'the calendar that opens when you press “Book a call” is provided by Lunacal (lunacal.ai): it is only loaded when you point at, touch or press one of these buttons, and what you enter in it is handled by Lunacal under its own rules;',
+                 'the calendar that opens when you press “Book a call” is provided by Lunacal (lunacal.ai): it is only loaded when you point at, touch or press one of these buttons, or open the page to book a call (ben.events/book), and what you enter in it is handled by Lunacal under its own rules;',
                  'the WhatsApp, Instagram and LinkedIn links only take you there if you click them.']]),
             ('Photos and videos of our events', [
                 'The site shows images of events we have produced. If you recognise yourself in one of them and would like it removed, write to us and we will take it down.']),
@@ -81,7 +81,7 @@ PAGES = {
                 ['la mesure d’audience est assurée par Rybbit (rybbit.io) ;',
                  'les polices de caractères sont fournies par Google Fonts ;',
                  'le film n’est chargé depuis son hébergeur vidéo (livid.com) que si vous appuyez sur lecture ;',
-                 'le calendrier qui s’ouvre quand vous appuyez sur « Réserver un appel » est fourni par Lunacal (lunacal.ai) : il n’est chargé que si vous pointez, touchez ou appuyez sur l’un de ces boutons, et ce que vous y saisissez est traité par Lunacal selon ses propres règles ;',
+                 'le calendrier qui s’ouvre quand vous appuyez sur « Réserver un appel » est fourni par Lunacal (lunacal.ai) : il n’est chargé que si vous pointez, touchez ou appuyez sur l’un de ces boutons, ou ouvrez la page de réservation (ben.events/book), et ce que vous y saisissez est traité par Lunacal selon ses propres règles ;',
                  'les liens WhatsApp, Instagram et LinkedIn ne vous y conduisent que si vous cliquez dessus.']]),
             ('Photos et vidéos de nos événements', [
                 'Le site montre des images d’événements que nous avons produits. Si vous vous reconnaissez sur l’une d’elles et souhaitez son retrait, écrivez-nous : nous la retirerons.']),

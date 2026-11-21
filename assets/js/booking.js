@@ -11,9 +11,12 @@
      so that it is usually there before the click that follows.
    - A visitor who presses the button before the calendar is there is not left with nothing: the button
      shows that it is working, and the page presses it again once the pop-up is ready (the calendar says so
-     itself, "prerenderReady": a pop-up opened before that can stay on its loading animation). If the
-     calendar cannot load (a blocker, a bad connection), the same calendar opens as a page of its own,
-     in a new tab.
+     itself, "prerenderReady": a pop-up opened before that can stay on its loading animation).
+
+   Everything stays on the site: the calendar is never sent to as a page of Lunacal. ben.events/book
+   (book.html, where the QR code and the PDF of the presentation lead) opens the pop-up by itself
+   (data-book-auto). If the calendar cannot load (a blocker, a bad connection), the visitor is taken to
+   that page, which then says so and offers the other ways to reach us (data-book-fallback).
 
    The buttons carry the attributes the calendar looks for (data-cal-link, data-cal-namespace,
    data-cal-config): they are added here, so that the link of the calendar is written in one place.
@@ -29,8 +32,8 @@
   var SCRIPT = ORIGIN + '/embed/embed.js';
   var CAL_LINK = 'benamara/consult';           // whose calendar, and which event type
   var NAMESPACE = 'consult';
-  var PAGE = ORIGIN + '/' + CAL_LINK;          // the same calendar as a page of its own: where a visitor goes if the pop-up cannot open
-  var WAIT = 8000;                             // ms: the longest its script may take to load before the page of its own is used
+  var BOOK = '/book';                          // the site's own page to book a call: where a visitor goes if the pop-up cannot open here
+  var WAIT = 8000;                             // ms: the longest its script may take to load before the visitor is taken there
   var WARM = 8000;                             // ms: once the script has loaded, the longest the pop-up may take to prepare itself behind the page
   // the look of the pop-up, as set in the Lunacal account
   var UI = {"theme":"dark","styles":{"branding":{}},"hideEventTypeDetails":true,"layout":"","cssVarsPerTheme":{"light":{"theme-border":"#1F1F1F","theme-background-primary":"#018CFF","theme-background-secondary":"#33353A","theme-background-card":"#090909","theme-background-base":"#090909","theme-text-primary":"#ffffff","theme-text-secondary":"#ffffff","theme-text-card":"#ffffff","theme-text-base":"#ffffff","theme-rounded-base":"12px","theme-rounded-calendar":"20px","theme-rounded-timeslot":"999px","theme-rounded-day":"999px","theme-rounded-button":"999px","theme-shadow-calendar":"1.5px 8.5px 4px 0px #0000001A","theme-shadow-button":"0px 0px 0px 0px #D1519A88","theme-shadow-timeslot":"0px 0px 0px 0px #000000","theme-font-family":"Outfit"},"dark":{"theme-border":"#1F1F1F","theme-background-primary":"#018CFF","theme-background-secondary":"#33353A","theme-background-card":"#090909","theme-background-base":"#090909","theme-text-primary":"#ffffff","theme-text-secondary":"#ffffff","theme-text-card":"#ffffff","theme-text-base":"#ffffff","theme-rounded-base":"12px","theme-rounded-calendar":"20px","theme-rounded-timeslot":"999px","theme-rounded-day":"999px","theme-rounded-button":"999px","theme-shadow-calendar":"1.5px 8.5px 4px 0px #0000001A","theme-shadow-button":"0px 0px 0px 0px #D1519A88","theme-shadow-timeslot":"0px 0px 0px 0px #000000","theme-font-family":"Outfit"}},"displayedContent":{"image":true,"name":true,"designation":true,"description":true,"eventName":true,"highlightBar":false},"background":{"type":"animated","presetId":"retro-grid"},"stylePreset":"blueshine"};
@@ -58,11 +61,15 @@
     b.classList.toggle('is-waiting', on);
     b.setAttribute('aria-busy', on ? 'true' : 'false');
   }
-  // the calendar as a page of its own; a blocked pop-up window takes the visitor there in this tab
-  function page() {
-    var w = null;
-    try { w = window.open(PAGE, '_blank', 'noopener'); } catch (e) {}
-    if (!w) window.location.assign(PAGE);
+  // the calendar cannot open: the page to book a call says so and gives the other ways to reach us; any other page leads there
+  function fallback() {
+    var box = doc.querySelector('[data-book-fallback]');
+    if (box) {
+      box.hidden = false;
+      try { box.focus(); } catch (e) {}
+      return;
+    }
+    window.location.assign(BOOK + (doc.documentElement.lang === 'fr' ? '?lang=fr' : ''));
   }
   function ready() {
     if (state !== 'loading') return;
@@ -87,7 +94,7 @@
     var b = pending;
     pending = null;
     busy(b, false);
-    if (b) page();
+    if (b) fallback();
   }
   function load() {
     if (state !== 'idle') return;
@@ -102,6 +109,7 @@
 
   // where on the page a button is, in a few plain words (never anything about the visitor)
   function where(b) {
+    if (b.hasAttribute('data-book-auto')) return 'booking page';
     if (b.closest('.deck__links')) return 'presentation slide';
     if (b.closest('.deck')) return 'presentation';
     if (b.closest('.menu')) return 'menu';
@@ -154,13 +162,22 @@
     if (state === 'ready') return;                           // the script of the calendar takes the press from here
     e.preventDefault();
     e.stopPropagation();
-    if (state === 'failed') { page(); return; }
+    if (state === 'failed') { fallback(); return; }
     if (pending && pending !== b) busy(pending, false);      // a second button pressed while the first one waits: only one waits
     pending = b;
     busy(b, true);
     load();
   }, true);
 
+  // the page to book a call opens the calendar at once (not counted as a press: the visit of the page is)
+  var auto = doc.querySelector('[data-book-auto]');
+  if (auto) {
+    arm(auto);
+    pending = auto;
+    busy(auto, true);
+    load();
+  }
+
   // for the automated checks
-  window.BEN_BOOKING = { state: function () { return state; }, link: CAL_LINK, namespace: NAMESPACE, page: PAGE };
+  window.BEN_BOOKING = { state: function () { return state; }, link: CAL_LINK, namespace: NAMESPACE, page: BOOK };
 })();

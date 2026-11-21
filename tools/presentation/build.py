@@ -255,7 +255,7 @@ def deck(lang):
 <div class="reach">%s</div>''' % (pic('contact', 'conference-opening.jpg', 1920, 1080, (.5, .5)), eyebrow(T['ct.eyebrow']), e(T['ft.cta1']), e(T['ft.cta2']), BAR, e(T['ct.lede']),
                                  ''.join('<p class="reach__row" data-href="%s" data-label="%s"><span>%s</span><b>%s</b></p>' % (e(h), e(k + ' : ' + v if lang == 'fr' else k + ': ' + v), e(k), e(v)) for k, v, h in rows))))
 
-    # 16 — book a call: the button opens the calendar (on the site, as a pop-up; in the PDF, the short link), the QR code leads to it from a screen or a printed page
+    # 16 — book a call: the button opens the calendar (on the site, as a pop-up; in the PDF, the page ben.events/book, which opens it), the QR code leads there from a screen or a printed page
     b = w['book']
     url = D['book']['url']
     rows = D['book']['qr']

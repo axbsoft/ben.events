@@ -36,3 +36,14 @@ html[lang="en"] [lang="fr"], html[lang="fr"] [lang="en"] { display: none !import
 .legal__foot nav { display: flex; flex-wrap: wrap; gap: 6px 24px; }
 .legal__foot a { transition: color .3s; }
 .legal__foot a:hover, .legal__foot a:focus-visible, .legal__foot a[aria-current] { color: var(--text); }
+
+/* ben.events/book (book.html): the calendar opens over this page; the page stays, with a way to open it again and the other ways to reach us */
+.book .legal__back { display: flex; width: fit-content; }
+.book .eyebrow { margin-bottom: 26px; }
+.book__do { margin-top: clamp(30px, 4vw, 48px); display: flex; flex-wrap: wrap; align-items: center; gap: 16px 26px; }
+.book__note { font-size: 13px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.book__fallback { margin-top: 28px; padding: 18px 22px; border-radius: 18px; border: 1px solid rgba(249, 178, 78, .4); background: rgba(249, 178, 78, .08); font-size: 16.5px; line-height: 1.6; }
+.book__fallback:focus { outline: none; }
+.book__other { margin-top: clamp(36px, 5vw, 56px); padding-top: 24px; border-top: 1px solid var(--line); display: grid; gap: 10px; font-size: 16.5px; line-height: 1.6; color: rgba(246, 245, 241, .8); }
+.book__other a { color: var(--text); text-decoration: underline; text-decoration-color: rgba(246, 245, 241, .4); text-underline-offset: 3px; transition: text-decoration-color .3s; }
+.book__other a:hover, .book__other a:focus-visible { text-decoration-color: currentColor; }

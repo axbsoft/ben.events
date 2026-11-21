@@ -1,4 +1,4 @@
-/* benevents agency — the two legal pages (privacy.html, terms.html).
+/* benevents agency — the two legal pages (privacy.html, terms.html), and the page to book a call (book.html).
    Each page holds its text in French and in English; this file shows the right one: the language asked for
    in the address (?lang=fr), else the one chosen on the site, else the language of the browser. */
 (function () {
@@ -19,7 +19,7 @@
     if (desc && meta) meta.content = desc;
     each('[data-lang]', function (n) { n.setAttribute('aria-pressed', String(n.getAttribute('data-lang') === lang)); });
     // the links to the site and to the other page keep the language (the home page is / in English, /fr in French)
-    each('[data-href]', function (a) { var to = a.getAttribute('data-href'); a.href = to === './' ? (lang === 'fr' ? 'fr' : './') : to + '?lang=' + lang; });
+    each('[data-href]', function (a) { var to = a.getAttribute('data-href'); a.href = to === './' ? (lang === 'fr' ? 'fr' : './') + (a.getAttribute('data-hash') || '') : to + '?lang=' + lang; });
     if (save) {
       try { localStorage.setItem('ben-lang', lang); } catch (e) {}
       try { history.replaceState(null, '', location.pathname + '?lang=' + lang + location.hash); } catch (e) {}

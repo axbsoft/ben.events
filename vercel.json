@@ -139,11 +139,6 @@
   ],
   "redirects": [
     {
-      "source": "/book",
-      "destination": "https://app.lunacal.ai/benamara/consult",
-      "permanent": false
-    },
-    {
       "source": "/caligraphy",
       "destination": "/calligraphy",
       "permanent": false
