@@ -6,7 +6,7 @@
    more than a few seconds), the copy kept on the device is used instead. Contacts are never held
    here: the app keeps them itself and hands them over when the network is back. */
 const KEPT = 'ben-calligraphy-1';
-const OWN = /^\/(calligraphy(\/card)?$|assets\/(calligraphy\/|js\/calli-|css\/(calli-app|style)\.css$|img\/favicon))/;
+const OWN = /^\/(calligraphy(\/card)?$|assets\/(calligraphy\/|js\/(calli-|qrcode\.js$)|css\/(calli-app|style)\.css$|img\/favicon))/;
 const FONTS = /^https:\/\/fonts\.(googleapis|gstatic)\.com\//;
 const SLOW = 4000;
 

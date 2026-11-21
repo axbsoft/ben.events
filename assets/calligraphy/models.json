@@ -1,0 +1,180 @@
+{
+ "v": 1,
+ "models": {
+  "hanzi-bookmark": {
+   "script": "zh",
+   "image": "templates/hanzi-bookmark_60x180mm.jpg",
+   "label": {
+    "fr": "Chine · marque-page",
+    "en": "China · bookmark"
+   },
+   "brand": "",
+   "w": 60,
+   "h": 180,
+   "han": [
+    30,
+    74
+   ],
+   "box": [
+    30,
+    58
+   ],
+   "name": 5.6,
+   "nameMax": 40,
+   "line": {
+    "y": 112.4,
+    "gap": [
+     20.6,
+     39.4
+    ],
+    "min": 4.3,
+    "below": 118.6
+   },
+   "edge": [
+    247,
+    241,
+    229
+   ],
+   "ink": [
+    26,
+    24,
+    28
+   ],
+   "qr": {
+    "x": 30,
+    "y": 144,
+    "plate": 21
+   }
+  },
+  "exeed-bookmark": {
+   "script": "zh",
+   "image": "templates/exeed-bookmark_60x180mm.jpg",
+   "label": {
+    "fr": "EXEED · marque-page",
+    "en": "EXEED · bookmark"
+   },
+   "brand": "M-Automotiv",
+   "w": 60,
+   "h": 180,
+   "han": [
+    30,
+    72
+   ],
+   "box": [
+    30,
+    56
+   ],
+   "name": 5.6,
+   "nameMax": 40,
+   "line": {
+    "y": 107.55,
+    "gap": [
+     20.6,
+     39.7
+    ],
+    "min": 4.3,
+    "below": 113.9
+   },
+   "edge": [
+    249,
+    224,
+    187
+   ],
+   "ink": [
+    24,
+    21,
+    19
+   ]
+  },
+  "kana-bookmark": {
+   "script": "ja",
+   "image": "templates/kana-bookmark_60x180mm.jpg",
+   "label": {
+    "fr": "Japon · marque-page",
+    "en": "Japan · bookmark"
+   },
+   "brand": "",
+   "w": 60,
+   "h": 180,
+   "han": [
+    30,
+    74
+   ],
+   "box": [
+    30,
+    58
+   ],
+   "name": 5.6,
+   "nameMax": 40,
+   "line": {
+    "y": 112.4,
+    "gap": [
+     20.6,
+     39.4
+    ],
+    "min": 4.3,
+    "below": 118.6
+   },
+   "edge": [
+    247,
+    241,
+    229
+   ],
+   "ink": [
+    26,
+    24,
+    28
+   ],
+   "qr": {
+    "x": 30,
+    "y": 144,
+    "plate": 21
+   }
+  },
+  "hangul-bookmark": {
+   "script": "ko",
+   "image": "templates/hangul-bookmark_60x180mm.jpg",
+   "label": {
+    "fr": "Corée · marque-page",
+    "en": "Korea · bookmark"
+   },
+   "brand": "",
+   "w": 60,
+   "h": 180,
+   "han": [
+    30,
+    74
+   ],
+   "box": [
+    30,
+    58
+   ],
+   "name": 5.6,
+   "nameMax": 40,
+   "line": {
+    "y": 112.4,
+    "gap": [
+     20.6,
+     39.4
+    ],
+    "min": 4.3,
+    "below": 118.6
+   },
+   "edge": [
+    247,
+    241,
+    229
+   ],
+   "ink": [
+    26,
+    24,
+    28
+   ],
+   "qr": {
+    "x": 30,
+    "y": 144,
+    "plate": 21
+   }
+  }
+ }
+}

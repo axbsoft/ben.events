@@ -18,6 +18,8 @@
        "consent"     "yes" or "no": did the visitor agree to be contacted by the brand,
        "language"    "Chinese", "Japanese" or "Korean", "characters" the name as written, "reading",
        "link"        the page where the visitor finds their calligraphy: this goes in the e-mail,
+       "offer"       the name of the brand offer the bookmark's QR code led to, when it had one
+                     (assets/calligraphy/offers.json); the link then leads to that offer too,
        "model"       the printed model, "lang" the language the visitor was reading ("fr" or "en"),
        "created_at"  when the visitor took part (ISO 8601), "received_at" when it reached this function,
        "id"          one per participation (an entry sent twice keeps its id), "device", "source" }
@@ -29,7 +31,9 @@ const crypto = require('crypto');
 let LOCK = null;
 try { LOCK = require('../assets/calligraphy/app.json'); } catch (e) { LOCK = null; }
 
-const LIMITS = { id: 40, at: 40, event: 80, brand: 60, model: 40, model_name: 80, script: 2, name: 24, chars: 40, reading: 120, email: 160, lang: 2, device: 12 };
+const LIMITS = { id: 40, at: 40, event: 80, brand: 60, model: 40, model_name: 80, script: 2, name: 24, chars: 40, reading: 120, email: 160, lang: 2, offer: 25, device: 12 };
+// the name of an offer is 2 to 24 characters; its limit above is one more, so that a name that is too long is refused, not cut short into another one
+const OFFER = /^(?:[a-z0-9][a-z0-9-]{1,23})?$/;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const NAME = /^[A-Za-zÀ-ɏ]+(?:[ '\-][A-Za-zÀ-ɏ]+)*$/;
 const CHARS = { zh: /^[一-鿿]+(?:·[一-鿿]+){0,2}$/, ja: /^[ァ-ー]+(?:·[ァ-ー]+){0,2}$/, ko: /^[가-힣]+(?:·[가-힣]+){0,2}$/ };
@@ -63,12 +67,14 @@ module.exports = async function handler(req, res) {
   const c = {};
   for (const key of Object.keys(LIMITS)) c[key] = clean(body, key);
   const when = new Date(c.at);
-  if (!CHARS[c.script] || !CHARS[c.script].test(c.chars) || !NAME.test(c.name) || !EMAIL.test(c.email) || !/^[a-z0-9-]+$/.test(c.model) || isNaN(when)) {
+  if (!CHARS[c.script] || !CHARS[c.script].test(c.chars) || !NAME.test(c.name) || !EMAIL.test(c.email) || !/^[a-z0-9-]+$/.test(c.model) || !OFFER.test(c.offer) || isNaN(when)) {
     return res.status(400).json({ ok: false, error: 'invalid' });
   }
   const lang = c.lang === 'en' ? 'en' : 'fr';
   // the page where the visitor finds their calligraphy: built here, never taken from the request
-  const link = SITE + '/calligraphy/card?' + new URLSearchParams({ s: c.script, m: c.model, n: c.name, c: c.chars, l: lang }).toString();
+  const params = { s: c.script, m: c.model, n: c.name, c: c.chars, l: lang };
+  if (c.offer) params.o = c.offer;
+  const link = SITE + '/calligraphy/card?' + new URLSearchParams(params).toString();
   const contact = {
     type: 'calligraphy',
     event: c.event,
@@ -80,6 +86,7 @@ module.exports = async function handler(req, res) {
     characters: c.chars.replace(/·/g, ' '),
     reading: c.reading,
     link,
+    offer: c.offer,
     model: c.model_name || c.model,
     lang,
     created_at: when.toISOString(),

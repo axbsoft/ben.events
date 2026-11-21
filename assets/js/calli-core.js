@@ -14,34 +14,30 @@
      zh.json, ja.json, ko.json   the names, the tables and how many files hold the outlines
      zh-0.json … ja-0.json … ko-0.json …   the outlines, a few characters per file, fetched when needed
      latin.json           the letters of the visitor's own name
-     templates/           the printed models: a picture each, printed as the background */
+     models.json          the printed models (tools/calligraphy/add_model.mjs adds one)
+     templates/           their pictures, printed as the background
+     offers.json          the brand offers a QR code can lead to (tools/calligraphy/add_offer.mjs)
+   A QR code is drawn by assets/js/qrcode.js (MIT, see assets/calligraphy/NOTICE.txt). */
 (function (root) {
   'use strict';
 
   /* ------------------------------------------------------------------
-     THE PRINTED MODELS
+     THE PRINTED MODELS (assets/calligraphy/models.json: a client's artwork is added there, with
+     tools/calligraphy/add_model.mjs, without touching this file)
      In mm from the top left corner: size (w, h); han: the centre of the characters and box: the
      room around it (width, height); name: the size of the visitor's own name and nameMax its
      longest width; line: the rule the name sits on (its height, the gap between its two dashes,
-     the smallest size before the name moves under the rule); edge: the paper colour (the bleed).
-     brand: who the visitor agrees to hear from, when the event has not said otherwise.
+     the smallest size before the name moves under the rule); edge: the paper colour (the bleed);
+     ink: the colour of everything drawn on it. brand: who the visitor agrees to hear from, when
+     the event has not said otherwise.
+     qr (optional): where a QR code can be printed: x, y the centre of its plate and plate its side
+     (border and paper colour the plate when the picture needs it). offer (optional): the QR code
+     the model starts with (assets/calligraphy/offers.json).
      ------------------------------------------------------------------ */
-  var PLAIN_MODEL = { w: 60, h: 180, han: [30, 74], box: [30, 58], name: 5.6, nameMax: 40, line: { y: 112.4, gap: [20.6, 39.4], min: 4.3, below: 118.6 }, edge: [247, 241, 229], ink: [26, 24, 28], brand: '' };
-  var model = function (script, file, fr, en) {
-    var m = { script: script, image: 'templates/' + file, label: { fr: fr, en: en } };
-    Object.keys(PLAIN_MODEL).forEach(function (k) { m[k] = PLAIN_MODEL[k]; });
-    return m;
-  };
-  var TEMPLATES = {
-    'hanzi-bookmark': model('zh', 'hanzi-bookmark_60x180mm.jpg', 'Chine · marque-page', 'China · bookmark'),
-    'exeed-bookmark': {
-      script: 'zh', brand: 'M-Automotiv', label: { fr: 'EXEED · marque-page', en: 'EXEED · bookmark' },
-      image: 'templates/exeed-bookmark_60x180mm.jpg', w: 60, h: 180, han: [30, 72], box: [30, 56],
-      name: 5.6, nameMax: 40, line: { y: 107.55, gap: [20.6, 39.7], min: 4.3, below: 113.9 }, edge: [249, 224, 187], ink: [24, 21, 19]
-    },
-    'kana-bookmark': model('ja', 'kana-bookmark_60x180mm.jpg', 'Japon · marque-page', 'Japan · bookmark'),
-    'hangul-bookmark': model('ko', 'hangul-bookmark_60x180mm.jpg', 'Corée · marque-page', 'Korea · bookmark')
-  };
+  var TEMPLATES = {};
+  var OFFERS = {};
+  // where the short link of a QR code lives: it is printed, so it never follows the host this page is served from
+  var SITE = 'https://www.ben.events';
   // the languages a name can be written in, in the order they are offered
   var SCRIPTS = {
     zh: { label: { fr: 'Chinois', en: 'Chinese' }, of: { fr: 'calligraphie chinoise', en: 'Chinese calligraphy' }, into: { fr: 'en caractères chinois', en: 'in Chinese characters' }, own: '中文' },
@@ -439,11 +435,35 @@
   function get(file, binary) {
     return fetch(BASE + file).then(function (r) { if (!r.ok) throw new Error(file); return binary ? r.arrayBuffer() : r.json(); });
   }
+  // the registry of printed models (filled in place: TEMPLATES stays the same object)
+  function models() {
+    if (!got.models) {
+      got.models = get('models.json').then(function (j) {
+        Object.keys(j.models || {}).forEach(function (id) { TEMPLATES[id] = j.models[id]; });
+        return TEMPLATES;
+      });
+      got.models.catch(function () { delete got.models; });
+    }
+    return got.models;
+  }
+  // the brand offers a QR code can lead to; without them a QR code is simply not offered
+  function offers() {
+    if (!got.offers) {
+      got.offers = get('offers.json').then(function (j) { OFFERS = j.offers || {}; return OFFERS; }, function () { delete got.offers; return OFFERS; });
+    }
+    return got.offers;
+  }
+  // what a QR code carries for an offer: our short link (it counts the scan), and the words printed under it
+  function qrOf(slug) {
+    var o = slug && OFFERS[slug];
+    if (!o) return null;
+    return { slug: slug, url: SITE + '/o/' + slug, caption: [o.label && o.label.fr, o.label && o.label.en].filter(Boolean).slice(0, 2) };
+  }
   // the names and tables of a script, and the Latin letters
   function load(script) {
     var key = 'meta:' + script;
     if (!got[key]) {
-      got[key] = Promise.all([D[script] ? null : get(script + '.json'), LA ? null : get('latin.json')]).then(function (r) {
+      got[key] = Promise.all([D[script] ? null : get(script + '.json'), LA ? null : get('latin.json'), models()]).then(function (r) {
         if (r[0]) D[script] = r[0];
         if (r[1]) LA = r[1];
         return true;
@@ -494,18 +514,20 @@
   }
   // the picture of a printed model
   function picture(id) {
-    var tp = TEMPLATES[id];
-    if (!tp) return Promise.reject(new Error('template'));
-    if (!pics[id]) {
-      pics[id] = get(tp.image, true).then(function (buf) {
-        var bytes = new Uint8Array(buf), px = jpegSize(bytes);
-        if (!px) throw new Error(tp.image);
-        tp.pic = { bytes: bytes, px: px, url: URL.createObjectURL(new Blob([bytes], { type: 'image/jpeg' })) };
-        return tp.pic;
-      });
-      pics[id].catch(function () { delete pics[id]; });
-    }
-    return pics[id];
+    return models().then(function () {
+      var tp = TEMPLATES[id];
+      if (!tp) throw new Error('template');
+      if (!pics[id]) {
+        pics[id] = get(tp.image, true).then(function (buf) {
+          var bytes = new Uint8Array(buf), px = jpegSize(bytes);
+          if (!px) throw new Error(tp.image);
+          tp.pic = { bytes: bytes, px: px, url: URL.createObjectURL(new Blob([bytes], { type: 'image/jpeg' })) };
+          return tp.pic;
+        });
+        pics[id].catch(function () { delete pics[id]; });
+      }
+      return pics[id];
+    });
   }
 
   /* ==================================================================
@@ -550,8 +572,51 @@
   var parsed = { zh: {}, ja: {}, ko: {} };
   function glyph(script, ch) { return parsed[script][ch] || (parsed[script][ch] = parsePath(G[script][ch] || '')); }
 
-  // ---- the model: what is drawn on its picture, in mm
-  function compose(id, res, form) {
+  // a rectangle with round corners, as segments
+  function rrect(x, y, w, h, r) {
+    return [['M', x + r, y], ['L', x + w - r, y], ['Q', x + w, y, x + w, y + r], ['L', x + w, y + h - r], ['Q', x + w, y + h, x + w - r, y + h],
+      ['L', x + r, y + h], ['Q', x, y + h, x, y + h - r], ['L', x, y + r], ['Q', x, y, x + r, y], ['Z']];
+  }
+  // A QR code on a card of paper, with the words of the offer under it (one line for each language), so that
+  // they stay readable on any picture. The modules are one path of rectangles, a little overlapped so that no
+  // hairline shows between two of them. The square the code sits in holds the quiet zone of four modules the
+  // scanners ask for; z.plate is its side, and the card is as wide as the words need, at least as wide as the square.
+  function qrShapes(tp, q) {
+    var z = tp.qr;
+    if (!z || !q || !q.url || !root.qrcode) return null;
+    var code = root.qrcode(0, 'M');
+    code.addData(q.url);
+    code.make();
+    var n = code.getModuleCount(), quiet = 4, side = z.plate, m = side / (n + 2 * quiet), x0 = z.x - side / 2, y0 = z.y - side / 2, e = .012, ring = .35;
+    // the words first: how wide and how tall the card must be
+    var room = z.captionWidth || 44, words = (q.caption || []).slice(0, 2).map(function (text) {
+      var fs = 2.4, run = letters(text, fs);
+      if (run.width > room) { fs *= room / run.width; run = letters(text, fs); }
+      return run;
+    });
+    var cardW = Math.max(side, words.reduce(function (w, run) { return Math.max(w, run.width); }, 0) + 4.4), cardH = side + (words.length ? 1.6 + words.length * 3.2 : 0);
+    var shapes = [{ segs: rrect(z.x - cardW / 2 - ring, y0 - ring, cardW + 2 * ring, cardH + 2 * ring, 1.6), fill: z.border || [185, 137, 47] },
+      { segs: rrect(z.x - cardW / 2, y0, cardW, cardH, 1.25), fill: z.paper || [253, 250, 244] }];
+    var runs = [];
+    for (var r = 0; r < n; r++) {
+      for (var c = 0; c < n; c++) {
+        if (!code.isDark(r, c)) continue;
+        var from = c;
+        while (c + 1 < n && code.isDark(r, c + 1)) c++;
+        var xa = x0 + (quiet + from) * m - e, xb = x0 + (quiet + c + 1) * m + e, ya = y0 + (quiet + r) * m - e, yb = y0 + (quiet + r + 1) * m + e;
+        runs.push(['M', xa, ya], ['L', xb, ya], ['L', xb, yb], ['L', xa, yb], ['Z']);
+      }
+    }
+    shapes.push({ segs: runs });
+    words.forEach(function (run, i) {
+      var base = y0 + side + 1.2 + (i + 1) * 3.2 - 1.2;
+      run.list.forEach(function (g) { shapes.push({ segs: move(g, [1, 0, 0, 1, z.x - run.width / 2, base]) }); });
+    });
+    return { shapes: shapes, box: [z.x - cardW / 2 - ring, y0 - ring, z.x + cardW / 2 + ring, y0 + cardH + ring], modules: n, module: m };
+  }
+
+  // ---- the model: what is drawn on its picture, in mm; opts.qr: { url, caption } for a QR code
+  function compose(id, res, form, opts) {
     var tp = TEMPLATES[id], script = res.script, upm = D[script].upm, lines = res.forms[form || 0], total = lines.join('');
     // the size of a character, in mm, for these columns of characters
     var size = function (ls) {
@@ -581,16 +646,18 @@
     if (run.width > room + .05) { fs = tp.name; run = letters(res.name, fs); nx = tp.w / 2; ny = tp.line.below; }
     if (run.width > tp.nameMax) { fs *= tp.nameMax / run.width; run = letters(res.name, fs); }
     run.list.forEach(function (g) { shapes.push({ segs: move(g, [1, 0, 0, 1, nx - run.width / 2, ny]) }); });
-    return { w: tp.w, h: tp.h, shapes: shapes, paper: tp.edge, ink: tp.ink, pic: tp.pic };
+    var qr = qrShapes(tp, opts && opts.qr);
+    if (qr) qr.shapes.forEach(function (sh) { shapes.push(sh); });
+    return { w: tp.w, h: tp.h, shapes: shapes, paper: tp.edge, ink: tp.ink, pic: tp.pic, qr: qr ? { url: opts.qr.url, box: qr.box, modules: qr.modules, module: qr.module } : null };
   }
 
   // ---- the page as SVG (what is shown) and as PDF (what is printed): the same shapes
   var f3 = function (v) { return (Math.round(v * 1000) / 1000).toString(); };
   function pathOf(segs) { return segs.map(function (s) { return s[0] + s.slice(1).map(f3).join(' '); }).join(''); }
+  var colour = function (col) { return 'rgb(' + col.join(',') + ')'; };
   function svgOf(page, cls) {
-    var ink = 'rgb(' + page.ink.join(',') + ')';
     var body = page.shapes.map(function (sh, i) {
-      return '<path' + (sh.ink ? ' class="ink" style="--i:' + i + '"' : '') + ' fill="' + ink + '" d="' + pathOf(sh.segs) + '"/>';
+      return '<path' + (sh.ink ? ' class="ink" style="--i:' + i + '"' : '') + ' fill="' + colour(sh.fill || page.ink) + '" d="' + pathOf(sh.segs) + '"/>';
     }).join('');
     return '<svg class="' + (cls || 'calli-page') + '" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + page.w + ' ' + page.h + '" role="img">' +
       '<image href="' + page.pic.url + '" x="0" y="0" width="' + page.w + '" height="' + page.h + '" preserveAspectRatio="none"/>' + body + '</svg>';
@@ -610,9 +677,8 @@
         cv.width = Math.round(page.w * k); cv.height = Math.round(page.h * k);
         var ctx = cv.getContext('2d');
         ctx.drawImage(img, 0, 0, cv.width, cv.height);
-        ctx.fillStyle = 'rgb(' + page.ink.join(',') + ')';
         ctx.setTransform(k, 0, 0, k, 0, 0);
-        page.shapes.forEach(function (sh) { ctx.fill(new Path2D(pathOf(sh.segs))); });
+        page.shapes.forEach(function (sh) { ctx.fillStyle = colour(sh.fill || page.ink); ctx.fill(new Path2D(pathOf(sh.segs))); });
         resolve(cv);
       };
       img.onerror = function () { reject(new Error('picture')); };
@@ -629,9 +695,11 @@
     // the picture, at the finished size; its paper colour fills the bleed
     if (shop) c.push(rgb(page.paper) + ' rg ' + [-BLEED, -BLEED, page.w + 2 * BLEED, page.h + 2 * BLEED].map(n).join(' ') + ' re f');
     c.push('q ' + n(page.w) + ' 0 0 ' + n(-page.h) + ' 0 ' + n(page.h) + ' cm /Im0 Do Q');
-    c.push(rgb(page.ink) + ' rg');
+    var now = rgb(page.ink);
+    c.push(now + ' rg');
     page.shapes.forEach(function (sh) {
-      var ops = [], x = 0, y = 0;
+      var ops = [], x = 0, y = 0, want = rgb(sh.fill || page.ink);
+      if (want !== now) { c.push(want + ' rg'); now = want; }
       sh.segs.forEach(function (s) {
         if (s[0] === 'M') { ops.push(n(s[1]) + ' ' + n(s[2]) + ' m'); x = s[1]; y = s[2]; }
         else if (s[0] === 'L') { ops.push(n(s[1]) + ' ' + n(s[2]) + ' l'); x = s[1]; y = s[2]; }
@@ -655,8 +723,8 @@
     var stream = c.join('\n');
     var hex = function (s) { var o = 'FEFF'; for (var i = 0; i < s.length; i++) o += ('000' + s.charCodeAt(i).toString(16)).slice(-4); return '<' + o.toUpperCase() + '>'; };
     var boxOf = function (m) { return '[' + [m * MM, m * MM, W - m * MM, H - m * MM].map(n).join(' ') + ']'; };
-    var now = new Date(), z = function (v) { return (v < 10 ? '0' : '') + v; };
-    var stamp = 'D:' + now.getUTCFullYear() + z(now.getUTCMonth() + 1) + z(now.getUTCDate()) + z(now.getUTCHours()) + z(now.getUTCMinutes()) + z(now.getUTCSeconds()) + 'Z';
+    var when = new Date(), z = function (v) { return (v < 10 ? '0' : '') + v; };
+    var stamp = 'D:' + when.getUTCFullYear() + z(when.getUTCMonth() + 1) + z(when.getUTCDate()) + z(when.getUTCHours()) + z(when.getUTCMinutes()) + z(when.getUTCSeconds()) + 'Z';
     var pic = page.pic, objs = [
       '<< /Type /Catalog /Pages 2 0 R >>',
       '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
@@ -681,17 +749,17 @@
     return bytes;
   }
 
-  // everything a name needs to be drawn on a model: its outlines and the picture of the model
-  function ready(id, res, form) {
+  // everything a name needs to be drawn on a model: its outlines and the picture of the model (opts.qr: see compose)
+  function ready(id, res, form, opts) {
     var lines = res.forms[form || 0];
-    return Promise.all([need(res.script, lines.join('')), picture(id)]).then(function () { return compose(id, res, form); });
+    return Promise.all([need(res.script, lines.join('')), picture(id)]).then(function () { return compose(id, res, form, opts); });
   }
   // the models of a script, in the order they are offered
   function modelsOf(script) { return Object.keys(TEMPLATES).filter(function (id) { return TEMPLATES[id].script === script; }); }
 
   root.BEN_CALLI_CORE = {
-    BASE: BASE, TEMPLATES: TEMPLATES, SCRIPTS: SCRIPTS, BLEED: BLEED, MAX_LENGTH: MAX_LENGTH,
-    load: load, need: need, warm: warm, picture: picture, ready: ready, modelsOf: modelsOf,
+    BASE: BASE, SITE: SITE, TEMPLATES: TEMPLATES, SCRIPTS: SCRIPTS, BLEED: BLEED, MAX_LENGTH: MAX_LENGTH,
+    load: load, models: models, offers: offers, qrOf: qrOf, need: need, warm: warm, picture: picture, ready: ready, modelsOf: modelsOf,
     tidy: tidy, strip: strip, transliterate: transliterate, fromChars: fromChars, reading: reading,
     compose: compose, svgOf: svgOf, pdfOf: pdfOf, canvasOf: canvasOf, tile: tile,
     // for the automated checks, and for the build to try the engine without a browser

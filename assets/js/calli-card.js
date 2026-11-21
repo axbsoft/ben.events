@@ -2,7 +2,9 @@
    activity (calligraphy/card.html). Vanilla JS, no dependencies.
 
    The address of the page says everything: ?s= the language (zh, ja, ko) · m= the printed model ·
-   n= the first name · c= its characters (parts separated by ·) · l= the language of the page.
+   n= the first name · c= its characters (parts separated by ·) · l= the language of the page ·
+   o= the brand offer the bookmark's QR code led to, when it had one (assets/calligraphy/offers.json):
+   the bookmark is then drawn with the same QR code, and a button leads to the offer.
    The name is drawn again here, from the same outlines as at the event; nothing is fetched about
    the visitor and nothing is stored. Engine: assets/js/calli-core.js. */
 (function () {
@@ -33,7 +35,8 @@
       'card.sharetext': 'My first name {into}'
     }
   };
-  var q = new URLSearchParams(location.search), lang = 'fr', res = null, page = null;
+  var q = new URLSearchParams(location.search), lang = 'fr', res = null, page = null, offers = {};
+  var offer = /^[a-z0-9][a-z0-9-]{1,23}$/.test(q.get('o') || '') ? q.get('o') : '';
   function t(key, vars) {
     var s = (TEXT[lang] && TEXT[lang][key]) || TEXT.fr[key] || '';
     if (vars) Object.keys(vars).forEach(function (k) { s = s.replace('{' + k + '}', vars[k]); });
@@ -54,6 +57,13 @@
     han.setAttribute('aria-label', t('card.spoken', { chars: lines.join(' '), reading: said }));
     $('.ca-card__read').textContent = t('card.said', { reading: said });
     doc.title = res.name + ' · ' + (body.getAttribute('data-title-' + lang) || doc.title);
+    // the way to the offer, counted like a scan (offer.html)
+    var go = $('.ca-card__offer'), o = offer && offers[offer];
+    go.hidden = !o;
+    if (o) {
+      $('span', go).textContent = (o.label && (o.label[lang] || o.label.fr)) || o.brand || '';
+      go.href = '/o/' + offer + '?from=card&l=' + lang;
+    }
   }
   function setLang(next, save) {
     lang = next === 'en' ? 'en' : 'fr';
@@ -96,13 +106,16 @@
   var asked = q.get('l');
   setLang(asked === 'en' || asked === 'fr' ? asked : kept || ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en'), false);
 
-  var script = q.get('s'), model = q.get('m'), tp = C.TEMPLATES[model];
-  if (!C.SCRIPTS[script] || !tp || tp.script !== script || !q.get('n') || !q.get('c')) { lost.hidden = false; return; }
+  var script = q.get('s'), model = q.get('m');
+  if (!C.SCRIPTS[script] || !model || !q.get('n') || !q.get('c')) { lost.hidden = false; return; }
   body.setAttribute('data-script', script);
-  C.load(script).then(function () {
+  Promise.all([C.load(script), C.offers()]).then(function (got) {
+    offers = got[1];
+    var tp = C.TEMPLATES[model];
+    if (!tp || tp.script !== script) { lost.hidden = false; return null; }
     res = C.fromChars(script, q.get('n'), q.get('c'));
     if (!res) { lost.hidden = false; return null; }
-    return C.ready(model, res, 0).then(function (pg) {
+    return C.ready(model, res, 0, { qr: tp.qr ? C.qrOf(offer) : null }).then(function (pg) {
       page = pg;
       $('.ca-card__paper').innerHTML = C.svgOf(page);
       $('[data-act="share"]').hidden = !navigator.share;

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>benevents agency</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Un instant : nous vous emmenons vers l’offre.">
+<meta name="theme-color" content="#08080a">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/calli-app.css">
+<script src="https://app.rybbit.io/api/script.js?siteId=5ad12948434d" defer onerror="window.benNoStats = 1"></script>
+</head>
+<body class="ca-card ca-offer">
+
+<!-- The page a QR code leads to (/o/<name>, see vercel.json): it counts the scan with the audience
+     measurement of the site, then takes the visitor to the brand's offer. Where each name leads is
+     listed in assets/calligraphy/offers.json (tools/calligraphy/add_offer.mjs): this page goes
+     nowhere else, whatever its address says. -->
+
+<div class="ca-aura" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+
+<main class="ca-offer__main" id="main">
+  <a class="logo" href="/fr" data-home aria-label="benevents agency">
+    <span class="brand"><span class="brand__w"><b>ben</b>events</span><span class="brand__bar"><i></i><i></i><i></i><i></i></span><span class="brand__a">agency</span></span>
+  </a>
+  <p class="ca-kicker ca-offer__brand" hidden></p>
+  <h1 class="ca-offer__title" aria-live="polite" data-t="offer.wait">Un instant…</h1>
+  <p class="ca-offer__text" data-t="offer.text">Nous vous emmenons vers l’offre.</p>
+  <a class="btn ca-offer__go" href="/fr" data-home hidden><span data-t="offer.go">Continuer</span></a>
+  <div class="ca-offer__bar" aria-hidden="true"><i></i></div>
+  <noscript><p class="ca-offer__text">Cette page a besoin de JavaScript. <a href="/fr">benevents agency</a></p></noscript>
+</main>
+
+<script src="/assets/js/stats.js"></script>
+<script src="/assets/js/calli-offer.js"></script>
+</body>
+</html>

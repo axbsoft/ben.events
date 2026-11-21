@@ -1,0 +1,13 @@
+{
+ "v": 1,
+ "offers": {
+  "benevents": {
+   "brand": "benevents agency",
+   "url": "https://www.ben.events/fr",
+   "label": {
+    "fr": "Parlons de votre événement",
+    "en": "Let’s talk about your event"
+   }
+  }
+ }
+}

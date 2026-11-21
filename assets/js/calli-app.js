@@ -54,6 +54,7 @@
       'setup.brand': 'Marque citée dans l’accord', 'setup.brandph': 'Nom de la marque', 'setup.brandhint': '« J’accepte d’être recontacté(e) par … ». Laissez vide pour ne pas proposer la case.',
       'setup.mail': 'E-mail du visiteur', 'setup.mail.required': 'Obligatoire', 'setup.mail.optional': 'Facultatif', 'setup.mail.none': 'Ne pas demander',
       'setup.print': 'Impression', 'setup.print.exact': 'Au format du modèle', 'setup.print.a4': 'Sur A4, traits de coupe', 'setup.print.none': 'Sans impression',
+      'setup.qr': 'Code QR sur le marque-page', 'setup.qrhint': 'Il mène à l’offre de la marque par un lien benevents, qui compte les scans. Le visiteur retrouve l’offre dans son e-mail.', 'setup.qr.none': 'Pas de code QR',
       'setup.exithint': 'Pour quitter l’animation : maintenez le logo en haut à gauche, puis saisissez le code.',
       'setup.back': 'Retour', 'setup.next': 'Continuer', 'setup.start': 'Lancer l’animation', 'setup.loading': 'Préparation de l’encre… {done} / {all}', 'setup.failed': 'Les caractères n’ont pas pu être chargés. Vérifiez la connexion et réessayez.',
       'kiosk.label': 'Animation', 'kiosk.mark': 'Espace équipe : maintenez appuyé', 'kiosk.title1': 'Votre prénom', 'kiosk.title2': 'au pinceau',
@@ -78,7 +79,7 @@
       'staff.send.offline': 'Hors connexion : les contacts attendent sur cet appareil et partiront dès le retour du réseau.',
       'staff.send.refused': 'L’envoi est refusé par le serveur (code changé depuis l’ouverture ?). Verrouillez puis rouvrez l’application ; les contacts restent sur cet appareil.',
       'staff.none': 'Aucune participation à réimprimer pour cet événement.', 'staff.exported': 'Liste exportée : {n} lignes.', 'staff.cleared': 'Les contacts de cet appareil sont effacés.',
-      'csv': ['Date', 'Événement', 'Modèle', 'Langue', 'Prénom', 'Caractères', 'Lecture', 'E-mail', 'Accord pour être recontacté', 'Imprimé', 'Transmis'], 'yes': 'oui', 'no': 'non'
+      'csv': ['Date', 'Événement', 'Modèle', 'Langue', 'Prénom', 'Caractères', 'Lecture', 'E-mail', 'Accord pour être recontacté', 'Imprimé', 'Transmis', 'Offre QR'], 'yes': 'oui', 'no': 'non'
     },
     en: {
       'gate.eyebrow': 'Activity · Team access', 'gate.title1': 'Your first name', 'gate.title2': 'by brush',
@@ -96,6 +97,7 @@
       'setup.brand': 'Brand named in the consent', 'setup.brandph': 'Name of the brand', 'setup.brandhint': '“I agree to be contacted by …”. Leave empty to leave the box out.',
       'setup.mail': 'Visitor’s email', 'setup.mail.required': 'Required', 'setup.mail.optional': 'Optional', 'setup.mail.none': 'Do not ask',
       'setup.print': 'Printing', 'setup.print.exact': 'At the size of the model', 'setup.print.a4': 'On A4, with crop marks', 'setup.print.none': 'No printing',
+      'setup.qr': 'QR code on the bookmark', 'setup.qrhint': 'It leads to the brand’s offer through a benevents link, which counts the scans. The visitor finds the offer in their email too.', 'setup.qr.none': 'No QR code',
       'setup.exithint': 'To leave the activity: hold the logo at the top left, then enter the code.',
       'setup.back': 'Back', 'setup.next': 'Continue', 'setup.start': 'Start the activity', 'setup.loading': 'Preparing the ink… {done} / {all}', 'setup.failed': 'The characters could not be loaded. Check the connection and try again.',
       'kiosk.label': 'Activity', 'kiosk.mark': 'Team corner: press and hold', 'kiosk.title1': 'Your first name', 'kiosk.title2': 'by brush',
@@ -120,7 +122,7 @@
       'staff.send.offline': 'Offline: contacts wait on this device and leave as soon as the network is back.',
       'staff.send.refused': 'The server refuses the contacts (code changed since the app was opened?). Lock the app and open it again; the contacts stay on this device.',
       'staff.none': 'No participation to print again for this event.', 'staff.exported': 'List exported: {n} rows.', 'staff.cleared': 'The contacts on this device are erased.',
-      'csv': ['Date', 'Event', 'Model', 'Language', 'First name', 'Characters', 'Reading', 'Email', 'Agrees to be contacted', 'Printed', 'Passed on'], 'yes': 'yes', 'no': 'no'
+      'csv': ['Date', 'Event', 'Model', 'Language', 'First name', 'Characters', 'Reading', 'Email', 'Agrees to be contacted', 'Printed', 'Passed on', 'QR offer'], 'yes': 'yes', 'no': 'no'
     }
   };
   var lang = 'fr';
@@ -148,7 +150,8 @@
   function store(key, value, plainText) {
     try { localStorage.setItem(key, plainText ? value : JSON.stringify(value)); return true; } catch (e) { return false; }
   }
-  var S = read(SET) || {};                   // language, model, event, brand, e-mail, paper, running
+  var S = read(SET) || {};                   // language, model, event, brand, e-mail, paper, qr (an offer), running
+  var offers = {};                           // the brand offers a QR code can lead to (offers.json)
   var log = read(LOG) || [];                 // every participation on this device
   if (!Array.isArray(log)) log = [];
   var keepSettings = function () { store(SET, S); };
@@ -234,6 +237,8 @@
   function shake(el) { el.classList.remove('is-wrong'); void el.offsetWidth; el.classList.add('is-wrong'); }
   function scriptOf() { return C.SCRIPTS[S.script] ? S.script : ''; }
   function modelOf() { var m = C.TEMPLATES[S.model]; return m && m.script === S.script ? m : null; }
+  // the QR code to print on a model for an offer: only where the model has a place for it
+  function qrOpts(id, slug) { var m = C.TEMPLATES[id]; return m && m.qr && slug && slug !== 'none' ? C.qrOf(slug) : null; }
 
   /* ---------- 1. The gate ---------- */
   gform.addEventListener('submit', function (e) {
@@ -324,7 +329,7 @@
   scriptBox.addEventListener('click', function (e) {
     var b = e.target.closest('.ca-choice');
     if (!b) return;
-    if (S.script !== b.getAttribute('data-id')) { S.script = b.getAttribute('data-id'); S.model = ''; S.brand = undefined; }
+    if (S.script !== b.getAttribute('data-id')) { S.script = b.getAttribute('data-id'); S.model = ''; S.brand = undefined; S.qr = undefined; }
     pick(scriptBox, S.script);
     body.setAttribute('data-script', S.script);
     keepSettings();
@@ -333,7 +338,7 @@
   modelBox.addEventListener('click', function (e) {
     var b = e.target.closest('.ca-choice');
     if (!b) return;
-    if (S.model !== b.getAttribute('data-id')) S.brand = undefined;
+    if (S.model !== b.getAttribute('data-id')) { S.brand = undefined; S.qr = undefined; }
     S.model = b.getAttribute('data-id');
     pick(modelBox, S.model);
     keepSettings();
@@ -348,6 +353,21 @@
       segState();
     });
   });
+  // the QR code of the bookmark: offered only where the model has a place for one and there is an offer to lead to
+  function drawQr() {
+    var m = modelOf(), row = $('.ca-row--qr'), seg = $('.ca-seg', row), slugs = Object.keys(offers);
+    row.hidden = !(m && m.qr && slugs.length);
+    if (row.hidden) { S.qr = 'none'; return; }
+    if (S.qr === undefined || (S.qr !== 'none' && !offers[S.qr])) S.qr = m.offer && offers[m.offer] ? m.offer : 'none';
+    seg.textContent = '';
+    slugs.concat('none').forEach(function (slug) {
+      var b = doc.createElement('button'), o = offers[slug];
+      b.type = 'button';
+      b.setAttribute('data-v', slug);
+      b.textContent = slug === 'none' ? t('setup.qr.none') : [o.brand, (o.label && (o.label[lang] || o.label.fr)) || slug].filter(Boolean).join(' · ');
+      seg.appendChild(b);
+    });
+  }
   function segState() {
     if (['required', 'optional', 'none'].indexOf(S.email) < 0) S.email = 'required';
     if (['exact', 'a4', 'none'].indexOf(S.paper) < 0) S.paper = 'exact';
@@ -376,12 +396,13 @@
   }
   function goStep(n) {
     state.step = n;
-    if (n === 2) drawModels();
+    if (n === 2) C.models().then(drawModels, function () { say(snote, 'setup.failed', null, true); });
     if (n === 3) {
       var m = modelOf();
       if (S.brand === undefined) S.brand = m ? m.brand : '';
       sform.elements.event.value = S.event || '';
       sform.elements.brand.value = S.brand || '';
+      drawQr();
       segState();
     }
     stepState();
@@ -389,6 +410,7 @@
   }
   function openSetup() {
     stopKiosk();
+    S.qr = undefined;                          // a new event chooses its QR code again: an offer is never carried over from the last one
     showOnly(setup);
     if (scriptOf()) body.setAttribute('data-script', S.script);
     drawScripts();
@@ -404,7 +426,7 @@
     nextBtn.classList.add('is-busy');
     say(snote, 'setup.loading', { done: 0, all: '…' });
     full(true);
-    Promise.all([C.picture(S.model), C.warm(S.script, function (done, all) { say(snote, 'setup.loading', { done: done, all: all }); })]).then(function () {
+    Promise.all([C.picture(S.model), C.offers(), C.warm(S.script, function (done, all) { say(snote, 'setup.loading', { done: done, all: all }); })]).then(function () {
       nextBtn.classList.remove('is-busy');
       say(snote, '');
       startKiosk();
@@ -450,6 +472,7 @@
         $('.ca-choice__text', b).textContent = t('setup.' + id);
       });
       if (state.step === 2) drawModels();
+      if (state.step === 3) { drawQr(); segState(); }
       stepState();
     }
     [gnote, snote, nameNote, mailNote, pnote].forEach(sayAgain);
@@ -527,7 +550,7 @@
     C.load(script).then(function () {
       var res = C.transliterate(script, input.value);
       if (res.error) { say(nameNote, 'err.' + res.error, null, true); shake(nameForm); return null; }
-      return C.ready(S.model, res, 0).then(function (page) {
+      return C.ready(S.model, res, 0, { qr: qrOpts(S.model, S.qr) }).then(function (page) {
         state.res = res; state.form = 0; state.page = page;
         say(nameNote, '');
         drawName(false);
@@ -593,7 +616,7 @@
     if (!b || !state.res) return;
     var i = +b.getAttribute('data-form');
     if (i === state.form) return;
-    C.ready(S.model, state.res, i).then(function (page) { state.form = i; state.page = page; drawName(false); }).catch(function () {});
+    C.ready(S.model, state.res, i, { qr: qrOpts(S.model, S.qr) }).then(function (page) { state.form = i; state.page = page; drawName(false); }).catch(function () {});
   });
 
   // c. the e-mail address
@@ -622,7 +645,7 @@
   function finish(email, consent, from) {
     var res = state.res, lines = res.forms[state.form], printing = S.paper !== 'none', page = state.page;
     var entry = { id: uid(), at: new Date().toISOString(), event: S.event, brand: S.brand || '', model: S.model, script: res.script, name: res.name,
-      chars: lines.join('·'), reading: C.reading(res.script, lines), email: email, consent: !!consent, lang: lang, printed: printing, sent: 0 };
+      chars: lines.join('·'), reading: C.reading(res.script, lines), email: email, consent: !!consent, lang: lang, printed: printing, offer: qrOpts(S.model, S.qr) ? S.qr : '', sent: 0 };
     log.push(entry);
     keepLog();
     $('.ca-done__title').textContent = t('kiosk.thanks', { name: res.name });
@@ -760,7 +783,7 @@
       C.load(last.script).then(function () {
         var res = C.fromChars(last.script, last.name, last.chars);
         if (!res) throw new Error('entry');
-        return C.ready(last.model, res, 0);
+        return C.ready(last.model, res, 0, { qr: qrOpts(last.model, last.offer) });
       }).then(function (page) { staff.hidden = true; return print(page); }).then(function () { staff.hidden = false; }, function () { staff.hidden = false; say(pnote, 'err.failed', null, true); });
     } else if (act === 'csv') {
       save(new Blob([csvOf()], { type: 'text/csv;charset=utf-8' }), 'calligraphie-contacts-' + new Date().toISOString().slice(0, 10) + '.csv');
@@ -782,7 +805,7 @@
     var yn = function (v) { return t(v ? 'yes' : 'no'); };
     var lines = [TEXT[lang].csv].concat(log.map(function (e) {
       var m = C.TEMPLATES[e.model], sc = C.SCRIPTS[e.script];
-      return [when(e.at), e.event, m ? m.label[lang] : e.model, sc ? sc.label[lang] : e.script, e.name, e.chars, e.reading, e.email, e.email ? yn(e.consent) : '', yn(e.printed), e.email ? yn(e.sent === 1) : ''];
+      return [when(e.at), e.event, m ? m.label[lang] : e.model, sc ? sc.label[lang] : e.script, e.name, e.chars, e.reading, e.email, e.email ? yn(e.consent) : '', yn(e.printed), e.email ? yn(e.sent === 1) : '', e.offer || ''];
     }));
     return '﻿' + lines.map(function (l) { return l.map(cell).join(';'); }).join('\r\n') + '\r\n';
   }
@@ -830,7 +853,7 @@
     var m = C.TEMPLATES[next.model];
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
       pass: BOX.pass, id: next.id, at: next.at, event: next.event, brand: next.brand, model: next.model, model_name: m ? m.label.fr : next.model,
-      script: next.script, name: next.name, chars: next.chars, reading: next.reading, email: next.email, consent: next.consent, lang: next.lang, device: device
+      script: next.script, name: next.name, chars: next.chars, reading: next.reading, email: next.email, consent: next.consent, lang: next.lang, offer: next.offer || '', device: device
     }) }).then(function (r) {
       if (r.ok) { next.sent = 1; sendState = 'ok'; }
       else if (r.status === 400) { next.sent = 2; sendState = 'ok'; }                 // an entry the server will never take: it stays in the export
@@ -852,10 +875,16 @@
   setLang((asked && asked[1]) || (kept === 'en' ? 'en' : 'fr'), false);
   segState();
   fit();
+  // the printed models and the offers a QR code can lead to: asked now, so that they are there when needed
+  C.models().catch(function () {});
+  C.offers().then(function (o) { offers = o; if (!setup.hidden && state.step === 3) { drawQr(); segState(); } });
   // this tab already opened the app: straight back to where the team left it
   restore().then(function (ok) {
     if (!ok) { if (!touch) gform.elements.code.focus({ preventScroll: true }); return; }
-    if (S.running && scriptOf() && modelOf()) startKiosk(); else openSetup();
+    return Promise.all([C.models().catch(function () {}), C.offers()]).then(function (got) {
+      offers = got[1];
+      if (S.running && scriptOf() && modelOf()) startKiosk(); else openSetup();
+    });
   });
   // the app keeps working when the network of the venue drops (calligraphy-sw.js)
   if ('serviceWorker' in navigator && window.isSecureContext) navigator.serviceWorker.register('/calligraphy-sw.js', { scope: '/calligraphy' }).catch(function () {});

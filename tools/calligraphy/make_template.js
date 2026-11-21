@@ -9,15 +9,35 @@
 
    usage:  node tools/calligraphy/make_template.js <Korean brush font> <Japanese brush font> [out folder]
            (.ttf or .woff2: the fonts only draw the seals)
+
+   One bookmark in a client's colours, with its logo where the emblem is (add_model.mjs runs this):
+           node tools/calligraphy/make_template.js <Korean font> <Japanese font> --kind ko --out file.jpg \
+                --logo logo.svg|png|jpg [--logo-plate "#0c0c0f"] [--accent "#b9892f"] [--paper "#f7f0e3"] \
+                [--no-seal] [--no-landscape]
+           --kind: the language the bookmark is for (zh, ja, ko): its landscape and its seal
+           --logo-plate: a colour behind the logo, for a logo that is white or does not read on paper
+           --accent: the colour of the frame and of the rule · --paper: the colour of the paper
+           With --no-seal the two fonts are not read at all.
    needs:  playwright (it draws the pictures with a browser)
-   The places of the name and of the rule are in assets/js/calli-core.js (PLAIN_MODEL). */
+   The places of the name and of the rule are in assets/js/calli-core.js (PLAIN_MODEL, copied into models.json). */
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
-const [korean, japanese] = process.argv.slice(2);
-const outDir = process.argv[4] || path.join(__dirname, '..', '..', 'assets', 'calligraphy', 'templates');
-if (!korean || !japanese) { console.error('usage: node make_template.js <Korean font> <Japanese font> [out folder]'); process.exit(1); }
+const pos = [], opts = {};
+for (let i = 2; i < process.argv.length; i++) {
+  const a = process.argv[i];
+  if (!a.startsWith('--')) { pos.push(a); continue; }
+  const next = process.argv[i + 1];
+  opts[a.slice(2)] = next !== undefined && !next.startsWith('--') ? process.argv[++i] : true;
+}
+const [korean, japanese] = pos;
+const single = !!opts.kind;
+const outDir = single ? path.dirname(path.resolve(opts.out || '.')) : pos[2] || path.join(__dirname, '..', '..', 'assets', 'calligraphy', 'templates');
+if ((!korean || !japanese) && !opts['no-seal']) { console.error('usage: node make_template.js <Korean font> <Japanese font> [out folder]   (or --no-seal: no fonts needed)'); process.exit(1); }
+if (single && (!['zh', 'ja', 'ko'].includes(opts.kind) || !opts.out)) { console.error('--kind zh|ja|ko needs --out file.jpg'); process.exit(1); }
+const HEX = /^#[0-9a-fA-F]{6}$/;
+for (const k of ['accent', 'paper', 'logo-plate']) if (opts[k] !== undefined && !HEX.test(opts[k])) { console.error('--' + k + ' must be a colour like "#b9892f"'); process.exit(1); }
 const W = 60, H = 180, PX = 2000 / H;                      // the same number of dots as the client's model: 667 × 2000
 
 // the same landscapes every time: numbers drawn from a fixed seed
@@ -48,6 +68,13 @@ function peaks(base, list) {
   }).join('');
 }
 
+// three tones of paper round one colour: a little lighter on top, a little darker at the foot
+const rgbOf = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
+const hexOf = c => '#' + c.map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join('');
+const mixWith = (hex, to, k) => hexOf(rgbOf(hex).map(v => v + (to - v) * k));
+const paperStops = hex => hex === '#f7f0e3'          // the paper of the plain bookmarks, as it was first drawn
+  ? '<stop offset="0" stop-color="#f8f2e6"/><stop offset=".55" stop-color="#f7f0e3"/><stop offset="1" stop-color="#f3ead9"/>'
+  : `<stop offset="0" stop-color="${mixWith(hex, 255, .22)}"/><stop offset=".55" stop-color="${hex}"/><stop offset="1" stop-color="${mixWith(hex, 0, .035)}"/>`;
 const wash = (id, y0, y1, a, b, c) => `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="0" y1="${y0}" x2="0" y2="${y1}">` +
   `<stop offset="0" stop-color="${a[0]}" stop-opacity="${a[1]}"/><stop offset=".6" stop-color="${b[0]}" stop-opacity="${b[1]}"/><stop offset="1" stop-color="${c[0]}" stop-opacity="${c[1]}"/></linearGradient>`;
 const mist = (y, h) => `<rect x="-2" y="${y}" width="${W + 4}" height="${h}" fill="url(#mist)"/>`;
@@ -81,7 +108,10 @@ function landscape(kind) {
       <path d="${near}" fill="url(#inkNear)" filter="url(#rough)"/>`;
 }
 
-function emblem(kind) {
+function emblem(kind, m) {
+  if (m && m.logo) return `<!-- the brand's logo, where the emblem is -->
+    ${m.logoPlate ? `<rect x="9.2" y="9" width="41.6" height="25" rx="2.6" fill="${m.logoPlate}"/>` : ''}
+    <image href="${m.logo}" x="11.5" y="11" width="37" height="21" preserveAspectRatio="xMidYMid meet"/>`;
   if (kind === 'ko') return `<!-- the circle of Korea: red above, blue below, turned as on the flag -->
     <g transform="translate(30 21.5) rotate(33.69)" filter="url(#rough)">
       <path d="M-8 0A8 8 0 0 1 8 0Z" fill="#c8322f"/><path d="M-8 0A8 8 0 0 0 8 0Z" fill="#1f4a8f"/>
@@ -96,14 +126,24 @@ function emblem(kind) {
 }
 
 const data = file => 'data:font/' + (file.endsWith('.woff2') ? 'woff2' : 'ttf') + ';base64,' + fs.readFileSync(file).toString('base64');
-const MODELS = [
+const IMAGE = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', svg: 'image/svg+xml', webp: 'image/webp' };
+const logoData = file => {
+  const type = IMAGE[path.extname(file).slice(1).toLowerCase()];
+  if (!type) { console.error('--logo: a .svg, .png, .jpg or .webp picture'); process.exit(1); }
+  return `data:${type};base64,` + fs.readFileSync(file).toString('base64');
+};
+const SEAL = { zh: ['福', 'ja'], ja: ['福', 'ja'], ko: ['복', 'ko'] };
+const MODELS = single ? [{
+  kind: opts.kind, file: path.basename(opts.out), seal: opts['no-seal'] ? '' : SEAL[opts.kind][0], font: SEAL[opts.kind][1],
+  logo: opts.logo ? logoData(opts.logo) : '', logoPlate: opts['logo-plate'] || '', accent: opts.accent || '#b9892f', paper: opts.paper || '#f7f0e3', landscape: !opts['no-landscape']
+}] : [
   { kind: 'zh', file: 'hanzi-bookmark_60x180mm.jpg', seal: '福', font: 'ja' },
   { kind: 'ja', file: 'kana-bookmark_60x180mm.jpg', seal: '福', font: 'ja' },
   { kind: 'ko', file: 'hangul-bookmark_60x180mm.jpg', seal: '복', font: 'ko' }
-];
+].map(m => Object.assign({ logo: '', logoPlate: '', accent: '#b9892f', paper: '#f7f0e3', landscape: true }, m));
 const page = m => `<!doctype html><meta charset="utf-8"><style>
-@font-face { font-family: ko; src: url(${data(korean)}); }
-@font-face { font-family: ja; src: url(${data(japanese)}); }
+${m.seal ? `@font-face { font-family: ko; src: url(${data(korean)}); }
+@font-face { font-family: ja; src: url(${data(japanese)}); }` : ''}
 html, body { margin: 0; background: #f7f1e5; }
 svg { display: block; width: ${W * PX}px; height: ${H * PX}px; }
 </style>
@@ -115,7 +155,7 @@ svg { display: block; width: ${W * PX}px; height: ${H * PX}px; }
     <filter id="soft"><feGaussianBlur stdDeviation=".45"/></filter>
     <filter id="softer"><feGaussianBlur stdDeviation=".9"/></filter>
     <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="5" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale=".55"/></filter>
-    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8f2e6"/><stop offset=".55" stop-color="#f7f0e3"/><stop offset="1" stop-color="#f3ead9"/></linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">${paperStops(m.paper)}</linearGradient>
     <radialGradient id="sun" cx=".42" cy=".4" r=".7"><stop offset="0" stop-color="#d9463c"/><stop offset=".7" stop-color="#c8322f"/><stop offset="1" stop-color="#b52a2a"/></radialGradient>
     <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6efe1" stop-opacity="0"/><stop offset=".5" stop-color="#f6efe1" stop-opacity=".75"/><stop offset="1" stop-color="#f6efe1" stop-opacity="0"/></linearGradient>
     <clipPath id="sheet"><rect width="${W}" height="${H}"/></clipPath>
@@ -125,18 +165,18 @@ svg { display: block; width: ${W * PX}px; height: ${H * PX}px; }
     <rect width="${W}" height="${H}" filter="url(#cloud)" opacity=".42"/>
     <rect width="${W}" height="${H}" filter="url(#fibre)" opacity=".2"/>
     <rect width="${W}" height="${H}" filter="url(#grain)" opacity=".3"/>
-    ${emblem(m.kind)}
+    ${emblem(m.kind, m)}
     <!-- the landscape in ink wash, the farthest first, mist between -->
-    ${landscape(m.kind)}
+    ${m.landscape ? landscape(m.kind) : ''}
     <!-- the rule the visitor's name sits on: two dashes, the name between them -->
-    <g stroke="#b9892f" stroke-width=".42" stroke-linecap="round"><path d="M10.4 112.4H20.6"/><path d="M39.4 112.4H49.6"/></g>
+    <g stroke="${m.accent}" stroke-width=".42" stroke-linecap="round"><path d="M10.4 112.4H20.6"/><path d="M39.4 112.4H49.6"/></g>
     <!-- the seal -->
-    <g transform="translate(45.2 93.6) rotate(-3)" filter="url(#rough)">
+    ${m.seal ? `<g transform="translate(45.2 93.6) rotate(-3)" filter="url(#rough)">
       <rect x="-3.5" y="-3.7" width="7" height="7.4" rx="1.1" fill="#c8322f"/>
       <text x="0" y="${m.font === 'ko' ? 2.35 : 2.2}" text-anchor="middle" font-family="${m.font}" font-size="${m.font === 'ko' ? 6.6 : 5.6}" fill="#f8f0e2">${m.seal}</text>
-    </g>
+    </g>` : ''}
     <!-- the frame: a fine double line, knotted at the corners -->
-    <g fill="none" stroke="#b9892f">
+    <g fill="none" stroke="${m.accent}">
       <rect x="2.3" y="2.3" width="${W - 4.6}" height="${H - 4.6}" stroke-width=".42"/>
       <rect x="3.5" y="3.5" width="${W - 7}" height="${H - 7}" stroke-width=".14" stroke-opacity=".8"/>
       ${[[2.3, 2.3, 1, 1], [W - 2.3, 2.3, -1, 1], [2.3, H - 2.3, 1, -1], [W - 2.3, H - 2.3, -1, -1]].map(c =>
@@ -152,6 +192,8 @@ svg { display: block; width: ${W * PX}px; height: ${H * PX}px; }
     const tab = await browser.newPage({ viewport: { width: Math.round(W * PX), height: Math.round(H * PX) }, deviceScaleFactor: 1 });
     await tab.setContent(page(m));
     await tab.evaluate(() => document.fonts.ready);
+    await tab.evaluate(() => Promise.all([...document.images].map(i => i.decode && i.decode().catch(() => {}))));
+    await tab.waitForFunction(() => [...document.querySelectorAll('image')].every(i => i.getAttribute('href')), null, { timeout: 5000 }).catch(() => {});
     await tab.waitForTimeout(300);
     const out = path.join(outDir, m.file);
     await tab.screenshot({ path: out, type: 'jpeg', quality: 90, clip: { x: 0, y: 0, width: Math.round(W * PX), height: Math.round(H * PX) } });

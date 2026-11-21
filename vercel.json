@@ -96,6 +96,28 @@
       ]
     },
     {
+      "source": "/o/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/offer",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -107,6 +129,12 @@
           "value": "strict-origin-when-cross-origin"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/o/:slug",
+      "destination": "/offer.html"
     }
   ],
   "redirects": [

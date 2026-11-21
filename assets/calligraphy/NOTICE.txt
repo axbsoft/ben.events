@@ -17,6 +17,12 @@ They come from open-source typefaces, each under the SIL Open Font License 1.1
                      Copyright 2022 The Instrument Serif Project Authors
                      https://github.com/Instrument/instrument-serif
 
+The QR codes are drawn by assets/js/qrcode.js, "QR Code Generator for JavaScript" by Kazuhiko Arase
+(version 2.0.4, MIT license, https://github.com/kazuhikoarase/qrcode-generator), unchanged. "QR Code" is a
+registered trademark of DENSO WAVE INCORPORATED.
+
+models.json lists the printed models and offers.json the brand offers a QR code can lead to.
+
 In templates/: the EXEED bookmark is the picture supplied for that project, unchanged; the three
 plain bookmarks (hanzi, kana, hangul) are drawn by tools/calligraphy/make_template.js.
 The name lists and the syllable table are in tools/calligraphy/.

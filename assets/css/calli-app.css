@@ -116,6 +116,7 @@
 .ca-seg { display: flex; flex-wrap: wrap; gap: 4px; padding: 5px; border-radius: 20px; border: 1px solid var(--line); background: rgba(255, 255, 255, .04); width: fit-content; max-width: 100%; }
 .ca-seg button { padding: 12px 18px; border-radius: 15px; font-size: 15px; font-weight: 500; color: var(--mute); transition: background .3s, color .3s; }
 .ca-seg button[aria-pressed="true"] { background: var(--text); color: #0a0a0a; }
+.ca-row--qr { grid-column: 1 / -1; }
 .ca-hint--key { padding: 14px 18px; border-radius: 16px; border: 1px dashed rgba(216, 176, 106, .5); color: #ecd6a8; background: rgba(216, 176, 106, .07); }
 .ca-setup__foot { position: sticky; bottom: 0; display: flex; justify-content: flex-end; gap: 10px; padding: 16px clamp(18px, 3vw, 40px) max(18px, env(safe-area-inset-bottom)); background: linear-gradient(rgba(8, 8, 10, 0), rgba(8, 8, 10, .92) 42%); }
 .ca-setup__note { text-align: right; }
@@ -308,6 +309,7 @@
 .ca-card__text { max-width: 40ch; margin-top: 16px; color: rgba(246, 245, 241, .78); font-size: clamp(16px, 1.4vw, 19px); line-height: 1.5; }
 .ca-card__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 .ca-card .btn { height: 58px; padding: 0 26px; }
+.ca-card__offer span::after { display: none; }
 .ca-card__by { margin-top: 34px; font-size: 14px; color: var(--mute); }
 .ca-card__by a { color: var(--text); background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; }
 .ca-card__lost { min-height: 70vh; display: grid; place-items: center; text-align: center; padding: 40px var(--pad); }
@@ -318,3 +320,16 @@
   .ca-card__text { margin-left: auto; margin-right: auto; }
   .ca-card__actions { justify-content: center; }
 }
+
+/* ============================================================
+   The page a QR code leads to (offer.html, /o/<name>)
+   ============================================================ */
+.ca-offer { min-height: 100vh; min-height: 100dvh; }
+.ca-offer__main { min-height: 100vh; min-height: 100dvh; display: grid; align-content: center; justify-items: center; gap: 14px; padding: 40px var(--pad); text-align: center; }
+.ca-offer__main .brand { font-size: clamp(30px, 5vw, 44px); margin-bottom: clamp(14px, 4vh, 36px); }
+.ca-offer__title { max-width: 18ch; font-family: var(--display); font-weight: 500; letter-spacing: -.034em; line-height: 1.02; font-size: clamp(34px, 7vw, 72px); text-wrap: balance; animation: ca-rise .9s var(--ease) both; }
+.ca-offer__text { max-width: 36ch; color: rgba(246, 245, 241, .76); font-size: clamp(16px, 1.6vw, 20px); line-height: 1.45; }
+.ca-offer__go { margin-top: 10px; height: 58px; padding: 0 28px; }
+.ca-offer__bar { width: min(240px, 60vw); height: 4px; margin-top: 18px; border-radius: 4px; overflow: hidden; background: rgba(255, 255, 255, .12); }
+.ca-offer__bar i { display: block; height: 100%; border-radius: 4px; background: var(--grad); transform-origin: left; animation: ca-fill 3.4s cubic-bezier(.2, .6, .3, 1) both; }
+@keyframes ca-fill { from { transform: scaleX(.04); } to { transform: scaleX(1); } }

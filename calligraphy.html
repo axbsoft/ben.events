@@ -121,6 +121,12 @@
             <button type="button" data-v="none" aria-pressed="false" data-t="setup.print.none">Sans impression</button>
           </div>
         </div>
+        <!-- only where the model has a place for a QR code, and there is an offer to lead to (offers.json) -->
+        <div class="ca-row ca-row--qr" role="group" aria-labelledby="set-qr" hidden>
+          <span class="ca-row__l" id="set-qr" data-t="setup.qr">Code QR sur le marque-page</span>
+          <div class="ca-seg" data-set="qr"></div>
+          <span class="ca-row__h" data-t="setup.qrhint">Il mène à l’offre de la marque par un lien benevents, qui compte les scans.</span>
+        </div>
       </form>
       <p class="ca-hint ca-hint--key" data-t="setup.exithint">Pour quitter l’animation : maintenez le logo en haut à gauche, puis saisissez le code.</p>
     </div>
@@ -276,6 +282,7 @@
 <!-- what the printer receives: the model at its true size, nothing else -->
 <div class="ca-print" aria-hidden="true"></div>
 
+<script src="assets/js/qrcode.js"></script>
 <script src="assets/js/calli-core.js"></script>
 <script src="assets/js/calli-app.js"></script>
 </body>
