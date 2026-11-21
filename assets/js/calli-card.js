@@ -3,8 +3,9 @@
 
    The address of the page says everything: ?s= the language (zh, ja, ko) · m= the printed model ·
    n= the first name · c= its characters (parts separated by ·) · l= the language of the page ·
-   o= the brand offer the bookmark's QR code led to, when it had one (assets/calligraphy/offers.json):
-   the bookmark is then drawn with the same QR code, and a button leads to the offer.
+   o= the brand offer the QR code on the back of the bookmark led to, when it had one
+   (assets/calligraphy/offers.json): a button leads to the offer. The picture and the PDF are the front
+   alone: the name and the artwork, with nothing else on them.
    The name is drawn again here, from the same outlines as at the event; nothing is fetched about
    the visitor and nothing is stored. Engine: assets/js/calli-core.js. */
 (function () {
@@ -115,7 +116,7 @@
     if (!tp || tp.script !== script) { lost.hidden = false; return null; }
     res = C.fromChars(script, q.get('n'), q.get('c'));
     if (!res) { lost.hidden = false; return null; }
-    return C.ready(model, res, 0, { qr: tp.qr ? C.qrOf(offer) : null }).then(function (pg) {
+    return C.ready(model, res, 0).then(function (pg) {
       page = pg;
       $('.ca-card__paper').innerHTML = C.svgOf(page);
       $('[data-act="share"]').hidden = !navigator.share;

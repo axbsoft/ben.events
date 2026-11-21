@@ -9,15 +9,19 @@
 
    usage:  node tools/calligraphy/make_template.js <Korean brush font> <Japanese brush font> [out folder]
            (.ttf or .woff2: the fonts only draw the seals)
+           It draws the three fronts (hanzi, kana, hangul) and the three backs, <kind>-back_60x180mm.jpg.
 
    One bookmark in a client's colours, with its logo where the emblem is (add_model.mjs runs this):
            node tools/calligraphy/make_template.js <Korean font> <Japanese font> --kind ko --out file.jpg \
                 --logo logo.svg|png|jpg [--logo-plate "#0c0c0f"] [--accent "#b9892f"] [--paper "#f7f0e3"] \
-                [--no-seal] [--no-landscape]
+                [--no-seal] [--no-landscape] [--back [--no-emblem]]
            --kind: the language the bookmark is for (zh, ja, ko): its landscape and its seal
+           --back: the other side: no seal and no rule, the middle left bare for the QR code card that the
+                   engine draws (the emblem or logo at the top, the landscape at the foot, as on the front);
+                   --no-emblem leaves out the national emblem (a logo is still drawn when there is one)
            --logo-plate: a colour behind the logo, for a logo that is white or does not read on paper
            --accent: the colour of the frame and of the rule · --paper: the colour of the paper
-           With --no-seal the two fonts are not read at all.
+           With --no-seal, or --back (which has no seal), the two fonts are not read at all.
    needs:  playwright (it draws the pictures with a browser)
    The places of the name and of the rule are in assets/js/calli-core.js (PLAIN_MODEL, copied into models.json). */
 const { chromium } = require('playwright');
@@ -34,7 +38,7 @@ for (let i = 2; i < process.argv.length; i++) {
 const [korean, japanese] = pos;
 const single = !!opts.kind;
 const outDir = single ? path.dirname(path.resolve(opts.out || '.')) : pos[2] || path.join(__dirname, '..', '..', 'assets', 'calligraphy', 'templates');
-if ((!korean || !japanese) && !opts['no-seal']) { console.error('usage: node make_template.js <Korean font> <Japanese font> [out folder]   (or --no-seal: no fonts needed)'); process.exit(1); }
+if ((!korean || !japanese) && !opts['no-seal'] && !opts.back) { console.error('usage: node make_template.js <Korean font> <Japanese font> [out folder]   (or --no-seal, or --back: no fonts needed)'); process.exit(1); }
 if (single && (!['zh', 'ja', 'ko'].includes(opts.kind) || !opts.out)) { console.error('--kind zh|ja|ko needs --out file.jpg'); process.exit(1); }
 const HEX = /^#[0-9a-fA-F]{6}$/;
 for (const k of ['accent', 'paper', 'logo-plate']) if (opts[k] !== undefined && !HEX.test(opts[k])) { console.error('--' + k + ' must be a colour like "#b9892f"'); process.exit(1); }
@@ -134,13 +138,16 @@ const logoData = file => {
 };
 const SEAL = { zh: ['福', 'ja'], ja: ['福', 'ja'], ko: ['복', 'ko'] };
 const MODELS = single ? [{
-  kind: opts.kind, file: path.basename(opts.out), seal: opts['no-seal'] ? '' : SEAL[opts.kind][0], font: SEAL[opts.kind][1],
+  kind: opts.kind, file: path.basename(opts.out), seal: opts['no-seal'] || opts.back ? '' : SEAL[opts.kind][0], font: SEAL[opts.kind][1], back: !!opts.back, noEmblem: !!opts['no-emblem'],
   logo: opts.logo ? logoData(opts.logo) : '', logoPlate: opts['logo-plate'] || '', accent: opts.accent || '#b9892f', paper: opts.paper || '#f7f0e3', landscape: !opts['no-landscape']
 }] : [
   { kind: 'zh', file: 'hanzi-bookmark_60x180mm.jpg', seal: '福', font: 'ja' },
   { kind: 'ja', file: 'kana-bookmark_60x180mm.jpg', seal: '福', font: 'ja' },
-  { kind: 'ko', file: 'hangul-bookmark_60x180mm.jpg', seal: '복', font: 'ko' }
-].map(m => Object.assign({ logo: '', logoPlate: '', accent: '#b9892f', paper: '#f7f0e3', landscape: true }, m));
+  { kind: 'ko', file: 'hangul-bookmark_60x180mm.jpg', seal: '복', font: 'ko' },
+  { kind: 'zh', file: 'hanzi-back_60x180mm.jpg', seal: '', font: 'ja', back: true },
+  { kind: 'ja', file: 'kana-back_60x180mm.jpg', seal: '', font: 'ja', back: true },
+  { kind: 'ko', file: 'hangul-back_60x180mm.jpg', seal: '', font: 'ko', back: true }
+].map(m => Object.assign({ logo: '', logoPlate: '', accent: '#b9892f', paper: '#f7f0e3', landscape: true, back: false, noEmblem: false }, m));
 const page = m => `<!doctype html><meta charset="utf-8"><style>
 ${m.seal ? `@font-face { font-family: ko; src: url(${data(korean)}); }
 @font-face { font-family: ja; src: url(${data(japanese)}); }` : ''}
@@ -165,11 +172,11 @@ svg { display: block; width: ${W * PX}px; height: ${H * PX}px; }
     <rect width="${W}" height="${H}" filter="url(#cloud)" opacity=".42"/>
     <rect width="${W}" height="${H}" filter="url(#fibre)" opacity=".2"/>
     <rect width="${W}" height="${H}" filter="url(#grain)" opacity=".3"/>
-    ${emblem(m.kind, m)}
+    ${m.noEmblem && !m.logo ? '' : emblem(m.kind, m)}
     <!-- the landscape in ink wash, the farthest first, mist between -->
     ${m.landscape ? landscape(m.kind) : ''}
-    <!-- the rule the visitor's name sits on: two dashes, the name between them -->
-    <g stroke="${m.accent}" stroke-width=".42" stroke-linecap="round"><path d="M10.4 112.4H20.6"/><path d="M39.4 112.4H49.6"/></g>
+    <!-- the rule the visitor's name sits on: two dashes, the name between them (not on the back) -->
+    ${m.back ? '' : `<g stroke="${m.accent}" stroke-width=".42" stroke-linecap="round"><path d="M10.4 112.4H20.6"/><path d="M39.4 112.4H49.6"/></g>`}
     <!-- the seal -->
     ${m.seal ? `<g transform="translate(45.2 93.6) rotate(-3)" filter="url(#rough)">
       <rect x="-3.5" y="-3.7" width="7" height="7.4" rx="1.1" fill="#c8322f"/>

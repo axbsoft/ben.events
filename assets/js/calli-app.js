@@ -54,7 +54,11 @@
       'setup.brand': 'Marque citée dans l’accord', 'setup.brandph': 'Nom de la marque', 'setup.brandhint': '« J’accepte d’être recontacté(e) par … ». Laissez vide pour ne pas proposer la case.',
       'setup.mail': 'E-mail du visiteur', 'setup.mail.required': 'Obligatoire', 'setup.mail.optional': 'Facultatif', 'setup.mail.none': 'Ne pas demander',
       'setup.print': 'Impression', 'setup.print.exact': 'Au format du modèle', 'setup.print.a4': 'Sur A4, traits de coupe', 'setup.print.none': 'Sans impression',
-      'setup.qr': 'Code QR sur le marque-page', 'setup.qrhint': 'Il mène à l’offre de la marque par un lien benevents, qui compte les scans. Le visiteur retrouve l’offre dans son e-mail.', 'setup.qr.none': 'Pas de code QR',
+      'setup.qr': 'Code QR au dos du marque-page', 'setup.qrhint': 'Le recto reste net : le nom et le visuel. Le code est au dos et mène à l’offre de la marque par un lien benevents, qui compte les scans. Le visiteur retrouve l’offre dans son e-mail.', 'setup.qr.none': 'Pas de code QR',
+      'setup.verso': 'Verso du marque-page', 'setup.back.front': 'Pré-imprimé : ici, seul le recto s’imprime', 'setup.back.both': 'Imprimé ici avec le recto',
+      'setup.backhint': 'Le verso est le même pour tous les visiteurs : faites-le imprimer d’avance en série, puis n’imprimez ici que le nom. Avec « imprimé ici », le recto et le verso partent en deux pages (recto-verso).',
+      'setup.backpdf': 'Verso pour l’imprimeur (PDF)', 'setup.backdone': 'Le verso est téléchargé : donnez-le à votre imprimeur (fond perdu de 3 mm, traits de coupe).', 'setup.backfailed': 'Le verso n’a pas pu être préparé. Vérifiez la connexion et réessayez.',
+      'kiosk.backqr': 'Au dos, scannez le code QR : {label}.', 'staff.backpdf': 'Verso pour l’imprimeur (PDF)',
       'setup.exithint': 'Pour quitter l’animation : maintenez le logo en haut à gauche, puis saisissez le code.',
       'setup.back': 'Retour', 'setup.next': 'Continuer', 'setup.start': 'Lancer l’animation', 'setup.loading': 'Préparation de l’encre… {done} / {all}', 'setup.failed': 'Les caractères n’ont pas pu être chargés. Vérifiez la connexion et réessayez.',
       'kiosk.label': 'Animation', 'kiosk.mark': 'Espace équipe : maintenez appuyé', 'kiosk.title1': 'Votre prénom', 'kiosk.title2': 'au pinceau',
@@ -97,7 +101,11 @@
       'setup.brand': 'Brand named in the consent', 'setup.brandph': 'Name of the brand', 'setup.brandhint': '“I agree to be contacted by …”. Leave empty to leave the box out.',
       'setup.mail': 'Visitor’s email', 'setup.mail.required': 'Required', 'setup.mail.optional': 'Optional', 'setup.mail.none': 'Do not ask',
       'setup.print': 'Printing', 'setup.print.exact': 'At the size of the model', 'setup.print.a4': 'On A4, with crop marks', 'setup.print.none': 'No printing',
-      'setup.qr': 'QR code on the bookmark', 'setup.qrhint': 'It leads to the brand’s offer through a benevents link, which counts the scans. The visitor finds the offer in their email too.', 'setup.qr.none': 'No QR code',
+      'setup.qr': 'QR code on the back of the bookmark', 'setup.qrhint': 'The front stays clean: the name and the artwork. The code is on the back and leads to the brand’s offer through a benevents link, which counts the scans. The visitor finds the offer in their email too.', 'setup.qr.none': 'No QR code',
+      'setup.verso': 'Back of the bookmark', 'setup.back.front': 'Pre-printed: only the front is printed here', 'setup.back.both': 'Printed here with the front',
+      'setup.backhint': 'The back is the same for every visitor: have it printed in advance, in numbers, then print only the name here. With “printed here”, the front and the back go out as two pages (both sides).',
+      'setup.backpdf': 'Back for the print shop (PDF)', 'setup.backdone': 'The back is downloaded: give it to your print shop (3 mm bleed, crop marks).', 'setup.backfailed': 'The back could not be prepared. Check the connection and try again.',
+      'kiosk.backqr': 'On the back, scan the QR code: {label}.', 'staff.backpdf': 'Back for the print shop (PDF)',
       'setup.exithint': 'To leave the activity: hold the logo at the top left, then enter the code.',
       'setup.back': 'Back', 'setup.next': 'Continue', 'setup.start': 'Start the activity', 'setup.loading': 'Preparing the ink… {done} / {all}', 'setup.failed': 'The characters could not be loaded. Check the connection and try again.',
       'kiosk.label': 'Activity', 'kiosk.mark': 'Team corner: press and hold', 'kiosk.title1': 'Your first name', 'kiosk.title2': 'by brush',
@@ -150,7 +158,7 @@
   function store(key, value, plainText) {
     try { localStorage.setItem(key, plainText ? value : JSON.stringify(value)); return true; } catch (e) { return false; }
   }
-  var S = read(SET) || {};                   // language, model, event, brand, e-mail, paper, qr (an offer), running
+  var S = read(SET) || {};                   // language, model, event, brand, e-mail, paper, qr (an offer), sides (front | both), running
   var offers = {};                           // the brand offers a QR code can lead to (offers.json)
   var log = read(LOG) || [];                 // every participation on this device
   if (!Array.isArray(log)) log = [];
@@ -226,7 +234,7 @@
   var hanBox = $('.ca-han'), paper = $('.ca-paper'), consentBox = $('.ca-consent'), agree = $('.ca-consent input'), skipBtn = $('.ca-skip');
   var staff = $('.ca-staff'), scode = $('.ca-staff__code'), spanel = $('.ca-staff__panel'), pnote = $('.ca-staff__pnote');
   var printBox = $('.ca-print');
-  var state = { step: 1, running: false, screen: 'name', res: null, form: 0, page: null };
+  var state = { step: 1, running: false, screen: 'name', res: null, form: 0, page: null, back: null };
 
   function say(el, key, vars, bad) {
     el._said = key ? { key: key, vars: vars, bad: bad } : null;
@@ -237,8 +245,20 @@
   function shake(el) { el.classList.remove('is-wrong'); void el.offsetWidth; el.classList.add('is-wrong'); }
   function scriptOf() { return C.SCRIPTS[S.script] ? S.script : ''; }
   function modelOf() { var m = C.TEMPLATES[S.model]; return m && m.script === S.script ? m : null; }
-  // the QR code to print on a model for an offer: only where the model has a place for it
-  function qrOpts(id, slug) { var m = C.TEMPLATES[id]; return m && m.qr && slug && slug !== 'none' ? C.qrOf(slug) : null; }
+  // the QR code to print on the back of a model for an offer: only where the model has a back with a place for it
+  function qrOpts(id, slug) { var m = C.TEMPLATES[id]; return m && m.back && m.back.qr && slug && slug !== 'none' ? C.qrOf(slug) : null; }
+  // the back of the bookmark for the offer chosen: the same for every visitor, so it is made once
+  function backReady() {
+    var q = qrOpts(S.model, S.qr);
+    state.back = null;
+    if (!q) return Promise.resolve(null);
+    return C.readyBack(S.model, { qr: q }).then(function (pg) { state.back = pg; return pg; });
+  }
+  // what goes to the printer for a visitor: the front, and the back too when this set-up prints both sides
+  function pagesFor(front) {
+    if (S.sides !== 'both' || !qrOpts(S.model, S.qr)) return Promise.resolve([front]);
+    return (state.back ? Promise.resolve(state.back) : backReady()).then(function (back) { return back ? [front, back] : [front]; });
+  }
 
   /* ---------- 1. The gate ---------- */
   gform.addEventListener('submit', function (e) {
@@ -356,7 +376,7 @@
   // the QR code of the bookmark: offered only where the model has a place for one and there is an offer to lead to
   function drawQr() {
     var m = modelOf(), row = $('.ca-row--qr'), seg = $('.ca-seg', row), slugs = Object.keys(offers);
-    row.hidden = !(m && m.qr && slugs.length);
+    row.hidden = !(m && m.back && m.back.qr && slugs.length);
     if (row.hidden) { S.qr = 'none'; return; }
     if (S.qr === undefined || (S.qr !== 'none' && !offers[S.qr])) S.qr = m.offer && offers[m.offer] ? m.offer : 'none';
     seg.textContent = '';
@@ -371,6 +391,8 @@
   function segState() {
     if (['required', 'optional', 'none'].indexOf(S.email) < 0) S.email = 'required';
     if (['exact', 'a4', 'none'].indexOf(S.paper) < 0) S.paper = 'exact';
+    if (['front', 'both'].indexOf(S.sides) < 0) S.sides = 'front';
+    $('.ca-row--back').hidden = $('.ca-row--qr').hidden || !S.qr || S.qr === 'none';      // how the back is printed matters only when there is one
     $$('.ca-seg').forEach(function (seg) {
       var v = S[seg.getAttribute('data-set')];
       $$('button', seg).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === v)); });
@@ -426,7 +448,7 @@
     nextBtn.classList.add('is-busy');
     say(snote, 'setup.loading', { done: 0, all: '…' });
     full(true);
-    Promise.all([C.picture(S.model), C.offers(), C.warm(S.script, function (done, all) { say(snote, 'setup.loading', { done: done, all: all }); })]).then(function () {
+    Promise.all([C.picture(S.model), C.offers().then(backReady), C.warm(S.script, function (done, all) { say(snote, 'setup.loading', { done: done, all: all }); })]).then(function () {
       nextBtn.classList.remove('is-busy');
       say(snote, '');
       startKiosk();
@@ -514,6 +536,7 @@
     show('name');
     C.load(S.script).then(function () { drawFloaters(); return C.picture(S.model); }).catch(function () { say(nameNote, 'err.failed', null, true); });
     C.warm(S.script).catch(function () {});
+    C.offers().then(backReady).catch(function () {});
     awake();
     try { history.pushState({ ca: 1 }, ''); } catch (e) {}
     arm();
@@ -550,7 +573,7 @@
     C.load(script).then(function () {
       var res = C.transliterate(script, input.value);
       if (res.error) { say(nameNote, 'err.' + res.error, null, true); shake(nameForm); return null; }
-      return C.ready(S.model, res, 0, { qr: qrOpts(S.model, S.qr) }).then(function (page) {
+      return C.ready(S.model, res, 0).then(function (page) {
         state.res = res; state.form = 0; state.page = page;
         say(nameNote, '');
         drawName(false);
@@ -616,7 +639,7 @@
     if (!b || !state.res) return;
     var i = +b.getAttribute('data-form');
     if (i === state.form) return;
-    C.ready(S.model, state.res, i, { qr: qrOpts(S.model, S.qr) }).then(function (page) { state.form = i; state.page = page; drawName(false); }).catch(function () {});
+    C.ready(S.model, state.res, i).then(function (page) { state.form = i; state.page = page; drawName(false); }).catch(function () {});
   });
 
   // c. the e-mail address
@@ -649,7 +672,8 @@
     log.push(entry);
     keepLog();
     $('.ca-done__title').textContent = t('kiosk.thanks', { name: res.name });
-    $('.ca-done__lines').textContent = [printing ? t('kiosk.printing') : '', email ? t('kiosk.mailing') : '', !printing && !email ? t('kiosk.kept') : ''].filter(Boolean).join(' ');
+    var offer = qrOpts(S.model, S.qr) ? offers[S.qr] : null, offerWords = offer && offer.label ? offer.label[lang] || offer.label.fr : '';
+    $('.ca-done__lines').textContent = [printing ? t('kiosk.printing') : '', printing && offerWords ? t('kiosk.backqr', { label: offerWords }) : '', email ? t('kiosk.mailing') : '', !printing && !email ? t('kiosk.kept') : ''].filter(Boolean).join(' ');
     $('.ca-out__paper').innerHTML = C.svgOf(page);
     var petals = '';
     for (var i = 0; i < 22; i++) petals += '<i style="left:' + Math.round(Math.random() * 100) + '%;--t:' + (3.2 + Math.random() * 2.6).toFixed(2) + 's;--d:' + (Math.random() * 1.6).toFixed(2) + 's;--x:' + Math.round(Math.random() * 16 - 8) + 'vw;--r:' + Math.round(360 + Math.random() * 540) + 'deg"></i>';
@@ -662,7 +686,7 @@
       clearTimeout(nextTimer);
       nextTimer = setTimeout(function () { if (state.running && state.screen === 'done') reset(); }, NEXT);
     };
-    setTimeout(function () { if (printing) print(page).then(count); else count(); }, reduced ? 50 : 1100);
+    setTimeout(function () { if (printing) pagesFor(page).then(print).then(count, count); else count(); }, reduced ? 50 : 1100);
     flush();
   }
   kiosk.addEventListener('click', function (e) {
@@ -770,6 +794,7 @@
     var line = $('.ca-staff__send');
     line.textContent = t('staff.send.' + sendState);
     line.classList.toggle('is-warn', sendState !== 'ok' && sendState !== 'idle');
+    $('.ca-staff [data-act="backpdf"]').hidden = !qrOpts(S.model, S.qr);
   }
   staff.addEventListener('click', function (e) {
     var b = e.target.closest('[data-act]');
@@ -783,8 +808,10 @@
       C.load(last.script).then(function () {
         var res = C.fromChars(last.script, last.name, last.chars);
         if (!res) throw new Error('entry');
-        return C.ready(last.model, res, 0, { qr: qrOpts(last.model, last.offer) });
-      }).then(function (page) { staff.hidden = true; return print(page); }).then(function () { staff.hidden = false; }, function () { staff.hidden = false; say(pnote, 'err.failed', null, true); });
+        return C.ready(last.model, res, 0);
+      }).then(function (page) { staff.hidden = true; return pagesFor(page).then(print); }).then(function () { staff.hidden = false; }, function () { staff.hidden = false; say(pnote, 'err.failed', null, true); });
+    } else if (act === 'backpdf') {
+      backPdf().then(function () { say(pnote, 'setup.backdone'); }, function () { say(pnote, 'setup.backfailed', null, true); });
     } else if (act === 'csv') {
       save(new Blob([csvOf()], { type: 'text/csv;charset=utf-8' }), 'calligraphie-contacts-' + new Date().toISOString().slice(0, 10) + '.csv');
       say(pnote, 'staff.exported', { n: log.length });
@@ -816,17 +843,23 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 120000);
   }
 
-  /* ---------- Printing: the model at its true size, alone on the page ---------- */
-  function print(page) {
-    var a4 = S.paper === 'a4', holder = doc.createElement('div'), ox = 20, oy = 20, w = page.w, h = page.h;
-    holder.innerHTML = C.svgOf(page);
-    var svg = holder.firstChild, inner = svg.innerHTML, NS = 'xmlns="http://www.w3.org/2000/svg"';
-    if (a4) {                                        // on a sheet of A4, with the marks to cut along
+  /* ---------- Printing: each side at its true size, alone on its page ---------- */
+  // pages: the front, or the front and the back (one page each)
+  function print(pages) {
+    pages = [].concat(pages);
+    var a4 = S.paper === 'a4', oy = 20, w = pages[0].w, h = pages[0].h, NS = 'xmlns="http://www.w3.org/2000/svg"';
+    printBox.innerHTML = pages.map(function (page, i) {
+      var holder = doc.createElement('div');
+      holder.innerHTML = C.svgOf(page);
+      var inner = holder.firstChild.innerHTML;
+      if (!a4) return '<div><svg ' + NS + ' width="' + w + 'mm" height="' + h + 'mm" viewBox="0 0 ' + w + ' ' + h + '">' + inner + '</svg></div>';
+      // on a sheet of A4, with the marks to cut along; the back sits where the front is when the sheet is turned over its long edge
+      var ox = i === 0 ? 20 : 210 - 20 - w;
       var marks = [[0, 0, -1, -1], [w, 0, 1, -1], [0, h, -1, 1], [w, h, 1, 1]].map(function (k) {
         return '<path d="M' + (ox + k[0] + k[2] * 2) + ' ' + (oy + k[1]) + 'h' + (k[2] * 6) + 'M' + (ox + k[0]) + ' ' + (oy + k[1] + k[3] * 2) + 'v' + (k[3] * 6) + '"/>';
       }).join('');
-      printBox.innerHTML = '<svg ' + NS + ' width="210mm" height="297mm" viewBox="0 0 210 297"><g transform="translate(' + ox + ' ' + oy + ')">' + inner + '</g><g fill="none" stroke="#000" stroke-width=".12">' + marks + '</g></svg>';
-    } else printBox.innerHTML = '<svg ' + NS + ' width="' + w + 'mm" height="' + h + 'mm" viewBox="0 0 ' + w + ' ' + h + '">' + inner + '</svg>';
+      return '<div><svg ' + NS + ' width="210mm" height="297mm" viewBox="0 0 210 297"><g transform="translate(' + ox + ' ' + oy + ')">' + inner + '</g><g fill="none" stroke="#000" stroke-width=".12">' + marks + '</g></svg></div>';
+    }).join('');
     var rule = $('#ca-page') || doc.head.appendChild(doc.createElement('style'));
     rule.id = 'ca-page';
     rule.textContent = '@page { size: ' + (a4 ? 'A4 portrait' : w + 'mm ' + h + 'mm') + '; margin: 0; }';
@@ -839,6 +872,23 @@
       }, 60);
     });
   }
+
+  // the back, for the print shop: the same for every visitor, so it is printed in advance, in numbers
+  // (with a bleed of 3 mm and crop marks, like any file for a print shop)
+  function backPdf() {
+    var q = qrOpts(S.model, S.qr), m = C.TEMPLATES[S.model];
+    if (!q) return Promise.reject(new Error('qr'));
+    return C.readyBack(S.model, { qr: q }).then(function (back) {
+      if (!back) throw new Error('back');
+      save(new Blob([C.pdfOf(back, m.label.fr + ' · verso · ' + S.qr, true)], { type: 'application/pdf' }), 'verso-' + S.model + '-' + S.qr + '.pdf');
+    });
+  }
+  setup.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('[data-act="backpdf"]') : null;
+    if (!b || b.classList.contains('is-busy')) return;
+    b.classList.add('is-busy');
+    backPdf().then(function () { say(snote, 'setup.backdone'); }, function () { say(snote, 'setup.backfailed', null, true); }).then(function () { b.classList.remove('is-busy'); });
+  });
 
   /* ---------- Handing the contacts over ---------- */
   var sending = false, sendState = 'idle', sendTimer = 0;

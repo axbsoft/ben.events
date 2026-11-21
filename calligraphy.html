@@ -123,9 +123,19 @@
         </div>
         <!-- only where the model has a place for a QR code, and there is an offer to lead to (offers.json) -->
         <div class="ca-row ca-row--qr" role="group" aria-labelledby="set-qr" hidden>
-          <span class="ca-row__l" id="set-qr" data-t="setup.qr">Code QR sur le marque-page</span>
+          <span class="ca-row__l" id="set-qr" data-t="setup.qr">Code QR au dos du marque-page</span>
           <div class="ca-seg" data-set="qr"></div>
-          <span class="ca-row__h" data-t="setup.qrhint">Il mène à l’offre de la marque par un lien benevents, qui compte les scans.</span>
+          <span class="ca-row__h" data-t="setup.qrhint">Le recto reste net : le nom et le visuel. Le code est au dos et mène à l’offre de la marque par un lien benevents, qui compte les scans.</span>
+        </div>
+        <!-- how the back is printed: the same for every visitor, so usually in advance, in numbers -->
+        <div class="ca-row ca-row--back" role="group" aria-labelledby="set-back" hidden>
+          <span class="ca-row__l" id="set-back" data-t="setup.verso">Verso du marque-page</span>
+          <div class="ca-seg" data-set="sides">
+            <button type="button" data-v="front" aria-pressed="true" data-t="setup.back.front">Pré-imprimé : ici, seul le recto s’imprime</button>
+            <button type="button" data-v="both" aria-pressed="false" data-t="setup.back.both">Imprimé ici avec le recto</button>
+          </div>
+          <button class="btn btn--ghost ca-backpdf" type="button" data-act="backpdf"><span data-t="setup.backpdf">Verso pour l’imprimeur (PDF)</span></button>
+          <span class="ca-row__h" data-t="setup.backhint">Le verso est le même pour tous les visiteurs : faites-le imprimer d’avance en série, puis n’imprimez ici que le nom. Avec « imprimé ici », le recto et le verso partent en deux pages (recto-verso).</span>
         </div>
       </form>
       <p class="ca-hint ca-hint--key" data-t="setup.exithint">Pour quitter l’animation : maintenez le logo en haut à gauche, puis saisissez le code.</p>
@@ -261,6 +271,7 @@
       <div class="ca-staff__grid">
         <button class="btn" type="button" data-act="resume"><span data-t="staff.resume">Reprendre l’animation</span></button>
         <button class="btn btn--ghost" type="button" data-act="reprint"><span data-t="staff.reprint">Réimprimer le dernier</span></button>
+        <button class="btn btn--ghost" type="button" data-act="backpdf" hidden><span data-t="staff.backpdf">Verso pour l’imprimeur (PDF)</span></button>
         <button class="btn btn--ghost" type="button" data-act="csv"><span data-t="staff.csv">Exporter les contacts (CSV)</span></button>
         <button class="btn btn--ghost" type="button" data-act="setup"><span data-t="staff.setup">Changer de modèle</span></button>
         <button class="btn btn--ghost" type="button" data-act="full"><span data-t="staff.full">Plein écran</span></button>

@@ -30,9 +30,11 @@
      the smallest size before the name moves under the rule); edge: the paper colour (the bleed);
      ink: the colour of everything drawn on it. brand: who the visitor agrees to hear from, when
      the event has not said otherwise.
-     qr (optional): where a QR code can be printed: x, y the centre of its plate and plate its side
-     (border and paper colour the plate when the picture needs it). offer (optional): the QR code
-     the model starts with (assets/calligraphy/offers.json).
+     back (optional): the other side of the bookmark. image: its picture (the same size). qr: where
+     the QR code card is drawn on it: x, y the centre of the square the code sits in, plate the side of
+     that square, words the size of the words under it (mm); border and paper colour the card when the
+     picture needs it. The front never carries a QR code, so that the name and the artwork stay clean.
+     offer (optional): the QR code the model starts with (assets/calligraphy/offers.json).
      ------------------------------------------------------------------ */
   var TEMPLATES = {};
   var OFFERS = {};
@@ -530,6 +532,24 @@
     });
   }
 
+  // the picture of the back of a model (null when it has none)
+  function pictureBack(id) {
+    return models().then(function () {
+      var tp = TEMPLATES[id], bk = tp && tp.back, key = id + ':back';
+      if (!bk) return null;
+      if (!pics[key]) {
+        pics[key] = get(bk.image, true).then(function (buf) {
+          var bytes = new Uint8Array(buf), px = jpegSize(bytes);
+          if (!px) throw new Error(bk.image);
+          bk.pic = { bytes: bytes, px: px, url: URL.createObjectURL(new Blob([bytes], { type: 'image/jpeg' })) };
+          return bk.pic;
+        });
+        pics[key].catch(function () { delete pics[key]; });
+      }
+      return pics[key];
+    });
+  }
+
   /* ==================================================================
      7. DRAWING: outlines, the model, the page
      ================================================================== */
@@ -581,20 +601,19 @@
   // they stay readable on any picture. The modules are one path of rectangles, a little overlapped so that no
   // hairline shows between two of them. The square the code sits in holds the quiet zone of four modules the
   // scanners ask for; z.plate is its side, and the card is as wide as the words need, at least as wide as the square.
-  function qrShapes(tp, q) {
-    var z = tp.qr;
+  function qrShapes(z, q) {
     if (!z || !q || !q.url || !root.qrcode) return null;
     var code = root.qrcode(0, 'M');
     code.addData(q.url);
     code.make();
     var n = code.getModuleCount(), quiet = 4, side = z.plate, m = side / (n + 2 * quiet), x0 = z.x - side / 2, y0 = z.y - side / 2, e = .012, ring = .35;
     // the words first: how wide and how tall the card must be
-    var room = z.captionWidth || 44, words = (q.caption || []).slice(0, 2).map(function (text) {
-      var fs = 2.4, run = letters(text, fs);
+    var fs0 = z.words || 2.4, pitch = fs0 * 4 / 3, room = z.captionWidth || 44, words = (q.caption || []).slice(0, 2).map(function (text) {
+      var fs = fs0, run = letters(text, fs);
       if (run.width > room) { fs *= room / run.width; run = letters(text, fs); }
       return run;
     });
-    var cardW = Math.max(side, words.reduce(function (w, run) { return Math.max(w, run.width); }, 0) + 4.4), cardH = side + (words.length ? 1.6 + words.length * 3.2 : 0);
+    var cardW = Math.max(side, words.reduce(function (w, run) { return Math.max(w, run.width); }, 0) + fs0 * 1.83), cardH = side + (words.length ? pitch * .5 + words.length * pitch : 0);
     var shapes = [{ segs: rrect(z.x - cardW / 2 - ring, y0 - ring, cardW + 2 * ring, cardH + 2 * ring, 1.6), fill: z.border || [185, 137, 47] },
       { segs: rrect(z.x - cardW / 2, y0, cardW, cardH, 1.25), fill: z.paper || [253, 250, 244] }];
     var runs = [];
@@ -609,14 +628,14 @@
     }
     shapes.push({ segs: runs });
     words.forEach(function (run, i) {
-      var base = y0 + side + 1.2 + (i + 1) * 3.2 - 1.2;
+      var base = y0 + side + pitch * .5 + (i + 1) * pitch - pitch * .5;
       run.list.forEach(function (g) { shapes.push({ segs: move(g, [1, 0, 0, 1, z.x - run.width / 2, base]) }); });
     });
     return { shapes: shapes, box: [z.x - cardW / 2 - ring, y0 - ring, z.x + cardW / 2 + ring, y0 + cardH + ring], modules: n, module: m };
   }
 
-  // ---- the model: what is drawn on its picture, in mm; opts.qr: { url, caption } for a QR code
-  function compose(id, res, form, opts) {
+  // ---- the front of a model: what is drawn on its picture, in mm (the visitor's name, and nothing else)
+  function compose(id, res, form) {
     var tp = TEMPLATES[id], script = res.script, upm = D[script].upm, lines = res.forms[form || 0], total = lines.join('');
     // the size of a character, in mm, for these columns of characters
     var size = function (ls) {
@@ -646,9 +665,16 @@
     if (run.width > room + .05) { fs = tp.name; run = letters(res.name, fs); nx = tp.w / 2; ny = tp.line.below; }
     if (run.width > tp.nameMax) { fs *= tp.nameMax / run.width; run = letters(res.name, fs); }
     run.list.forEach(function (g) { shapes.push({ segs: move(g, [1, 0, 0, 1, nx - run.width / 2, ny]) }); });
-    var qr = qrShapes(tp, opts && opts.qr);
-    if (qr) qr.shapes.forEach(function (sh) { shapes.push(sh); });
-    return { w: tp.w, h: tp.h, shapes: shapes, paper: tp.edge, ink: tp.ink, pic: tp.pic, qr: qr ? { url: opts.qr.url, box: qr.box, modules: qr.modules, module: qr.module } : null };
+    return { w: tp.w, h: tp.h, shapes: shapes, paper: tp.edge, ink: tp.ink, pic: tp.pic };
+  }
+  // ---- the back of a model: its own picture, and the QR code card (opts.qr: { url, caption }). It is the same for
+  //      every visitor, so it can be printed in advance, in numbers; null when the model has no back
+  function composeBack(id, opts) {
+    var tp = TEMPLATES[id], bk = tp && tp.back;
+    if (!bk || !bk.pic) return null;
+    var qr = qrShapes(bk.qr, opts && opts.qr);
+    return { w: tp.w, h: tp.h, shapes: qr ? qr.shapes : [], paper: tp.edge, ink: tp.ink, pic: bk.pic, back: true,
+      qr: qr ? { url: opts.qr.url, box: qr.box, modules: qr.modules, module: qr.module } : null };
   }
 
   // ---- the page as SVG (what is shown) and as PDF (what is printed): the same shapes
@@ -687,10 +713,10 @@
   }
 
   var MM = 72 / 25.4;
-  function pdfOf(page, title, shop) {
-    var pad = shop ? BLEED + MARKS : 0, W = (page.w + 2 * pad) * MM, H = (page.h + 2 * pad) * MM, c = [], n = f3;
+  // what one page of the PDF draws: in millimetres, y pointing down, from the top left corner of the finished size
+  function pageStream(page, shop, pad, H) {
+    var c = [], n = f3;
     var rgb = function (col) { return col.map(function (v) { return n(v / 255); }).join(' '); };
-    // work in millimetres, y pointing down, origin at the top left corner of the finished size
     c.push('q ' + n(MM) + ' 0 0 ' + n(-MM) + ' ' + n(pad * MM) + ' ' + n(H - pad * MM) + ' cm');
     // the picture, at the finished size; its paper colour fills the bleed
     if (shop) c.push(rgb(page.paper) + ' rg ' + [-BLEED, -BLEED, page.w + 2 * BLEED, page.h + 2 * BLEED].map(n).join(' ') + ' re f');
@@ -720,48 +746,62 @@
       });
     }
     c.push('Q');
-    var stream = c.join('\n');
+    return c.join('\n');
+  }
+  // pages: one page, or a list of pages (the front, then the back); shop: with bleed and crop marks, for a print shop
+  function pdfOf(pages, title, shop) {
+    pages = [].concat(pages);
+    var pad = shop ? BLEED + MARKS : 0, n = f3;
     var hex = function (s) { var o = 'FEFF'; for (var i = 0; i < s.length; i++) o += ('000' + s.charCodeAt(i).toString(16)).slice(-4); return '<' + o.toUpperCase() + '>'; };
-    var boxOf = function (m) { return '[' + [m * MM, m * MM, W - m * MM, H - m * MM].map(n).join(' ') + ']'; };
     var when = new Date(), z = function (v) { return (v < 10 ? '0' : '') + v; };
     var stamp = 'D:' + when.getUTCFullYear() + z(when.getUTCMonth() + 1) + z(when.getUTCDate()) + z(when.getUTCHours()) + z(when.getUTCMinutes()) + z(when.getUTCSeconds()) + 'Z';
-    var pic = page.pic, objs = [
-      '<< /Type /Catalog /Pages 2 0 R >>',
-      '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
-      '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + n(W) + ' ' + n(H) + '] /TrimBox ' + boxOf(pad) + ' /BleedBox ' + boxOf(shop ? MARKS : 0) + ' /Resources << /XObject << /Im0 6 0 R >> >> /Contents 4 0 R >>',
-      '<< /Length ' + stream.length + ' >>\nstream\n' + stream + '\nendstream',
-      '<< /Title ' + hex(title) + ' /Creator (benevents agency) /Producer (benevents calligraphy) /CreationDate (' + stamp + ') >>',
-      ['<< /Type /XObject /Subtype /Image /Width ' + pic.px[0] + ' /Height ' + pic.px[1] + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + pic.bytes.length + ' >>\nstream\n', pic.bytes, '\nendstream']
-    ];
-    // the file, byte by byte (the picture is binary)
+    // the objects of the file: 1 the catalog, 2 the list of pages, 3 the information, then three for each page (page, drawing, picture)
+    var objs = ['<< /Type /Catalog /Pages 2 0 R >>', null, '<< /Title ' + hex(title) + ' /Creator (benevents agency) /Producer (benevents calligraphy) /CreationDate (' + stamp + ') >>'], kids = [];
+    pages.forEach(function (page, i) {
+      var at = 4 + i * 3, W = (page.w + 2 * pad) * MM, H = (page.h + 2 * pad) * MM, stream = pageStream(page, shop, pad, H), pic = page.pic;
+      var boxOf = function (m) { return '[' + [m * MM, m * MM, W - m * MM, H - m * MM].map(n).join(' ') + ']'; };
+      kids.push(at + ' 0 R');
+      objs.push('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + n(W) + ' ' + n(H) + '] /TrimBox ' + boxOf(pad) + ' /BleedBox ' + boxOf(shop ? MARKS : 0) + ' /Resources << /XObject << /Im0 ' + (at + 2) + ' 0 R >> >> /Contents ' + (at + 1) + ' 0 R >>',
+        '<< /Length ' + stream.length + ' >>\nstream\n' + stream + '\nendstream',
+        ['<< /Type /XObject /Subtype /Image /Width ' + pic.px[0] + ' /Height ' + pic.px[1] + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + pic.bytes.length + ' >>\nstream\n', pic.bytes, '\nendstream']);
+    });
+    objs[1] = '<< /Type /Pages /Kids [' + kids.join(' ') + '] /Count ' + pages.length + ' >>';
+    // the file, byte by byte (the pictures are binary)
     var parts = [], total = 0, at = [];
     var put = function (x) {
       if (typeof x === 'string') { var u = new Uint8Array(x.length); for (var i = 0; i < x.length; i++) u[i] = x.charCodeAt(i) & 255; x = u; }
       parts.push(x); total += x.length;
     };
-    put('%PDF-1.4\n%âãÏÓ\n');
+    put('%PDF-1.4\n%\u00e2\u00e3\u00cf\u00d3\n');
     objs.forEach(function (o, i) { at.push(total); put((i + 1) + ' 0 obj\n'); [].concat(o).forEach(put); put('\nendobj\n'); });
     var xref = total;
     put('xref\n0 ' + (objs.length + 1) + '\n0000000000 65535 f \n' + at.map(function (a) { return ('0000000000' + a).slice(-10) + ' 00000 n \n'; }).join(''));
-    put('trailer\n<< /Size ' + (objs.length + 1) + ' /Root 1 0 R /Info 5 0 R >>\nstartxref\n' + xref + '\n%%EOF\n');
+    put('trailer\n<< /Size ' + (objs.length + 1) + ' /Root 1 0 R /Info 3 0 R >>\nstartxref\n' + xref + '\n%%EOF\n');
     var bytes = new Uint8Array(total), pos = 0;
     parts.forEach(function (u) { bytes.set(u, pos); pos += u.length; });
     return bytes;
   }
 
-  // everything a name needs to be drawn on a model: its outlines and the picture of the model (opts.qr: see compose)
-  function ready(id, res, form, opts) {
+  // everything a name needs to be drawn on a model: its outlines and the picture of the model
+  function ready(id, res, form) {
     var lines = res.forms[form || 0];
-    return Promise.all([need(res.script, lines.join('')), picture(id)]).then(function () { return compose(id, res, form, opts); });
+    return Promise.all([need(res.script, lines.join('')), picture(id)]).then(function () { return compose(id, res, form); });
+  }
+  // the back of a model with the QR code card for an offer (opts.qr: see qrOf); resolves null when the model has no back
+  function readyBack(id, opts) {
+    return pictureBack(id).then(function (pic) {
+      if (!pic) return null;
+      return load(TEMPLATES[id].script).then(function () { return composeBack(id, opts); });      // the letters of the words come with it
+    });
   }
   // the models of a script, in the order they are offered
   function modelsOf(script) { return Object.keys(TEMPLATES).filter(function (id) { return TEMPLATES[id].script === script; }); }
 
   root.BEN_CALLI_CORE = {
     BASE: BASE, SITE: SITE, TEMPLATES: TEMPLATES, SCRIPTS: SCRIPTS, BLEED: BLEED, MAX_LENGTH: MAX_LENGTH,
-    load: load, models: models, offers: offers, qrOf: qrOf, need: need, warm: warm, picture: picture, ready: ready, modelsOf: modelsOf,
+    load: load, models: models, offers: offers, qrOf: qrOf, need: need, warm: warm, picture: picture, pictureBack: pictureBack, ready: ready, readyBack: readyBack, modelsOf: modelsOf,
     tidy: tidy, strip: strip, transliterate: transliterate, fromChars: fromChars, reading: reading,
-    compose: compose, svgOf: svgOf, pdfOf: pdfOf, canvasOf: canvasOf, tile: tile,
+    compose: compose, composeBack: composeBack, svgOf: svgOf, pdfOf: pdfOf, canvasOf: canvasOf, tile: tile,
     // for the automated checks, and for the build to try the engine without a browser
     _: { sounds: sounds, writeKo: writeKo, writeJa: writeJa, writeZh: writeZh, romanOf: romanOf, romajiOf: romajiOf, keyOf: keyOf, data: D, set: function (script, data, latin) { D[script] = data; if (latin) LA = latin; haveKo = null; }, glyphs: G }
   };

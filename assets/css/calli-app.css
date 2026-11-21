@@ -116,7 +116,9 @@
 .ca-seg { display: flex; flex-wrap: wrap; gap: 4px; padding: 5px; border-radius: 20px; border: 1px solid var(--line); background: rgba(255, 255, 255, .04); width: fit-content; max-width: 100%; }
 .ca-seg button { padding: 12px 18px; border-radius: 15px; font-size: 15px; font-weight: 500; color: var(--mute); transition: background .3s, color .3s; }
 .ca-seg button[aria-pressed="true"] { background: var(--text); color: #0a0a0a; }
-.ca-row--qr { grid-column: 1 / -1; }
+.ca-row--qr, .ca-row--back { grid-column: 1 / -1; }
+.ca-backpdf { align-self: flex-start; height: 50px; padding: 0 22px; font-size: 14.5px; }
+.ca-backpdf span::after { display: none; }
 .ca-hint--key { padding: 14px 18px; border-radius: 16px; border: 1px dashed rgba(216, 176, 106, .5); color: #ecd6a8; background: rgba(216, 176, 106, .07); }
 .ca-setup__foot { position: sticky; bottom: 0; display: flex; justify-content: flex-end; gap: 10px; padding: 16px clamp(18px, 3vw, 40px) max(18px, env(safe-area-inset-bottom)); background: linear-gradient(rgba(8, 8, 10, 0), rgba(8, 8, 10, .92) 42%); }
 .ca-setup__note { text-align: right; }
@@ -253,6 +255,8 @@
   body.ca > *:not(.ca-print), body.ca-card > *:not(.ca-print) { display: none !important; }
   .ca-print { display: block !important; }
   .ca-print svg { display: block; }
+  .ca-print > div { break-after: page; page-break-after: always; }       /* the front, then the back: one page each */
+  .ca-print > div:last-child { break-after: auto; page-break-after: auto; }
 }
 
 /* ---------- Narrow and upright screens ---------- */

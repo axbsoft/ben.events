@@ -6,7 +6,7 @@
            add --replace to change an offer that exists · --remove --slug kgm-essai to take one away
            --root <folder> to work on another copy of the site (the default is this repository)
 
-   A QR code printed on a bookmark never holds the brand's address itself. It holds a short link of
+   A QR code printed on the back of a bookmark never holds the brand's address itself. It holds a short link of
    ours, https://www.ben.events/o/<slug>, which counts the scan and takes the visitor to the address
    listed here (offer.html). Three things follow:
      - the QR code stays small and easy to scan, whatever the brand's address looks like;
@@ -74,14 +74,14 @@ if (reg.offers[slug] && !args.replace) fail('"' + slug + '" is already listed: a
 reg.offers[slug] = { brand, url: url.href, label };
 save();
 
-// how big the modules of its QR code will be on the plate of a model
+// how big the modules of its QR code will be on the back of a model
 const qrcode = createRequire(import.meta.url)(join(root, 'assets', 'js', 'qrcode.js'));
 const code = qrcode(0, 'M');
 code.addData('https://www.ben.events/o/' + slug);
 code.make();
 const n = code.getModuleCount();
-const plate = 21;
+const plate = 36;
 console.log(`${reg.offers[slug] === undefined ? '' : 'saved'} "${slug}" → ${url.href}`);
 console.log(`  words: ${label.fr} / ${label.en}`);
-console.log(`  the QR code holds https://www.ben.events/o/${slug}: ${n} × ${n} modules, ${(plate / (n + 8)).toFixed(2)} mm each on a plate of ${plate} mm (0.5 mm and more scans well)`);
+console.log(`  the QR code holds https://www.ben.events/o/${slug}: ${n} × ${n} modules, ${(plate / (n + 8)).toFixed(2)} mm each on a square of ${plate} mm on the back of a bookmark (0.5 mm and more scans well)`);
 console.log('  publish the site for it to be used; the scans appear in the audience measurement as the page /o/' + slug);
