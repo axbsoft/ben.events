@@ -1,0 +1,13 @@
+{
+ "v": 1,
+ "rev": "8437818f",
+ "kdf": {
+  "name": "PBKDF2",
+  "hash": "SHA-256",
+  "iterations": 600000,
+  "salt": "1SJFHZ2WFc0PnLXkFH+hcA=="
+ },
+ "check": "9YCx9xHfX5oLWdG3xFgkN6kTWe/yU02cwjnn4y5n8abmivQ1HEh63Pzx",
+ "box": "7WXs0M503qMTk8h/6kH2ha+yHHu931fCCnS10KA0NcC8hkUOYGwBpsj9r81HaQloGBRyyxs1JW86OwdzGN3R5cq9aroTxQU=",
+ "pass": "ed74d8b84276410076807e5784b106a93e8f4ab2317a82c0d6a2e97cf60d23d1"
+}

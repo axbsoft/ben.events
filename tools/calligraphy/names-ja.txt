@@ -1,0 +1,175 @@
+# benevents agency — Japanese calligraphy experience: first names whose Japanese form is not what
+# their letters alone would give.
+#
+# Foreign names are written in katakana, sound by sound, so most names need no entry here: the
+# app writes them from the way they are spelt in French (Yassine ヤシン, Fatima ファティマ,
+# Achraf アシュラフ). This list holds the others: names that take a long vowel (Paul ポール,
+# Nour ヌール) or a doubled consonant (Charlotte シャルロット), French names with silent
+# letters or nasal vowels (Jean ジャン, Vincent ヴァンサン), and English names (John ジョン).
+#
+# One line per name:   カタカナ[/other accepted form]: spelling spelling spelling
+# Spellings are written without accents, in lower case; capitals, accents, hyphens and
+# spaces in what the visitor types are ignored when looking a name up.
+#
+# After editing, run:  python3 tools/calligraphy/build_app.py   (see the top of that file)
+
+# ---- Arabic-origin names
+ヌール: nour noor nur
+ムハンマド: muhammad mouhammad
+ムバレク: mbarek mbark
+
+# ---- French names, men
+ジャン: jean
+ピエール: pierre
+ポール: paul
+ジャック: jacques jack
+ルイ: louis
+ジュリアン: julien
+ジュール: jules
+トマ/トーマス: thomas
+ニコラ/ニコラス: nicolas nicholas
+ユーゴ/ヒューゴ: hugo
+リュカ/ルーカス: lucas
+リュック/ルーク: luc
+アントワーヌ: antoine
+フランソワ: francois
+アレクサンドル/アレクサンダー: alexandre alexander
+シャルル/チャールズ: charles
+ヴァンサン/ヴィンセント: vincent
+ローラン: laurent
+オリヴィエ: olivier
+セバスチャン: sebastien sebastian
+ギヨーム: guillaume
+アルチュール/アーサー: arthur
+アラン: alain
+ロマン: romain
+クリスチャン: christian
+ブリュノ/ブルーノ: bruno
+アンリ: henri
+ジョルジュ: georges
+シモン/サイモン: simon
+マルタン/マーティン: martin
+アドリアン: adrien
+ブノワ: benoit
+グザヴィエ: xavier
+クレマン: clement
+イヴ: yves
+ドニ: denis
+ルネ: rene renee
+アンドレ: andre andree
+ジェローム: jerome
+ジル: gilles
+ギー: guy
+ロジェ: roger
+レイモン: raymond
+エティエンヌ: etienne
+バティスト: baptiste
+ダミアン: damien
+セドリック: cedric
+ティエリー: thierry
+ディディエ: didier
+エマニュエル: emmanuel emmanuelle
+ファビアン: fabien
+カンタン: quentin
+ジェレミー: jeremy jeremie
+ジョナタン/ジョナサン: jonathan
+バンジャマン/ベンジャミン: benjamin
+ジョゼフ/ジョセフ: joseph
+ロベール/ロバート: robert
+リシャール/リチャード: richard
+ダヴィド/デイヴィッド: david
+エリック: eric erik
+パトリック: patrick
+フィリップ: philippe philip
+ベルナール: bernard
+ジェラール: gerard
+マチュー: mathieu matthieu
+
+# ---- French names, women
+マリー: marie
+ソフィー: sophie
+ルイーズ: louise
+ジュリー: julie
+ジュリエット: juliette
+ジュリア: julia
+リュシー/ルーシー: lucie lucy
+カミーユ: camille
+クレール: claire clair
+フランソワーズ: francoise
+カトリーヌ/キャサリン: catherine katherine
+イザベル: isabelle isabel
+アレクサンドラ: alexandra
+クロエ: chloe
+シャルロット: charlotte
+ロランス: laurence
+アンナ: anna
+アンヌ: anne
+マルゴ: margaux margot
+クリスティーヌ: christine
+ナタリー: nathalie natalie
+セリーヌ: celine
+カロリーヌ/キャロライン: caroline
+ポーリーヌ: pauline
+エレーヌ: helene
+エリーズ: elise
+エミリー: emilie emily
+ローラ: laura
+ニーナ: nina
+サンドリーヌ: sandrine
+ヴァレリー: valerie
+シルヴィー: sylvie
+ステファニー: stephanie
+メラニー: melanie
+アメリー: amelie
+オレリー: aurelie
+アニエス: agnes
+エロイーズ: eloise heloise
+ジャクリーヌ: jacqueline
+フロランス: florence
+オードリー: audrey
+ジュスティーヌ: justine
+クレマンス: clemence
+ローズ: rose
+ジャンヌ: jeanne
+エリザベート/エリザベス: elisabeth elizabeth
+ジョゼフィーヌ: josephine
+テレーズ: therese
+ドニーズ: denise
+マドレーヌ: madeleine
+マルグリット: marguerite
+ジュヌヴィエーヴ: genevieve
+
+# ---- English, Spanish and Italian names
+ジョン: john
+ジェームズ: james
+マイケル/ミカエル: michael mickael mikael
+ウィリアム: william
+ピーター: peter
+ケビン: kevin
+ライアン: ryan
+ニック: nick
+マイク: mike
+メアリー: mary
+マーク: mark
+ジョージ: george
+クリストファー: christopher
+オリバー: oliver
+ハリー: harry
+チャーリー: charlie
+エドワード: edward
+アンドリュー: andrew
+スティーブン: steven stephen
+ブライアン: brian bryan
+ジェイソン: jason
+アンソニー/アントニー: anthony
+ジェニファー: jennifer
+アシュリー: ashley
+グレース: grace
+ナンシー: nancy
+ホセ: jose
+フアン: juan
+ハビエル: javier
+ホルヘ: jorge
+ジョヴァンニ: giovanni
+ジュゼッペ: giuseppe
+フランチェスコ: francesco

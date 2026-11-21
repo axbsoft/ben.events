@@ -60,6 +60,42 @@
       ]
     },
     {
+      "source": "/calligraphy",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/calligraphy/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/assets/calligraphy/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/calligraphy-sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -74,6 +110,21 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/caligraphy",
+      "destination": "/calligraphy",
+      "permanent": false
+    },
+    {
+      "source": "/calligraphie",
+      "destination": "/calligraphy",
+      "permanent": false
+    },
+    {
+      "source": "/caligraphie",
+      "destination": "/calligraphy",
+      "permanent": false
+    },
     {
       "source": "/m-automotive",
       "destination": "/m-automotiv",

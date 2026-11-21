@@ -1,0 +1,164 @@
+# benevents agency — Korean calligraphy experience: first names whose Korean form is not what
+# their letters alone would give.
+#
+# Korean script writes sounds, so most names need no entry here: the app writes them from the
+# way they are spelt in French (Yassine 야신, Fatima Zahra 파티마 자흐라, Achraf 아슈라프).
+# This list holds the others: French names with silent letters or nasal vowels (Jean, Vincent),
+# English names (John, Michael), and a few established forms (Muhammad 무함마드).
+#
+# One line per name:   한글[/other accepted form]: spelling spelling spelling
+# Spellings are written without accents, in lower case; capitals, accents, hyphens and
+# spaces in what the visitor types are ignored when looking a name up.
+# The forms follow the spelling rules of the National Institute of Korean Language.
+#
+# After editing, run:  python3 tools/calligraphy/build_app.py   (see the top of that file)
+
+# ---- Arabic-origin names
+무함마드: muhammad mouhammad
+메리엠: meryem
+마리엠: maryem
+파이살: faycal
+아유브: ayyoub
+자카리아: zacharia zachariah
+자카리: zacharie zachary
+
+# ---- French names, men
+장: jean
+자크: jacques
+루이: louis
+쥘리앵/줄리앙: julien
+쥘/줄스: jules
+토마/토마스: thomas
+니콜라/니콜라스: nicolas nicholas
+위고/휴고: hugo
+뤼카/루카스: lucas
+뤼크/루크: luc
+앙투안: antoine
+프랑수아: francois
+알렉상드르/알렉산더: alexandre alexander
+샤를/찰스: charles
+뱅상/빈센트: vincent
+로랑: laurent
+올리비에: olivier
+세바스티앵/세바스찬: sebastien sebastian
+기욤: guillaume
+아르튀르/아서: arthur
+알랭: alain
+로맹: romain
+크리스티앙/크리스티안: christian
+브뤼노/브루노: bruno
+앙리: henri
+조르주: georges
+시몽/사이먼: simon
+마르탱/마틴: martin
+아드리앵: adrien
+브누아: benoit
+그자비에: xavier
+클레망: clement
+플로리앙/플로리안: florian
+나탕/나탄: nathan
+이브: yves
+드니: denis
+르네: rene renee
+앙드레: andre andree
+제롬: jerome
+질: gilles
+기: guy
+로제: roger
+레몽: raymond
+에티엔: etienne
+바티스트: baptiste
+다미앵: damien
+세드리크: cedric
+뤼도비크: ludovic
+얀: yann
+티에리: thierry
+디디에: didier
+에마뉘엘: emmanuel emmanuelle
+파비앵: fabien
+캉탱: quentin
+제레미: jeremy jeremie
+조나탕/조나단: jonathan
+뱅자맹/벤자민: benjamin
+조제프/조셉: joseph
+로베르/로버트: robert
+리샤르/리처드: richard
+다비드/데이비드: david
+에리크/에릭: eric
+쥐스탱/저스틴: justin
+
+# ---- French names, women
+루이즈: louise
+쥘리/줄리: julie
+쥘리에트/줄리엣: juliette
+쥘리아/줄리아: julia
+뤼시/루시: lucie
+카미유: camille
+클레르: claire clair
+프랑수아즈: francoise
+카트린/캐서린: catherine katherine
+이자벨: isabelle isabel
+알렉상드라/알렉산드라: alexandra
+클로에: chloe
+로랑스: laurence
+마농: manon
+안나: anna
+마르고: margaux margot
+마리옹: marion
+상드린: sandrine
+아녜스: agnes
+엘로이즈: eloise heloise
+자클린: jacqueline
+플로랑스: florence
+오드레/오드리: audrey
+쥐스틴: justine
+클레망스: clemence
+로즈: rose
+잔: jeanne
+앙브르: ambre
+엘렌: helene
+엘리즈: elise
+마들렌: madeleine
+마르그리트: marguerite
+주느비에브: genevieve
+엘리자베트/엘리자베스: elisabeth elizabeth
+조제핀: josephine
+테레즈: therese
+드니즈: denise
+에마/엠마: emma
+
+# ---- English, Spanish and Italian names
+존: john
+제임스: james
+마이클/미카엘: michael mickael mikael
+윌리엄: william
+피터: peter
+라이언: ryan
+샘: sam
+잭: jack
+닉: nick
+마이크: mike
+메리: mary
+마크: mark
+조지: george
+크리스토퍼: christopher
+올리버: oliver
+해리: harry
+찰리: charlie
+에드워드: edward
+앤드루: andrew
+스티븐: steven stephen
+브라이언: brian bryan
+제이슨: jason
+앤서니/안토니: anthony
+제니퍼: jennifer
+애슐리: ashley
+그레이스: grace
+낸시: nancy
+호세: jose
+후안: juan
+하비에르: javier
+호르헤: jorge
+조반니: giovanni
+주세페: giuseppe
+프란체스코: francesco

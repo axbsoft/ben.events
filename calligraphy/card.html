@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Votre calligraphie — benevents agency</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Votre prénom tracé au pinceau, un souvenir de l’événement.">
+<!-- what shows when the link is shared -->
+<meta property="og:title" content="Mon prénom au pinceau">
+<meta property="og:description" content="Un souvenir tracé au pinceau, par benevents agency.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="benevents agency">
+<meta property="og:image" content="https://www.ben.events/assets/img/og.jpg">
+<meta name="theme-color" content="#08080a">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/calli-app.css">
+</head>
+<body class="ca-card" data-title-fr="Votre calligraphie — benevents agency" data-title-en="Your calligraphy — benevents agency">
+
+<!-- The page a visitor opens from the e-mail they receive after the calligraphy activity: their
+     first name as it was written at the event, to keep, print or share. The address of the page
+     carries the name and its characters; nothing is stored. Engine: assets/js/calli-core.js. -->
+
+<div class="ca-aura" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="ca-card__top">
+  <a class="logo" href="/fr" data-home aria-label="benevents agency">
+    <span class="brand"><span class="brand__w"><b>ben</b>events</span><span class="brand__bar"><i></i><i></i><i></i><i></i></span><span class="brand__a">agency</span></span>
+  </a>
+  <div class="lang" role="group" aria-label="Langue">
+    <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+    <span>·</span>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="ca-card__main" hidden>
+    <div class="ca-card__paper"></div>
+    <div class="ca-card__side">
+      <p class="ca-kicker ca-card__of"></p>
+      <h1 class="ca-card__title"></h1>
+      <div class="ca-card__han" role="img"></div>
+      <p class="ca-card__read"></p>
+      <p class="ca-card__text" data-t="card.text">Voici votre prénom tel qu’il a été tracé pour vous. Gardez-le, imprimez-le, partagez-le.</p>
+      <div class="ca-card__actions">
+        <button class="btn" type="button" data-act="png"><span data-t="card.png">Enregistrer l’image</span></button>
+        <button class="btn btn--ghost" type="button" data-act="pdf"><span data-t="card.pdf">PDF à imprimer</span></button>
+        <button class="btn btn--ghost" type="button" data-act="share" hidden><span data-t="card.share">Partager</span></button>
+      </div>
+      <p class="ca-note ca-card__note" role="status" aria-live="polite"></p>
+      <p class="ca-card__by"><span data-t="card.by">Une animation signée</span> <a href="/fr" data-home>benevents agency</a><span data-t="card.by2">, agence événementielle au Maroc.</span></p>
+    </div>
+  </section>
+
+  <section class="ca-card__lost" hidden>
+    <div>
+      <p class="eyebrow"><i></i><span data-t="card.losteyebrow">Calligraphie</span></p>
+      <h1 class="ca-h" data-t="card.lost">Ce lien est incomplet.</h1>
+      <p class="ca-card__text" data-t="card.losttext">Ouvrez le lien depuis l’e-mail reçu après l’animation, sans le modifier.</p>
+      <p class="ca-card__actions" style="justify-content:center"><a class="btn" href="/fr" data-home><span data-t="card.home">Découvrir benevents</span></a></p>
+    </div>
+  </section>
+  <noscript><p class="ca-card__lost">Cette page a besoin de JavaScript pour tracer votre prénom.</p></noscript>
+</main>
+
+<script src="/assets/js/calli-core.js"></script>
+<script src="/assets/js/calli-card.js"></script>
+</body>
+</html>

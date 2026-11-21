@@ -1,13 +1,22 @@
-benevents agency — Chinese calligraphy experience
+benevents agency — calligraphy experience (Chinese, Japanese, Korean)
 
-data.json holds the outlines of the characters and letters this page draws.
-They come from two open-source typefaces, each under the SIL Open Font License 1.1
+The .json files of this folder hold the outlines of the characters and letters the pages draw.
+They come from open-source typefaces, each under the SIL Open Font License 1.1
 (https://openfontlicense.org):
 
-  Ma Shan Zheng      Copyright 2018 The MaShanZheng Project Authors
+  Ma Shan Zheng      Chinese brush script
+                     Copyright 2018 The MaShanZheng Project Authors
                      https://github.com/googlefonts/mashanzheng
-  Instrument Serif   Copyright 2022 The Instrument Serif Project Authors
+  Yuji Boku          Japanese brush script (the katakana, in their forms for writing downwards)
+                     Copyright 2021 The Yuji Project Authors
+                     https://github.com/Kinutafontfactory/Yuji
+  East Sea Dokdo     Korean brush script (enlarged to the size of the other two)
+                     Copyright (c) YoonDesign Inc.
+                     https://fonts.google.com/specimen/East+Sea+Dokdo
+  Instrument Serif   the visitor's own name, in Latin letters
+                     Copyright 2022 The Instrument Serif Project Authors
                      https://github.com/Instrument/instrument-serif
 
-The bookmark in templates/ is the picture supplied for the project, unchanged.
-The name list and the syllable table are in tools/calligraphy/.
+In templates/: the EXEED bookmark is the picture supplied for that project, unchanged; the three
+plain bookmarks (hanzi, kana, hangul) are drawn by tools/calligraphy/make_template.js.
+The name lists and the syllable table are in tools/calligraphy/.

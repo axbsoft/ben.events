@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calligraphie — benevents agency</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Application d’animation benevents agency. Accès réservé à l’équipe.">
+<meta name="theme-color" content="#08080a">
+<!-- added to the home screen of a tablet, it opens like an app: full screen, no address bar -->
+<link rel="manifest" href="assets/calligraphy/app.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Calligraphie">
+<link rel="apple-touch-icon" href="assets/calligraphy/icon-180.png">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/calli-app.css">
+</head>
+<body class="ca" data-title-fr="Calligraphie — benevents agency" data-title-en="Calligraphy — benevents agency">
+
+<!-- The calligraphy app: a visitor types a first name, sees it written with a brush in Chinese,
+     Japanese or Korean, leaves an e-mail address and gets a printed bookmark.
+     1. the team opens it with its code;  2. chooses the language, the printed model, the event;
+     3. the visitors' screen runs until the team leaves it, with the same code.
+     Engine: assets/js/calli-core.js · screens: assets/js/calli-app.js · the code: tools/calligraphy/lock.mjs -->
+
+<div class="ca-aura" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ 1. The team's code ============ -->
+<main class="ca-gate" id="main">
+  <div class="ca-gate__in">
+    <span class="brand ca-gate__brand" role="img" aria-label="benevents agency"><span class="brand__w"><b>ben</b>events</span><span class="brand__bar"><i></i><i></i><i></i><i></i></span><span class="brand__a">agency</span></span>
+    <p class="eyebrow"><i></i><span data-t="gate.eyebrow">Animation · Accès équipe</span></p>
+    <h1 class="ca-gate__title"><span class="line"><span data-t="gate.title1">Votre prénom</span></span> <span class="line"><span><em data-t="gate.title2">au pinceau</em></span></span></h1>
+    <p class="ca-gate__text" data-t="gate.text">L’animation qui écrit le prénom de vos invités en chinois, en japonais ou en coréen, l’imprime et recueille leur e-mail.</p>
+    <form class="ca-gate__form" novalidate>
+      <label class="ca-field">
+        <span class="sr" data-t="gate.label">Code de l’équipe</span>
+        <input type="password" name="code" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Code de l’équipe" data-t-ph="gate.label" required>
+      </label>
+      <button class="btn" type="submit"><span data-t="gate.open">Ouvrir</span></button>
+    </form>
+    <p class="ca-note ca-gate__note" role="status" aria-live="polite"></p>
+    <noscript><p class="ca-note is-error">Cette application a besoin de JavaScript.</p></noscript>
+  </div>
+  <div class="lang ca-gate__lang" role="group" aria-label="Langue">
+    <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+    <span>·</span>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</main>
+
+<!-- ============ 2. Setting up: language, printed model, event ============ -->
+<section class="ca-setup" hidden aria-labelledby="setup-title">
+  <header class="ca-setup__bar">
+    <span class="brand" aria-hidden="true"><span class="brand__w"><b>ben</b>events</span><span class="brand__bar"><i></i><i></i><i></i><i></i></span><span class="brand__a">agency</span></span>
+    <ol class="ca-steps" aria-label="Étapes" data-t-aria="setup.steps">
+      <li data-at="1"><b>1</b><span data-t="setup.s1">Langue</span></li>
+      <li data-at="2"><b>2</b><span data-t="setup.s2">Modèle</span></li>
+      <li data-at="3"><b>3</b><span data-t="setup.s3">Événement</span></li>
+    </ol>
+    <div class="ca-setup__side">
+      <div class="lang" role="group" aria-label="Langue">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <span>·</span>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="ca-quiet" type="button" data-act="lock"><span data-t="setup.lock">Verrouiller</span></button>
+    </div>
+  </header>
+
+  <div class="ca-setup__body">
+    <h1 class="sr" id="setup-title" data-t="setup.title">Préparer l’animation</h1>
+
+    <div class="ca-step" data-step="1">
+      <p class="ca-kicker" data-t="setup.k1">Étape 1 sur 3</p>
+      <h2 class="ca-h" data-t="setup.q1">Dans quelle langue écrit-on les prénoms ?</h2>
+      <div class="ca-choices ca-choices--script" role="radiogroup" aria-labelledby="setup-title"></div>
+    </div>
+
+    <div class="ca-step" data-step="2" hidden>
+      <p class="ca-kicker" data-t="setup.k2">Étape 2 sur 3</p>
+      <h2 class="ca-h" data-t="setup.q2">Quel modèle imprime-t-on ?</h2>
+      <div class="ca-choices ca-choices--model" role="radiogroup"></div>
+      <p class="ca-hint" data-t="setup.modelhint">Un modèle aux couleurs de votre client ? Envoyez son visuel à benevents : il s’ajoute ici.</p>
+    </div>
+
+    <div class="ca-step" data-step="3" hidden>
+      <p class="ca-kicker" data-t="setup.k3">Étape 3 sur 3</p>
+      <h2 class="ca-h" data-t="setup.q3">Derniers réglages</h2>
+      <form class="ca-form" novalidate>
+        <label class="ca-row">
+          <span class="ca-row__l" data-t="setup.event">Nom de l’événement</span>
+          <input class="ca-input" type="text" name="event" maxlength="80" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Portes ouvertes, Casablanca" data-t-ph="setup.eventph">
+          <span class="ca-row__h" data-t="setup.eventhint">Il range les contacts dans votre tableau et sert au décompte.</span>
+        </label>
+        <label class="ca-row">
+          <span class="ca-row__l" data-t="setup.brand">Marque citée dans l’accord</span>
+          <input class="ca-input" type="text" name="brand" maxlength="60" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Nom de la marque" data-t-ph="setup.brandph">
+          <span class="ca-row__h" data-t="setup.brandhint">« J’accepte d’être recontacté(e) par … ». Laissez vide pour ne pas proposer la case.</span>
+        </label>
+        <div class="ca-row" role="group" aria-labelledby="set-mail">
+          <span class="ca-row__l" id="set-mail" data-t="setup.mail">E-mail du visiteur</span>
+          <div class="ca-seg" data-set="email">
+            <button type="button" data-v="required" aria-pressed="true" data-t="setup.mail.required">Obligatoire</button>
+            <button type="button" data-v="optional" aria-pressed="false" data-t="setup.mail.optional">Facultatif</button>
+            <button type="button" data-v="none" aria-pressed="false" data-t="setup.mail.none">Ne pas demander</button>
+          </div>
+        </div>
+        <div class="ca-row" role="group" aria-labelledby="set-print">
+          <span class="ca-row__l" id="set-print" data-t="setup.print">Impression</span>
+          <div class="ca-seg" data-set="paper">
+            <button type="button" data-v="exact" aria-pressed="true" data-t="setup.print.exact">Au format du modèle</button>
+            <button type="button" data-v="a4" aria-pressed="false" data-t="setup.print.a4">Sur A4, traits de coupe</button>
+            <button type="button" data-v="none" aria-pressed="false" data-t="setup.print.none">Sans impression</button>
+          </div>
+        </div>
+      </form>
+      <p class="ca-hint ca-hint--key" data-t="setup.exithint">Pour quitter l’animation : maintenez le logo en haut à gauche, puis saisissez le code.</p>
+    </div>
+
+    <p class="ca-note ca-setup__note" role="status" aria-live="polite"></p>
+  </div>
+
+  <footer class="ca-setup__foot">
+    <button class="btn btn--ghost ca-back" type="button" data-act="back" hidden><span data-t="setup.back">Retour</span></button>
+    <button class="btn ca-next" type="button" data-act="next" disabled><span data-t="setup.next">Continuer</span></button>
+  </footer>
+</section>
+
+<!-- ============ 3. The visitors' screen ============ -->
+<section class="ca-kiosk" hidden aria-label="Animation" data-t-aria="kiosk.label">
+  <div class="ca-float" aria-hidden="true"></div>
+
+  <header class="ca-top">
+    <button class="ca-mark" type="button" aria-label="Espace équipe : maintenez appuyé" data-t-aria="kiosk.mark">
+      <span class="brand" aria-hidden="true"><span class="brand__w"><b>ben</b>events</span><span class="brand__bar"><i></i><i></i><i></i><i></i></span><span class="brand__a">agency</span></span>
+    </button>
+    <ol class="ca-dots" aria-hidden="true"><li></li><li></li><li></li></ol>
+    <div class="lang" role="group" aria-label="Langue">
+      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+      <span>·</span>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <div class="ca-stage">
+
+    <!-- a. the first name -->
+    <div class="ca-screen is-on" data-screen="name">
+      <p class="eyebrow"><i></i><span class="ca-script-of">Calligraphie coréenne</span></p>
+      <h1 class="ca-title"><span data-t="kiosk.title1">Votre prénom</span> <em data-t="kiosk.title2">au pinceau</em></h1>
+      <p class="ca-sub ca-name-sub">Écrivez votre prénom : nous le traçons en coréen.</p>
+      <form class="ca-big ca-name" novalidate>
+        <label class="ca-field">
+          <span class="sr" data-t="kiosk.name">Votre prénom</span>
+          <input type="text" name="name" maxlength="24" autocomplete="off" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Votre prénom" data-t-ph="kiosk.name">
+        </label>
+        <button class="btn" type="submit"><span data-t="kiosk.reveal">Révéler</span></button>
+      </form>
+      <p class="ca-note ca-name-note" role="status" aria-live="polite"></p>
+    </div>
+
+    <!-- b. the name, written -->
+    <div class="ca-screen" data-screen="reveal" hidden>
+      <div class="ca-reveal">
+        <div class="ca-reveal__text">
+          <p class="ca-kicker ca-reveal__who"></p>
+          <div class="ca-han" role="img"></div>
+          <p class="ca-read"><span data-t="kiosk.said">Se prononce</span> <b></b></p>
+          <div class="ca-under">
+            <span class="ca-chip"></span>
+            <div class="ca-alts"></div>
+          </div>
+          <div class="ca-actions">
+            <button class="btn" type="button" data-act="yes"><span data-t="kiosk.yes">C’est mon prénom</span></button>
+            <button class="btn btn--ghost" type="button" data-act="again"><span data-t="kiosk.again">Corriger</span></button>
+          </div>
+        </div>
+        <div class="ca-reveal__paper"><div class="ca-paper"></div></div>
+      </div>
+    </div>
+
+    <!-- c. the e-mail address -->
+    <div class="ca-screen" data-screen="mail" hidden>
+      <h2 class="ca-title ca-title--2"><span data-t="kiosk.mail1">Où envoyer</span> <em data-t="kiosk.mail2">votre calligraphie ?</em></h2>
+      <p class="ca-sub ca-mail-sub"></p>
+      <form class="ca-big ca-mail" novalidate>
+        <label class="ca-field">
+          <span class="sr" data-t="kiosk.email">Votre e-mail</span>
+          <input type="email" name="email" maxlength="120" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" inputmode="email" enterkeyhint="send" placeholder="Votre e-mail" data-t-ph="kiosk.email">
+        </label>
+        <button class="btn" type="submit"><span class="ca-mail-go">Recevoir et imprimer</span></button>
+      </form>
+      <div class="ca-domains" role="group" aria-label="Terminaisons courantes" data-t-aria="kiosk.domains">
+        <button type="button">@gmail.com</button><button type="button">@hotmail.com</button><button type="button">@outlook.com</button><button type="button">@yahoo.fr</button><button type="button">@icloud.com</button>
+      </div>
+      <label class="ca-consent"><input type="checkbox" name="consent"><span></span></label>
+      <p class="ca-note ca-mail-note" role="status" aria-live="polite"></p>
+      <p class="ca-privacy"></p>
+      <button class="ca-quiet ca-skip" type="button" data-act="skip" hidden></button>
+    </div>
+
+    <!-- d. thank you -->
+    <div class="ca-screen" data-screen="done" hidden>
+      <div class="ca-done">
+        <div class="ca-out" aria-hidden="true"><div class="ca-out__slot"></div><div class="ca-out__paper"></div></div>
+        <div class="ca-done__text">
+          <h2 class="ca-title ca-title--2 ca-done__title"></h2>
+          <p class="ca-sub ca-done__lines"></p>
+          <button class="btn ca-next-one" type="button" data-act="next-one"><span data-t="kiosk.nextone">Au suivant</span><i class="ca-ring" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="ca-petals" aria-hidden="true"></div>
+    </div>
+
+  </div>
+  <div class="ca-wipe" aria-hidden="true"></div>
+</section>
+
+<!-- ============ The team's corner: the code again, then counts, export, exit ============ -->
+<div class="ca-staff" hidden role="dialog" aria-modal="true" aria-labelledby="staff-title">
+  <div class="ca-staff__box">
+    <h2 class="ca-h ca-h--sm" id="staff-title" data-t="staff.title">Espace équipe</h2>
+
+    <form class="ca-staff__code" novalidate>
+      <p class="ca-staff__text" data-t="staff.codetext">Saisissez le code de l’équipe pour ouvrir les réglages ou quitter l’animation.</p>
+      <label class="ca-field">
+        <span class="sr" data-t="gate.label">Code de l’équipe</span>
+        <input type="password" name="code" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Code de l’équipe" data-t-ph="gate.label">
+      </label>
+      <p class="ca-note ca-staff__note" role="status" aria-live="polite"></p>
+      <div class="ca-staff__row">
+        <button class="btn" type="submit"><span data-t="staff.enter">Entrer</span></button>
+        <button class="btn btn--ghost" type="button" data-act="resume"><span data-t="staff.resume">Reprendre l’animation</span></button>
+      </div>
+    </form>
+
+    <div class="ca-staff__panel" hidden>
+      <p class="ca-staff__event"></p>
+      <ul class="ca-counts">
+        <li><b data-n="names">0</b><span data-t="staff.names">Prénoms</span></li>
+        <li><b data-n="emails">0</b><span data-t="staff.emails">E-mails</span></li>
+        <li><b data-n="consents">0</b><span data-t="staff.consents">Accords</span></li>
+        <li><b data-n="prints">0</b><span data-t="staff.prints">Impressions</span></li>
+        <li><b data-n="waiting">0</b><span data-t="staff.waiting">En attente d’envoi</span></li>
+      </ul>
+      <p class="ca-staff__send"></p>
+      <div class="ca-staff__grid">
+        <button class="btn" type="button" data-act="resume"><span data-t="staff.resume">Reprendre l’animation</span></button>
+        <button class="btn btn--ghost" type="button" data-act="reprint"><span data-t="staff.reprint">Réimprimer le dernier</span></button>
+        <button class="btn btn--ghost" type="button" data-act="csv"><span data-t="staff.csv">Exporter les contacts (CSV)</span></button>
+        <button class="btn btn--ghost" type="button" data-act="setup"><span data-t="staff.setup">Changer de modèle</span></button>
+        <button class="btn btn--ghost" type="button" data-act="full"><span data-t="staff.full">Plein écran</span></button>
+        <button class="btn btn--ghost" type="button" data-act="lock"><span data-t="staff.lock">Verrouiller et quitter</span></button>
+      </div>
+      <button class="ca-quiet ca-danger" type="button" data-act="clear"><span data-t="staff.clear">Effacer les contacts de cet appareil</span></button>
+      <div class="ca-confirm" hidden>
+        <p></p>
+        <div class="ca-staff__row">
+          <button class="btn ca-btn-danger" type="button" data-act="clear-yes"><span data-t="staff.clearyes">Effacer</span></button>
+          <button class="btn btn--ghost" type="button" data-act="clear-no"><span data-t="staff.clearno">Annuler</span></button>
+        </div>
+      </div>
+      <p class="ca-note ca-staff__pnote" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+</div>
+
+<!-- what the printer receives: the model at its true size, nothing else -->
+<div class="ca-print" aria-hidden="true"></div>
+
+<script src="assets/js/calli-core.js"></script>
+<script src="assets/js/calli-app.js"></script>
+</body>
+</html>
