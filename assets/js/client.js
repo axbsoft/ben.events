@@ -13,6 +13,7 @@
 
   var doc = document, root = doc.documentElement, body = doc.body;
   var DIR = body.getAttribute('data-deck') || 'assets/m-automotiv/';      // the files of the presentation and their manifest
+  var CLIENT = body.getAttribute('data-client') || 'M-Automotiv';         // the brand the presentation is made for ({client} in the words below)
   var STORE = 'ben-client-' + DIR.replace(/^assets\/|\/$/g, '');           // keeps a locked page open while the browser tab lives
   var LIVE_MIN = 900;                       // px: a narrower frame shows a live slide as a tall card instead of a scaled slide
   var CHECK = 'benevents:open';
@@ -70,6 +71,7 @@
       'cta.btn': 'Contacter benevents',
       'calli.title1': 'Votre prénom en',
       'calli.title2': 'calligraphie chinoise',
+      'calli.title2.ko': 'hangeul',
       'calli.cap1': 'Le visiteur saisit son prénom',
       'calli.cap2': 'Il reçoit d’abord sa calligraphie par e-mail',
       'calli.cap3': 'Puis son marque-page est imprimé sur place',
@@ -77,11 +79,11 @@
       'calli.go': 'Révéler',
       'calli.maillabel': 'Votre e-mail',
       'calli.send': 'Envoyer',
-      'calli.consent': 'J’accepte d’être recontacté(e) par M-Automotiv.',
+      'calli.consent': 'J’accepte d’être recontacté(e) par {client}.',
       'calli.print': 'Imprimer le marque-page',
       'calli.pdf': 'Télécharger le PDF',
       'calli.shop': 'Version imprimeur',
-      'calli.side': 'Côté M-Automotiv',
+      'calli.side': 'Côté {client}',
       'calli.leadtitle': 'Une animation qui collecte des contacts',
       'calli.leadtext': 'Chaque participation laisse un prénom et un e-mail, recueillis avec l’accord du visiteur.',
       'calli.listtitle': 'Contacts collectés',
@@ -133,6 +135,7 @@
       'cta.btn': 'Contact benevents',
       'calli.title1': 'Your first name in',
       'calli.title2': 'Chinese calligraphy',
+      'calli.title2.ko': 'Hangul',
       'calli.cap1': 'The visitor types their first name',
       'calli.cap2': 'They first receive their calligraphy by email',
       'calli.cap3': 'Then their bookmark is printed on the spot',
@@ -140,11 +143,11 @@
       'calli.go': 'Reveal',
       'calli.maillabel': 'Your email',
       'calli.send': 'Send',
-      'calli.consent': 'I agree to be contacted by M-Automotiv.',
+      'calli.consent': 'I agree to be contacted by {client}.',
       'calli.print': 'Print the bookmark',
       'calli.pdf': 'Download the PDF',
       'calli.shop': 'Print-shop version',
-      'calli.side': 'On M-Automotiv’s side',
+      'calli.side': 'On {client}’s side',
       'calli.leadtitle': 'An activity that collects contacts',
       'calli.leadtext': 'Every participation leaves a first name and an email address, collected with the visitor’s consent.',
       'calli.listtitle': 'Contacts collected',
@@ -155,7 +158,7 @@
   };
   var lang = 'fr';
   function t(key, vars) {
-    var s = (TEXT[lang] && TEXT[lang][key]) || TEXT.fr[key] || '';
+    var s = ((TEXT[lang] && TEXT[lang][key]) || TEXT.fr[key] || '').replace(/\{client\}/g, CLIENT);
     if (vars) Object.keys(vars).forEach(function (k) { s = s.replace('{' + k + '}', vars[k]); });
     return s;
   }
@@ -164,6 +167,8 @@
     $$('[data-t]').forEach(function (n) { n.textContent = t(n.getAttribute('data-t')); });
     $$('[data-t-ph]').forEach(function (n) { n.setAttribute('placeholder', t(n.getAttribute('data-t-ph'))); });
     $$('[data-t-aria]').forEach(function (n) { n.setAttribute('aria-label', t(n.getAttribute('data-t-aria'))); });
+    // words of one page only, written on the page in both languages: <span data-en="…">mot</span>
+    $$('[data-en]').forEach(function (n) { if (!n.hasAttribute('data-fr')) n.setAttribute('data-fr', n.textContent); n.textContent = n.getAttribute('data-' + lang); });
     root.lang = lang;
     var title = body.getAttribute('data-title-' + lang);
     if (title) doc.title = title;
@@ -721,8 +726,10 @@
   var asked = /[?&]lang=(en|fr)\b/.exec(location.search), kept = null;
   try { kept = localStorage.getItem('ben-lang'); } catch (e) {}
   if (form) {
-    // a client page: French first, as the presentation is; then the access form, or straight in if this tab already opened it
-    setLang((asked && asked[1]) || (kept === 'en' ? 'en' : 'fr'), false);
+    // a client page: in the language its presentation comes in first (French unless the page says <body data-first-lang="en">),
+    // or the one chosen before; then the access form, or straight in if this tab already opened it
+    var first = body.getAttribute('data-first-lang') === 'en' ? 'en' : 'fr';
+    setLang((asked && asked[1]) || (kept === 'en' || kept === 'fr' ? kept : first), false);
     restore().then(function (ok) {
       if (ok) return openDeck(true);
       body.classList.remove('is-restoring');

@@ -25,6 +25,28 @@
       ]
     },
     {
+      "source": "/kgm",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/assets/kgm/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, max-age=600"
+        }
+      ]
+    },
+    {
       "source": "/assets/m-automotiv/(.*)",
       "headers": [
         {

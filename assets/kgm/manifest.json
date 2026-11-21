@@ -1,0 +1,39 @@
+{
+ "v": 2,
+ "rev": "237295e1",
+ "kdf": {
+  "name": "PBKDF2",
+  "hash": "SHA-256",
+  "iterations": 600000,
+  "salt": "uGxaItPJohi/lOtIRbGXOQ=="
+ },
+ "check": "e2LKcPgrxgkVS2r3HCh3LBN8qxbl5cRXZDU3XnUWLzYm+cLwiEofH67I",
+ "langs": {
+  "en": {
+   "count": 14,
+   "type": "image/webp",
+   "thumbs": {
+    "type": "image/webp",
+    "columns": 6
+   },
+   "pdf": {
+    "name": "KGM-Korea-meets-Morocco-benevents.pdf"
+   }
+  },
+  "fr": {
+   "count": 14,
+   "type": "image/webp",
+   "thumbs": {
+    "type": "image/webp",
+    "columns": 6
+   },
+   "pdf": {
+    "name": "KGM-La-Coree-rencontre-le-Maroc-benevents.pdf"
+   }
+  }
+ },
+ "meta": true,
+ "live": [
+  6
+ ]
+}
