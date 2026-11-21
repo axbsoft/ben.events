@@ -123,7 +123,10 @@
   // a visitor who goes towards a button is about to press it: the calendar starts loading now
   ['pointerover', 'focusin', 'touchstart'].forEach(function (name) {
     doc.addEventListener(name, function (e) {
-      if (e.target && e.target.closest && e.target.closest('[data-book]')) load();
+      var b = e.target && e.target.closest ? e.target.closest('[data-book]') : null;
+      if (!b) return;
+      if (b.hasAttribute('aria-label')) b.title = b.getAttribute('aria-label');     // a button that shows only the calendar says its name on hover, in the language of the page
+      load();
     }, { capture: true, passive: true });
   });
 

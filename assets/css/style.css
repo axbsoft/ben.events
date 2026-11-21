@@ -85,6 +85,9 @@ ul, ol { padding: 0; list-style: none; }
 .btn--book span { display: inline-flex; align-items: center; }
 .btn--book span::after { display: none; }
 .btn--book span::before { content: ""; flex: none; width: 1.12em; height: 1.12em; margin-right: 9px; background: currentColor; -webkit-mask: var(--cal) center / contain no-repeat; mask: var(--cal) center / contain no-repeat; }
+/* in the header, the calendar alone: a round button the size of the menu button; its name is said by aria-label and shown on hover (title) */
+.btn.btn--icon { width: 44px; height: 44px; padding: 0; flex: none; }
+.btn--icon span::before { width: 18px; height: 18px; margin-right: 0; }
 [data-book].is-waiting { cursor: progress; opacity: .72; }
 .btn--book.is-waiting span::before { animation: bookwait 1s ease-in-out infinite; }
 @keyframes bookwait { 50% { opacity: .2; } }
@@ -154,10 +157,6 @@ ul, ol { padding: 0; list-style: none; }
 .nav .btn:hover::before, .nav .btn:focus-visible::before { animation-play-state: running; }
 .nav .btn--ghost::before { opacity: 0; }
 .nav .btn--ghost:hover::before, .nav .btn--ghost:focus-visible::before { opacity: 1; }
-/* the ghost "Book a call" of the header shows where there is room for it, on wide screens and on tablets; in between, and on phones,
-   the same button is in the menu (home page), in the contact section and in the footer */
-.nav .btn--book { display: none; }
-@media (min-width: 1241px), (min-width: 701px) and (max-width: 1100px) { .nav .btn--book { display: inline-flex; } }
 @keyframes flow { to { background-position: -500% 0; } }
 .lang { display: flex; align-items: center; gap: 2px; font-size: 13px; font-weight: 500; color: var(--mute); padding: 4px; border-radius: 99px; border: 1px solid var(--line); }
 .lang span { display: none; }

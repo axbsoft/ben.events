@@ -285,7 +285,7 @@ ${STATS}
     <div class="lang" role="group" aria-label="${att(w.language)}">
       ${LANGS.map(k => k === l ? `<a href="${alt[k]}" aria-current="true" lang="${k}">${k.toUpperCase()}</a>` : `<a href="${alt[k]}" hreflang="${k}" lang="${k}">${k.toUpperCase()}</a>`).join('\n      <span>·</span>\n      ')}
     </div>
-    <button class="btn btn--sm btn--ghost btn--book" type="button" data-book aria-haspopup="dialog"><span>${esc(t['book.cta'])}</span></button>
+    <button class="btn btn--sm btn--ghost btn--book btn--icon" type="button" data-book aria-haspopup="dialog" aria-label="${att(t['book.cta'])}" title="${att(t['book.cta'])}"><span></span></button>
     <a class="btn btn--sm" href="${U.at(l, '#contact')}"><span>${esc(w.cta)}</span></a>
   </div>
 </header>
