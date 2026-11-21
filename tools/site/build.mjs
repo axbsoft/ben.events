@@ -617,7 +617,7 @@ ${cta(l, cw.endTitle(name), w.endText)}
   <div>
     <p class="eyebrow"><i></i><span>${esc(a.name)}</span></p>
     <h1 class="pg__title">${esc(a.title[0])} <em>${esc(a.title[1])}</em></h1>
-    <p class="pg__lede">${esc(t['about.p1'])}</p>
+    <p class="pg__lede">${esc(a.lede)}</p>
     <a class="btn" href="${U.at(l, '#contact')}"><span>${esc(w.talk)}</span></a>
   </div>
   <figure class="pg__cover">${img(cover, a.cover, ' fetchpriority="high"', 'cover')}</figure>
@@ -625,14 +625,14 @@ ${cta(l, cw.endTitle(name), w.endText)}
 <section class="pg__cols">
   <div class="pg__text">
     <h2 class="pg__h2">${esc(a.oneTeam)}</h2>
-    <p>${esc(t['about.p2'])}</p>
+    <p>${esc(a.intro)}</p>
     ${a.text.map(p => `<p>${esc(p)}</p>`).join('\n    ')}
     <p class="pg__more"><a class="link-arrow" href="${U.at(l, '#process')}">${esc(a.film)}</a></p>
   </div>
   <div class="pg__does pg__does--said">
     <h2 class="pg__h">${esc(a.values)}</h2>
     <ul>
-      ${[1, 2, 3, 4].map(k => `<li><span><b>${esc(t['about.k' + k])}</b>${esc(t['about.v' + k])}</span></li>`).join('\n      ')}
+      ${a.principles.map(([k, v]) => `<li><span><b>${esc(k)}</b>${esc(v)}</span></li>`).join('\n      ')}
     </ul>
   </div>
 </section>${FIGURES.length ? `

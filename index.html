@@ -231,7 +231,7 @@
       <span class="line"><span data-i18n="hero.l3">worth remembering.</span></span>
     </p>
     <div class="hero__foot">
-      <p class="hero__lede" data-i18n="hero.lede">benevents agency designs and produces events for companies and institutions in Morocco: conventions, conferences, ceremonies, gala evenings and launches. Creative direction, scenography and audiovisual production by one team, from the first idea to the last cue.</p>
+      <p class="hero__lede" data-i18n="hero.lede">We design and produce events for companies and institutions, all over Morocco.</p>
       <div class="hero__actions">
         <a class="btn magnetic" href="#contact"><span data-i18n="hero.cta">Plan your event</span></a>
         <a class="link-arrow" href="#gallery"><span data-i18n="hero.cta2">View our work</span></a>
@@ -270,18 +270,15 @@
     <div class="about__text">
       <p class="eyebrow" data-reveal><i></i><span data-i18n="about.eyebrow">The Agency</span></p>
       <h2 class="h2" data-reveal data-i18n="about.title">One team, from design to production.</h2>
-      <p class="lede" data-reveal data-i18n="about.p1">benevents agency is an event design and production agency. We bring concept, scenography and audiovisual production together under one roof, so that every element, from the stage to the screen content, speaks with a single voice.</p>
-      <p class="body" data-reveal data-i18n="about.p2">Companies, institutions and foundations trust us with the moments that matter to them. Our promise is simple: an event that looks effortless on the day, because nothing was left to chance beforehand.</p>
-      <!-- Our principles: what a client can hold us to -->
+      <p class="lede" data-reveal data-i18n="about.p1">Concept, scenography and audiovisual production under one roof, so that everything speaks with one voice.</p>
+      <!-- Our principles: what a client can hold us to. The agency page says each one at more length. -->
       <p class="pillars__h" data-reveal data-i18n="about.principles">Our principles</p>
       <ul class="pillars" data-reveal>
-        <li><b data-i18n="about.k1">Those who draw it build it</b><span data-i18n="about.v1">Stage, light, sound and screen content stay in the same hands, from the sketch to the control desk.</span></li>
-        <li><b data-i18n="about.k2">You approve before we book</b><span data-i18n="about.v2">The concept and the budget are yours to approve before anything is reserved.</span></li>
-        <li><b data-i18n="about.k3">One contact</b><span data-i18n="about.v3">A dedicated producer, from the first conversation to the final toast.</span></li>
-        <li><b data-i18n="about.k4">Nothing is improvised</b><span data-i18n="about.v4">Every sequence is written down, and our own team runs the show on the day.</span></li>
+        <li><b data-i18n="about.k1">Those who draw it build it</b><span data-i18n="about.v1">The same hands, from sketch to control desk.</span></li>
+        <li><b data-i18n="about.k2">You approve before we book</b><span data-i18n="about.v2">Concept and budget first.</span></li>
+        <li><b data-i18n="about.k3">One contact</b><span data-i18n="about.v3">From the first call to the final toast.</span></li>
+        <li><b data-i18n="about.k4">Nothing is improvised</b><span data-i18n="about.v4">Every sequence is written down.</span></li>
       </ul>
-      <!-- where we work: each city has a page of its own (tools/site/pages.mjs) -->
-      <p class="about__where" data-reveal><span data-i18n="about.where">We work in</span> <a href="event-agency-casablanca" data-page="city:casablanca">Casablanca</a>, <a href="event-agency-rabat" data-page="city:rabat">Rabat</a> <span data-i18n="about.and">and</span> <a href="event-agency-marrakech" data-page="city:marrakech">Marrakech</a><span data-i18n="about.where2">, and wherever in Morocco your event takes place.</span></p>
       <p class="about__more" data-reveal><a class="link-arrow" href="agency" data-page="agency" data-i18n="about.more">More about the agency</a></p>
     </div>
     <div class="about__visual">
@@ -295,6 +292,21 @@
         <svg class="seal__ring" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="sealPath" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><text><textPath href="#sealPath" data-i18n="seal.ring">START YOUR PROJECT ✦ LET’S TALK ABOUT IT ✦&nbsp;</textPath></text></svg>
         <span class="seal__core" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg></span>
       </a>
+    </div>
+    <!-- Where we are: Morocco, drawn from Natural Earth's public map, with a dot on each warehouse.
+         To add a city, give its link the place of its longitude and latitude on the drawing:
+         --x = (longitude + 17.10) / 16.03, --y = (35.93 - latitude) / 15.12, both as percentages. -->
+    <div class="about__map" data-reveal>
+      <div class="about__map-say">
+        <p class="pillars__h" data-i18n="map.label">Where we are</p>
+        <h3 class="about__map-title" data-i18n="map.title">Three warehouses, and wherever your event takes place.</h3>
+      </div>
+      <div class="map" role="group" aria-label="Map of Morocco: our warehouses in Casablanca, Rabat and Marrakech" data-i18n-aria="map.aria">
+        <svg class="map__land" viewBox="0 0 400 429" aria-hidden="true"><defs><pattern id="mapDots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1"/></pattern></defs><path d="M291.9 0.0L294.8 0.8L293.4 2.1L293.4 5.3L299.1 13.1L305.9 18.4L311.1 20.5L318.5 21.8L334.4 18.5L337.0 19.9L341.9 20.4L346.6 19.6L352.4 14.9L352.9 17.5L355.7 22.7L371.2 23.4L373.3 27.2L381.8 33.4L380.4 37.5L383.3 41.5L381.9 44.3L383.9 49.8L383.7 60.9L385.8 67.1L384.6 74.1L387.9 81.0L388.9 86.6L390.4 89.2L398.8 95.8L400.0 98.2L395.6 101.9L395.1 103.8L396.0 108.4L394.7 108.9L365.4 107.8L355.1 109.3L353.4 110.3L351.2 116.2L340.7 119.8L332.6 120.3L330.6 122.2L332.0 129.6L330.9 134.2L336.1 137.9L336.1 139.8L335.1 140.9L327.1 142.3L318.7 148.4L302.6 155.0L297.4 163.5L290.6 169.4L276.8 173.0L264.9 173.3L263.9 177.8L261.0 180.4L248.0 179.2L239.8 185.4L234.8 186.6L210.5 204.5L209.9 207.3L210.0 281.8L126.8 281.8L126.6 353.4L117.9 357.7L111.7 359.0L101.5 366.7L98.4 371.8L98.3 375.5L99.9 381.0L101.8 413.9L3.3 414.1L0.9 426.3L1.3 428.9L0.0 427.5L4.2 397.9L7.6 390.6L10.3 387.3L14.5 385.6L18.4 378.2L19.8 371.4L22.4 368.3L23.2 365.8L22.2 363.9L32.7 344.2L32.3 342.8L27.8 347.7L29.9 342.8L37.7 336.3L47.6 324.8L51.4 322.8L54.7 317.9L55.9 313.6L56.3 303.8L57.5 298.5L64.2 283.7L65.6 277.0L67.0 274.4L69.5 273.2L73.1 269.8L78.5 267.8L87.8 260.8L89.9 256.9L92.1 249.1L97.8 234.8L101.2 231.4L103.5 227.4L107.4 225.5L115.5 224.6L127.5 221.2L138.3 216.1L141.4 214.1L150.1 204.7L165.0 194.7L180.8 173.6L185.4 165.1L186.4 158.2L185.7 155.5L182.8 151.1L180.7 149.9L180.2 147.8L181.2 144.2L181.9 127.8L185.2 119.7L193.4 109.0L194.9 104.7L195.9 95.2L206.1 85.4L214.2 76.0L219.5 72.5L237.9 64.9L254.4 55.6L258.0 51.0L268.1 32.7L278.8 4.1L286.3 2.9Z"/></svg>
+        <a class="map__city map__city--left" style="--x:59.3%;--y:15.59%" href="event-agency-casablanca" data-page="city:casablanca"><i aria-hidden="true"></i><span>Casablanca</span></a>
+        <a class="map__city" style="--x:63.97%;--y:12.63%" href="event-agency-rabat" data-page="city:rabat"><i aria-hidden="true"></i><span>Rabat</span></a>
+        <a class="map__city" style="--x:56.86%;--y:28.44%" href="event-agency-marrakech" data-page="city:marrakech"><i aria-hidden="true"></i><span>Marrakech</span></a>
+      </div>
     </div>
   </div>
 </section>

@@ -182,6 +182,14 @@ export const AGENCY = {
     slug: 'agency', name: 'The agency',
     seo: ['About benevents agency | Event Design and Production in Morocco', 'benevents agency designs and produces corporate events in Casablanca, Rabat, Marrakech and across Morocco: one team for the concept, the stage and the audiovisual production.'],
     title: ['The agency that designs your event', 'and builds it.'],
+    lede: 'benevents agency is an event design and production agency. We bring concept, scenography and audiovisual production together under one roof, so that every element, from the stage to the screen content, speaks with a single voice.',
+    intro: 'Companies, institutions and foundations trust us with the moments that matter to them. Our promise is simple: an event that looks effortless on the day, because nothing was left to chance beforehand.',
+    principles: [
+      ['Those who draw it build it', 'Stage, light, sound and screen content stay in the same hands, from the sketch to the control desk.'],
+      ['You approve before we book', 'The concept and the budget are yours to approve before anything is reserved.'],
+      ['One contact', 'A dedicated producer, from the first conversation to the final toast.'],
+      ['Nothing is improvised', 'Every sequence is written down, and our own team runs the show on the day.']
+    ],
     oneTeam: 'Why one team',
     text: [
       'Design and production are often two jobs, given to two companies. We keep them in the same hands. The team that draws your stage is the one that lights it, fills its screens and runs it from the control desk on the day: fewer go-betweens, faster decisions, and no gap between the sketch and the room.',
@@ -197,6 +205,14 @@ export const AGENCY = {
     slug: 'agence', name: 'L’agence',
     seo: ['L’agence benevents : conception et production d’événements au Maroc', 'benevents agency conçoit et produit des événements d’entreprise à Casablanca, Rabat, Marrakech et partout au Maroc : une seule équipe pour le concept, la scène et l’audiovisuel.'],
     title: ['L’agence qui conçoit votre événement', 'et le produit.'],
+    lede: 'benevents agency est une agence de conception et de production événementielle. Concept, scénographie et production audiovisuelle sont réunis sous un même toit, pour que chaque élément, de la scène aux contenus d’écran, parle d’une seule voix.',
+    intro: 'Entreprises, institutions et fondations nous confient les moments qui comptent pour elles. Notre promesse est simple : un événement qui paraît évident le jour J, parce que rien n’a été laissé au hasard en amont.',
+    principles: [
+      ['Ceux qui dessinent produisent', 'La scène, la lumière, le son et les contenus restent entre les mêmes mains, du croquis à la régie.'],
+      ['Vous validez avant toute réservation', 'Le concept et le budget vous sont soumis avant que quoi que ce soit ne soit réservé.'],
+      ['Un seul interlocuteur', 'Un chef de projet dédié, de la première conversation au dernier toast.'],
+      ['Rien ne s’improvise', 'Chaque séquence est écrite, et notre propre équipe tient la régie le jour J.']
+    ],
     oneTeam: 'Pourquoi une seule équipe',
     text: [
       'La conception et la production sont souvent deux métiers, confiés à deux sociétés. Chez nous, ils restent entre les mêmes mains. L’équipe qui dessine votre scène est celle qui l’éclaire, qui prépare ses contenus et qui la pilote depuis la régie le jour J : moins d’intermédiaires, des décisions plus rapides, et aucun écart entre le croquis et la salle.',
