@@ -566,20 +566,22 @@
 @keyframes fest-foam { 0%, 40% { opacity: 0; } 48%, 100% { opacity: 1; } }
 @keyframes fest-steam { 0%, 44% { opacity: 0; } 52%, 85% { opacity: 1; } 91%, 100% { opacity: 0; } }
 @keyframes fest-wisp { 0% { transform: translateY(6px); opacity: 0; } 35% { opacity: .85; } 100% { transform: translateY(-10px); opacity: 0; } }
-/* phones: each country's name has its row, and its drawing beside it: the lantern hangs to the right of Korea,
-   the tea is served to the left of Morocco (sizes in em: they follow the size of the title) */
+/* phones: each country's name has its row, and the two drawings change sides, each one offered to the other country:
+   the tea is poured at the top right, beside Korea, and the lantern hangs at the bottom left, beside Morocco
+   (sizes in em: they follow the size of the title) */
 @media (max-width: 760px) {
   .gate__title .gate__kr + span { display: block; }
   .fest { translate: none; }
-  .fest--ko { top: -.27em; left: calc(50% + 2.7em); width: 1em; }
-  .fest--ma { top: auto; bottom: .12em; right: calc(50% + 2.42em); width: 1.3em; }
+  .fest--ma { top: -.15em; right: auto; left: calc(50% + 2.7em); width: 1.15em; }
+  .fest--ko { top: auto; bottom: -.1em; left: auto; right: calc(50% + 2.42em); width: 1em; }
 }
 @media (max-width: 380px) {
   .gate .lockup:has(.lockup__word) { font-size: 8.6vw; }      /* two names side by side (a client shown by its name): they fit a small phone */
-  .fest--ko { top: -.116em; left: calc(50% + 2.62em); width: .8em; }
-  .fest--ma { right: calc(50% + 2.36em); width: 1.1em; }
+  .fest--ma { left: calc(50% + 2.62em); width: .9em; }
+  .fest--ko { right: calc(50% + 2.36em); width: .9em; }
 }
 @media (max-width: 350px) {
-  .fest--ko { top: .04em; left: calc(50% + 2.54em); width: .6em; }
-  .fest--ma { right: calc(50% + 2.3em); width: .8em; }
+  .fest--ma { left: calc(50% + 2.54em); width: .6em; }
+  .fest--ko { right: calc(50% + 2.3em); width: .8em; }
+}
 }
