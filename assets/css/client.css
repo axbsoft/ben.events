@@ -482,6 +482,8 @@
 .deck__cta-side { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 
 /* ---------- A client whose mark is its name in letters (kgm.html) ---------- */
-.lockup__m.lockup__word { width: auto; height: auto; align-self: center; font-family: var(--sans); font-weight: 700; font-size: 1.04em; line-height: 1; letter-spacing: .14em; color: #fff; }
+.lockup__m.lockup__word { width: auto; height: auto; align-self: center; color: #fff; }
+.kgmark { display: block; height: .64em; width: auto; }
 .gate .lockup__word::before { inset: -70% -30%; background: radial-gradient(closest-side, rgba(233, 75, 91, .34), transparent); }
-.gate__client { font-weight: 700; letter-spacing: .14em; color: var(--text); }
+.gate__client { height: .9em; color: var(--text); }
+@media (max-width: 480px) { .gate .lockup__word .kgmark { height: .44em; } }
