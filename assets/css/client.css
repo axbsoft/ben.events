@@ -520,11 +520,12 @@
 .calli[data-skin="slide"] .calli__stage.has-designs .calli__paper { height: 742px; }
 .calli[data-skin="tall"] .calli__designs button { padding: 8px 16px; font-size: 14px; }
 
-/* ---------- A lantern for Korea, mint tea for Morocco (kgm.html): two small scenes on the sides of the access page ----------
+/* ---------- A lantern for Korea, mint tea for Morocco (kgm.html): two small scenes beside the title of the access page ----------
    Drawn in SVG, moved by CSS alone. Without motion (reduced motion) they are still: the lantern lit, the glass full. */
-.fest { position: absolute; z-index: 0; top: 48%; height: auto; overflow: visible; pointer-events: none; }
-.fest--ko { left: clamp(14px, 6.5vw, 110px); width: clamp(70px, 8.4vw, 132px); translate: 0 -50%; }
-.fest--ma { right: clamp(8px, 4.2vw, 76px); width: clamp(96px, 11.6vw, 186px); translate: 0 -50%; }
+.fest { position: absolute; z-index: 0; top: 50%; height: auto; overflow: visible; pointer-events: none; translate: 0 -50%; }
+/* they live in the title (so that they follow it); on a wide screen they stand near the edges of the card, level with it */
+.fest--ko { left: calc(50% - 50vw + var(--gap) + clamp(14px, 6.5vw, 110px)); width: clamp(70px, 8.4vw, 132px); }
+.fest--ma { right: calc(50% - 50vw + var(--gap) + clamp(8px, 4.2vw, 76px)); width: clamp(96px, 11.6vw, 186px); }
 .is-restoring .fest { visibility: hidden; }
 .fest__stick { fill: none; stroke: #7a5636; stroke-width: 5; stroke-linecap: round; }
 .fest__cord { fill: none; stroke: #c9a15a; stroke-width: 1.6; }
@@ -565,9 +566,20 @@
 @keyframes fest-foam { 0%, 40% { opacity: 0; } 48%, 100% { opacity: 1; } }
 @keyframes fest-steam { 0%, 44% { opacity: 0; } 52%, 85% { opacity: 1; } 91%, 100% { opacity: 0; } }
 @keyframes fest-wisp { 0% { transform: translateY(6px); opacity: 0; } 35% { opacity: .85; } 100% { transform: translateY(-10px); opacity: 0; } }
-/* phones: no room beside the title, so the two scenes sit in the bottom corners of the card */
+/* phones: each country's name has its row, and its drawing beside it: the lantern hangs to the right of Korea,
+   the tea is served to the left of Morocco (sizes in em: they follow the size of the title) */
 @media (max-width: 760px) {
-  .fest { top: auto; translate: none; }
-  .fest--ko { left: 14px; bottom: 16px; width: 52px; }
-  .fest--ma { right: 8px; bottom: 12px; width: 76px; }
+  .gate__title .gate__kr + span { display: block; }
+  .fest { translate: none; }
+  .fest--ko { top: -.27em; left: calc(50% + 2.7em); width: 1em; }
+  .fest--ma { top: auto; bottom: .12em; right: calc(50% + 2.42em); width: 1.3em; }
+}
+@media (max-width: 380px) {
+  .gate .lockup:has(.lockup__word) { font-size: 8.6vw; }      /* two names side by side (a client shown by its name): they fit a small phone */
+  .fest--ko { top: -.116em; left: calc(50% + 2.62em); width: .8em; }
+  .fest--ma { right: calc(50% + 2.36em); width: 1.1em; }
+}
+@media (max-width: 350px) {
+  .fest--ko { top: .04em; left: calc(50% + 2.54em); width: .6em; }
+  .fest--ma { right: calc(50% + 2.3em); width: .8em; }
 }
