@@ -26,7 +26,7 @@
       image: ['assets/img/conference-opening.jpg', 2000, 1330],
       seo: {
         title: { en: 'Conference and Convention Organisation in Morocco | benevents agency', fr: 'Organisation de conférences et conventions au Maroc | benevents agency' },
-        desc: { en: 'Forums, annual conventions, panels and seminars in Morocco: benevents agency handles the format, the stage, the welcome, the control desk and the filming of your event.',
+        desc: { en: 'Forums, annual conventions, panels and seminars in Morocco: benevents handles the format, stage, welcome, control desk and filming of your event.',
                 fr: 'Forums, conventions annuelles, panels et séminaires au Maroc : benevents agency conçoit le format, la scène, l’accueil, la régie et la captation de votre événement.' }
       },
       text: {
@@ -74,8 +74,8 @@
       image: ['assets/img/graduation-ceremony.jpg', 2000, 1330],
       seo: {
         title: { en: 'Ceremony and Gala Evening Organisation in Morocco | benevents agency', fr: 'Organisation de cérémonies et soirées de gala au Maroc | benevents agency' },
-        desc: { en: 'Award and graduation ceremonies, gala dinners and anniversary evenings in Morocco: benevents agency stages your ceremony, from the storyline to show control on the day.',
-                fr: 'Remises de prix et de diplômes, dîners de gala et soirées anniversaires au Maroc : benevents agency met en scène votre cérémonie, du fil conducteur à la régie du jour J.' }
+        desc: { en: 'Award and graduation ceremonies, gala dinners and anniversary evenings in Morocco: benevents stages your ceremony, from storyline to show control on the day.',
+                fr: 'Remises de prix et de diplômes, dîners de gala et soirées anniversaires au Maroc : benevents met en scène votre cérémonie, du fil conducteur à la régie du jour J.' }
       },
       text: {
         en: ['A ceremony happens only once. Awards, graduation, gala dinner or anniversary evening: we write the storyline, set every entrance on stage and hold show control, so that the emotion arrives at the right moment.',
@@ -123,7 +123,7 @@
       seo: {
         title: { en: 'Product Launches and Corporate Receptions in Morocco | benevents agency', fr: 'Lancement de produit et réceptions d’entreprise au Maroc | benevents agency' },
         desc: { en: 'Product launches, inaugurations, press events and networking receptions in Morocco: a concept, a set in the colours of your brand and a journey for your guests.',
-                fr: 'Lancements de produit, inaugurations, événements presse et réceptions au Maroc : un concept, une scénographie aux couleurs de votre marque et un parcours pour vos invités.' }
+                fr: 'Lancements de produit, inaugurations, événements presse et réceptions au Maroc : un concept, une scénographie à vos couleurs et un parcours pour vos invités.' }
       },
       text: {
         en: ['A launch or an inauguration is a brand receiving guests at home. We start from your world to imagine a concept, a set in your colours and a journey that takes each guest from the welcome to the last conversation.',

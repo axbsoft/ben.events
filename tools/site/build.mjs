@@ -13,7 +13,7 @@
      event-agency-<city>.html               one page per city where we work              -> /event-agency-<city>
      fr/agence-evenementielle-<city>.html   the same in French                           -> /fr/agence-evenementielle-<city>
      404.html                               what a visitor sees when an address does not exist
-     sitemap.xml                            the list of all of them
+     sitemap.xml                            the list of all of them, with the day each last changed and its pictures
 
    It also rewrites, in index.html, the lines between "head:seo" and "/head:seo" (title, description,
    addresses of the two languages, data for search engines), from assets/js/i18n.js (meta).
@@ -26,8 +26,17 @@
 
        node tools/site/build.mjs
 
-   Nothing else is needed: no dependency, plain Node. */
+   Nothing else is needed: no dependency, plain Node.
+
+   The picture of a link preview (what WhatsApp, LinkedIn or a message shows under a shared link) is the page's
+   own picture cut to 1200 x 630, in assets/img/og/. When a page gets a new picture, make its preview, then
+   build again (until then the page shows the agency's picture, and this tool says which previews are missing):
+
+       python3 tools/site/previews.py && node tools/site/build.mjs
+
+   "node tools/site/build.mjs --previews" only lists the pictures and their previews, and writes nothing. */
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync, existsSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
@@ -44,7 +53,8 @@ const STATS = '<script src="https://app.rybbit.io/api/script.js?siteId=5ad129484
 const LANGS = ['en', 'fr'];
 
 const read = f => readFileSync(join(ROOT, f), 'utf8');
-const write = (f, s) => { mkdirSync(dirname(join(ROOT, f)), { recursive: true }); writeFileSync(join(ROOT, f), s); };
+const LIST = process.argv.includes('--previews');        // only say which preview pictures the pages need
+const write = (f, s) => { if (LIST) return; mkdirSync(dirname(join(ROOT, f)), { recursive: true }); writeFileSync(join(ROOT, f), s); };
 
 /* ---------- what the site says ---------- */
 const box = { window: {} };
@@ -96,7 +106,7 @@ const W = {
     talk: 'Talk to us about your event', craft: 'What we create', does: 'What we take care of', ideas: 'Ideas, seen in our projects', see: 'See the project:',
     more: 'More events of this kind', others: 'Our other services', work: 'Portfolio', allWork: 'All projects',
     workTitle: ['Events produced', 'in Morocco'], workLede: 'Conventions, forums, ceremonies, gala evenings and brand events designed and produced by benevents agency in Morocco.',
-    workSeo: ['Corporate Events Produced in Morocco: Our Projects | benevents agency', 'Conventions, forums, ceremonies, gala evenings and brand events designed and produced by benevents agency in Casablanca, Rabat, Tangier, Marrakech and across Morocco.'],
+    workSeo: ['Corporate Events Produced in Morocco: Our Projects | benevents agency', 'Conventions, forums, ceremonies, gala evenings and brand events designed and produced by benevents in Casablanca, Rabat, Tangier, Marrakech and across Morocco.'],
     project: 'project by benevents agency', crafts: 'Services involved', photos: (t, i, n) => `${t}: photo ${i} of ${n}`, prev: 'Previous project', next: 'Next project',
     endTitle: 'An event like this in mind?', endText: 'Give us the date, the place and the number of guests: we will come back with first ideas.',
     pjEndTitle: 'Planning something similar?', pjEndText: 'Tell us about your event. We will take this project as the starting point and come back to you with first ideas.',
@@ -110,7 +120,7 @@ const W = {
     talk: 'Parlons de votre événement', craft: 'Ce que nous créons', does: 'Ce que nous prenons en charge', ideas: 'Des idées, vues dans nos réalisations', see: 'Voir le projet :',
     more: 'D’autres événements de ce type', others: 'Nos autres savoir-faire', work: 'Réalisations', allWork: 'Toutes les réalisations',
     workTitle: ['Événements réalisés', 'au Maroc'], workLede: 'Conventions, forums, cérémonies, soirées de gala et événements de marque conçus et produits par benevents agency au Maroc.',
-    workSeo: ['Événements d’entreprise réalisés au Maroc : nos réalisations | benevents agency', 'Conventions, forums, cérémonies, soirées de gala et événements de marque conçus et produits par benevents agency à Casablanca, Rabat, Tanger, Marrakech et partout au Maroc.'],
+    workSeo: ['Événements d’entreprise réalisés au Maroc : nos réalisations | benevents agency', 'Conventions, forums, cérémonies, soirées de gala et événements de marque conçus et produits par benevents agency à Casablanca, Rabat, Tanger, Marrakech et au Maroc.'],
     project: 'réalisation benevents agency', crafts: 'Savoir-faire mobilisés', photos: (t, i, n) => `${t} : photo ${i} sur ${n}`, prev: 'Réalisation précédente', next: 'Réalisation suivante',
     endTitle: 'Un événement de ce type en tête ?', endText: 'Donnez-nous la date, le lieu et le nombre d’invités : nous revenons vers vous avec de premières idées.',
     pjEndTitle: 'Un projet similaire en préparation ?', pjEndText: 'Parlez-nous de votre événement. Nous partirons de cette réalisation pour revenir vers vous avec de premières idées.',
@@ -151,8 +161,27 @@ const agency = l => ({
 
 /* ---------- the head lines that change with the page and its language ---------- */
 // alt: the address of the page in each language · xdef: the one shown to other languages
-function seoHead({ l, title, desc, alt, xdef, image, imageAlt, data }) {
-  const img = SITE + (image || '/assets/img/og.jpg');
+// the picture of a link preview: the page's picture, cut to 1200 x 630 by tools/site/previews.py
+const PREVIEWS = new Map(), NO_PREVIEW = new Set();
+const previewOf = image => {
+  const out = '/assets/img/og/' + image.replace(/^\/assets\/img\//, '').replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '.jpg';
+  PREVIEWS.set(image, out);
+  if (existsSync(join(ROOT, out))) return out;
+  NO_PREVIEW.add(image);
+  return null;
+};
+// a title longer than about 65 characters is cut in a result of Google: the words that say what the page is come
+// first, and the name of the agency at the end is shortened, then left out, until the title fits
+const fitTitle = t => {
+  if (t.length <= 65) return t;
+  const m = / \| benevents agency(, (Morocco|Maroc))?$/.exec(t);
+  if (!m) return t;
+  const base = t.slice(0, m.index);
+  return [base + ' | benevents agency', base + ' | benevents'].find(x => x.length <= 65) || base;
+};
+function seoHead({ l, title: full, desc, alt, xdef, image, imageAlt, data }) {
+  const title = fitTitle(full);
+  const img = SITE + ((image && previewOf(image)) || '/assets/img/og.jpg');
   return [
     `<title>${esc(title)}</title>`,
     `<meta name="description" content="${att(desc)}">`,
@@ -170,9 +199,13 @@ function seoHead({ l, title, desc, alt, xdef, image, imageAlt, data }) {
     `<meta property="og:locale" content="${l === 'fr' ? 'fr_FR' : 'en_US'}">`,
     `<meta property="og:locale:alternate" content="${l === 'fr' ? 'en_US' : 'fr_FR'}">`,
     `<meta property="og:image" content="${img}">`,
-    ...(image ? [] : ['<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">']),
+    '<meta property="og:image:type" content="image/jpeg">',
+    '<meta property="og:image:width" content="1200">',
+    '<meta property="og:image:height" content="630">',
     `<meta property="og:image:alt" content="${att(imageAlt || (l === 'fr' ? 'benevents agency : conception et production d’événements d’entreprise' : 'benevents agency: corporate event design and production'))}">`,
     '<meta name="twitter:card" content="summary_large_image">',
+    `<meta name="twitter:title" content="${att(title)}">`,
+    `<meta name="twitter:description" content="${att(desc)}">`,
     `<meta name="twitter:image" content="${img}">`,
     '<!-- who we are and what the page is, in the form search engines read -->',
     ld({ '@context': 'https://schema.org', '@graph': data })
@@ -371,10 +404,10 @@ const projectCard = (l, p, text) => {
     </a>`;
 };
 
-const pages = [];        // every page written: { alt: {en, fr} }
+const pages = [];        // every page written: { alt: {en, fr}, images: its pictures, for the list of pages }
 for (const s of SERVICES) {
   const n = SERVICES.indexOf(s) + 1, alt = Object.fromEntries(LANGS.map(l => [l, U.service(l, s)]));
-  pages.push({ alt, xdef: alt.fr });
+  pages.push({ alt, xdef: alt.fr, images: [s.image[0]] });
   for (const l of LANGS) {
     const w = W[l], t = T[l], name = t['srv.' + n + '.t'], parts = name.split(' & '), lede = t['srv.' + n + '.d'];
     const mine = projectsOf(s).filter(p => !s.ideas.some(i => i.project === p.id));
@@ -441,7 +474,7 @@ ${cta(l, w.endTitle, w.endText)}
 
 PROJECTS.forEach((p, i) => {
   const alt = Object.fromEntries(LANGS.map(l => [l, U.project(l, p)]));
-  pages.push({ alt, xdef: alt.fr });
+  pages.push({ alt, xdef: alt.fr, images: p.photos.map(ph => ph[0]) });
   for (const l of LANGS) {
     const w = W[l], title = tr(p.title, l), kind = tr(p.kind, l), intro = tr(p.intro, l), parts = titleParts(title), n = p.photos.length;
     const prev = PROJECTS[(i + PROJECTS.length - 1) % PROJECTS.length], next = PROJECTS[(i + 1) % PROJECTS.length];
@@ -512,7 +545,7 @@ ${cta(l, w.pjEndTitle, w.pjEndText)}
 
 {
   const alt = Object.fromEntries(LANGS.map(l => [l, U.projects(l)]));
-  pages.push({ alt, xdef: alt.fr });
+  pages.push({ alt, xdef: alt.fr, images: PROJECTS.map(p => p.photos[0][0]) });
   for (const l of LANGS) {
     const w = W[l], trail = [[w.homeName, U.home(l)], [w.work]];
     const head = seoHead({
@@ -546,7 +579,7 @@ const serviceLinks = l => SERVICES.map((s, i) => `<a href="${U.service(l, s)}">$
 
 for (const c of CITIES) {
   const alt = Object.fromEntries(LANGS.map(l => [l, U.city(l, c)]));
-  pages.push({ alt, xdef: alt.fr, kind: 'city' });
+  pages.push({ alt, xdef: alt.fr, kind: 'city', images: [c.image[0]] });
   for (const l of LANGS) {
     const w = W[l], cw = CITY_WORDS[l], name = tr(c.name, l), title = cw.title(name);
     const trail = [[w.homeName, U.home(l)], [AGENCY[l].name, U.agency(l)], [name]];
@@ -608,6 +641,7 @@ ${cta(l, cw.endTitle(name), w.endText)}
   // the logos of the home page, in its order
   const logos = [...new Map([...home.matchAll(/<div class="client"><img src="(assets\/img\/clients\/[^"]+)" alt="([^"]+)"/g)].map(m => [m[1], unesc(m[2])])).entries()];
   const cover = ['assets/img/stage-runway.jpg', 960, 1280];
+  pages[pages.length - 1].images = [cover[0]];
   for (const l of LANGS) {
     const w = W[l], t = T[l], a = AGENCY[l], trail = [[w.homeName, U.home(l)], [a.name]];
     const office = [COMPANY.address, [COMPANY.postalCode, COMPANY.city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
@@ -740,15 +774,31 @@ ${STATS}
 `);
 }
 
+if (LIST) { for (const [src, out] of PREVIEWS) console.log(src.slice(1) + '\t' + out.slice(1)); process.exit(0); }
+
 /* ---------- 5. the list of pages, for search engines ---------- */
-const entry = (loc, links) => `  <url>\n    <loc>${SITE + loc}</loc>\n${links.map(([k, href]) => `    <xhtml:link rel="alternate" hreflang="${k}" href="${SITE + href}"/>`).join('\n')}\n  </url>`;
+// The day a page last changed: today when this run has just written it differently, else the day of its last
+// change in the history of the site (git). Left out when git cannot say.
+const changedNow = (() => {
+  try { return new Set(execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean).map(x => x.slice(3).replace(/^"|"$/g, ''))); } catch (e) { return null; }
+})();
+const today = new Date().toISOString().slice(0, 10);
+const lastmod = file => {
+  if (!changedNow) return '';
+  if (changedNow.has(file)) return today;
+  try { return execFileSync('git', ['log', '-1', '--format=%cs', '--', file], { cwd: ROOT, encoding: 'utf8' }).trim(); } catch (e) { return ''; }
+};
+const entry = (loc, links, images = [], file = fileOf(loc)) => {
+  const day = lastmod(file);
+  return `  <url>\n    <loc>${SITE + loc}</loc>\n${day ? `    <lastmod>${day}</lastmod>\n` : ''}${links.map(([k, href]) => `    <xhtml:link rel="alternate" hreflang="${k}" href="${SITE + href}"/>`).join('\n')}${[...new Set(images)].slice(0, 30).map(src => `\n    <image:image><image:loc>${SITE}/${src}</image:loc></image:image>`).join('')}\n  </url>`;
+};
 const urls = [];
 for (const l of LANGS) urls.push(entry(U.home(l), [['en', '/'], ['fr', '/fr'], ['x-default', '/']]));
-for (const pg of pages) for (const l of LANGS) urls.push(entry(pg.alt[l], [...LANGS.map(k => [k, pg.alt[k]]), ['x-default', pg.xdef]]));
+for (const pg of pages) for (const l of LANGS) urls.push(entry(pg.alt[l], [...LANGS.map(k => [k, pg.alt[k]]), ['x-default', pg.xdef]], pg.images));
 for (const k of ['privacy', 'terms']) urls.push(entry('/' + k, [['en', '/' + k + '?lang=en'], ['fr', '/' + k + '?lang=fr'], ['x-default', '/' + k]]));
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <!-- Written by tools/site/build.mjs -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.join('\n')}
 </urlset>
 `);
@@ -764,3 +814,4 @@ for (const [dir, start] of [['', CITY_WORDS.en.slug], ['fr/', CITY_WORDS.fr.slug
   for (const f of readdirSync(join(ROOT, dir))) if (f.startsWith(start) && f.endsWith('.html') && !kept.has(dir + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + f); }
 }
 console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, the agency, ${CITIES.length} cities, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);
+if (NO_PREVIEW.size) console.log(`\n${NO_PREVIEW.size} picture(s) have no preview yet (their pages show the agency's picture in a shared link):\n  ${[...NO_PREVIEW].join('\n  ')}\nMake them: python3 tools/site/previews.py && node tools/site/build.mjs`);

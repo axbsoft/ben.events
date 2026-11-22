@@ -191,8 +191,17 @@ def page(key):
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="benevents agency">
 <meta property="og:url" content="{site}{key}">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fr_FR">
 <meta property="og:image" content="{site}assets/img/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="benevents agency: corporate event design and production">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{title_en}">
+<meta name="twitter:description" content="{desc_en}">
+<meta name="twitter:image" content="{site}assets/img/og.jpg">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

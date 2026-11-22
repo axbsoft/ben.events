@@ -22,7 +22,7 @@ export const CITIES = [
       title: { en: 'Event Agency in Casablanca, Morocco | benevents agency', fr: 'Agence événementielle à Casablanca | benevents agency' },
       desc: {
         en: 'Event agency in Casablanca: benevents designs and produces conventions, conferences, product launches and gala evenings, with its own stage and audiovisual team.',
-        fr: 'Agence événementielle à Casablanca : conventions, conférences, lancements et soirées de gala conçus et produits par benevents, avec sa propre équipe scène et audiovisuel.'
+        fr: 'Agence événementielle à Casablanca : conventions, conférences, lancements et soirées de gala conçus et produits par benevents, avec sa propre équipe technique.'
       }
     },
     lede: {
@@ -72,7 +72,7 @@ export const CITIES = [
       title: { en: 'Event Agency in Rabat, Morocco | benevents agency', fr: 'Agence événementielle à Rabat | benevents agency' },
       desc: {
         en: 'Event agency in Rabat: benevents designs and produces institutional forums, conferences, ceremonies and official receptions, with its own stage and audiovisual team.',
-        fr: 'Agence événementielle à Rabat : forums institutionnels, conférences, cérémonies et réceptions officielles conçus et produits par benevents, scène et audiovisuel inclus.'
+        fr: 'Agence événementielle à Rabat : forums institutionnels, conférences, cérémonies et réceptions officielles conçus et produits par benevents, technique incluse.'
       }
     },
     lede: {
@@ -120,8 +120,8 @@ export const CITIES = [
     seo: {
       title: { en: 'Event Agency in Marrakech, Morocco | benevents agency', fr: 'Agence événementielle à Marrakech | benevents agency' },
       desc: {
-        en: 'Event agency in Marrakech (Marrakesh): benevents designs and produces seminars, gala dinners, cocktails and brand receptions, with its own stage, light and sound team.',
-        fr: 'Agence événementielle à Marrakech : séminaires, dîners de gala, cocktails et réceptions de marque conçus et produits par benevents, avec sa propre équipe scène, lumière et son.'
+        en: 'Event agency in Marrakech (Marrakesh): benevents designs and produces seminars, gala dinners, cocktails and brand receptions, with its own technical team.',
+        fr: 'Agence événementielle à Marrakech : séminaires, dîners de gala, cocktails et réceptions de marque conçus et produits par benevents et son équipe technique.'
       }
     },
     lede: {
@@ -180,7 +180,7 @@ export const CITY_WORDS = {
 export const AGENCY = {
   en: {
     slug: 'agency', name: 'The agency',
-    seo: ['About benevents agency | Event Design and Production in Morocco', 'benevents agency designs and produces corporate events in Casablanca, Rabat, Marrakech and across Morocco: one team for the concept, the stage and the audiovisual production.'],
+    seo: ['About benevents agency | Event Design and Production in Morocco', 'benevents agency designs and produces corporate events in Casablanca, Rabat, Marrakech and across Morocco: one team for concept, stage and audiovisual.'],
     title: ['The agency that designs your event', 'and builds it.'],
     lede: 'benevents agency is an event design and production agency. We bring concept, scenography and audiovisual production together under one roof, so that every element, from the stage to the screen content, speaks with a single voice.',
     intro: 'Companies, institutions and foundations trust us with the moments that matter to them. Our promise is simple: an event that looks effortless on the day, because nothing was left to chance beforehand.',
@@ -203,7 +203,7 @@ export const AGENCY = {
   },
   fr: {
     slug: 'agence', name: 'L’agence',
-    seo: ['L’agence benevents : conception et production d’événements au Maroc', 'benevents agency conçoit et produit des événements d’entreprise à Casablanca, Rabat, Marrakech et partout au Maroc : une seule équipe pour le concept, la scène et l’audiovisuel.'],
+    seo: ['L’agence benevents : conception et production d’événements au Maroc', 'benevents agency conçoit et produit vos événements d’entreprise à Casablanca, Rabat, Marrakech et au Maroc : concept, scène et audiovisuel, une seule équipe.'],
     title: ['L’agence qui conçoit votre événement', 'et le produit.'],
     lede: 'benevents agency est une agence de conception et de production événementielle. Concept, scénographie et production audiovisuelle sont réunis sous un même toit, pour que chaque élément, de la scène aux contenus d’écran, parle d’une seule voix.',
     intro: 'Entreprises, institutions et fondations nous confient les moments qui comptent pour elles. Notre promesse est simple : un événement qui paraît évident le jour J, parce que rien n’a été laissé au hasard en amont.',
