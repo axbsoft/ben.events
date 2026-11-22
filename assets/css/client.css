@@ -6,6 +6,9 @@
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 /* ---------- Top bar ---------- */
+/* the progress line stays at the top of the page, like the bar under it (which scrolls with the page):
+   fixed to the screen, it crossed the bar as soon as a phone scrolled down */
+.cpage .progress { position: absolute; }
 .cbar {
   position: absolute; top: 22px; left: 22px; right: 22px; z-index: 30; max-width: 1300px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
