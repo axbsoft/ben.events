@@ -1,10 +1,10 @@
 {
  "v": 2,
- "rev": "20d5c48f",
+ "rev": "8bd9fbb2",
  "open": true,
  "langs": {
   "fr": {
-   "count": 16,
+   "count": 15,
    "type": "image/webp",
    "thumbs": {
     "type": "image/webp",
@@ -18,7 +18,7 @@
    "ext": "webp"
   },
   "en": {
-   "count": 16,
+   "count": 15,
    "type": "image/webp",
    "thumbs": {
     "type": "image/webp",

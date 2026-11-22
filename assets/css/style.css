@@ -81,6 +81,8 @@ ul, ol { padding: 0; list-style: none; }
 .btn--ghost { padding: 15px 26px; background: rgba(255, 255, 255, .06); color: var(--text); border: 1px solid var(--line); transition: transform .5s var(--ease), box-shadow .5s, color .35s, border-color .35s; }
 .btn--ghost:hover, .btn--ghost:focus-visible { color: #0a0a0a; border-color: transparent; }
 .btn--sm.btn--ghost { padding: 10px 17px; }
+/* "Book a call" is HIDDEN FOR NOW, everywhere on the site: delete the next line to show the buttons again (assets/js/booking.js does the rest) */
+:root:not([data-book-on]) [data-book] { display: none !important; }
 /* "Book a call": the buttons that open the calendar (assets/js/booking.js) carry a small calendar in place of the arrow */
 .btn--book > span { display: inline-flex; align-items: center; }
 .btn--book span::after { display: none; }

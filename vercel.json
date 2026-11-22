@@ -161,6 +161,11 @@
   ],
   "redirects": [
     {
+      "source": "/book",
+      "destination": "/#contact",
+      "permanent": false
+    },
+    {
       "source": "/caligraphy",
       "destination": "/calligraphy",
       "permanent": false

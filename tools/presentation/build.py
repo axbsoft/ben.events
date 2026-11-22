@@ -22,6 +22,7 @@ FILM = 'https://livid.com/watch/L6GCH7EFgl4D'
 P = {p['id']: p for p in D['projects']}
 SV = D['services']
 made = {}
+BOOK_SLIDE = False                          # the last slide, "Book a call": hidden for now, as on the site
 
 
 def e(s):
@@ -255,27 +256,28 @@ def deck(lang):
 <div class="reach">%s</div>''' % (pic('contact', 'conference-opening.jpg', 1920, 1080, (.5, .5)), eyebrow(T['ct.eyebrow']), e(T['ft.cta1']), e(T['ft.cta2']), BAR, e(T['ct.lede']),
                                  ''.join('<p class="reach__row" data-href="%s" data-label="%s"><span>%s</span><b>%s</b></p>' % (e(h), e(k + ' : ' + v if lang == 'fr' else k + ': ' + v), e(k), e(v)) for k, v, h in rows))))
 
-    # 16 — book a call: the button opens the calendar (on the site, as a pop-up; in the PDF, the page ben.events/book, which opens it), the QR code leads there from a screen or a printed page
-    b = w['book']
-    url = D['book']['url']
-    rows = D['book']['qr']
-    q = len(rows)
-    cells = ''.join('<rect x="%d" y="%d" width="1" height="1"/>' % (c + 4, r + 4) for r, row in enumerate(rows) for c, v in enumerate(row) if v == '1')
-    code = '<svg class="book__qr-code" viewBox="0 0 %d %d" shape-rendering="crispEdges" aria-hidden="true"><rect width="%d" height="%d" fill="#fff"/><g fill="#0a0a0c">%s</g></svg>' % (q + 8, q + 8, q + 8, q + 8, cells)
-    cal = '<svg class="book__cal" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3.5"/><path d="M3.5 10.5h17M8 3v4M16 3v4"/></svg>'
-    short = url.replace('https://www.', '')
-    S.append(page('book', '''<div class="bg" style="background-image:url(%s)"></div>
-<div class="veil veil--left veil--deep"></div>
-<div class="book__in">
-%s
-<h2 class="mega mega--sm">%s<br><span class="g">%s</span></h2>
-%s
-<p class="lede">%s</p>
-<p class="book__btn" data-href="%s" data-label="%s">%s<span>%s</span></p>
-<p class="book__note">%s</p>
-</div>
-<div class="book__qr">%s<p class="book__qr-say">%s</p><p class="book__qr-url">%s</p></div>''' % (pic('book', 'control-desk-ballroom.jpg', 1920, 1080, (.6, .5)), eyebrow(b['eyebrow']), e(b['title'][0]), e(b['title'][1]), BAR, e(b['lede']),
-                                    e(url), e(b['btn'] + (' : ' if lang == 'fr' else ': ') + short), cal, e(b['btn']), e(b['note']), code, e(b['scan']), e(short))))
+    # 16 — book a call (left out while booking is hidden on the site: set BOOK_SLIDE = True to bring it back): the button opens the calendar (on the site, as a pop-up; in the PDF, the page ben.events/book, which opens it), the QR code leads there from a screen or a printed page
+    if BOOK_SLIDE:
+        b = w['book']
+        url = D['book']['url']
+        rows = D['book']['qr']
+        q = len(rows)
+        cells = ''.join('<rect x="%d" y="%d" width="1" height="1"/>' % (c + 4, r + 4) for r, row in enumerate(rows) for c, v in enumerate(row) if v == '1')
+        code = '<svg class="book__qr-code" viewBox="0 0 %d %d" shape-rendering="crispEdges" aria-hidden="true"><rect width="%d" height="%d" fill="#fff"/><g fill="#0a0a0c">%s</g></svg>' % (q + 8, q + 8, q + 8, q + 8, cells)
+        cal = '<svg class="book__cal" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3.5"/><path d="M3.5 10.5h17M8 3v4M16 3v4"/></svg>'
+        short = url.replace('https://www.', '')
+        S.append(page('book', '''<div class="bg" style="background-image:url(%s)"></div>
+    <div class="veil veil--left veil--deep"></div>
+    <div class="book__in">
+    %s
+    <h2 class="mega mega--sm">%s<br><span class="g">%s</span></h2>
+    %s
+    <p class="lede">%s</p>
+    <p class="book__btn" data-href="%s" data-label="%s">%s<span>%s</span></p>
+    <p class="book__note">%s</p>
+    </div>
+    <div class="book__qr">%s<p class="book__qr-say">%s</p><p class="book__qr-url">%s</p></div>''' % (pic('book', 'control-desk-ballroom.jpg', 1920, 1080, (.6, .5)), eyebrow(b['eyebrow']), e(b['title'][0]), e(b['title'][1]), BAR, e(b['lede']),
+                                        e(url), e(b['btn'] + (' : ' if lang == 'fr' else ': ') + short), cal, e(b['btn']), e(b['note']), code, e(b['scan']), e(short))))
 
     return '''<!doctype html>
 <html lang="%s">

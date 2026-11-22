@@ -299,12 +299,13 @@
   var dots = $('.deck__dots'), countNow = $('.deck__count b'), countAll = $('.deck__count span'), badge = $('.deck__badge');
   var dnote = $('.deck__note'), grid = $('.deck__grid'), gridIn = $('.deck__grid-in'), prog = $('.progress b');
   var prevBtn = $('.deck__nav--prev'), nextBtn = $('.deck__nav--next'), gridBtn = $('.cbar [data-act="grid"]');
-  var links = $('.deck__links', frame), tryLinks = $$('.deck__try'), calli = $('.calli', frame);
+  // the live slides of the page (class calli), in the order of the slide numbers listed in the manifest (live)
+  var links = $('.deck__links', frame), tryLinks = $$('.deck__try'), lives = $$('.calli', frame);
   tryLinks.forEach(function (a) {
     a.addEventListener('click', function (e) {         // on to the slide where the activity can be tried
       e.preventDefault();
       e.stopPropagation();
-      go(liveIndex());
+      go(cur + 1);
     });
   });
   var N = 0, cur = -1, top = 0, turn = 0, urls = {}, sprites = {}, META = null, built = false, gridBuilt = false, swiped = 0, shown = '';
@@ -358,41 +359,56 @@
      Its picture is never shown while the demonstration works: the picture stays unseen underneath,
      and when the presentation moves on, the demonstration waits for the next slide and fades into it. */
   var liveNow = '', liveOut = 0;
-  function liveAt(i) { return !!(M && M.live && M.live.indexOf(i + 1) > -1); }
-  function liveIndex() { return M && M.live && M.live.length ? M.live[0] - 1 : -1; }
+  // the live slide shown at slide i (each says which script it needs: data-needs, BEN_CALLI by default), or null
+  function liveEl(i) {
+    if (!M || !M.live) return null;
+    var k = M.live.indexOf(i + 1);
+    return k > -1 ? lives[k] || null : null;
+  }
+  function liveAt(i) { return !!liveEl(i); }
   function live() {
-    if (!calli || !built) return;
-    var on = cur >= 0 && liveAt(cur) && !!window.BEN_CALLI, w = frame.clientWidth, skin = !on ? '' : w >= LIVE_MIN ? 'slide' : 'tall';   // without its script, the picture stays
+    if (!lives.length || !built) return;
+    var el = cur >= 0 ? liveEl(cur) : null, need = el && (el.getAttribute('data-needs') || 'BEN_CALLI');
+    var on = !!el && !!window[need], w = frame.clientWidth, skin = !on ? '' : w >= LIVE_MIN ? 'slide' : 'tall';   // without its script, the picture stays
     var near = !on && (liveAt(cur + 1) || liveAt(cur - 1)), now = skin + '|' + cur + '|' + near;
-    if (skin === 'slide') calli.style.setProperty('--k', (w / 1856).toFixed(5));
+    if (skin === 'slide') el.style.setProperty('--k', (w / 1856).toFixed(5));
     if (now === liveNow) return;
     liveNow = now;
+    lives.forEach(function (o) { if (o !== el && !o.hidden) o.classList.add('is-leaving'); });    // another one that was shown leaves with the next picture
     if (on) {
       clearTimeout(liveOut);
-      calli.classList.remove('is-leaving', 'is-out');
-      calli.hidden = false;
-      calli.setAttribute('data-skin', skin);
-      $('.calli__page b', calli).textContent = cur + 1;
+      el.classList.remove('is-leaving', 'is-out');
+      el.hidden = false;
+      el.setAttribute('data-skin', skin);
+      var pg = $('.calli__page b', el);
+      if (pg) pg.textContent = cur + 1;
       frame.classList.add('is-live');
       frame.classList.toggle('is-tall', skin === 'tall');
       stage.classList.add('has-live');
       stage.classList.toggle('has-tall', skin === 'tall');
-    } else if (!calli.hidden) calli.classList.add('is-leaving');       // it leaves when the next slide is ready: see liveGone
-    doc.dispatchEvent(new CustomEvent('ben:live', { detail: { on: on, near: near } }));
+    }
+    doc.dispatchEvent(new CustomEvent('ben:live', { detail: { on: on, near: near, el: el } }));
   }
-  // the next slide is ready (or could not be loaded): the demonstration that was leaving goes, or stays as it was
+  // the next slide is ready (or could not be loaded): the demonstrations that were leaving go, or stay as they were
   function liveGone(loaded, instant) {
-    if (!calli || !calli.classList.contains('is-leaving')) return;
-    if (!loaded) { calli.classList.remove('is-leaving'); return; }
-    var tall = calli.getAttribute('data-skin') === 'tall';
-    frame.classList.remove('is-live', 'is-tall');
-    stage.classList.remove('has-live', 'has-tall');
+    var going = lives.filter(function (o) { return o.classList.contains('is-leaving'); });
+    if (!going.length) return;
+    if (!loaded) { going.forEach(function (o) { o.classList.remove('is-leaving'); }); return; }
+    var still = lives.some(function (o) { return !o.hidden && !o.classList.contains('is-leaving'); });
+    if (!still) {
+      frame.classList.remove('is-live', 'is-tall');
+      stage.classList.remove('has-live', 'has-tall');
+    }
     clearTimeout(liveOut);
-    var end = function () { calli.hidden = true; calli.classList.remove('is-leaving', 'is-out'); };
-    if (tall || instant || reduced) return end();
-    calli.classList.add('is-out');
-    liveOut = setTimeout(end, 480);
+    going.forEach(function (o) {
+      var end = function () { o.hidden = true; o.classList.remove('is-leaving', 'is-out'); };
+      if (o.getAttribute('data-skin') === 'tall' || instant || reduced || still) return end();
+      o.classList.add('is-out');
+      liveOut = setTimeout(end, 480);
+    });
   }
+  // a live slide whose script became ready later (its data comes with the presentation): shown if it is on screen
+  doc.addEventListener('ben:live-ready', function () { liveNow = ''; live(); });
   if (window.ResizeObserver) new ResizeObserver(function () { requestAnimationFrame(live); }).observe(frame);
   else window.addEventListener('resize', live);
 
@@ -431,7 +447,7 @@
     $$('.thumb', gridIn).forEach(function (b, i) {
       if (i === cur) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
     });
-    tryLinks.forEach(function (a) { a.hidden = !(liveIndex() > 0 && cur === liveIndex() - 1); });
+    tryLinks.forEach(function (a) { a.hidden = !(cur >= 0 && liveAt(cur + 1)); });
     live();
     prevBtn.disabled = cur <= 0;
     nextBtn.disabled = cur >= N - 1;
@@ -507,6 +523,8 @@
         : fileOf('meta.bin').then(function (buf) { return JSON.parse(new TextDecoder().decode(buf)); })).then(function (meta) {
         META = meta;
         describe();
+        // what the page's live slides need, kept with the presentation (encrypted with it on a client page)
+        if (meta.data) { window.BEN_DECK_DATA = meta.data; doc.dispatchEvent(new CustomEvent('ben:data', { detail: meta.data })); }
       }).catch(function () {});
     };
     if (instant || reduced) show();

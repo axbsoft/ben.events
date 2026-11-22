@@ -171,7 +171,7 @@
 
   // the page to book a call opens the calendar at once (not counted as a press: the visit of the page is)
   var auto = doc.querySelector('[data-book-auto]');
-  if (auto) {
+  if (auto && getComputedStyle(auto).display !== 'none') {        // not while "Book a call" is hidden (assets/css/style.css)
     arm(auto);
     pending = auto;
     busy(auto, true);
