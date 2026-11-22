@@ -490,36 +490,25 @@
 
 /* ---------- Korea and Morocco on the access page (kgm.html): each word with its flag and its colours ---------- */
 .gate__title .flag { display: inline-block; height: .44em; width: auto; vertical-align: .1em; border-radius: .06em; box-shadow: 0 0 0 .012em rgba(255, 255, 255, .45), 0 .08em .3em rgba(0, 0, 0, .5); }
-.gate__title .line:first-child .flag { margin-right: .22em; }
-.gate__title .line:last-child .flag { margin-left: .2em; vertical-align: .16em; }
+.gate__title .line:first-of-type .flag { margin-right: .22em; }
+.gate__title .line:last-of-type .flag { margin-left: .2em; vertical-align: .16em; }
 .gate__kr { background: linear-gradient(174deg, #ff5f6a 0 54%, #5b8cff 54% 100%); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .08em; }
 .gate__title em.gate__ma { background: linear-gradient(100deg, #ff6a6e 0%, #e0343b 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-/* the two flags meet (assets/js/meet.js): they fly in from opposite sides, clink together in the middle of the title
-   (a burst of colour, a ring of light), then glide to their places; afterwards they sway towards each other */
+/* a festive welcome (assets/js/meet.js): the flags rise gently into place and wave in the breeze, in the same rhythm;
+   confetti pops from them; petals and golden sparks drift down the page */
 .gate__title { position: relative; isolation: isolate; }
-.gate__title .flag { position: relative; z-index: 1; transform-origin: 50% 100%; }
+.gate__title .flag { position: relative; z-index: 1; transform-origin: 0 50%; }
 @media (prefers-reduced-motion: no-preference) {
-  .gate__title:not(.is-done) .line .flag { opacity: 0; animation: flag-late 0s 6s forwards; }      /* shown by the script; at the latest after 6 s */
-  .gate__title.is-done .line:first-child .flag { animation: flag-sway-right 4s ease-in-out .4s infinite; }
-  .gate__title.is-done .line:last-child .flag { animation: flag-sway-left 4s ease-in-out .4s infinite; }
-  .gate__title.is-hop .line:first-child .flag { animation: flag-hop-right .7s cubic-bezier(.3, 1.5, .5, 1); }
-  .gate__title.is-hop .line:last-child .flag { animation: flag-hop-left .7s cubic-bezier(.3, 1.5, .5, 1); }
+  .gate__title .line:first-of-type .flag { animation: flag-rise 1s cubic-bezier(.3, 1.45, .5, 1) 1.5s both, flag-wave 3.6s ease-in-out 2.5s infinite; }
+  .gate__title .line:last-of-type .flag { animation: flag-rise 1s cubic-bezier(.3, 1.45, .5, 1) 1.7s both, flag-wave 3.6s ease-in-out 2.7s infinite; }
 }
-@keyframes flag-late { to { opacity: 1; } }
-@keyframes flag-sway-right { 0%, 100% { transform: none; } 50% { transform: rotate(5deg) translateY(-.03em); } }
-@keyframes flag-sway-left { 0%, 100% { transform: none; } 50% { transform: rotate(-5deg) translateY(-.03em); } }
-@keyframes flag-hop-right { 45% { transform: translateY(-.22em) rotate(12deg) scale(1.08); } }
-@keyframes flag-hop-left { 45% { transform: translateY(-.22em) rotate(-12deg) scale(1.08); } }
-.meet__fly { position: absolute; z-index: 3; display: block; pointer-events: none; will-change: transform; }
-.meet__fly .flag { display: block; width: 100%; height: 100%; vertical-align: 0; margin: 0; opacity: 1; animation: none; filter: drop-shadow(0 .06em .2em rgba(0, 0, 0, .55)); }
-.meet__bit { position: absolute; z-index: 2; width: .085em; height: .085em; margin: -.042em 0 0 -.042em; border-radius: 2px; pointer-events: none; animation: meet-burst 1.3s cubic-bezier(.15, .75, .3, 1) forwards; }
-@keyframes meet-burst { 0% { transform: translate(0, 0) rotate(0) scale(1.3); opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) rotate(var(--r)) scale(.35); opacity: 0; } }
-.meet__ring { position: absolute; z-index: 2; width: 1.6em; height: 1.6em; margin: -.8em 0 0 -.8em; border-radius: 50%; border: .045em solid; border-color: #ff5f6a #5b8cff #1fae6f #e0343b; pointer-events: none; animation: meet-ring 1.1s cubic-bezier(.2, .8, .3, 1) forwards; }
-@keyframes meet-ring { from { transform: scale(.15) rotate(0); opacity: 1; } to { transform: scale(1.5) rotate(160deg); opacity: 0; } }
-.meet__flash { position: absolute; z-index: 1; width: 2.4em; height: 2.4em; margin: -1.2em 0 0 -1.2em; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 236, 200, .55), rgba(249, 178, 78, .18) 55%, transparent); pointer-events: none; animation: meet-flash .9s ease-out forwards; }
-@keyframes meet-flash { from { transform: scale(.3); opacity: 1; } to { transform: scale(1.3); opacity: 0; } }
-.gate__title.is-clink .gate__kr, .gate__title.is-clink .gate__ma { filter: brightness(1.25) drop-shadow(0 0 .08em rgba(255, 220, 160, .5)); transition: filter .2s; }
-.gate__kr, .gate__title em.gate__ma { transition: filter .6s; }
+@keyframes flag-rise { from { opacity: 0; transform: translateY(.4em) scale(.5); } }
+@keyframes flag-wave { 0%, 100% { transform: none; } 25% { transform: skewY(-3deg) scaleX(.97); } 50% { transform: none; } 75% { transform: skewY(2.5deg) scaleX(.98); } }
+.meet__bit { position: absolute; z-index: 2; width: .07em; height: .04em; margin: -.02em 0 0 -.035em; border-radius: 1px; pointer-events: none; }
+.meet__bit.is-round { width: .05em; height: .05em; border-radius: 50%; }
+.meet__petal, .meet__spark { position: absolute; z-index: -1; pointer-events: none; will-change: transform; }
+.meet__petal { width: 13px; height: 10px; border-radius: 85% 0 85% 0; background: linear-gradient(135deg, #ffe1ec, #f48fb1 70%, #e86f9a); }
+.meet__spark { width: 5px; height: 5px; border-radius: 50%; background: #ffd99a; box-shadow: 0 0 6px 1px rgba(249, 178, 78, .9), 0 0 14px 2px rgba(249, 178, 78, .35); }
 
 /* the toggle between a client's bookmark designs (assets/js/calli-live.js), above the bookmark */
 .calli__designs { display: flex; gap: 4px; padding: 4px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, .16); background: rgba(255, 255, 255, .05); }
