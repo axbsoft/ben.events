@@ -224,9 +224,17 @@
     Array.prototype.forEach.call(parts.bar.children, function (b, i) { b.className = i < state.step ? 'is-done' : i === state.step ? 'is-now' : ''; });
     parts.q.textContent = tr(q.q);
     parts.answers.textContent = '';
+    parts.answers.classList.toggle('has-img', q.a.some(function (a) { return !!a.img; }));
     q.a.forEach(function (a, i) {
       var b = el('button', 'quiz__a');
       b.type = 'button';
+      if (a.img) {                                    // an answer with its picture: the picture fills the card, the words sit on it
+        var im = el('img');
+        im.src = a.img;
+        im.alt = '';
+        b.classList.add('has-img');
+        b.appendChild(im);
+      }
       b.appendChild(el('b', null, 'ABCD'.charAt(i)));
       b.appendChild(el('span', null, tr(a.t)));
       b.addEventListener('click', function () { choose(i); });
@@ -373,6 +381,7 @@
     if (D || !data || !data.quiz || !data.quiz.questions) return;
     D = data.quiz;
     D.order.forEach(function (id) { state.tally[id] = 0; var img = new Image(); img.src = D.models[id].img; });     // the pictures are ready before the result
+    D.questions.forEach(function (q) { q.a.forEach(function (a) { if (a.img) { var im = new Image(); im.src = a.img; } }); });
     build();
     words();
     ask();

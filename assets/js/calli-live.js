@@ -3,7 +3,9 @@
    (the engine of the calligraphy app: Korean, Chinese or Japanese, the same outlines on screen and in the PDF).
 
    The page says what it wants on the slide itself:
-     <section class="calli" data-script="ko" data-model="hangul-bookmark" data-client="KGM" data-example="Yassine">
+     <section class="calli" data-script="ko" data-model="hangul-bookmark" data-models="kgm-hanok,kgm-kpop" data-client="KGM" data-example="Yassine">
+   data-models: the client's own designs (assets/calligraphy/models.json), offered with a toggle above the bookmark; those that
+   are not in the registry are left out, and data-model is used when none is.
    (assets/js/calligraphy.js is the older, Chinese-only version of this slide, kept for the M-Automotiv page.)
 
    1. A visitor types a first name; it is written in the script, by its sound (never a meaning).
@@ -22,6 +24,8 @@
 
   var SCRIPT = root.getAttribute('data-script') || 'ko';
   var MODEL = root.getAttribute('data-model') || 'hangul-bookmark';
+  var WANTED = (root.getAttribute('data-models') || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+  var DESIGNS = [];                                                    // the designs offered by the toggle (two or more)
   var CLIENT = root.getAttribute('data-client') || '';
   var EXAMPLE = root.getAttribute('data-example') || 'Yassine';      // shown before the visitor types anything
   var SHOWN = 4;                                                       // contacts listed on the slide (the newest first)
@@ -56,7 +60,8 @@
       csv: ['Prénom', 'Caractères', 'Lecture', 'E-mail', 'Accord pour être recontacté', 'Date'],
       yes: 'oui',
       no: 'non',
-      file: 'marque-page'
+      file: 'marque-page',
+      designs: 'Modèle du marque-page'
     },
     en: {
       empty: 'Enter a first name.',
@@ -87,7 +92,8 @@
       csv: ['First name', 'Characters', 'Reading', 'Email', 'Agrees to be contacted', 'Date'],
       yes: 'yes',
       no: 'no',
-      file: 'bookmark'
+      file: 'bookmark',
+      designs: 'Bookmark design'
     }
   };
   var lang = doc.documentElement.lang === 'en' ? 'en' : 'fr';
@@ -121,7 +127,12 @@
   function load() {
     if (state.loading) return state.loading;
     say(note, 'loading');
-    state.loading = C.load(SCRIPT).then(function () { return C.picture(MODEL); }).then(function () { say(note, ''); });
+    state.loading = C.load(SCRIPT).then(function () { return C.models(); }).then(function () {
+      DESIGNS = WANTED.filter(function (id) { return C.TEMPLATES[id] && C.TEMPLATES[id].script === SCRIPT; });
+      if (DESIGNS.length && DESIGNS.indexOf(MODEL) < 0) MODEL = DESIGNS[0];
+      designs();
+      return C.picture(MODEL);
+    }).then(function () { say(note, ''); });
     state.loading.catch(function () { state.loading = null; say(note, 'failed', null, 'error'); });
     return state.loading;
   }
@@ -172,6 +183,35 @@
     result.classList.remove('is-in', 'is-still');
     void result.offsetWidth;
     result.classList.add(still ? 'is-still' : 'is-in');
+  }
+
+  // the toggle between the client's designs, above the bookmark
+  var designBox = null;
+  function designs() {
+    if (DESIGNS.length < 2) { if (designBox) designBox.hidden = true; paper.parentNode.classList.remove('has-designs'); return; }
+    if (!designBox) {
+      designBox = doc.createElement('div');
+      designBox.className = 'calli__designs';
+      designBox.setAttribute('role', 'group');
+      paper.parentNode.insertBefore(designBox, paper);
+    }
+    designBox.hidden = false;
+    designBox.setAttribute('aria-label', t('designs'));
+    paper.parentNode.classList.add('has-designs');
+    designBox.textContent = '';
+    DESIGNS.forEach(function (id) {
+      var b = doc.createElement('button'), lab = C.TEMPLATES[id].label || {};
+      b.type = 'button';
+      b.textContent = String(lab[lang] || lab.en || id).replace(/^.*?·\s*/, '');
+      b.setAttribute('aria-pressed', String(id === MODEL));
+      b.addEventListener('click', function () {
+        if (id === MODEL) return;
+        MODEL = id;
+        designs();
+        C.picture(MODEL).then(function () { if (state.res) showPaper(); });
+      });
+      designBox.appendChild(b);
+    });
   }
 
   function showPaper() {
@@ -299,6 +339,7 @@
   doc.addEventListener('ben:lang', function (e) {
     lang = e.detail === 'en' ? 'en' : 'fr';
     [note, mnote, anote].forEach(sayAgain);
+    designs();
     if (state.res) { showHan(true); showPaper(); }
     showLeads(false);
   });
@@ -316,7 +357,7 @@
 
   // for the automated checks
   window.BEN_CALLI = {
-    script: SCRIPT, model: MODEL,
+    script: SCRIPT, model: function () { return MODEL; }, designs: function () { return DESIGNS.slice(); },
     ready: function () { return load().then(function () { return true; }); },
     transliterate: function (s) { return C.transliterate(SCRIPT, s); },
     reveal: function (s) { return reveal(s); },

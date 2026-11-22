@@ -154,3 +154,15 @@
 .quiz[data-skin="tall"] .calli__rows span { font-size: 13px; }
 .quiz[data-skin="tall"] .calli__rows i { padding: 3px 9px; font-size: 11px; }
 .quiz[data-skin="tall"] .calli__none { padding: 10px 0 14px; font-size: 14px; }
+
+/* answers with a picture (quiz data: "img" on an answer): the picture fills the card, the words sit at its foot */
+.quiz__a.has-img { position: relative; overflow: hidden; align-items: flex-end; border-color: rgba(255, 255, 255, .14); }
+.quiz__a.has-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.quiz__a.has-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(8, 8, 10, .92) 0%, rgba(8, 8, 10, .45) 45%, rgba(8, 8, 10, 0) 75%); }
+.quiz__a.has-img b, .quiz__a.has-img span { position: relative; z-index: 1; }
+.quiz__a.has-img b { background: rgba(8, 8, 10, .5); }
+.quiz__a.has-img:hover img, .quiz__a.has-img:focus-visible img { transform: scale(1.06); }
+.quiz[data-skin="slide"] .quiz__answers.has-img { gap: 14px; }
+.quiz[data-skin="slide"] .quiz__a.has-img { min-height: 236px; padding: 0 24px 20px; }
+.quiz[data-skin="slide"] .quiz__answers.has-img ~ .quiz__back { margin-top: 14px; }
+.quiz[data-skin="tall"] .quiz__a.has-img { min-height: 150px; padding: 0 16px 14px; }
