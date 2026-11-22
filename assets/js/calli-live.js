@@ -4,8 +4,10 @@
 
    The page says what it wants on the slide itself:
      <section class="calli" data-script="ko" data-model="hangul-bookmark" data-models="kgm-hanok,kgm-kpop" data-client="KGM" data-example="Yassine">
-   data-models: the client's own designs (assets/calligraphy/models.json), offered with a toggle above the bookmark; those that
-   are not in the registry are left out, and data-model is used when none is.
+   data-models: the client's own designs, offered with a toggle above the bookmark. They are models of the registry
+   (assets/calligraphy/models.json) or models that come with the presentation itself (the "models" of its private data,
+   encrypted with it: window.BEN_DECK_DATA, event ben:data); those found in neither are left out, and data-model is
+   used when none is.
    (assets/js/calligraphy.js is the older, Chinese-only version of this slide, kept for the M-Automotiv page.)
 
    1. A visitor types a first name; it is written in the script, by its sound (never a meaning).
@@ -128,14 +130,36 @@
     if (state.loading) return state.loading;
     say(note, 'loading');
     state.loading = C.load(SCRIPT).then(function () { return C.models(); }).then(function () {
-      DESIGNS = WANTED.filter(function (id) { return C.TEMPLATES[id] && C.TEMPLATES[id].script === SCRIPT; });
-      if (DESIGNS.length && DESIGNS.indexOf(MODEL) < 0) MODEL = DESIGNS[0];
-      designs();
+      Object.keys(OWN).forEach(function (id) { C.TEMPLATES[id] = OWN[id]; });      // after the registry, so that it cannot take their place
+      offer();
       return C.picture(MODEL);
     }).then(function () { say(note, ''); });
     state.loading.catch(function () { state.loading = null; say(note, 'failed', null, 'error'); });
     return state.loading;
   }
+  // the designs that can be offered now; the first one is shown when the model in use is not among them
+  function offer() {
+    DESIGNS = WANTED.filter(function (id) { return C.TEMPLATES[id] && C.TEMPLATES[id].script === SCRIPT; });
+    var changed = DESIGNS.length > 0 && DESIGNS.indexOf(MODEL) < 0;
+    if (changed) MODEL = DESIGNS[0];
+    designs();
+    return changed;
+  }
+  // the models that come with the presentation (once its code is accepted)
+  var OWN = {};
+  function adopt(data) {
+    var m = data && data.models;
+    if (!m) return;
+    Object.keys(m).forEach(function (id) { if (m[id] && m[id].script === SCRIPT && !OWN[id]) OWN[id] = m[id]; });      // once: the engine keeps the picture on the model
+    if (!state.loading) return;                          // not loaded yet: load() takes them
+    state.loading.then(function () {
+      Object.keys(OWN).forEach(function (id) { C.TEMPLATES[id] = OWN[id]; });
+      if (offer()) return C.picture(MODEL).then(function () { if (state.res) showPaper(); });
+    }).catch(function () {});
+  }
+  doc.addEventListener('ben:data', function (e) { adopt(e.detail); });
+  if (window.BEN_DECK_DATA) adopt(window.BEN_DECK_DATA);
+
   var reading = function (lines) { return C.reading(SCRIPT, lines); };
   var tiles = function (text, pad) { return text.split('').map(function (ch) { return C.tile(SCRIPT, ch, pad); }).join(''); };
 
@@ -215,6 +239,7 @@
   }
 
   function showPaper() {
+    if (!C.TEMPLATES[MODEL].pic) { C.picture(MODEL).then(showPaper).catch(function () {}); return; }      // its picture first
     var pg = state.page = C.compose(MODEL, state.res, state.form);
     paper.innerHTML = C.svgOf(pg, 'calli__svg');
     paper.firstChild.setAttribute('aria-label', t('paper', { name: state.res.name, han: state.res.forms[state.form].join('') }));

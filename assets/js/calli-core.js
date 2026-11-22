@@ -434,8 +434,9 @@
   /* ==================================================================
      6. THE FILES
      ================================================================== */
+  // a picture that comes with a private presentation is given whole (data:), not as a file of the site
   function get(file, binary) {
-    return fetch(BASE + file).then(function (r) { if (!r.ok) throw new Error(file); return binary ? r.arrayBuffer() : r.json(); });
+    return fetch(/^(data|blob):/.test(file) ? file : BASE + file).then(function (r) { if (!r.ok) throw new Error(file.slice(0, 60)); return binary ? r.arrayBuffer() : r.json(); });
   }
   // the registry of printed models (filled in place: TEMPLATES stays the same object)
   function models() {
