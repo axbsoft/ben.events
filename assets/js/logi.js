@@ -36,7 +36,14 @@
       fZones: 'Par zone et par ville', play: 'Lecture', pause: 'Pause', again: 'Rejouer',
       cap1: 'Réception et contrôle à l’entrepôt : chaque carton est scanné et photographié.', cap2: 'Chargement des véhicules 7 places, puis départ par zone ; les équipes des autres villes sont déjà sur l’autoroute.',
       cap3: 'Chaque point de vente est servi, photo à l’appui.', cap4: 'Pause des équipes, puis reprise des tournées.', cap5: 'Derniers points de vente, retour à l’entrepôt.', cap6: 'Tournées terminées : le rapport du jour part automatiquement.',
-      app: 'Suivi terrain', tabs: { dash: 'Tableau de bord', recv: 'Réception', disp: 'Dispatch', deliv: 'Livraisons', vans: 'Véhicules', exp: 'Dépenses' },
+      app: 'Suivi terrain', tabs: { dash: 'Tableau de bord', recv: 'Réception', disp: 'Dispatch', deliv: 'Livraisons', fb: 'Retours', vans: 'Véhicules', exp: 'Dépenses' },
+      fDays: ['J1 · Tournée A', 'J2 · Tournée B', 'J3 · Retour'], fNew: 'Nouveaux points de vente', fBackNote: 'Retour : avis + réassort', fSeen: 'Points de vente revisités', fRestock: 'Cartons de réassort', fBack: 'Avis + réassort',
+      capDay2: 'J2 : une autre tournée, vers de nouveaux points de vente.', capBack: 'J3 : retour chez les points de vente du J1. Le CE recueille l’avis du gérant et complète le stock.',
+      fbAsked: 'Points de vente interrogés', fbScore: 'Note moyenne', fbMysteryN: 'Visites mystère', fbRestockN: 'Réassorts demandés', fbTitle: 'Retours du terrain', fbAll: 'Tous', fbStore: 'Gérants', fbMystery: 'Clients mystère',
+      fbStore1: 'Gérant', fbMystery1: 'Client mystère', fbByCe: 'Gérant, interrogé par {who}', fbByMystery: 'Client mystère n° {n}', fbAdd: 'Nouveau retour', fbPos: 'Point de vente', fbSource: 'Source', fbRate: 'Note', fbRemark: 'Remarque',
+      fbNeed: 'Choisissez une note de 1 à 5.', fbAskRestock: 'Réassort demandé', fbToDisp: 'Réassort demandé : à prévoir à la prochaine tournée.', fbCancel: 'Annuler', fbFresh: 'Nouveau', fbUnits: '{n} unités', aRestock: 'Réassort demandé · {name}',
+      fbQ: { sell: 'Le produit se vend-il ?', display: 'Présentoir en place ?', stock: 'Stock restant', visible: 'Produit visible ?', offered: 'Proposé spontanément ?', pitch: 'Discours du vendeur', price: 'Prix respecté ?' },
+      fbA: { good: 'Oui, bien', mid: 'Moyennement', low: 'Peu', yes: 'Oui', no: 'Non', ok: 'Conforme', part: 'Partiel', none: 'Absent' },
       role: 'Vue responsable', now: 'Il est', served: 'Points de vente livrés', cartons: 'Cartons livrés', onRoad: 'Véhicules en tournée', stopped: 'sur place', spent: 'Dépenses du jour', toCheck: '{n} à valider',
       byZone: 'Avancement par zone et par ville', todo: 'À traiter', lastPhotos: 'Dernières livraisons, en photo', fPhoto: 'Preuve de livraison', export: 'Exporter le rapport du jour (CSV)', nothing: 'Rien à signaler.',
       aGap: 'Écart à la réception · {id}', aDue: 'Réception attendue · {id}', aHalt: 'Arrêt non planifié · {van} · {min} min', aLate: 'Départ retardé · {van} · {at}', aExp: '{n} justificatif(s) à valider', aRefill: 'Réassort à préparer · {van}',
@@ -54,7 +61,7 @@
         hClock: 'L’heure de la démonstration. Sur l’écran Véhicules, le curseur permet de la faire avancer.', hRole: 'Ici, la vue du responsable. Sur le terrain, chaque équipe ne voit que sa tournée, ses livraisons et ses dépenses.',
         dServed: 'Mis à jour dès qu’une livraison est validée sur place. Le total est celui des tournées du jour.', dCartons: 'Les cartons remis aux points de vente, sur ceux chargés ce matin.',
         dRoad: 'Position transmise par le boîtier GPS de chaque véhicule. « Sur place » : à l’arrêt chez un point de vente.', dSpent: 'La somme des justificatifs envoyés aujourd’hui ; ceux « à valider » attendent le responsable.',
-        dZones: 'Une zone ou une ville, une équipe, un véhicule. La barre avance à chaque point de vente servi.', dTodo: 'Tout ce qui demande une décision : écart à la réception, arrêt non planifié, justificatif à valider. Un clic ouvre l’écran concerné.', dPhotos: 'La photo prise devant chaque point de vente au moment où les cartons sont déposés. Un clic ouvre la preuve complète : heure, position, signature.',
+        dZones: 'Une zone ou une ville, une équipe, un véhicule. La barre avance à chaque point de vente servi.', dTodo: 'Tout ce qui demande une décision : écart à la réception, arrêt non planifié, justificatif à valider. Un clic ouvre l’écran concerné.', tab_fb: 'Ce que disent les points de vente : le gérant interrogé par le CE, et les clients mystère.', fbKpis: 'Combien de points de vente ont donné leur avis, leur note moyenne, les visites mystère et les réassorts demandés.', fbList: 'Chaque retour : le gérant interrogé par le CE lors d’une visite, ou un client mystère envoyé incognito.', fbNew: 'Sur le terrain, le CE saisit le retour en une minute. Essayez.', fbDetail: 'Les réponses, la remarque mot pour mot et la photo du point de vente. Un réassort demandé part à l’entrepôt.', dPhotos: 'La photo prise devant chaque point de vente au moment où les cartons sont déposés. Un clic ouvre la preuve complète : heure, position, signature.',
         dExport: 'Le rapport du jour, prêt à être transmis : une ligne par point de vente, avec l’heure de livraison.',
         rList: 'Chaque livraison fournisseur arrive avec un bon. « Attendu » : pas encore contrôlé. « Écart » : il manquait des cartons.', rSteps: 'Trois gestes, toujours dans le même ordre : scanner le bon, compter et photographier, valider.',
         rScan: 'Sur le terrain, l’appareil photo du téléphone lit le code-barres du bon. Essayez.', rPhoto: 'Comptez avec + et −, puis prenez la photo : elle est horodatée et rattachée au bon.',
@@ -78,7 +85,14 @@
       fZones: 'By zone and by city', play: 'Play', pause: 'Pause', again: 'Replay',
       cap1: 'Goods received and checked at the warehouse: every carton is scanned and photographed.', cap2: 'The 7-seat vans are loaded, then leave for their zone; the teams for other cities are already on the motorway.',
       cap3: 'Each point of sale is served, with a photo as proof.', cap4: 'The teams take their break, then the rounds resume.', cap5: 'Last points of sale, back to the warehouse.', cap6: 'Rounds complete: the day’s report goes out on its own.',
-      app: 'Field tracker', tabs: { dash: 'Dashboard', recv: 'Receiving', disp: 'Dispatch', deliv: 'Deliveries', vans: 'Vehicles', exp: 'Expenses' },
+      app: 'Field tracker', tabs: { dash: 'Dashboard', recv: 'Receiving', disp: 'Dispatch', deliv: 'Deliveries', fb: 'Feedback', vans: 'Vehicles', exp: 'Expenses' },
+      fDays: ['D1 · Round A', 'D2 · Round B', 'D3 · Return'], fNew: 'New points of sale', fBackNote: 'Return: feedback + restock', fSeen: 'Points of sale revisited', fRestock: 'Restock cartons', fBack: 'Feedback + restock',
+      capDay2: 'Day 2: another round, to new points of sale.', capBack: 'Day 3: back to the points of sale of day 1. The CE hears the shopkeeper and tops up the stock.',
+      fbAsked: 'Points of sale heard', fbScore: 'Average score', fbMysteryN: 'Mystery visits', fbRestockN: 'Restocks requested', fbTitle: 'Feedback from the field', fbAll: 'All', fbStore: 'Shopkeepers', fbMystery: 'Mystery customers',
+      fbStore1: 'Shopkeeper', fbMystery1: 'Mystery customer', fbByCe: 'Shopkeeper, asked by {who}', fbByMystery: 'Mystery customer no. {n}', fbAdd: 'New feedback', fbPos: 'Point of sale', fbSource: 'Source', fbRate: 'Score', fbRemark: 'Remark',
+      fbNeed: 'Choose a score from 1 to 5.', fbAskRestock: 'Restock requested', fbToDisp: 'Restock requested: to plan for the next round.', fbCancel: 'Cancel', fbFresh: 'New', fbUnits: '{n} units', aRestock: 'Restock requested · {name}',
+      fbQ: { sell: 'Does the product sell?', display: 'Display in place?', stock: 'Stock left', visible: 'Product visible?', offered: 'Offered without asking?', pitch: 'The seller’s pitch', price: 'Price respected?' },
+      fbA: { good: 'Yes, well', mid: 'Moderately', low: 'Little', yes: 'Yes', no: 'No', ok: 'As briefed', part: 'Partial', none: 'None' },
       role: 'Manager view', now: 'It is', served: 'Points of sale delivered', cartons: 'Cartons delivered', onRoad: 'Vans on their round', stopped: 'on site', spent: 'Expenses today', toCheck: '{n} to approve',
       byZone: 'Progress by zone and by city', todo: 'To handle', lastPhotos: 'Latest deliveries, in photos', fPhoto: 'Proof of delivery', export: 'Export the day’s report (CSV)', nothing: 'Nothing to report.',
       aGap: 'Shortage on receipt · {id}', aDue: 'Delivery expected · {id}', aHalt: 'Unplanned stop · {van} · {min} min', aLate: 'Late departure · {van} · {at}', aExp: '{n} receipt(s) to approve', aRefill: 'Refill to prepare · {van}',
@@ -96,7 +110,7 @@
         hClock: 'The time of the demonstration. On the Vehicles screen, the slider moves it forward.', hRole: 'This is the manager’s view. In the field, each team only sees its round, its deliveries and its expenses.',
         dServed: 'Updated as soon as a delivery is confirmed on site. The total is that of today’s rounds.', dCartons: 'Cartons handed to points of sale, out of those loaded this morning.',
         dRoad: 'Position sent by the GPS unit of each van. “On site”: stopped at a point of sale.', dSpent: 'The sum of the receipts sent today; those “to approve” are waiting for the manager.',
-        dZones: 'One zone or one city, one team, one van. The bar moves with every point of sale served.', dTodo: 'Everything that needs a decision: a shortage on receipt, an unplanned stop, a receipt to approve. A click opens the screen concerned.', dPhotos: 'The photo taken in front of each point of sale when the cartons are dropped off. A click opens the full proof: time, position, signature.',
+        dZones: 'One zone or one city, one team, one van. The bar moves with every point of sale served.', dTodo: 'Everything that needs a decision: a shortage on receipt, an unplanned stop, a receipt to approve. A click opens the screen concerned.', tab_fb: 'What the points of sale say: the shopkeeper asked by the CE, and mystery customers.', fbKpis: 'How many points of sale gave their opinion, their average score, the mystery visits and the restocks requested.', fbList: 'Each piece of feedback: the shopkeeper asked by the CE during a visit, or a mystery customer sent incognito.', fbNew: 'In the field, the CE enters the feedback in a minute. Try it.', fbDetail: 'The answers, the remark word for word and the photo of the point of sale. A restock requested goes to the warehouse.', dPhotos: 'The photo taken in front of each point of sale when the cartons are dropped off. A click opens the full proof: time, position, signature.',
         dExport: 'The day’s report, ready to be passed on: one line per point of sale, with the time of delivery.',
         rList: 'Every supplier delivery comes with a note. “Expected”: not checked yet. “Shortage”: cartons were missing.', rSteps: 'Three steps, always in the same order: scan the note, count and photograph, confirm.',
         rScan: 'In the field, the phone’s camera reads the barcode of the note. Try it.', rPhoto: 'Count with + and −, then take the photo: it is time-stamped and attached to the note.',
@@ -161,6 +175,24 @@
       V[v.id] = v;
     });
   }
+  /* The cycle of rounds shown on the map of the day: day 1 (the day of the application), day 2 to other points of sale,
+     day 3 back to those of day 1 to hear the shopkeepers and restock. Each day is a small world of its own (its vans
+     with their routes, its points of sale); the functions above and below work on the one that useDay() puts in place.
+     The application always works on day 1: whoever switches puts day 1 back before leaving. */
+  var worlds = [];
+  function worldsBuild() {
+    var one = { id: 'J1', kind: 'new', vans: D.vans, pos: D.pos, P: P, V: V };
+    worlds = [one];
+    (D.days || []).slice(1).forEach(function (day) {
+      var pos = day.pos || one.pos.map(function (q) { return { id: q.id, name: q.name, zone: q.zone, x: q.x, y: q.y, map: q.map, stop: q.stop, cartons: q.cartons > 1 ? 1 : 0 }; });
+      var vans = one.vans.map(function (v) { var c = {}; Object.keys(v).forEach(function (k) { c[k] = v[k]; }); c.route = (day.routes && day.routes[v.id]) || v.route; c.halt = null; c.late = false; return c; });
+      D.vans = vans; D.pos = pos; P = {}; V = {};
+      plan();
+      worlds.push({ id: day.id, kind: day.kind || 'new', vans: vans, pos: pos, P: P, V: V });
+      D.vans = one.vans; D.pos = one.pos; P = one.P; V = one.V;
+    });
+  }
+  function useDay(k) { var w = worlds[k] || worlds[0]; D.vans = w.vans; D.pos = w.pos; P = w.P; V = w.V; return w; }
   // where a van is at minute m, what it is doing, since when, and how far it has driven (units of the map)
   function where(v, m) {
     var W = v.home, done = 0;
@@ -249,43 +281,63 @@
   }
 
   /* ---------- 1. the day on the map ---------- */
-  var flow = { t: T0, on: false, raf: 0, last: 0, map: null, parts: {}, held: 0 };
-  var LOOP = 34000;                                     // ms for the whole day
+  var flow = { t: T0, on: false, raf: 0, last: 0, map: null, parts: {}, held: 0, day: 0 };
+  var LOOP = 30000;                                     // ms for the whole day
   function flowBuild() {
     var c = $('.flow__main', flowRoot);
     var awayN = D.vans.filter(function (v) { return v.map === 'country'; }).length;
     c.innerHTML = '<div class="flow__maps"><div class="flow__map"></div>' + (awayN ? '<div class="flow__inset"><div class="flow__away"></div><p><b>' + awayN + '</b><span data-w="fAway"></span></p></div>' : '') +
       '<figure class="flow__last" hidden><img alt=""><figcaption><small data-w="fPhoto"></small><b></b><span></span></figcaption></figure></div><div class="flow__panel">' +
-      '<p class="lg-eyebrow"><i></i><span data-w="fEyebrow"></span></p><h2 class="flow__title"></h2>' +
+      '<div class="flow__days" role="group">' + worlds.map(function (w, k) { return '<button type="button" data-act="flow-day" data-id="' + k + '"></button>'; }).join('') + '</div><h2 class="flow__title"></h2>' +
       '<p class="flow__clock"><b></b><span></span></p>' +
       '<div class="flow__stats"><p><b data-k="served"></b><span data-w="fServed"></span></p><p><b data-k="cartons"></b><span data-w="fCartons"></span></p><p><b data-k="road"></b><span data-w="fVans"></span></p><p><b data-k="km"></b><span data-w="fKm"></span></p></div>' +
       '<p class="flow__sub" data-w="fZones"></p><ul class="flow__zones">' + D.zones.map(function (z, i) { return '<li data-zone="' + z.id + '"><span>' + esc(z.name.split(' · ')[0]) + '</span><i><b style="background:' + COLOURS[i % COLOURS.length] + '"></b></i><em></em></li>'; }).join('') + '</ul>' +
       '<div class="flow__ctl"><button type="button" class="lg-btn" data-act="flow-toggle"></button><button type="button" class="lg-btn lg-btn--ghost" data-act="flow-again"></button><span class="flow__demo" data-w="demo"></span></div></div>' +
       '<p class="flow__cap"></p>';
-    flow.map = mapOf($('.flow__map', c), { id: 'f' });
-    flow.far = awayN ? mapOf($('.flow__away', c), { id: 'g', kind: 'country', view: D.country.inset }) : null;
+    flowMaps();
     flow.parts = { last: $('.flow__last', c), lastImg: $('.flow__last img', c), lastName: $('.flow__last b', c), lastMeta: $('.flow__last span', c), title: $('.flow__title', c), clock: $('.flow__clock b', c), day: $('.flow__clock span', c), cap: $('.flow__cap', c), toggle: $('[data-act="flow-toggle"]', c), again: $('[data-act="flow-again"]', c), stats: {}, zones: {} };
     $$('[data-k]', c).forEach(function (b) { flow.parts.stats[b.getAttribute('data-k')] = b; });
     $$('.flow__zones li', c).forEach(function (li) { flow.parts.zones[li.getAttribute('data-zone')] = li; });
     c.addEventListener('click', function (e) {
       var b = e.target.closest('[data-act]');
       if (!b) return;
+      if (b.getAttribute('data-act') === 'flow-day') return flowDay(+b.getAttribute('data-id'), true);
       if (b.getAttribute('data-act') === 'flow-toggle') { if (flow.on) flowStop(); else { if (flow.t >= T1) flow.t = T0; flowPlay(); } }
       else { flow.t = T0; flow.held = 0; flowPlay(); }
     });
     flowWords();
     flowDraw();
   }
+  // the two maps of the day shown (its points of sale, its routes)
+  function flowMaps() {
+    var c = $('.flow__main', flowRoot), w = useDay(flow.day);
+    flow.map = mapOf($('.flow__map', c), { id: 'f' });
+    flow.far = $('.flow__away', c) ? mapOf($('.flow__away', c), { id: 'g', kind: 'country', view: D.country.inset }) : null;
+    useDay(0);
+    $('.flow__maps', c).classList.toggle('is-back', w.kind === 'back');
+    flow.lastId = '';
+  }
+  function flowDay(k, play) {
+    flow.day = ((k % worlds.length) + worlds.length) % worlds.length; flow.t = T0; flow.held = 0;
+    flowMaps();
+    flowWords();
+    if (play && !reduced) flowPlay();
+  }
   function flowWords() {
     if (!flow.map) return;
+    var back = worlds[flow.day].kind === 'back';
     $$('[data-w]', flowRoot).forEach(function (el) { el.textContent = t(el.getAttribute('data-w')); });
+    $('[data-w="fServed"]', flowRoot).textContent = t(back ? 'fSeen' : 'fServed');
+    $('[data-w="fCartons"]', flowRoot).textContent = t(back ? 'fRestock' : 'fCartons');
+    $('[data-w="fPhoto"]', flowRoot).textContent = t(back ? 'fBack' : 'fPhoto');
+    $$('.flow__days button', flowRoot).forEach(function (b, k) { b.textContent = t('fDays')[k] || worlds[k].id; b.classList.toggle('is-sel', k === flow.day); b.setAttribute('aria-pressed', k === flow.day ? 'true' : 'false'); });
     flow.parts.title.textContent = t('fTitle', { city: D.city });
-    flow.parts.day.textContent = tr(D.day);
+    flow.parts.day.textContent = t(back ? 'fBackNote' : 'fNew');
     flow.parts.again.textContent = t('again');
     flowDraw();
   }
   function flowDraw() {
-    var m = flow.t, o = totals(m), p = flow.parts;
+    var w = useDay(flow.day), m = flow.t, o = totals(m), p = flow.parts;
     mapAt(flow.map, m, '');
     if (flow.far) mapAt(flow.far, m, '');
     p.clock.textContent = hm(m);
@@ -294,10 +346,11 @@
     p.stats.road.textContent = o.road + ' / ' + D.vans.length;
     p.stats.km.textContent = num(o.km);
     D.zones.forEach(function (z) { var li = p.zones[z.id], q = o.zones[z.id]; li.querySelector('b').style.width = (100 * q.done / q.all) + '%'; li.querySelector('em').textContent = q.done + '/' + q.all; });
-    var cap = m < 8 * 60 ? 'cap1' : m < 8 * 60 + 40 ? 'cap2' : m < 12 * 60 + 30 ? 'cap3' : m < 13 * 60 + 20 ? 'cap4' : o.road > 0 ? 'cap5' : 'cap6';
+    var cap = w.kind === 'back' ? 'capBack' : flow.day > 0 && m < 9 * 60 + 40 ? 'capDay2' : m < 8 * 60 ? 'cap1' : m < 8 * 60 + 40 ? 'cap2' : m < 12 * 60 + 30 ? 'cap3' : m < 13 * 60 + 20 ? 'cap4' : o.road > 0 ? 'cap5' : 'cap6';
     if (p.capKey !== cap + lang) { p.capKey = cap + lang; p.cap.textContent = t(cap); p.cap.classList.remove('is-in'); void p.cap.offsetWidth; p.cap.classList.add('is-in'); }
     p.toggle.textContent = flow.on ? t('pause') : t('play');
     flowPhoto(m);
+    useDay(0);
   }
   // the photograph of the latest delivery; while the day plays, it stays long enough to be seen
   function flowPhoto(m) {
@@ -314,7 +367,7 @@
     if (!flow.on) return;
     var dt = Math.min(80, now - (flow.last || now));
     flow.last = now;
-    if (flow.t >= T1) { flow.held += dt; if (flow.held > 3200) { flow.held = 0; flow.t = T0; } }
+    if (flow.t >= T1) { flow.held += dt; if (flow.held > 3200) { flowDay(flow.day + 1, false); } }      // the next day of the cycle
     else flow.t = Math.min(T1, flow.t + dt * (T1 - T0) / LOOP);
     flowDraw();
     flow.raf = requestAnimationFrame(flowStep);
@@ -379,7 +432,8 @@
   var ICON = {
     dash: '<path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-3H4zM14 7h6V4h-6z"/>', recv: '<path d="M3 8l9-5 9 5v9l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v9"/>',
     disp: '<path d="M4 6h16M4 12h10M4 18h7"/><path d="M17 15l3 3-3 3"/>', deliv: '<path d="M5 12l4.5 4.5L19 7"/><rect x="3" y="3" width="18" height="18" rx="4"/>',
-    vans: '<path d="M2 7h11v9H2zM13 10h5l4 3v3h-9z"/><circle cx="6.500" cy="17.500" r="1.800"/><circle cx="17.500" cy="17.500" r="1.800"/>', exp: '<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>'
+    vans: '<path d="M2 7h11v9H2zM13 10h5l4 3v3h-9z"/><circle cx="6.500" cy="17.500" r="1.800"/><circle cx="17.500" cy="17.500" r="1.800"/>', exp: '<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>',
+    fb: '<path d="M4 5h16v11h-9l-5 4v-4H4z"/><path d="M8 9h8M8 12h5"/>'
   };
   function cu(n) { return n + ' ' + t(n > 1 ? 'cartonsU' : 'cartonU'); }
   function chip(kind, text) { return '<i class="lg-chip is-' + kind + '">' + esc(text) + '</i>'; }
@@ -396,6 +450,7 @@
       if (v.late) a.push({ kind: 'warn', text: t('aLate', { van: v.id, at: hm(v.depart) }), tab: 'vans', id: v.id });
     });
     if (D.refill && !D.refill.done) a.push({ kind: 'info', text: t('aRefill', { van: D.refill.van }), tab: 'disp', id: '' });
+    D.feedback.forEach(function (f) { if (f.restock && f.status === 'new' && P[f.pos]) a.push({ kind: 'warn', text: t('aRestock', { name: P[f.pos].name }), tab: 'fb', id: f.id }); });
     if (pending()) a.push({ kind: 'info', text: t('aExp', { n: pending() }), tab: 'exp', id: '' });
     return a;
   }
@@ -571,12 +626,54 @@
       '<div class="lg-cols lg-cols--side lg-cols--flip"><section class="lg-card" data-tip="eList"><h3>' + t('expenses') + '<button type="button" class="lg-btn lg-btn--small" data-act="new-exp" data-tip="eNew">+ ' + t('add') + '</button></h3><ul class="lg-list lg-list--exp">' + list + '</ul></section><section class="lg-card" data-tip="' + (app.form ? 'eForm' : 'eDetail') + '">' + right + '</section></div>';
   }
 
+  /* ---------- what the shops say: the shopkeeper asked by the CE on a return visit, and mystery customers ---------- */
+  function stars(k) { return '<i class="lg-stars" role="img" aria-label="' + k + ' / 5"><b>' + '★★★★★'.slice(0, k) + '</b>' + '★★★★★'.slice(k) + '</i>'; }
+  function fbWho(f) { var q = P[f.pos], v = q && V[q.van]; return f.kind === 'mystery' ? t('fbByMystery', { n: f.n || 1 }) : t('fbByCe', { who: esc((v && v.ce) || 'CE') }); }
+  function fbAnswers(f) {
+    var A = t('fbA'), a = f.answers;
+    if (!a) return [];
+    return f.kind === 'mystery' ? [['visible', A[a[0]]], ['offered', A[a[1]]], ['pitch', A[a[2]]], ['price', A[a[3]]]] : [['sell', A[a[0]]], ['display', A[a[1]]], ['stock', t('fbUnits', { n: a[2] })]];
+  }
+  function vFb() {
+    var all = D.feedback, F = app.fbf || 'all', list = all.filter(function (f) { return F === 'all' || f.kind === F; });
+    var cur = all.filter(function (f) { return f.id === app.fb; })[0] || list[0] || all[0];
+    app.fb = cur ? cur.id : '';
+    var asked = {}, sum = 0;
+    all.forEach(function (f) { asked[f.pos] = 1; sum += f.score; });
+    var kpi = function (a, b) { return '<div class="lg-kpi"><span>' + a + '</span><b>' + b + '</b></div>'; };
+    var items = list.map(function (f) {
+      return '<li' + (cur && f.id === cur.id && !app.form ? ' class="is-sel"' : '') + '><button type="button" data-act="fb" data-id="' + f.id + '"><i class="lg-kind is-' + f.kind + '"></i><span><b>' + esc(P[f.pos].name) + '</b><small>' + t(f.kind === 'mystery' ? 'fbMystery1' : 'fbStore1') + ' · ' + esc(tr(f.day)) + ' ' + f.at + '</small></span>' +
+        stars(f.score) + (f.restock ? chip('due', t('fbAskRestock')) : f.status === 'new' ? chip('now', t('fbFresh')) : '') + '</button></li>';
+    }).join('');
+    var right;
+    if (app.form && app.form.fb) {
+      var g = app.form;
+      right = '<h3>' + t('fbAdd') + '</h3><div class="lg-form lg-form--fb"><label><span>' + t('fbPos') + '</span><select data-f="pos">' + D.pos.slice(0, 36).map(function (q) { return '<option value="' + q.id + '"' + (g.pos === q.id ? ' selected' : '') + '>' + esc(q.name) + ' · ' + q.id + '</option>'; }).join('') + '</select></label>' +
+        '<label class="lg-wide"><span>' + t('fbSource') + '</span><select data-f="kind"><option value="store"' + (g.kind === 'store' ? ' selected' : '') + '>' + t('fbStore1') + '</option><option value="mystery"' + (g.kind === 'mystery' ? ' selected' : '') + '>' + t('fbMystery1') + '</option></select></label>' +
+        '<div class="lg-rate"><span>' + t('fbRate') + '</span>' + [1, 2, 3, 4, 5].map(function (k) { return '<button type="button" data-act="fb-rate" data-id="' + k + '"' + (g.score >= k ? ' class="is-on"' : '') + ' aria-label="' + k + ' / 5">★</button>'; }).join('') + '</div>' +
+        '<label class="lg-wide"><span>' + t('fbRemark') + '</span><input data-f="remark" autocomplete="off" value="' + esc(g.remark) + '"></label>' +
+        '<label class="lg-check"><input type="checkbox" data-f="restock"' + (g.restock ? ' checked' : '') + '><span>' + t('fbAskRestock') + '</span></label>' +
+        '<div class="lg-actions"><button type="button" class="lg-btn" data-act="save-fb">' + t('save') + '</button><button type="button" class="lg-btn lg-btn--ghost" data-act="fb-cancel">' + t('fbCancel') + '</button></div><p class="lg-note" role="status">' + esc(g.note || '') + '</p></div>';
+    } else if (cur) {
+      var q = P[cur.pos];
+      right = '<h3>' + cur.id + ' <small>' + fbWho(cur) + '</small></h3><div class="lg-proof lg-proof--fb">' + picShop(q.id, q.id + ' · ' + tr(cur.day) + ' ' + cur.at) +
+        '<div><p class="lg-meta"><b>' + esc(q.name) + '</b><br>' + q.id + ' · ' + esc(zoneName(q.zone)) + ' · ' + q.van + '</p>' + stars(cur.score) +
+        '<dl class="lg-qa">' + fbAnswers(cur).map(function (x) { return '<dt>' + t('fbQ')[x[0]] + '</dt><dd>' + esc(x[1]) + '</dd>'; }).join('') + '</dl></div></div>' +
+        '<p class="lg-quote">« ' + esc(tr(cur.note)) + ' »</p>' + (cur.restock ? '<p class="lg-warn">' + t('fbToDisp') + '</p>' : '');
+    } else right = '<p class="lg-none">' + t('nothing') + '</p>';
+    return '<div class="lg-kpis lg-kpis--exp" data-tip="fbKpis">' + kpi(t('fbAsked'), Object.keys(asked).length + '<small> / ' + D.pos.length + '</small>') + kpi(t('fbScore'), num(all.length ? sum / all.length : 0, 1) + '<small> / 5</small>') +
+      kpi(t('fbMysteryN'), all.filter(function (f) { return f.kind === 'mystery'; }).length) + kpi(t('fbRestockN'), all.filter(function (f) { return f.restock; }).length) + '</div>' +
+      '<div class="lg-cols lg-cols--side lg-cols--flip"><section class="lg-card" data-tip="fbList"><h3>' + t('fbTitle') + '<button type="button" class="lg-btn lg-btn--small" data-act="new-fb" data-tip="fbNew">+ ' + t('fbAdd') + '</button></h3>' +
+      '<div class="lg-views lg-views--fb">' + ['all', 'store', 'mystery'].map(function (k) { return '<button type="button" data-act="fbf" data-id="' + k + '"' + (F === k ? ' class="is-sel"' : '') + '>' + t(k === 'all' ? 'fbAll' : k === 'store' ? 'fbStore' : 'fbMystery') + '</button>'; }).join('') + '</div>' +
+      '<ul class="lg-list lg-list--exp lg-list--fb">' + items + '</ul></section><section class="lg-card" data-tip="fbDetail">' + right + '</section></div>';
+  }
+
   /* ---------- help: a word of explanation on each important part of a screen ----------
      A part says which word it carries (data-tip). With the help on, it wears a "?" marker: a click or a tap on the
      marker shows the word. On a computer the word also shows when the pointer rests on the part, help on or off. */
   var tip = { el: null, timer: 0, over: null, sticky: false, x: 0, y: 0 };
   var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  var KEY = { dTodo: 1, dPhotos: 1, rScan: 1, sRefill: 1, lProof: 1, vMap: 1, vJourney: 1, eNew: 1 };
+  var KEY = { dTodo: 1, dPhotos: 1, rScan: 1, sRefill: 1, lProof: 1, vMap: 1, vJourney: 1, eNew: 1, fbNew: 1 };
   function hots(root) {
     if (!root) return;
     $$('[data-tip]:not([data-quiet])', root).forEach(function (el) {
@@ -610,7 +707,7 @@
     head();
   }
 
-  var VIEWS = { dash: vDash, recv: vRecv, disp: vDisp, deliv: vDeliv, vans: vVans, exp: vExp };
+  var VIEWS = { dash: vDash, recv: vRecv, disp: vDisp, deliv: vDeliv, fb: vFb, vans: vVans, exp: vExp };
   function head() {
     var h = $('.logi__head', appRoot);
     if (!h) return;
@@ -618,7 +715,7 @@
       '<button type="button" class="lg-guide" data-act="guide" aria-pressed="' + (app.guide ? 'true' : 'false') + '"><b>?</b>' + t('guide') + '</button></p>';
     hots(h);
     $$('.logi__nav button', appRoot).forEach(function (b) {
-      var k = b.getAttribute('data-tab'), n = k === 'exp' ? pending() : k === 'recv' ? D.receipts.filter(function (x) { return x.status === 'due'; }).length : k === 'dash' ? alerts().length : 0;
+      var k = b.getAttribute('data-tab'), n = k === 'exp' ? pending() : k === 'fb' ? D.feedback.filter(function (x) { return x.status === 'new'; }).length : k === 'recv' ? D.receipts.filter(function (x) { return x.status === 'due'; }).length : k === 'dash' ? alerts().length : 0;
       b.classList.toggle('is-sel', k === app.tab);
       b.setAttribute('aria-current', k === app.tab ? 'page' : 'false');
       b.querySelector('span').textContent = t('tabs')[k];
@@ -640,7 +737,7 @@
   }
   function go(tab, id) {
     app.tab = VIEWS[tab] ? tab : 'dash'; app.job = null; app.form = null;
-    if (id) { if (tab === 'recv') app.note = id; if (tab === 'vans' || tab === 'deliv') app.van = id; }
+    if (id) { if (tab === 'recv') app.note = id; if (tab === 'vans' || tab === 'deliv') app.van = id; if (tab === 'fb') app.fb = id; }
     if (app.tab === 'vans' && V[app.van]) app.view = V[app.van].map;
     if (app.tab === 'vans' && !V[app.van]) app.van = (D.vans.filter(function (v) { return v.legs.some(function (l) { return l.type === 'halt' && app.now >= l.t0; }); })[0] || D.vans[0]).id;
     show();
@@ -699,6 +796,17 @@
       else if (act === 'confirm-pos' && j) { P[j.id].proof = { at: hm(app.now) }; app.job = null; show(true); }
       else if (act === 'play') { if (app.on) appStop(); else { if (app.now >= T1) app.now = T0; app.on = true; app.last = 0; app.raf = requestAnimationFrame(appStep); } vansDraw(); }
       else if (act === 'exp') { app.exp = id; app.form = null; show(true); }
+      else if (act === 'fb') { app.fb = id; app.form = null; D.feedback.forEach(function (x) { if (x.id === id && x.status === 'new' && !x.restock) x.status = 'seen'; }); show(true); }
+      else if (act === 'fbf') { app.fbf = id; app.fb = ''; app.form = null; show(); }
+      else if (act === 'new-fb') { app.form = { fb: true, pos: D.pos[0].id, kind: 'store', score: 0, remark: '', restock: false, note: '' }; show(true); }
+      else if (act === 'fb-rate' && app.form) { app.form.score = +id; app.form.note = ''; show(true); }
+      else if (act === 'fb-cancel') { app.form = null; show(true); }
+      else if (act === 'save-fb' && app.form) {
+        var g = app.form;
+        if (!(g.score > 0)) { g.note = t('fbNeed'); return show(true); }
+        var nf = { id: 'RET-' + (3200 + D.feedback.length), pos: g.pos, kind: g.kind, day: { fr: 'Aujourd’hui', en: 'Today' }, at: hm(app.now), score: g.score, answers: null, restock: !!g.restock, note: { fr: g.remark || '—', en: g.remark || '—' }, status: 'new', n: 1 };
+        D.feedback.unshift(nf); app.fb = nf.id; app.fbf = 'all'; app.form = null; show();
+      }
       else if (act === 'new-exp') { app.form = { van: D.vans[0].id, kind: 'fuel', amount: '', shot: false, note: '' }; show(true); }
       else if (act === 'exp-ok' || act === 'exp-no') { var x = D.expenses.filter(function (q) { return q.id === app.exp; })[0]; x.status = act === 'exp-ok' ? 'ok' : 'no'; show(true); }
       else if (act === 'save-exp') {
@@ -712,14 +820,14 @@
     });
     c.addEventListener('change', function (e) {
       var el = e.target, f = el.getAttribute('data-f'), key = el.getAttribute('data-shot');
-      if (f && app.form) { app.form[f] = el.value; app.form.note = ''; if (f !== 'amount') show(true); return; }
+      if (f && app.form) { app.form[f] = el.type === 'checkbox' ? el.checked : el.value; app.form.note = ''; if (f !== 'amount' && f !== 'remark') show(true); return; }
       if (!key || !el.files || !el.files[0]) return;
       var url = URL.createObjectURL(el.files[0]);                    // shown from the device's own memory: it goes nowhere
       if (key === 'exp:new') { shots['DEP-NEW'] = shots['exp:new'] = url; app.form.shot = true; }
       else { shots[key.split(':')[1]] = url; if (app.job) app.job.shot = true; }
       show(true);
     });
-    c.addEventListener('input', function (e) { var f = e.target.getAttribute('data-f'); if (f === 'amount' && app.form) app.form.amount = e.target.value; });
+    c.addEventListener('input', function (e) { var f = e.target.getAttribute('data-f'); if ((f === 'amount' || f === 'remark') && app.form) app.form[f] = e.target.value; });
     c.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.className === 'lg-hot') { e.preventDefault(); e.target.click(); } else if (e.key === 'Escape') tipHide(); });
     if (canHover) {
       c.addEventListener('mousemove', function (e) { tip.x = e.clientX; tip.y = e.clientY; });
@@ -741,8 +849,11 @@
     if (D || !data || !data.logi || !data.logi.vans) return;
     D = JSON.parse(JSON.stringify(data.logi));
     plan();
-    if (flowRoot) { flow.t = reduced ? D.now : T0; flowBuild(); window.BEN_FLOW = { state: function () { var o = totals(flow.t); return { t: hm(flow.t), on: flow.on, served: o.served, all: o.all, road: o.road }; }, play: flowPlay, stop: flowStop, at: function (m) { flowStop(); flow.t = m; flowDraw(); } }; }
-    if (appRoot) { appBuild(); window.BEN_LOGI = { state: function () { var o = totals(app.now); return { tab: app.tab, now: hm(app.now), van: app.van, guide: app.guide, served: o.served, all: o.all, pending: pending(), alerts: alerts().length, notes: D.receipts.map(function (n) { return n.id + ':' + n.status; }).join(), expenses: D.expenses.length, playing: app.on }; }, go: go, at: function (m) { appStop(); app.now = m; show(true); }, csv: csv, guide: guide }; }
+    worldsBuild();
+    if (!D.feedback) D.feedback = [];
+    if (flowRoot) { flow.t = reduced ? D.now : T0; flowBuild(); window.BEN_FLOW = { state: function () { useDay(flow.day); var o = totals(flow.t); useDay(0); return { t: hm(flow.t), on: flow.on, served: o.served, all: o.all, road: o.road, day: flow.day, days: worlds.length }; }, play: flowPlay, stop: flowStop,
+      at: function (m, day) { flowStop(); if (day != null && day !== flow.day) { flow.day = day; flowMaps(); flowWords(); } flow.t = m; flowDraw(); }, day: flowDay }; }
+    if (appRoot) { appBuild(); window.BEN_LOGI = { state: function () { var o = totals(app.now); return { tab: app.tab, now: hm(app.now), van: app.van, guide: app.guide, served: o.served, all: o.all, pending: pending(), alerts: alerts().length, notes: D.receipts.map(function (n) { return n.id + ':' + n.status; }).join(), expenses: D.expenses.length, feedback: D.feedback.length, playing: app.on }; }, go: go, at: function (m) { appStop(); app.now = m; show(true); }, csv: csv, guide: guide }; }
     doc.dispatchEvent(new CustomEvent('ben:live-ready'));
   }
   doc.addEventListener('ben:data', function (e) { start(e.detail); });

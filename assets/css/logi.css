@@ -88,6 +88,15 @@
 .flow__last span { color: var(--mute); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .flow__last.is-in img { animation: calli-in .5s; }
 .flow__title { margin: .35em 0 .1em; font-size: 1.9em; font-weight: 600; line-height: 1.05; letter-spacing: -.02em; }
+/* the days of the cycle: day 1, day 2 (other points of sale), day 3 (back for feedback and restocking) */
+.flow__days { display: flex; flex-wrap: wrap; gap: .35em; margin-bottom: .8em; }
+.flow__days button { padding: .42em .85em; border-radius: 99em; border: 1px solid var(--edge); background: none; color: var(--mute); font: inherit; font-size: .68em; font-weight: 600; line-height: 1.2; white-space: nowrap; cursor: pointer; transition: border-color .25s, background .25s, color .25s; }
+.flow__days button:hover, .flow__days button:focus-visible { color: var(--text); border-color: rgba(255, 255, 255, .4); }
+.flow__days button.is-sel { border-color: rgba(249, 178, 78, .75); background: rgba(249, 178, 78, .13); color: var(--text); }
+/* on the day of the return visits the points of sale are already known: tinted, then white once heard */
+.flow__maps.is-back .lmap__pos { fill: color-mix(in srgb, var(--c) 36%, #16171b); stroke: var(--c); }
+.flow__maps.is-back .lmap__pos.is-done { fill: #f6f5f1; stroke: var(--c); stroke-width: 2.6; }
+.flow__maps.is-back .lmap--country .lmap__pos.is-done { stroke-width: 1.5; }
 .flow__clock { display: flex; align-items: baseline; gap: .7em; margin-bottom: .7em; }
 .flow__clock b { font-size: 3.5em; font-weight: 600; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .flow__clock span { color: var(--mute); font-size: .9em; }
@@ -219,6 +228,25 @@
 .lg-list--exp button em { grid-column: auto; font-size: .84em; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .lg-list--exp button .lg-chip { grid-column: auto; grid-row: auto; }
 .lg-kind { flex: none; display: inline-block; width: .8em; height: .8em; border-radius: .25em; background: #8f7bf0; }
+.lg-kind.is-store { background: #5dbea3; border-radius: 50%; } .lg-kind.is-mystery { background: #8f7bf0; }
+/* what the shops say */
+.lg-stars { font-style: normal; font-size: .82em; letter-spacing: .06em; color: rgba(255, 255, 255, .2); white-space: nowrap; }
+.lg-stars b { font-weight: 400; color: #f9b24e; }
+.lg-views--fb { margin: -.15em 0 .7em; }
+.lg-list--fb button { grid-template-columns: auto minmax(0, 1fr) auto auto; }
+.lg-proof--fb { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.lg-proof--fb .lg-stars { display: block; margin-top: .5em; font-size: 1.1em; }
+.lg-qa { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .3em 1em; margin: .7em 0 0; font-size: .74em; line-height: 1.35; }
+.lg-qa dt { color: var(--mute); }
+.lg-qa dd { margin: 0; font-weight: 600; text-align: right; }
+.lg-quote { margin-top: .9em; padding: .7em .9em; border-left: 3px solid #f9b24e; border-radius: 0 .6em .6em 0; background: rgba(255, 255, 255, .04); font-size: .82em; line-height: 1.45; }
+.lg-rate { grid-column: 1 / 3; display: flex; align-items: center; gap: .25em; font-size: .74em; color: var(--mute); }
+.lg-rate span { margin-right: .7em; }
+.lg-rate button { border: 0; background: none; padding: 0 .08em; font: inherit; font-size: 2em; line-height: 1; color: rgba(255, 255, 255, .22); cursor: pointer; }
+.lg-rate button.is-on { color: #f9b24e; }
+.lg-form .lg-wide { grid-column: 1 / 3; }
+.lg-form .lg-check { grid-column: 1 / 3; display: flex; align-items: center; gap: .6em; font-size: .8em; color: var(--text); }
+.lg-form .lg-check input { flex: none; width: 1.2em; height: 1.2em; padding: 0; accent-color: #f9b24e; }
 .lg-kind.is-fuel { background: #f9b24e; } .lg-kind.is-parking { background: #6cb6ff; } .lg-kind.is-toll { background: #5dbea3; } .lg-kind.is-wash { background: #00adb0; } .lg-kind.is-repair { background: #e94b5b; }
 
 .lg-table { width: 100%; border-collapse: collapse; font-size: .8em; }
