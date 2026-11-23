@@ -278,6 +278,28 @@
 .lg-amount { font-size: 1.7em; font-weight: 600; line-height: 1.1; letter-spacing: -.02em; margin-bottom: .2em; }
 .lg-proof--exp .lg-chip { margin-top: .7em; }
 
+/* help: the "?" markers, the word they show, the button that shows or hides them */
+.logi__app { position: relative; }
+.logi__app.is-guide [data-tip]:not([data-quiet]) { position: relative; }
+.lg-hot { position: absolute; right: -.55em; top: -.55em; z-index: 6; display: none; place-items: center; width: 1.6em; height: 1.6em; border-radius: 50%; background: #f9b24e; color: #0e0e0e; font: 700 .68em/1 var(--display); font-style: normal; text-indent: 0; letter-spacing: 0; cursor: help; box-shadow: 0 0 0 0 rgba(249, 178, 78, .55), 0 2px 8px rgba(0, 0, 0, .5); }
+.logi__app.is-guide .lg-hot { display: grid; }
+.lg-hot:hover, .lg-hot:focus-visible { background: #fff; outline: none; }
+.lg-map > .lg-hot, .lg-vans > .lg-hot, .lg-kpis > .lg-hot { right: .5em; top: .5em; }
+.lg-btn > .lg-hot { right: -.7em; top: -.7em; font-size: .72em; }
+.logi__head [data-tip] > .lg-hot { right: -.9em; top: -.9em; font-size: .6em; }
+.lg-vans.lg-vans { padding-right: 2.2em; }
+@media (prefers-reduced-motion: no-preference) { .logi__app.is-guide .lg-hot { animation: lg-hot 2.6s ease-out infinite; } }
+@keyframes lg-hot { 0% { box-shadow: 0 0 0 0 rgba(249, 178, 78, .55), 0 2px 8px rgba(0, 0, 0, .5); } 70%, 100% { box-shadow: 0 0 0 .7em rgba(249, 178, 78, 0), 0 2px 8px rgba(0, 0, 0, .5); } }
+.lg-tip { position: absolute; left: 0; top: 0; z-index: 20; max-width: 21em; padding: .7em .95em; border-radius: .8em; background: #f6f5f1; color: #0e0e0e; font-size: .8em; font-weight: 500; line-height: 1.4; box-shadow: 0 18px 50px -12px rgba(0, 0, 0, .85); pointer-events: none; animation: calli-in .18s; }
+.lg-tip[hidden] { display: none; }
+.lg-tip::before { content: ""; position: absolute; left: var(--ax, 50%); top: -.34em; width: .8em; height: .8em; margin-left: -.4em; background: inherit; transform: rotate(45deg); border-radius: .14em; }
+.lg-tip.is-up::before { top: auto; bottom: -.34em; }
+.lg-guide { display: inline-flex; align-items: center; gap: .5em; padding: .3em .9em .3em .34em; border-radius: 99em; border: 1px solid var(--edge); background: none; color: var(--mute); font: inherit; font-weight: 500; cursor: pointer; transition: background .25s, color .25s, border-color .25s; }
+.lg-guide b { display: grid; place-items: center; width: 1.5em; height: 1.5em; border-radius: 50%; background: rgba(255, 255, 255, .12); color: var(--text) !important; font-size: .9em; }
+.lg-guide[aria-pressed="true"] { border-color: rgba(249, 178, 78, .7); background: rgba(249, 178, 78, .1); color: var(--text); }
+.lg-guide[aria-pressed="true"] b { background: #f9b24e; color: #0e0e0e !important; }
+.lg-fleetwrap { flex: none; min-width: 0; }
+
 .logi[data-skin="slide"] .logi__main { position: absolute; left: 72px; right: 72px; top: 112px; bottom: 36px; font-size: 20px; }
 .logi[data-skin="slide"] .logi__body { overflow: hidden; }
 .logi[data-skin="slide"] .logi__body[data-view="dash"] .lg-zones { flex: 1; align-content: space-evenly; }
@@ -290,6 +312,7 @@
 .logi[data-skin="tall"] .logi__nav button { white-space: nowrap; padding: .55em .8em; }
 .logi[data-skin="tall"] .logi__head { padding: .8em 1em; flex-wrap: wrap; }
 .logi[data-skin="tall"] .logi__head p i { display: none; }
+.logi[data-skin="tall"] .lg-tip { max-width: min(21em, calc(100% - 16px)); }
 .logi[data-skin="tall"] .logi__body { padding: .9em 1em 1.1em; }
 .logi[data-skin="tall"] .lg-kpis { grid-template-columns: 1fr 1fr; }
 .logi[data-skin="tall"] .lg-cols { display: flex; flex-direction: column; }
