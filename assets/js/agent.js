@@ -3,8 +3,10 @@
 
    Every button marked data-agent opens a small panel under the header. The agent shows itself in that
    panel: its script finds the box marked data-dialora-widget and puts its card there (a status line and
-   the button that starts the call). For that, the widget must be set to the "inline" placement in the
-   Dialora account; set to "floating", it shows its own round button in a corner of the screen instead.
+   the button that starts the call). The widget does that when its placement is "inline"; set to
+   "floating" in the Dialora account, it would show a round button in a corner of the screen instead.
+   So the page asks for "inline" whatever the account says: when the widget reads its settings, the
+   placement it gets is "inline" (inline() below). Nothing else in its settings is touched.
 
    - Nothing is requested from Dialora, and Dialora learns nothing, until a visitor presses the button.
      Its script then loads (with Google reCAPTCHA, which it uses to tell people from robots).
@@ -27,15 +29,13 @@
   var SHOW = 6000;                                      // ms: once it has loaded, the longest its card may take to appear in the panel
   var WORDS = {
     en: { title: 'AI voice agent', sub: 'Ask about your event, out loud.', wait: 'Connecting…', close: 'Close',
-          fail: 'The agent cannot open right now. Write to us on WhatsApp or through the contact form.',
-          corner: 'Press the round button at the bottom right of the screen to talk to the agent.' },
+          fail: 'The agent cannot open right now. Write to us on WhatsApp or through the contact form.' },
     fr: { title: 'Agent vocal IA', sub: 'Posez vos questions sur votre événement, de vive voix.', wait: 'Connexion…', close: 'Fermer',
-          fail: 'L’agent ne peut pas s’ouvrir pour le moment. Écrivez-nous sur WhatsApp ou via le formulaire de contact.',
-          corner: 'Appuyez sur le bouton rond en bas à droite de l’écran pour parler à l’agent.' }
+          fail: 'L’agent ne peut pas s’ouvrir pour le moment. Écrivez-nous sur WhatsApp ou via le formulaire de contact.' }
   };
   /* ------------------------------------------------------------------ */
 
-  var state = 'idle';                                   // idle → loading → ready (the card is in the panel), floating, or failed
+  var state = 'idle';                                   // idle → loading → ready (the card is in the panel), or failed
   var panel = null, box = null, opener = null, timer = 0, poll = 0;
 
   function lang() { return doc.documentElement.lang === 'fr' ? 'fr' : 'en'; }
@@ -65,7 +65,7 @@
     panel.querySelector('.agent__t').textContent = t.title;
     panel.querySelector('.agent__s').textContent = t.sub;
     panel.querySelector('.agent__x').setAttribute('aria-label', t.close);
-    panel.querySelector('.agent__wait').textContent = state === 'failed' ? t.fail : state === 'floating' ? t.corner : t.wait;
+    panel.querySelector('.agent__wait').textContent = state === 'failed' ? t.fail : t.wait;
   }
   // the panel hangs under the button that opened it, inside the screen
   function place() {
@@ -103,7 +103,7 @@
   function settingsIn() {
     try { return performance.getEntriesByType('resource').some(function (e) { return e.name.indexOf('/api/widgets/' + KEY) > -1 && e.responseEnd > 0; }); } catch (e) { return false; }
   }
-  // the card shows in the panel when the widget is set to "inline": it then has a height. Set to "floating", it never does.
+  // the card has a height once it shows in the panel
   function watch() {
     var since = 0;
     clearInterval(poll);
@@ -126,20 +126,43 @@
     if (state !== 'loading') return;
     clearTimeout(timer);
     clearInterval(poll);
-    // the widget is there but set to float in a corner: it goes there (out of the panel), its own round button is the way in,
-    // it takes the place of the WhatsApp button, and the panel says where to press
-    var floating = !!(window.__dialoraWidget && window.__dialoraWidget.mounted);
-    state = floating ? 'floating' : 'failed';
-    if (floating) {
-      box.removeAttribute('data-dialora-widget');
-      doc.documentElement.classList.add('agent-floating');
-    }
+    state = 'failed';                                   // whatever the widget made stays out of sight in the panel: never a button in a corner
     words();
     place();
+  }
+  // The widget reads its settings once, with an XMLHttpRequest to Dialora (…/api/widgets/KEY). The answer it reads has
+  // its placement set to "inline", so that it shows in the panel. Only that request, and only that one value, are changed.
+  function inline() {
+    var X = window.XMLHttpRequest;
+    if (!X || X.prototype.__benInline) return;
+    var SETTINGS = new RegExp('/api/widgets/' + KEY + '(\\?|$)');
+    var text = Object.getOwnPropertyDescriptor(X.prototype, 'responseText');
+    var open = X.prototype.open;
+    if (!text || !text.get) return;
+    X.prototype.__benInline = true;
+    X.prototype.open = function (method, url) {
+      if (SETTINGS.test(String(url))) {
+        var xhr = this, done = null;
+        Object.defineProperty(xhr, 'responseText', { configurable: true, get: function () {
+          var raw = text.get.call(xhr);
+          if (xhr.readyState !== 4) return raw;
+          if (done === null) {
+            done = raw;
+            try {
+              var d = JSON.parse(raw);
+              if (d && typeof d === 'object') { d.configurations = d.configurations || {}; d.configurations.placement = 'inline'; done = JSON.stringify(d); }
+            } catch (e) {}
+          }
+          return done;
+        } });
+      }
+      return open.apply(this, arguments);
+    };
   }
   function load() {
     if (state !== 'idle') return;
     state = 'loading';
+    inline();
     var s = doc.createElement('script');
     s.src = SCRIPT;
     s.async = true;

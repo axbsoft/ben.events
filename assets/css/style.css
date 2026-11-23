@@ -114,7 +114,6 @@ ul, ol { padding: 0; list-style: none; }
 .agent:not(.is-ready) .agent__box > :not(.agent__wait) { position: absolute; left: 0; right: 0; top: 0; visibility: hidden; }      /* the agent's card, while it settles */
 .agent__wait { padding: 18px 14px; border-radius: 14px; background: var(--card-2); font-size: 14px; line-height: 1.45; color: var(--mute); text-align: center; }
 .agent.is-ready .agent__wait { display: none; }
-.agent-floating .wa { display: none; }      /* the agent's own round button takes the corner (widget set to "floating") */
 .btn--book.is-waiting > span::before { animation: bookwait 1s ease-in-out infinite; }
 @keyframes bookwait { 50% { opacity: .2; } }
 @keyframes sheen { to { background-position: -200% 0; } }
