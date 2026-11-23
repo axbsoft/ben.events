@@ -1,16 +1,16 @@
 {
  "v": 2,
- "rev": "c1fcfe58",
+ "rev": "8fad4473",
  "kdf": {
   "name": "PBKDF2",
   "hash": "SHA-256",
   "iterations": 600000,
-  "salt": "0PWlHssm5FEVZ/kbKqhKnQ=="
+  "salt": "mKqsFmvgi/wnoiyeV35tcg=="
  },
- "check": "ziaI/TvAEDtmO8Z5Cez4OePLUNElkz3GXAapl5bFHVh6fRAEDyxgAJc2",
+ "check": "Jjbjkbi5ltkFVAIm6ZjffzoTSH9QTw9VA1vIt164CrA3BOYKTJbPZAYH",
  "langs": {
   "fr": {
-   "count": 13,
+   "count": 11,
    "type": "image/webp",
    "thumbs": {
     "type": "image/webp",
@@ -21,7 +21,7 @@
    }
   },
   "en": {
-   "count": 13,
+   "count": 11,
    "type": "image/webp",
    "thumbs": {
     "type": "image/webp",
@@ -34,7 +34,7 @@
  },
  "meta": true,
  "live": [
-  9,
-  12
+  8,
+  10
  ]
 }

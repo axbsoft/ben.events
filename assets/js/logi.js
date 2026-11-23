@@ -38,7 +38,7 @@
       cap3: 'Chaque point de vente est servi, photo à l’appui.', cap4: 'Pause des équipes, puis reprise des tournées.', cap5: 'Derniers points de vente, retour à l’entrepôt.', cap6: 'Tournées terminées : le rapport du jour part automatiquement.',
       app: 'Suivi terrain', tabs: { dash: 'Tableau de bord', recv: 'Réception', disp: 'Dispatch', deliv: 'Livraisons', vans: 'Véhicules', exp: 'Dépenses' },
       role: 'Vue responsable', now: 'Il est', served: 'Points de vente livrés', cartons: 'Cartons livrés', onRoad: 'Véhicules en tournée', stopped: 'sur place', spent: 'Dépenses du jour', toCheck: '{n} à valider',
-      byZone: 'Avancement par zone et par ville', todo: 'À traiter', export: 'Exporter le rapport du jour (CSV)', nothing: 'Rien à signaler.',
+      byZone: 'Avancement par zone et par ville', todo: 'À traiter', lastPhotos: 'Dernières livraisons, en photo', fPhoto: 'Preuve de livraison', export: 'Exporter le rapport du jour (CSV)', nothing: 'Rien à signaler.',
       aGap: 'Écart à la réception · {id}', aDue: 'Réception attendue · {id}', aHalt: 'Arrêt non planifié · {van} · {min} min', aLate: 'Départ retardé · {van} · {at}', aExp: '{n} justificatif(s) à valider', aRefill: 'Réassort à préparer · {van}',
       see: 'Voir', notes: 'Bons de livraison', from: 'Provenance', expected: 'Attendu', received: 'Reçu', cartonsU: 'cartons', cartonU: 'carton', sOk: 'Conforme', sGap: 'Écart', sDue: 'Attendu', sNew: 'À valider', sNo: 'Refusé', sValid: 'Validé',
       step1: 'Scanner le bon', step2: 'Compter et photographier', step3: 'Valider la réception', scan: 'Scanner', scanning: 'Lecture du code…', scanned: 'Code lu', photo: 'Prendre la photo', camera: 'Avec l’appareil photo', retake: 'Reprendre',
@@ -54,7 +54,7 @@
         hClock: 'L’heure de la démonstration. Sur l’écran Véhicules, le curseur permet de la faire avancer.', hRole: 'Ici, la vue du responsable. Sur le terrain, chaque équipe ne voit que sa tournée, ses livraisons et ses dépenses.',
         dServed: 'Mis à jour dès qu’une livraison est validée sur place. Le total est celui des tournées du jour.', dCartons: 'Les cartons remis aux points de vente, sur ceux chargés ce matin.',
         dRoad: 'Position transmise par le boîtier GPS de chaque véhicule. « Sur place » : à l’arrêt chez un point de vente.', dSpent: 'La somme des justificatifs envoyés aujourd’hui ; ceux « à valider » attendent le responsable.',
-        dZones: 'Une zone ou une ville, une équipe, un véhicule. La barre avance à chaque point de vente servi.', dTodo: 'Tout ce qui demande une décision : écart à la réception, arrêt non planifié, justificatif à valider. Un clic ouvre l’écran concerné.',
+        dZones: 'Une zone ou une ville, une équipe, un véhicule. La barre avance à chaque point de vente servi.', dTodo: 'Tout ce qui demande une décision : écart à la réception, arrêt non planifié, justificatif à valider. Un clic ouvre l’écran concerné.', dPhotos: 'La photo prise devant chaque point de vente au moment où les cartons sont déposés. Un clic ouvre la preuve complète : heure, position, signature.',
         dExport: 'Le rapport du jour, prêt à être transmis : une ligne par point de vente, avec l’heure de livraison.',
         rList: 'Chaque livraison fournisseur arrive avec un bon. « Attendu » : pas encore contrôlé. « Écart » : il manquait des cartons.', rSteps: 'Trois gestes, toujours dans le même ordre : scanner le bon, compter et photographier, valider.',
         rScan: 'Sur le terrain, l’appareil photo du téléphone lit le code-barres du bon. Essayez.', rPhoto: 'Comptez avec + et −, puis prenez la photo : elle est horodatée et rattachée au bon.',
@@ -80,7 +80,7 @@
       cap3: 'Each point of sale is served, with a photo as proof.', cap4: 'The teams take their break, then the rounds resume.', cap5: 'Last points of sale, back to the warehouse.', cap6: 'Rounds complete: the day’s report goes out on its own.',
       app: 'Field tracker', tabs: { dash: 'Dashboard', recv: 'Receiving', disp: 'Dispatch', deliv: 'Deliveries', vans: 'Vehicles', exp: 'Expenses' },
       role: 'Manager view', now: 'It is', served: 'Points of sale delivered', cartons: 'Cartons delivered', onRoad: 'Vans on their round', stopped: 'on site', spent: 'Expenses today', toCheck: '{n} to approve',
-      byZone: 'Progress by zone and by city', todo: 'To handle', export: 'Export the day’s report (CSV)', nothing: 'Nothing to report.',
+      byZone: 'Progress by zone and by city', todo: 'To handle', lastPhotos: 'Latest deliveries, in photos', fPhoto: 'Proof of delivery', export: 'Export the day’s report (CSV)', nothing: 'Nothing to report.',
       aGap: 'Shortage on receipt · {id}', aDue: 'Delivery expected · {id}', aHalt: 'Unplanned stop · {van} · {min} min', aLate: 'Late departure · {van} · {at}', aExp: '{n} receipt(s) to approve', aRefill: 'Refill to prepare · {van}',
       see: 'View', notes: 'Delivery notes', from: 'From', expected: 'Expected', received: 'Received', cartonsU: 'cartons', cartonU: 'carton', sOk: 'Complete', sGap: 'Shortage', sDue: 'Expected', sNew: 'To approve', sNo: 'Refused', sValid: 'Approved',
       step1: 'Scan the note', step2: 'Count and photograph', step3: 'Confirm receipt', scan: 'Scan', scanning: 'Reading the code…', scanned: 'Code read', photo: 'Take the photo', camera: 'With the camera', retake: 'Retake',
@@ -96,7 +96,7 @@
         hClock: 'The time of the demonstration. On the Vehicles screen, the slider moves it forward.', hRole: 'This is the manager’s view. In the field, each team only sees its round, its deliveries and its expenses.',
         dServed: 'Updated as soon as a delivery is confirmed on site. The total is that of today’s rounds.', dCartons: 'Cartons handed to points of sale, out of those loaded this morning.',
         dRoad: 'Position sent by the GPS unit of each van. “On site”: stopped at a point of sale.', dSpent: 'The sum of the receipts sent today; those “to approve” are waiting for the manager.',
-        dZones: 'One zone or one city, one team, one van. The bar moves with every point of sale served.', dTodo: 'Everything that needs a decision: a shortage on receipt, an unplanned stop, a receipt to approve. A click opens the screen concerned.',
+        dZones: 'One zone or one city, one team, one van. The bar moves with every point of sale served.', dTodo: 'Everything that needs a decision: a shortage on receipt, an unplanned stop, a receipt to approve. A click opens the screen concerned.', dPhotos: 'The photo taken in front of each point of sale when the cartons are dropped off. A click opens the full proof: time, position, signature.',
         dExport: 'The day’s report, ready to be passed on: one line per point of sale, with the time of delivery.',
         rList: 'Every supplier delivery comes with a note. “Expected”: not checked yet. “Shortage”: cartons were missing.', rSteps: 'Three steps, always in the same order: scan the note, count and photograph, confirm.',
         rScan: 'In the field, the phone’s camera reads the barcode of the note. Try it.', rPhoto: 'Count with + and −, then take the photo: it is time-stamped and attached to the note.',
@@ -254,7 +254,8 @@
   function flowBuild() {
     var c = $('.flow__main', flowRoot);
     var awayN = D.vans.filter(function (v) { return v.map === 'country'; }).length;
-    c.innerHTML = '<div class="flow__maps"><div class="flow__map"></div>' + (awayN ? '<div class="flow__inset"><div class="flow__away"></div><p><b>' + awayN + '</b><span data-w="fAway"></span></p></div>' : '') + '</div><div class="flow__panel">' +
+    c.innerHTML = '<div class="flow__maps"><div class="flow__map"></div>' + (awayN ? '<div class="flow__inset"><div class="flow__away"></div><p><b>' + awayN + '</b><span data-w="fAway"></span></p></div>' : '') +
+      '<figure class="flow__last" hidden><img alt=""><figcaption><small data-w="fPhoto"></small><b></b><span></span></figcaption></figure></div><div class="flow__panel">' +
       '<p class="lg-eyebrow"><i></i><span data-w="fEyebrow"></span></p><h2 class="flow__title"></h2>' +
       '<p class="flow__clock"><b></b><span></span></p>' +
       '<div class="flow__stats"><p><b data-k="served"></b><span data-w="fServed"></span></p><p><b data-k="cartons"></b><span data-w="fCartons"></span></p><p><b data-k="road"></b><span data-w="fVans"></span></p><p><b data-k="km"></b><span data-w="fKm"></span></p></div>' +
@@ -263,7 +264,7 @@
       '<p class="flow__cap"></p>';
     flow.map = mapOf($('.flow__map', c), { id: 'f' });
     flow.far = awayN ? mapOf($('.flow__away', c), { id: 'g', kind: 'country', view: D.country.inset }) : null;
-    flow.parts = { title: $('.flow__title', c), clock: $('.flow__clock b', c), day: $('.flow__clock span', c), cap: $('.flow__cap', c), toggle: $('[data-act="flow-toggle"]', c), again: $('[data-act="flow-again"]', c), stats: {}, zones: {} };
+    flow.parts = { last: $('.flow__last', c), lastImg: $('.flow__last img', c), lastName: $('.flow__last b', c), lastMeta: $('.flow__last span', c), title: $('.flow__title', c), clock: $('.flow__clock b', c), day: $('.flow__clock span', c), cap: $('.flow__cap', c), toggle: $('[data-act="flow-toggle"]', c), again: $('[data-act="flow-again"]', c), stats: {}, zones: {} };
     $$('[data-k]', c).forEach(function (b) { flow.parts.stats[b.getAttribute('data-k')] = b; });
     $$('.flow__zones li', c).forEach(function (li) { flow.parts.zones[li.getAttribute('data-zone')] = li; });
     c.addEventListener('click', function (e) {
@@ -296,6 +297,18 @@
     var cap = m < 8 * 60 ? 'cap1' : m < 8 * 60 + 40 ? 'cap2' : m < 12 * 60 + 30 ? 'cap3' : m < 13 * 60 + 20 ? 'cap4' : o.road > 0 ? 'cap5' : 'cap6';
     if (p.capKey !== cap + lang) { p.capKey = cap + lang; p.cap.textContent = t(cap); p.cap.classList.remove('is-in'); void p.cap.offsetWidth; p.cap.classList.add('is-in'); }
     p.toggle.textContent = flow.on ? t('pause') : t('play');
+    flowPhoto(m);
+  }
+  // the photograph of the latest delivery; while the day plays, it stays long enough to be seen
+  function flowPhoto(m) {
+    var p = flow.parts, L = null, now = Date.now();
+    D.pos.forEach(function (q) { if (m >= q.leave && (!L || q.leave > L.leave)) L = q; });
+    var src = L ? shopPhoto(L) : '';
+    if (!src) { p.last.hidden = true; flow.lastId = ''; return; }
+    if (flow.lastId === L.id || (flow.on && flow.lastId && now - flow.lastAt < 1500)) return;
+    flow.lastId = L.id; flow.lastAt = now;
+    p.lastImg.src = src; p.lastName.textContent = L.name; p.lastMeta.textContent = hm(L.leave - 1) + ' · ' + L.van + ' · GPS ✓';
+    p.last.hidden = false; p.last.classList.remove('is-in'); void p.last.offsetWidth; p.last.classList.add('is-in');
   }
   function flowStep(now) {
     if (!flow.on) return;
@@ -313,6 +326,9 @@
   var shots = {};                                       // a real photo taken during the demonstration, by what it shows (it never leaves the device)
   // a photograph that comes with the data (always the same one for the same thing), or '' when there is none of that kind
   function pick(kind, key) { var a = D.photos && D.photos[kind]; return a && a.length ? a[Math.floor(seed(kind + key)() * a.length) % a.length] : ''; }
+  function shopPhoto(p) { var a = D.photos && D.photos.shop; return a && a.length ? shots[p.id] || a[((p.n || 1) - 1 + Math.max(0, D.vans.indexOf(V[p.van])) * 5) % a.length] : ''; }
+  function doneMin(p) { if (!p.proof) return p.leave - 1; var a = p.proof.at.split(':'); return +a[0] * 60 + +a[1]; }
+  function lastDone(m, k) { return D.pos.filter(function (p) { return isDone(p, m); }).sort(function (a, b) { return doneMin(b) - doneMin(a) || (a.id < b.id ? -1 : 1); }).slice(0, k); }
   function frame(key, inner, stamp, photo) {
     if (shots[key] || photo) return '<figure class="lpic"><img src="' + (shots[key] || photo) + '" alt=""><figcaption>' + esc(stamp) + '</figcaption></figure>';
     return '<figure class="lpic"><svg viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' + inner + '</svg><figcaption>' + esc(stamp) + '</figcaption></figure>';
@@ -332,7 +348,7 @@
     return frame(key, s, stamp);
   }
   function picShop(key, stamp) {
-    var ph = pick('shop', key);
+    var ph = P[key] ? shopPhoto(P[key]) : pick('shop', key);
     if (ph) return frame(key, '', stamp, ph);
     var r = seed(key), s = '<rect width="320" height="220" fill="#2b2622"/><rect y="150" width="320" height="70" fill="#5b4632"/><rect y="146" width="320" height="8" fill="#7a5f43"/>';
     for (var row = 0; row < 3; row++) {
@@ -394,7 +410,14 @@
       '<div class="lg-cols"><section class="lg-card" data-tip="dZones"><h3>' + t('byZone') + '</h3><ul class="lg-zones">' +
       D.zones.map(function (z, i) { var q = o.zones[z.id]; return '<li><span><i style="background:' + D.vans[i].colour + '"></i>' + esc(z.name) + '</span><i class="lg-bar"><b style="width:' + (100 * q.done / q.all) + '%;background:' + D.vans[i].colour + '"></b></i><em>' + q.done + '/' + q.all + '</em></li>'; }).join('') + '</ul></section>' +
       '<section class="lg-card" data-tip="dTodo"><h3>' + t('todo') + '</h3>' + (al.length ? '<ul class="lg-alerts">' + al.map(function (a) { return '<li class="is-' + a.kind + '"><button type="button" data-act="go" data-tab="' + a.tab + '" data-id="' + a.id + '"><i></i><span>' + esc(a.text) + '</span><em>' + t('see') + '</em></button></li>'; }).join('') + '</ul>' : '<p class="lg-none">' + t('nothing') + '</p>') +
-      '<button type="button" class="lg-btn lg-btn--ghost lg-export" data-act="csv" data-tip="dExport">' + t('export') + '</button></section></div>';
+      thumbs(app.now) + '<button type="button" class="lg-btn lg-btn--ghost lg-export" data-act="csv" data-tip="dExport">' + t('export') + '</button></section></div>';
+  }
+  function thumbs(m) {
+    var seen = {}, a = lastDone(m, 9).filter(function (p) { var ph = shopPhoto(p); if (!ph || seen[ph]) return false; seen[ph] = 1; return true; }).slice(0, 3);   // three different shops
+    if (!a.length) return '';
+    return '<div class="lg-last" data-tip="dPhotos"><h4>' + t('lastPhotos') + '</h4><div class="lg-thumbs">' + a.map(function (p) {
+      return '<button type="button" data-act="go" data-tab="deliv" data-id="' + p.van + '" data-pos="' + p.id + '"><img src="' + shopPhoto(p) + '" alt=""><span><b>' + esc(p.name) + '</b><small>' + doneAt(p) + ' · ' + p.van + '</small></span></button>';
+    }).join('') + '</div></div>';
   }
 
   function vRecv() {
@@ -457,7 +480,8 @@
     var tabs = '<div class="lg-vans" data-tip="lVans">' + D.vans.map(function (x) { var n = x.route.filter(function (id) { return isDone(P[id], app.now); }).length; return '<button type="button" data-act="van" data-id="' + x.id + '"' + (x.id === v.id ? ' class="is-sel"' : '') + '><i style="background:' + x.colour + '"></i>' + x.id + '<small>' + n + '/' + x.route.length + '</small></button>'; }).join('') + '</div>';
     var list = v.route.map(function (id) {
       var p = P[id], done = isDone(p, app.now), here = isNow(p, app.now);
-      return '<li class="' + (p.id === app.pos ? 'is-sel' : '') + (done ? '' : ' is-todo') + '"><button type="button" data-act="pos" data-id="' + p.id + '"><b>' + p.n + '</b><span>' + esc(p.name) + '<small>' + p.id + ' · ' + cu(p.cartons) + '</small></span>' +
+      var th = done ? shopPhoto(p) : '';
+      return '<li class="' + (p.id === app.pos ? 'is-sel' : '') + (done ? '' : ' is-todo') + (th ? ' has-th' : '') + '"><button type="button" data-act="pos" data-id="' + p.id + '"><b>' + p.n + '</b><span>' + esc(p.name) + '<small>' + p.id + ' · ' + cu(p.cartons) + '</small></span>' + (th ? '<img class="lg-th" src="' + th + '" alt="">' : '') +
         chip(done ? 'ok' : here ? 'now' : 'due', done ? t('pDone') + ' ' + doneAt(p) : here ? t('pNow') : t('pNext')) + '</button>' + (next && p.id === next.id ? '<button type="button" class="lg-btn lg-btn--small" data-act="deliver" data-tip="lDeliver" data-id="' + p.id + '">' + t('deliver') + '</button>' : '') + '</li>';
     }).join('');
     var j = app.job && cur && app.job.id === cur.id ? app.job : null, right;
@@ -651,7 +675,7 @@
       var act = b.getAttribute('data-act'), id = b.getAttribute('data-id'), j = app.job;
       if (act === 'guide') guide(!app.guide);
       else if (act === 'tab') go(b.getAttribute('data-tab'));
-      else if (act === 'go') go(b.getAttribute('data-tab'), id);
+      else if (act === 'go') { if (b.getAttribute('data-pos')) app.pos = b.getAttribute('data-pos'); go(b.getAttribute('data-tab'), id); }
       else if (act === 'csv') save(new Blob([csv()], { type: 'text/csv;charset=utf-8' }), [D.client, t('file'), D.day.iso].join('-') + '.csv');
       else if (act === 'note') { app.note = id; app.job = null; show(); }
       else if (act === 'scan') { var n = D.receipts.filter(function (x) { return x.id === app.note; })[0]; app.job = { id: n.id, qty: n.lines.map(function (l) { return l[1]; }) }; scanThen(app.job, function () { app.job.scanned = true; }); }
