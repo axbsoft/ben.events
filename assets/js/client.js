@@ -515,8 +515,11 @@
       body.classList.remove('is-leaving', 'is-restoring');
       if (!instant && !reduced) { deck.classList.add('is-in'); setTimeout(function () { deck.classList.remove('is-in'); }, 1600); }
       window.scrollTo(0, 0);
-      var m = /^#(\d+)$/.exec(location.hash);
-      go(m ? parseInt(m[1], 10) - 1 : 0, 1, true);
+      var m = /^#(\d+)$/.exec(location.hash), first = m ? parseInt(m[1], 10) - 1 : 0, named = '';
+      // a live slide can also be opened by a name given on its section (data-name), whatever its number: #app
+      try { named = m ? '' : decodeURIComponent(location.hash.slice(1)).toLowerCase(); } catch (e) {}
+      if (named && M.live) lives.forEach(function (el, k) { if (M.live[k] && (' ' + (el.getAttribute('data-name') || '') + ' ').indexOf(' ' + named + ' ') >= 0) first = M.live[k] - 1; });
+      go(first, 1, true);
       frame.focus({ preventScroll: true });
       doc.dispatchEvent(new CustomEvent('ben:open'));
       if (M.meta && !META) (M.open ? fetch(plainUrl('meta.json')).then(function (r) { if (!r.ok) throw new Error('file'); return r.json(); })
