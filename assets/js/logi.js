@@ -10,6 +10,9 @@
    the "data" of its descriptions (data.logi), encrypted with it on a client page: window.BEN_DECK_DATA, event
    ben:data. This file only holds the screens and their words, in French and in English.
 
+   The photographs of the demonstration come with the data too (data.logi.photos); where there is none, a drawing
+   takes its place.
+
    A demonstration: every figure is sample data, nothing is sent and nothing is stored. A photo taken with the
    phone's camera stays on the phone. */
 (function () {
@@ -24,18 +27,18 @@
   var D = null, P = {}, V = {};                       // the data; its points of sale and vans by id
   var SPEED = .07, KM = .031, STOP = 1.55;            // minutes of driving and km for one unit of the map; how long a stop lasts, against its base
   var T0 = 7 * 60 + 30, T1 = 16 * 60 + 45;            // the day shown: 07:30 to 16:45
-  var COLOURS = ['#f9b24e', '#e94b5b', '#00adb0', '#5dbea3', '#8f7bf0', '#f48fb1', '#6cb6ff', '#c9d46a'];
+  var COLOURS = ['#f9b24e', '#e94b5b', '#00adb0', '#5dbea3', '#8f7bf0', '#f48fb1', '#6cb6ff', '#c9d46a', '#ff8a5c', '#4fd1c5', '#b794f4', '#f6e05e', '#68d391', '#fc8181'];
 
   var TEXT = {
     fr: {
       demo: 'Démonstration · données d’exemple', scheme: 'Carte schématique', ocean: 'Océan Atlantique', port: 'Port', wh: 'Entrepôt',
-      fEyebrow: 'Une journée type', fTitle: 'La distribution, {city}', fServed: 'Points de vente servis', fCartons: 'Cartons livrés', fVans: 'Véhicules en tournée', fKm: 'Km parcourus',
-      fZones: 'Par zone', play: 'Lecture', pause: 'Pause', again: 'Rejouer',
-      cap1: 'Réception et contrôle à l’entrepôt : chaque carton est scanné et photographié.', cap2: 'Chargement des véhicules 7 places, puis départ par zone.',
+      fEyebrow: 'Une journée type', fTitle: 'De {city} aux régions', fAway: 'véhicules dans les autres villes', fServed: 'Points de vente servis', fCartons: 'Cartons livrés', fVans: 'Véhicules en tournée', fKm: 'Km parcourus',
+      fZones: 'Par zone et par ville', play: 'Lecture', pause: 'Pause', again: 'Rejouer',
+      cap1: 'Réception et contrôle à l’entrepôt : chaque carton est scanné et photographié.', cap2: 'Chargement des véhicules 7 places, puis départ par zone ; les équipes des autres villes sont déjà sur l’autoroute.',
       cap3: 'Chaque point de vente est servi, photo à l’appui.', cap4: 'Pause des équipes, puis reprise des tournées.', cap5: 'Derniers points de vente, retour à l’entrepôt.', cap6: 'Tournées terminées : le rapport du jour part automatiquement.',
       app: 'Suivi terrain', tabs: { dash: 'Tableau de bord', recv: 'Réception', disp: 'Dispatch', deliv: 'Livraisons', vans: 'Véhicules', exp: 'Dépenses' },
       role: 'Vue responsable', now: 'Il est', served: 'Points de vente livrés', cartons: 'Cartons livrés', onRoad: 'Véhicules en tournée', stopped: 'sur place', spent: 'Dépenses du jour', toCheck: '{n} à valider',
-      byZone: 'Avancement par zone', todo: 'À traiter', export: 'Exporter le rapport du jour (CSV)', nothing: 'Rien à signaler.',
+      byZone: 'Avancement par zone et par ville', todo: 'À traiter', export: 'Exporter le rapport du jour (CSV)', nothing: 'Rien à signaler.',
       aGap: 'Écart à la réception · {id}', aDue: 'Réception attendue · {id}', aHalt: 'Arrêt non planifié · {van} · {min} min', aLate: 'Départ retardé · {van} · {at}', aExp: '{n} justificatif(s) à valider', aRefill: 'Réassort à préparer · {van}',
       see: 'Voir', notes: 'Bons de livraison', from: 'Provenance', expected: 'Attendu', received: 'Reçu', cartonsU: 'cartons', cartonU: 'carton', sOk: 'Conforme', sGap: 'Écart', sDue: 'Attendu', sNew: 'À valider', sNo: 'Refusé', sValid: 'Validé',
       step1: 'Scanner le bon', step2: 'Compter et photographier', step3: 'Valider la réception', scan: 'Scanner', scanning: 'Lecture du code…', scanned: 'Code lu', photo: 'Prendre la photo', camera: 'Avec l’appareil photo', retake: 'Reprendre',
@@ -43,7 +46,7 @@
       refill: 'Réassort', refillFor: 'Réassort demandé par {van}', prepare: 'Préparer et scanner', handed: 'Remis à {van} à {at}', round: 'Tournée', stopN: 'Arrêt', pDone: 'Livré', pNow: 'Sur place', pNext: 'À livrer',
       deliver: 'Valider la livraison', proof: 'Preuve de livraison', proofNone: 'La photo apparaîtra ici une fois la livraison validée.', receivedBy: 'Réceptionné par', manager: 'le gérant', gps: 'Position confirmée', at: 'à',
       vDepot: 'À l’entrepôt', vDrive: 'En route', vStop: 'Au point de vente · {min} min', vHalt: 'Arrêt non planifié · {min} min', vBreak: 'Pause · {min} min', vBack: 'Rentré', journey: 'Journée de {van}', driven: 'Conduite', halted: 'Arrêts', dist: 'Distance',
-      lDepart: 'Départ de l’entrepôt', lBreak: 'Pause', lHalt: 'Arrêt non planifié', lReturn: 'Retour à l’entrepôt', sDepot: 'Entrepôt', sDrive: 'En route', sStop: 'Sur place · {min} min', sHalt: 'Arrêt · {min} min', sBreak: 'Pause · {min} min', sBack: 'Rentré', pick: 'Choisissez un véhicule pour suivre sa journée : son trajet, ses arrêts et leur durée.', minU: 'min', expenses: 'Justificatifs', today: 'Aujourd’hui', week: 'Cette semaine', pending: 'À valider',
+      lDepart: 'Départ de l’entrepôt', lLeave: 'Départ de Casablanca, par l’autoroute', vCountry: 'Maroc', lBreak: 'Pause', lHalt: 'Arrêt non planifié', lReturn: 'Retour à l’entrepôt', sDepot: 'Entrepôt', sDrive: 'En route', sStop: 'Sur place · {min} min', sHalt: 'Arrêt · {min} min', sBreak: 'Pause · {min} min', sBack: 'Rentré', pick: 'Choisissez un véhicule pour suivre sa journée : son trajet, ses arrêts et leur durée.', minU: 'min', expenses: 'Justificatifs', today: 'Aujourd’hui', week: 'Cette semaine', pending: 'À valider',
       kinds: { fuel: 'Carburant', parking: 'Parking', toll: 'Péage', wash: 'Lavage', repair: 'Entretien' }, add: 'Nouveau justificatif', amount: 'Montant (DH)', kind: 'Nature', van: 'Véhicule', receipt: 'Photo du ticket', save: 'Envoyer',
       guide: 'Aide', tips: {
         tab_dash: 'La journée en un coup d’œil : avancement, alertes, rapport.', tab_recv: 'L’entrepôt : chaque livraison fournisseur est scannée, comptée et photographiée.', tab_disp: 'Le stock et ce qui part dans chaque véhicule.',
@@ -51,7 +54,7 @@
         hClock: 'L’heure de la démonstration. Sur l’écran Véhicules, le curseur permet de la faire avancer.', hRole: 'Ici, la vue du responsable. Sur le terrain, chaque équipe ne voit que sa tournée, ses livraisons et ses dépenses.',
         dServed: 'Mis à jour dès qu’une livraison est validée sur place. Le total est celui des tournées du jour.', dCartons: 'Les cartons remis aux points de vente, sur ceux chargés ce matin.',
         dRoad: 'Position transmise par le boîtier GPS de chaque véhicule. « Sur place » : à l’arrêt chez un point de vente.', dSpent: 'La somme des justificatifs envoyés aujourd’hui ; ceux « à valider » attendent le responsable.',
-        dZones: 'Une zone, une équipe, un véhicule. La barre avance à chaque point de vente servi.', dTodo: 'Tout ce qui demande une décision : écart à la réception, arrêt non planifié, justificatif à valider. Un clic ouvre l’écran concerné.',
+        dZones: 'Une zone ou une ville, une équipe, un véhicule. La barre avance à chaque point de vente servi.', dTodo: 'Tout ce qui demande une décision : écart à la réception, arrêt non planifié, justificatif à valider. Un clic ouvre l’écran concerné.',
         dExport: 'Le rapport du jour, prêt à être transmis : une ligne par point de vente, avec l’heure de livraison.',
         rList: 'Chaque livraison fournisseur arrive avec un bon. « Attendu » : pas encore contrôlé. « Écart » : il manquait des cartons.', rSteps: 'Trois gestes, toujours dans le même ordre : scanner le bon, compter et photographier, valider.',
         rScan: 'Sur le terrain, l’appareil photo du téléphone lit le code-barres du bon. Essayez.', rPhoto: 'Comptez avec + et −, puis prenez la photo : elle est horodatée et rattachée au bon.',
@@ -60,8 +63,8 @@
         sRefill: 'Une équipe à court de goodies demande un réassort depuis son téléphone ; l’entrepôt le prépare et le scanne.',
         lVans: 'Une tournée par véhicule. Le compteur montre les points de vente déjà servis.', lRoute: 'L’ordre de passage de la tournée. Cliquez sur un point de vente livré pour revoir sa preuve.',
         lDeliver: 'Le SPV valide la livraison sur place : la photo est obligatoire. Essayez.', lProof: 'Ce qui est conservé : la photo, l’heure, la position et la personne qui a réceptionné.',
-        vMap: 'Trait plein : le chemin parcouru. Pointillé : la suite prévue. Point plein : point de vente servi. Anneau rouge : arrêt non planifié.', vTime: 'Rejouez la journée : faites glisser le curseur ou lancez la lecture.',
-        vFleet: 'Cliquez sur un véhicule pour ne suivre que lui ; cliquez de nouveau pour les revoir tous.', vJourney: 'Chaque arrêt, son heure et sa durée. En rouge : un arrêt hors point de vente, signalé au responsable.',
+        vMap: 'Trait plein : le chemin parcouru. Pointillé : la suite prévue. Point plein : point de vente servi. Anneau rouge : arrêt non planifié.', vTime: 'Rejouez la journée : faites glisser le curseur ou lancez la lecture.', vView: 'La ville en détail, ou le pays : les véhicules envoyés à Rabat, Marrakech, Fès ou Tanger.',
+        vFleet: 'Les 14 véhicules. Cliquez sur l’un d’eux pour ne suivre que lui ; ceux des autres villes ouvrent la carte du pays.', vJourney: 'Chaque arrêt, son heure et sa durée. En rouge : un arrêt hors point de vente, signalé au responsable.',
         eTotals: 'Les totaux du jour, de la semaine et par nature, sans les justificatifs refusés.', eList: 'Chaque dépense est rattachée à un véhicule et à la personne qui l’a envoyée.',
         eNew: 'Le conducteur photographie son ticket depuis son téléphone : nature, montant, photo. Essayez.', eDetail: 'Le responsable valide ou refuse. Un ticket illisible repart avec une demande de nouvelle photo.',
         eForm: 'Trois champs et une photo : sans photo du ticket, la dépense n’est pas envoyée.'
@@ -71,13 +74,13 @@
     },
     en: {
       demo: 'Demonstration · sample data', scheme: 'Schematic map', ocean: 'Atlantic Ocean', port: 'Port', wh: 'Warehouse',
-      fEyebrow: 'A typical day', fTitle: 'Distribution, {city}', fServed: 'Points of sale served', fCartons: 'Cartons delivered', fVans: 'Vans on their round', fKm: 'Km driven',
-      fZones: 'By zone', play: 'Play', pause: 'Pause', again: 'Replay',
-      cap1: 'Goods received and checked at the warehouse: every carton is scanned and photographed.', cap2: 'The 7-seat vans are loaded, then leave for their zone.',
+      fEyebrow: 'A typical day', fTitle: 'From {city} to the regions', fAway: 'vans in other cities', fServed: 'Points of sale served', fCartons: 'Cartons delivered', fVans: 'Vans on their round', fKm: 'Km driven',
+      fZones: 'By zone and by city', play: 'Play', pause: 'Pause', again: 'Replay',
+      cap1: 'Goods received and checked at the warehouse: every carton is scanned and photographed.', cap2: 'The 7-seat vans are loaded, then leave for their zone; the teams for other cities are already on the motorway.',
       cap3: 'Each point of sale is served, with a photo as proof.', cap4: 'The teams take their break, then the rounds resume.', cap5: 'Last points of sale, back to the warehouse.', cap6: 'Rounds complete: the day’s report goes out on its own.',
       app: 'Field tracker', tabs: { dash: 'Dashboard', recv: 'Receiving', disp: 'Dispatch', deliv: 'Deliveries', vans: 'Vehicles', exp: 'Expenses' },
       role: 'Manager view', now: 'It is', served: 'Points of sale delivered', cartons: 'Cartons delivered', onRoad: 'Vans on their round', stopped: 'on site', spent: 'Expenses today', toCheck: '{n} to approve',
-      byZone: 'Progress by zone', todo: 'To handle', export: 'Export the day’s report (CSV)', nothing: 'Nothing to report.',
+      byZone: 'Progress by zone and by city', todo: 'To handle', export: 'Export the day’s report (CSV)', nothing: 'Nothing to report.',
       aGap: 'Shortage on receipt · {id}', aDue: 'Delivery expected · {id}', aHalt: 'Unplanned stop · {van} · {min} min', aLate: 'Late departure · {van} · {at}', aExp: '{n} receipt(s) to approve', aRefill: 'Refill to prepare · {van}',
       see: 'View', notes: 'Delivery notes', from: 'From', expected: 'Expected', received: 'Received', cartonsU: 'cartons', cartonU: 'carton', sOk: 'Complete', sGap: 'Shortage', sDue: 'Expected', sNew: 'To approve', sNo: 'Refused', sValid: 'Approved',
       step1: 'Scan the note', step2: 'Count and photograph', step3: 'Confirm receipt', scan: 'Scan', scanning: 'Reading the code…', scanned: 'Code read', photo: 'Take the photo', camera: 'With the camera', retake: 'Retake',
@@ -85,7 +88,7 @@
       refill: 'Refill', refillFor: 'Refill requested by {van}', prepare: 'Prepare and scan', handed: 'Handed to {van} at {at}', round: 'Round', stopN: 'Stop', pDone: 'Delivered', pNow: 'On site', pNext: 'To deliver',
       deliver: 'Confirm delivery', proof: 'Proof of delivery', proofNone: 'The photo will appear here once the delivery is confirmed.', receivedBy: 'Received by', manager: 'the manager', gps: 'Position confirmed', at: 'at',
       vDepot: 'At the warehouse', vDrive: 'On the road', vStop: 'At the point of sale · {min} min', vHalt: 'Unplanned stop · {min} min', vBreak: 'Break · {min} min', vBack: 'Back', journey: '{van}’s day', driven: 'Driving', halted: 'Stops', dist: 'Distance',
-      lDepart: 'Left the warehouse', lBreak: 'Break', lHalt: 'Unplanned stop', lReturn: 'Back at the warehouse', sDepot: 'Warehouse', sDrive: 'On the road', sStop: 'On site · {min} min', sHalt: 'Stopped · {min} min', sBreak: 'Break · {min} min', sBack: 'Back', pick: 'Choose a van to follow its day: the way it went, where it stopped and for how long.', minU: 'min', expenses: 'Receipts', today: 'Today', week: 'This week', pending: 'To approve',
+      lDepart: 'Left the warehouse', lLeave: 'Left Casablanca, by the motorway', vCountry: 'Morocco', lBreak: 'Break', lHalt: 'Unplanned stop', lReturn: 'Back at the warehouse', sDepot: 'Warehouse', sDrive: 'On the road', sStop: 'On site · {min} min', sHalt: 'Stopped · {min} min', sBreak: 'Break · {min} min', sBack: 'Back', pick: 'Choose a van to follow its day: the way it went, where it stopped and for how long.', minU: 'min', expenses: 'Receipts', today: 'Today', week: 'This week', pending: 'To approve',
       kinds: { fuel: 'Fuel', parking: 'Parking', toll: 'Toll', wash: 'Car wash', repair: 'Maintenance' }, add: 'New receipt', amount: 'Amount (MAD)', kind: 'Type', van: 'Vehicle', receipt: 'Photo of the receipt', save: 'Send',
       guide: 'Help', tips: {
         tab_dash: 'The day at a glance: progress, alerts, report.', tab_recv: 'The warehouse: every supplier delivery is scanned, counted and photographed.', tab_disp: 'The stock, and what leaves in each van.',
@@ -93,7 +96,7 @@
         hClock: 'The time of the demonstration. On the Vehicles screen, the slider moves it forward.', hRole: 'This is the manager’s view. In the field, each team only sees its round, its deliveries and its expenses.',
         dServed: 'Updated as soon as a delivery is confirmed on site. The total is that of today’s rounds.', dCartons: 'Cartons handed to points of sale, out of those loaded this morning.',
         dRoad: 'Position sent by the GPS unit of each van. “On site”: stopped at a point of sale.', dSpent: 'The sum of the receipts sent today; those “to approve” are waiting for the manager.',
-        dZones: 'One zone, one team, one van. The bar moves with every point of sale served.', dTodo: 'Everything that needs a decision: a shortage on receipt, an unplanned stop, a receipt to approve. A click opens the screen concerned.',
+        dZones: 'One zone or one city, one team, one van. The bar moves with every point of sale served.', dTodo: 'Everything that needs a decision: a shortage on receipt, an unplanned stop, a receipt to approve. A click opens the screen concerned.',
         dExport: 'The day’s report, ready to be passed on: one line per point of sale, with the time of delivery.',
         rList: 'Every supplier delivery comes with a note. “Expected”: not checked yet. “Shortage”: cartons were missing.', rSteps: 'Three steps, always in the same order: scan the note, count and photograph, confirm.',
         rScan: 'In the field, the phone’s camera reads the barcode of the note. Try it.', rPhoto: 'Count with + and −, then take the photo: it is time-stamped and attached to the note.',
@@ -102,8 +105,8 @@
         sRefill: 'A team running short of goodies asks for a refill from its phone; the warehouse prepares and scans it.',
         lVans: 'One round per van. The counter shows the points of sale already served.', lRoute: 'The order of the round. Click a delivered point of sale to see its proof again.',
         lDeliver: 'The SPV confirms the delivery on site: the photo is compulsory. Try it.', lProof: 'What is kept: the photo, the time, the position and who received the goods.',
-        vMap: 'Solid line: the way already driven. Dotted: what is planned next. Filled dot: point of sale served. Red ring: unplanned stop.', vTime: 'Replay the day: drag the slider or press play.',
-        vFleet: 'Click a van to follow it alone; click again to see them all.', vJourney: 'Every stop, its time and its length. In red: a stop away from a point of sale, reported to the manager.',
+        vMap: 'Solid line: the way already driven. Dotted: what is planned next. Filled dot: point of sale served. Red ring: unplanned stop.', vTime: 'Replay the day: drag the slider or press play.', vView: 'The city in detail, or the country: the vans sent to Rabat, Marrakech, Fez or Tangier.',
+        vFleet: 'The 14 vans. Click one to follow it alone; those in other cities open the map of the country.', vJourney: 'Every stop, its time and its length. In red: a stop away from a point of sale, reported to the manager.',
         eTotals: 'Totals for the day, the week and by type, without the receipts refused.', eList: 'Every expense is tied to a van and to the person who sent it.',
         eNew: 'The driver photographs the receipt from the phone: type, amount, photo. Try it.', eDetail: 'The manager approves or refuses. An unreadable receipt goes back with a request for a new photo.',
         eForm: 'Three fields and a photo: without the photo of the receipt, the expense is not sent.'
@@ -128,12 +131,13 @@
 
   /* ---------- the day, van by van: what each one does from the minute it leaves ---------- */
   function plan() {
-    var W = D.warehouse;
-    D.pos.forEach(function (p) { P[p.id] = p; });
+    D.pos.forEach(function (p) { P[p.id] = p; p.map = p.map || 'city'; });
     D.vans.forEach(function (v, k) {
+      var away = v.map === 'country', W = away ? D.country.hub : D.warehouse, pace = away ? D.country.speed : SPEED;
+      v.map = v.map || 'city'; v.home = W; v.kmf = away ? D.country.km : KM;
       var x = W.x, y = W.y, at = v.depart, legs = [], pts = [[x, y]], paused = false;
       function drive(nx, ny) {
-        var d = Math.hypot(nx - x, ny - y), m = Math.max(3, Math.round(d * SPEED));
+        var d = Math.hypot(nx - x, ny - y), m = Math.max(3, Math.round(d * pace));
         legs.push({ type: 'drive', t0: at, t1: at + m, a: [x, y], b: [nx, ny], d: d });
         at += m; x = nx; y = ny; pts.push([x, y]);
       }
@@ -159,7 +163,7 @@
   }
   // where a van is at minute m, what it is doing, since when, and how far it has driven (units of the map)
   function where(v, m) {
-    var W = D.warehouse, done = 0;
+    var W = v.home, done = 0;
     if (m < v.depart) return { x: W.x, y: W.y, state: 'depot', d: 0, since: 0 };
     for (var i = 0; i < v.legs.length; i++) {
       var l = v.legs[i];
@@ -178,36 +182,47 @@
     var o = { served: 0, cartons: 0, all: D.pos.length, allCartons: 0, road: 0, stopped: 0, km: 0, zones: {} };
     D.zones.forEach(function (z) { o.zones[z.id] = { done: 0, all: 0 }; });
     D.pos.forEach(function (p) { o.allCartons += p.cartons; o.zones[p.zone].all++; if (isDone(p, m)) { o.served++; o.cartons += p.cartons; o.zones[p.zone].done++; } });
-    D.vans.forEach(function (v) { var w = where(v, m); o.km += w.d * KM; if (w.state !== 'depot' && w.state !== 'back') { o.road++; if (w.state !== 'drive') o.stopped++; } });
+    D.vans.forEach(function (v) { var w = where(v, m); o.km += w.d * v.kmf; if (w.state !== 'depot' && w.state !== 'back') { o.road++; if (w.state !== 'drive') o.stopped++; } });
     return o;
   }
 
   /* ---------- the map (schematic: the coast, the main roads, the zones) ---------- */
   var NS = 'http://www.w3.org/2000/svg';
+  // kind 'city': the city in detail (coast, main roads, zones). kind 'country': the country, for the vans sent to other cities.
   function mapOf(host, opts) {
-    var W = D.map.w, H = D.map.h, c = D.map.coast, wh = D.warehouse, vb = D.map.view || [0, 0, W, H];
-    var land = 'M' + c.map(function (p) { return p[0] + ' ' + p[1]; }).join('L') + 'L' + W + ' ' + H + 'L0 ' + H + 'Z';
-    var roads = ['M40 505C150 420 250 330 330 240S470 160 560 150S720 120 820 100S940 70 1000 55',                     // the coast road
-      'M60 600C200 520 340 500 470 500S690 470 790 380S930 230 1000 190',                                                  // the motorway round the city
-      'M566 150C540 250 520 340 520 500', 'M566 150C640 230 700 300 790 380', 'M566 150C470 230 400 330 330 460', 'M330 240C420 300 560 330 720 350', 'M566 150C680 170 760 185 870 150'];
-    var s = '<svg class="lmap" viewBox="' + vb.join(' ') + '" role="img" aria-label="' + esc(D.city) + '" preserveAspectRatio="xMidYMid meet">' +
-      '<defs><linearGradient id="lm-sea' + opts.id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d2a3d"/><stop offset="1" stop-color="#0a1b29"/></linearGradient>' +
-      '<radialGradient id="lm-glow' + opts.id + '"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>' +
-      '<rect width="' + W + '" height="' + H + '" fill="url(#lm-sea' + opts.id + ')"/><path class="lmap__land" d="' + land + '"/>' +
-      '<path class="lmap__coast" d="M' + c.map(function (p) { return p[0] + ' ' + p[1]; }).join('L') + '"/>' +
-      roads.map(function (d, i) { return '<path class="lmap__road' + (i === 1 ? ' is-main' : '') + '" d="' + d + '"/>'; }).join('') +
-      '<text class="lmap__sea" x="' + (vb[0] + 46) + '" y="' + (vb[1] + 118) + '" transform="rotate(-33 ' + (vb[0] + 46) + ' ' + (vb[1] + 118) + ')" data-w="ocean"></text>' +
-      '<text class="lmap__note" x="' + (vb[0] + vb[2] - 14) + '" y="' + (vb[1] + vb[3] - 12) + '" text-anchor="end" data-w="scheme"></text>' +
-      '<g class="lmap__port"><circle cx="586" cy="108" r="5"/><text x="598" y="103" data-w="port"></text></g>' +
-      D.zones.map(function (z) { return '<text class="lmap__zone" x="' + z.x + '" y="' + (z.y - 62) + '" text-anchor="middle" data-zone="' + z.id + '">' + esc(z.name) + '</text>'; }).join('') +
-      D.vans.map(function (v) { return '<path class="lmap__plan" data-van="' + v.id + '" d="M' + v.pts.map(function (p) { return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join('L') + '"/>'; }).join('') +
-      D.vans.map(function (v) { return '<path class="lmap__trail" data-van="' + v.id + '" stroke="' + v.colour + '" stroke-dasharray="' + v.total.toFixed(1) + '" stroke-dashoffset="' + v.total.toFixed(1) + '" d="M' + v.pts.map(function (p) { return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join('L') + '"/>'; }).join('') +
-      D.pos.map(function (p) { return '<circle class="lmap__pos" data-pos="' + p.id + '" cx="' + p.x + '" cy="' + p.y + '" r="4.2" style="--c:' + V[p.van].colour + '"/>'; }).join('') +
-      '<g class="lmap__wh" transform="translate(' + wh.x + ' ' + wh.y + ')"><circle class="lmap__pulse" r="16"/><rect x="-11" y="-9" width="22" height="18" rx="3"/><path d="M-11 -9 0 -17 11 -9"/><text y="34" text-anchor="middle" data-w="wh"></text></g>' +
-      D.vans.map(function (v, i) { return '<g class="lmap__van" data-van="' + v.id + '" style="--c:' + v.colour + '"><circle class="lmap__ring" r="15"/><circle r="10.5"/><text y="4" text-anchor="middle">' + (i + 1) + '</text></g>'; }).join('') +
+    var kind = opts.kind || 'city', away = kind === 'country', C = away ? D.country : D.map, vb = opts.view || C.view || [0, 0, C.w, C.h], id = opts.id;
+    var vans = D.vans.filter(function (v) { return v.map === kind; }), poss = D.pos.filter(function (p) { return p.map === kind; });
+    var line = function (pts) { return pts.map(function (q) { return q[0] + ' ' + q[1]; }).join('L'); };
+    var Z = away ? { pos: 2.5, van: 8.4, ring: 12, font: 8.6 } : { pos: 4.2, van: 10.5, ring: 15, font: 11 }, base;
+    if (away) {
+      var up = C.atl.slice().reverse(), hub = C.hub;
+      base = '<path class="lmap__land" d="M' + line(up) + 'L' + line(C.med.slice(1)) + 'L' + C.w + ' ' + C.h + 'Z"/><path class="lmap__coast" d="M' + line(up) + 'L' + line(C.med.slice(1)) + '"/>' +
+        C.roads.map(function (r) { return '<path class="lmap__road is-main" d="M' + line(r) + '"/>'; }).join('') +
+        C.cities.map(function (c) { return '<g class="lmap__city"><circle cx="' + c.x + '" cy="' + c.y + '" r="3.2"/><text x="' + (c.x + 9) + '" y="' + (c.y - 8) + '">' + esc(c.name) + '</text></g>'; }).join('') +
+        '<g class="lmap__wh lmap__wh--hub" transform="translate(' + hub.x + ' ' + hub.y + ')"><circle class="lmap__pulse" r="12"/><rect x="-7.500" y="-6" width="15" height="12" rx="2"/><path d="M-7.500 -6 0 -11.500 7.500 -6"/><text x="-12" y="4" text-anchor="end">' + esc(hub.name) + '</text></g>';
+    } else {
+      var c = C.coast, wh = D.warehouse;
+      var roads = ['M40 505C150 420 250 330 330 240S470 160 560 150S720 120 820 100S940 70 1000 55',                     // the coast road
+        'M60 600C200 520 340 500 470 500S690 470 790 380S930 230 1000 190',                                                  // the motorway round the city
+        'M566 150C540 250 520 340 520 500', 'M566 150C640 230 700 300 790 380', 'M566 150C470 230 400 330 330 460', 'M330 240C420 300 560 330 720 350', 'M566 150C680 170 760 185 870 150'];
+      base = '<path class="lmap__land" d="M' + line(c) + 'L' + C.w + ' ' + C.h + 'L0 ' + C.h + 'Z"/><path class="lmap__coast" d="M' + line(c) + '"/>' +
+        roads.map(function (d, i) { return '<path class="lmap__road' + (i === 1 ? ' is-main' : '') + '" d="' + d + '"/>'; }).join('') +
+        '<text class="lmap__sea" x="' + (vb[0] + 46) + '" y="' + (vb[1] + 118) + '" transform="rotate(-33 ' + (vb[0] + 46) + ' ' + (vb[1] + 118) + ')" data-w="ocean"></text>' +
+        '<text class="lmap__note" x="' + (vb[0] + 14) + '" y="' + (vb[1] + vb[3] - 12) + '" data-w="scheme"></text>' +
+        '<g class="lmap__port"><circle cx="586" cy="108" r="5"/><text x="598" y="103" data-w="port"></text></g>' +
+        D.zones.filter(function (z) { return z.map === 'city'; }).map(function (z) { return '<text class="lmap__zone" x="' + z.x + '" y="' + (z.y - 62) + '" text-anchor="middle">' + esc(z.name) + '</text>'; }).join('') +
+        '<g class="lmap__wh" transform="translate(' + wh.x + ' ' + wh.y + ')"><circle class="lmap__pulse" r="16"/><rect x="-11" y="-9" width="22" height="18" rx="3"/><path d="M-11 -9 0 -17 11 -9"/><text y="34" text-anchor="middle" data-w="wh"></text></g>';
+    }
+    var path = function (v) { return 'M' + v.pts.map(function (q) { return q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join('L'); };
+    host.innerHTML = '<svg class="lmap lmap--' + kind + '" viewBox="' + vb.join(' ') + '" role="img" aria-label="' + esc(away ? C.hub.name : D.city) + '" preserveAspectRatio="xMidYMid meet">' +
+      '<defs><linearGradient id="lm-sea' + id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d2a3d"/><stop offset="1" stop-color="#0a1b29"/></linearGradient></defs>' +
+      '<rect x="' + vb[0] + '" y="' + vb[1] + '" width="' + vb[2] + '" height="' + vb[3] + '" fill="url(#lm-sea' + id + ')"/>' + base +
+      vans.map(function (v) { return '<path class="lmap__plan" data-van="' + v.id + '" d="' + path(v) + '"/>'; }).join('') +
+      vans.map(function (v) { return '<path class="lmap__trail" data-van="' + v.id + '" stroke="' + v.colour + '" stroke-dasharray="' + v.total.toFixed(1) + '" stroke-dashoffset="' + v.total.toFixed(1) + '" d="' + path(v) + '"/>'; }).join('') +
+      poss.map(function (q) { return '<circle class="lmap__pos" data-pos="' + q.id + '" cx="' + q.x + '" cy="' + q.y + '" r="' + Z.pos + '" style="--c:' + V[q.van].colour + '"/>'; }).join('') +
+      vans.map(function (v) { return '<g class="lmap__van" data-van="' + v.id + '" style="--c:' + v.colour + '"><circle class="lmap__ring" r="' + Z.ring + '"/><circle r="' + Z.van + '"/><text y="' + (Z.font * .36).toFixed(1) + '" text-anchor="middle" style="font-size:' + Z.font + 'px">' + v.id.slice(1) + '</text></g>'; }).join('') +
       '</svg>';
-    host.innerHTML = s;
-    var m = { svg: host.firstChild, vans: {}, trails: {}, plans: {}, pos: {}, last: {} };
+    var m = { svg: host.firstChild, kind: kind, list: vans, poss: poss, vans: {}, trails: {}, plans: {}, pos: {}, last: {} };
     $$('.lmap__van', host).forEach(function (g) { m.vans[g.getAttribute('data-van')] = g; });
     $$('.lmap__trail', host).forEach(function (g) { m.trails[g.getAttribute('data-van')] = g; });
     $$('.lmap__plan', host).forEach(function (g) { m.plans[g.getAttribute('data-van')] = g; });
@@ -216,9 +231,10 @@
     return m;
   }
   function mapWords(m) { $$('[data-w]', m.svg).forEach(function (el) { el.textContent = t(el.getAttribute('data-w')); }); }
-  // the map at minute t; sel: the van looked at (the others fade), or ''
+  // the map at minute t; sel: the van looked at (the others of its map fade), or ''
   function mapAt(m, tm, sel) {
-    D.vans.forEach(function (v) {
+    sel = sel && V[sel] && V[sel].map === m.kind ? sel : '';
+    m.list.forEach(function (v) {
       var w = where(v, tm), g = m.vans[v.id], cls = 'lmap__van is-' + w.state + (sel && sel !== v.id ? ' is-off' : '') + (sel === v.id ? ' is-sel' : '');
       g.setAttribute('transform', 'translate(' + w.x.toFixed(1) + ' ' + w.y.toFixed(1) + ')');
       if (m.last[v.id] !== cls) { g.setAttribute('class', cls); m.last[v.id] = cls; }
@@ -226,9 +242,9 @@
       m.trails[v.id].style.opacity = sel && sel !== v.id ? .12 : '';
       m.plans[v.id].style.opacity = sel ? (sel === v.id ? .55 : .05) : '';
     });
-    D.pos.forEach(function (p) {
-      var cls = 'lmap__pos' + (isDone(p, tm) ? ' is-done' : isNow(p, tm) ? ' is-now' : '') + (sel && sel !== p.van ? ' is-off' : ''), g = m.pos[p.id];
-      if (m.last[p.id] !== cls) { g.setAttribute('class', cls); m.last[p.id] = cls; }
+    m.poss.forEach(function (q) {
+      var cls = 'lmap__pos' + (isDone(q, tm) ? ' is-done' : isNow(q, tm) ? ' is-now' : '') + (sel && sel !== q.van ? ' is-off' : ''), g = m.pos[q.id];
+      if (m.last[q.id] !== cls) { g.setAttribute('class', cls); m.last[q.id] = cls; }
     });
   }
 
@@ -237,14 +253,16 @@
   var LOOP = 34000;                                     // ms for the whole day
   function flowBuild() {
     var c = $('.flow__main', flowRoot);
-    c.innerHTML = '<div class="flow__map"></div><div class="flow__panel">' +
+    var awayN = D.vans.filter(function (v) { return v.map === 'country'; }).length;
+    c.innerHTML = '<div class="flow__maps"><div class="flow__map"></div>' + (awayN ? '<div class="flow__inset"><div class="flow__away"></div><p><b>' + awayN + '</b><span data-w="fAway"></span></p></div>' : '') + '</div><div class="flow__panel">' +
       '<p class="lg-eyebrow"><i></i><span data-w="fEyebrow"></span></p><h2 class="flow__title"></h2>' +
       '<p class="flow__clock"><b></b><span></span></p>' +
       '<div class="flow__stats"><p><b data-k="served"></b><span data-w="fServed"></span></p><p><b data-k="cartons"></b><span data-w="fCartons"></span></p><p><b data-k="road"></b><span data-w="fVans"></span></p><p><b data-k="km"></b><span data-w="fKm"></span></p></div>' +
-      '<p class="flow__sub" data-w="fZones"></p><ul class="flow__zones">' + D.zones.map(function (z, i) { return '<li data-zone="' + z.id + '"><span>' + esc(z.name) + '</span><i><b style="background:' + COLOURS[i % COLOURS.length] + '"></b></i><em></em></li>'; }).join('') + '</ul>' +
+      '<p class="flow__sub" data-w="fZones"></p><ul class="flow__zones">' + D.zones.map(function (z, i) { return '<li data-zone="' + z.id + '"><span>' + esc(z.name.split(' · ')[0]) + '</span><i><b style="background:' + COLOURS[i % COLOURS.length] + '"></b></i><em></em></li>'; }).join('') + '</ul>' +
       '<div class="flow__ctl"><button type="button" class="lg-btn" data-act="flow-toggle"></button><button type="button" class="lg-btn lg-btn--ghost" data-act="flow-again"></button><span class="flow__demo" data-w="demo"></span></div></div>' +
       '<p class="flow__cap"></p>';
     flow.map = mapOf($('.flow__map', c), { id: 'f' });
+    flow.far = awayN ? mapOf($('.flow__away', c), { id: 'g', kind: 'country', view: D.country.inset }) : null;
     flow.parts = { title: $('.flow__title', c), clock: $('.flow__clock b', c), day: $('.flow__clock span', c), cap: $('.flow__cap', c), toggle: $('[data-act="flow-toggle"]', c), again: $('[data-act="flow-again"]', c), stats: {}, zones: {} };
     $$('[data-k]', c).forEach(function (b) { flow.parts.stats[b.getAttribute('data-k')] = b; });
     $$('.flow__zones li', c).forEach(function (li) { flow.parts.zones[li.getAttribute('data-zone')] = li; });
@@ -268,6 +286,7 @@
   function flowDraw() {
     var m = flow.t, o = totals(m), p = flow.parts;
     mapAt(flow.map, m, '');
+    if (flow.far) mapAt(flow.far, m, '');
     p.clock.textContent = hm(m);
     p.stats.served.textContent = o.served + ' / ' + o.all;
     p.stats.cartons.textContent = o.cartons;
@@ -292,11 +311,15 @@
 
   /* ---------- sample "photos": drawn, so that the demonstration needs no picture of anyone's shop or receipt ---------- */
   var shots = {};                                       // a real photo taken during the demonstration, by what it shows (it never leaves the device)
-  function frame(key, inner, stamp) {
-    if (shots[key]) return '<figure class="lpic"><img src="' + shots[key] + '" alt=""><figcaption>' + esc(stamp) + '</figcaption></figure>';
+  // a photograph that comes with the data (always the same one for the same thing), or '' when there is none of that kind
+  function pick(kind, key) { var a = D.photos && D.photos[kind]; return a && a.length ? a[Math.floor(seed(kind + key)() * a.length) % a.length] : ''; }
+  function frame(key, inner, stamp, photo) {
+    if (shots[key] || photo) return '<figure class="lpic"><img src="' + (shots[key] || photo) + '" alt=""><figcaption>' + esc(stamp) + '</figcaption></figure>';
     return '<figure class="lpic"><svg viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' + inner + '</svg><figcaption>' + esc(stamp) + '</figcaption></figure>';
   }
   function picBoxes(key, label, stamp, missing) {
+    var ph = pick('boxes', key);
+    if (ph) return frame(key, '', stamp, ph);
     var r = seed(key), s = '<rect width="320" height="220" fill="#23262c"/><rect y="150" width="320" height="70" fill="#34373d"/><path d="M0 150H320" stroke="#4a4e56"/>' +
       '<path d="M20 20V150M110 20V150M210 20V150M300 20V150M20 60H300M20 105H300" stroke="#3a3e46" stroke-width="3"/><rect x="52" y="178" width="216" height="12" rx="2" fill="#7b5a36"/><path d="M66 190v10M160 190v10M254 190v10" stroke="#5e4428" stroke-width="10"/>';
     for (var row = 0; row < 3; row++) for (var col = 0; col < 3; col++) {
@@ -309,6 +332,8 @@
     return frame(key, s, stamp);
   }
   function picShop(key, stamp) {
+    var ph = pick('shop', key);
+    if (ph) return frame(key, '', stamp, ph);
     var r = seed(key), s = '<rect width="320" height="220" fill="#2b2622"/><rect y="150" width="320" height="70" fill="#5b4632"/><rect y="146" width="320" height="8" fill="#7a5f43"/>';
     for (var row = 0; row < 3; row++) {
       s += '<rect x="14" y="' + (22 + row * 40) + '" width="292" height="3" fill="#4a3f36"/>';
@@ -328,12 +353,13 @@
       '<path d="M102 132H218" stroke="#999" stroke-dasharray="3 3"/><text x="104" y="152" font-size="11" font-weight="700" fill="#111" font-family="monospace">' + esc(t('total')) + '</text><text x="216" y="152" text-anchor="end" font-size="11" font-weight="700" fill="#111" font-family="monospace">' + esc(num(e.amount, 2)) + '</text>' +
       '<path d="M108 168v22m4-22v22m3-22v22m5-22v22m3-22v22m6-22v22m3-22v22m4-22v22m6-22v22m3-22v22m5-22v22m3-22v22m6-22v22m4-22v22m3-22v22m6-22v22m4-22v22m3-22v22m5-22v22m4-22v22m3-22v22m6-22v22m3-22v22m5-22v22" stroke="#222" stroke-width="1.6"/>' +
       '<text x="160" y="205" text-anchor="middle" font-size="7.5" fill="#666" font-family="monospace">' + esc(t('thanks')) + '</text></g>';
-    return frame(key, s, (e.id === 'DEP-NEW' ? '' : e.id + ' · ') + tr(e.day) + ' ' + e.at).replace('class="lpic"', 'class="lpic' + (big ? ' lpic--tall' : '') + (e.status === 'no' ? ' is-blurred' : '') + '"');
+    var ph = e.kind === 'fuel' && seed(key)() < .34 ? pick('fuel', key) : pick('receipt', key);
+    return frame(key, s, (e.id === 'DEP-NEW' ? '' : e.id + ' · ') + tr(e.day) + ' ' + e.at, ph).replace('class="lpic"', 'class="lpic' + (big ? ' lpic--tall' : '') + (e.status === 'no' ? ' is-blurred' : '') + '"');
   }
   function barcode(code) { var r = seed(code), s = ''; for (var i = 0, x = 6; x < 214; i++) { var w = 1 + Math.floor(r() * 3) * 1.5; s += '<rect x="' + x + '" y="6" width="' + w + '" height="56"/>'; x += w + 1.5 + Math.floor(r() * 2) * 1.5; } return '<svg class="lg-code" viewBox="0 0 220 84" aria-hidden="true">' + s + '<text x="110" y="78" text-anchor="middle">' + esc(code) + '</text></svg>'; }
 
   /* ---------- 2. the application ---------- */
-  var app = { tab: 'dash', now: 0, van: '', pos: '', note: '', exp: '', job: null, form: null, on: false, raf: 0, last: 0, map: null, parts: {}, guide: true };
+  var app = { tab: 'dash', now: 0, van: '', pos: '', note: '', exp: '', view: 'city', job: null, form: null, on: false, raf: 0, last: 0, map: null, parts: {}, guide: true };
   var ICON = {
     dash: '<path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-3H4zM14 7h6V4h-6z"/>', recv: '<path d="M3 8l9-5 9 5v9l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v9"/>',
     disp: '<path d="M4 6h16M4 12h10M4 18h7"/><path d="M17 15l3 3-3 3"/>', deliv: '<path d="M5 12l4.5 4.5L19 7"/><rect x="3" y="3" width="18" height="18" rx="4"/>',
@@ -449,11 +475,16 @@
   function stateText(w) { return w.state === 'depot' ? t('vDepot') : w.state === 'drive' ? t('vDrive') : w.state === 'back' ? t('vBack') : t(w.state === 'stop' ? 'vStop' : w.state === 'halt' ? 'vHalt' : 'vBreak', { min: Math.max(1, Math.round(w.since)) }); }
   function shortState(w) { return w.state === 'depot' ? t('sDepot') : w.state === 'drive' ? t('sDrive') : w.state === 'back' ? t('sBack') : t(w.state === 'stop' ? 'sStop' : w.state === 'halt' ? 'sHalt' : 'sBreak', { min: Math.max(1, Math.round(w.since)) }); }
   function vVans() {
-    return '<div class="lg-cols lg-cols--map"><section class="lg-card lg-mapcard"><div class="lg-map" data-tip="vMap"></div><div class="lg-time" data-tip="vTime"><button type="button" class="lg-btn lg-btn--small" data-act="play"></button><input type="range" min="' + T0 + '" max="' + T1 + '" step="1" value="' + Math.round(app.now) + '" aria-label="' + t('now') + '"><b></b></div><div class="lg-fleetwrap" data-tip="vFleet"><ul class="lg-fleetlist"></ul></div></section>' +
+    var n = { city: 0, country: 0 };
+    D.vans.forEach(function (v) { n[v.map]++; });
+    if (!n[app.view]) app.view = 'city';
+    return '<div class="lg-cols lg-cols--map"><section class="lg-card lg-mapcard">' +
+      (n.country ? '<div class="lg-views" data-tip="vView"><button type="button" data-act="view" data-id="city"' + (app.view === 'city' ? ' class="is-sel"' : '') + '>' + esc(D.city) + '<small>' + n.city + '</small></button><button type="button" data-act="view" data-id="country"' + (app.view === 'country' ? ' class="is-sel"' : '') + '>' + t('vCountry') + '<small>' + n.country + '</small></button></div>' : '') +
+      '<div class="lg-map lg-map--' + app.view + '" data-tip="vMap"></div><div class="lg-time" data-tip="vTime"><button type="button" class="lg-btn lg-btn--small" data-act="play"></button><input type="range" min="' + T0 + '" max="' + T1 + '" step="1" value="' + Math.round(app.now) + '" aria-label="' + t('now') + '"><b></b></div><div class="lg-fleetwrap" data-tip="vFleet"><ul class="lg-fleetlist"></ul></div></section>' +
       '<section class="lg-card lg-fleet" data-tip="vJourney"><div class="lg-journey"></div></section></div>';
   }
   function vansFill(body) {
-    app.map = mapOf($('.lg-map', body), { id: 'a' });
+    app.map = mapOf($('.lg-map', body), { id: 'a', kind: app.view });
     hots(body);
     app.parts = { range: $('.lg-time input', body), clock: $('.lg-time b', body), play: $('[data-act="play"]', body), list: $('.lg-fleetlist', body), journey: $('.lg-journey', body) };
     app.parts.range.addEventListener('input', function () { appStop(); app.now = +this.value; vansDraw(); head(); });
@@ -468,11 +499,11 @@
     p.play.textContent = app.on ? t('pause') : t('play');
     p.list.innerHTML = D.vans.map(function (v) {
       var w = where(v, app.now), n = v.route.filter(function (id) { return isDone(P[id], app.now); }).length;
-      return '<li class="' + (v.id === sel ? 'is-sel ' : '') + 'is-' + w.state + '"><button type="button" data-act="van" data-id="' + v.id + '"><i class="lg-dot" style="background:' + v.colour + '">' + v.id.slice(1) + '</i><span><b>' + v.id + ' · ' + esc(v.lead.split(' ')[0]) + '</b><small>' + esc(shortState(w)) + '</small></span><em>' + n + '/' + v.route.length + '</em></button></li>';
+      return '<li class="' + (v.id === sel ? 'is-sel ' : '') + 'is-' + w.state + (v.map !== app.view ? ' is-far' : '') + '"><button type="button" data-act="van" data-id="' + v.id + '" aria-label="' + esc(v.id + ' · ' + zoneName(v.zone) + ' · ' + stateText(w)) + '"><i class="lg-dot" style="background:' + v.colour + '">' + v.id.slice(1) + '</i><em>' + n + '/' + v.route.length + '</em></button></li>';
     }).join('');
     if (!sel) { p.journey.innerHTML = '<p class="lg-none">' + t('pick') + '</p>'; return; }
     var v = V[sel], w = where(v, app.now), drive = 0, halt = 0, stops = 0;
-    var rows = ['<li class="' + (app.now >= v.depart ? '' : 'is-later') + '"><time>' + hm(v.depart) + '</time><span>' + t('lDepart') + '</span></li>'];
+    var rows = ['<li class="' + (app.now >= v.depart ? '' : 'is-later') + '"><time>' + hm(v.depart) + '</time><span>' + t(v.map === 'country' ? 'lLeave' : 'lDepart') + '</span></li>'];
     v.legs.forEach(function (l) {
       var past = app.now >= l.t0, now = past && app.now < l.t1, m = Math.max(0, Math.min(app.now, l.t1) - l.t0);
       if (l.type === 'drive') { drive += m; return; }
@@ -480,7 +511,8 @@
       rows.push('<li class="is-' + l.type + (past ? '' : ' is-later') + (now ? ' is-now' : '') + '"><time>' + hm(l.t0) + '</time><span>' + (l.type === 'stop' ? '<b>' + l.pos.n + '</b> ' + esc(l.pos.name) : t(l.type === 'halt' ? 'lHalt' : 'lBreak')) + '</span><em>' + Math.round(l.t1 - l.t0) + ' ' + t('minU') + '</em></li>');
     });
     rows.push('<li class="' + (app.now >= v.end ? '' : 'is-later') + '"><time>' + hm(v.end) + '</time><span>' + t('lReturn') + '</span></li>');
-    p.journey.innerHTML = '<h4>' + t('journey', { van: v.id }) + ' <small>' + esc(v.plate) + ' · ' + esc(v.lead) + ' · ' + esc(zoneName(v.zone)) + '</small></h4><p class="lg-sum"><span>' + t('dist') + ' <b>' + num(w.d * KM, 1) + ' km</b></span><span>' + t('driven') + ' <b>' + dur(drive) + '</b></span><span>' + t('halted') + ' <b>' + stops + ' · ' + dur(halt) + '</b></span></p><ol class="lg-legs">' + rows.join('') + '</ol>';
+    p.journey.innerHTML = '<h4>' + t('journey', { van: v.id }) + ' <small>' + esc(zoneName(v.zone)) + ' · ' + esc(v.lead) + ' · ' + esc(v.plate) + '</small></h4><p class="lg-state is-' + w.state + '">' + esc(stateText(w)) + '</p>' +
+      '<p class="lg-sum"><span>' + t('dist') + ' <b>' + num(w.d * v.kmf, v.map === 'country' ? 0 : 1) + ' km</b></span><span>' + t('driven') + ' <b>' + dur(drive) + '</b></span><span>' + t('halted') + ' <b>' + stops + ' · ' + dur(halt) + '</b></span></p><ol class="lg-legs">' + rows.join('') + '</ol>';
     var cur = $('.is-now', p.journey);
     if (cur && app.on) cur.scrollIntoView({ block: 'nearest' });
   }
@@ -582,6 +614,7 @@
   function go(tab, id) {
     app.tab = VIEWS[tab] ? tab : 'dash'; app.job = null; app.form = null;
     if (id) { if (tab === 'recv') app.note = id; if (tab === 'vans' || tab === 'deliv') app.van = id; }
+    if (app.tab === 'vans' && V[app.van]) app.view = V[app.van].map;
     if (app.tab === 'vans' && !V[app.van]) app.van = (D.vans.filter(function (v) { return v.legs.some(function (l) { return l.type === 'halt' && app.now >= l.t0; }); })[0] || D.vans[0]).id;
     show();
   }
@@ -627,7 +660,13 @@
       else if (act === 'reshoot' && j) { j.shot = false; delete shots[(app.tab === 'recv' ? 'note:' : 'pos:') + j.id]; delete shots[j.id]; show(true); }
       else if (act === 'confirm-note' && j) { var n3 = D.receipts.filter(function (x) { return x.id === j.id; })[0]; n3.lines.forEach(function (l, k) { l[2] = j.qty[k]; }); n3.status = noteQty(n3, 2) < noteQty(n3, 1) ? 'gap' : 'ok'; n3.at = hm(app.now); n3.by = D.staff.keeper; app.job = null; show(); }
       else if (act === 'refill') { app.job = { id: 'refill' }; scanThen(app.job, function () { D.refill.done = hm(app.now); app.job = null; }); }
-      else if (act === 'van') { app.van = app.tab === 'vans' && app.van === id ? '' : id; app.pos = ''; app.job = null; if (app.tab === 'vans') vansDraw(); else show(); }
+      else if (act === 'van') {
+        app.van = app.tab === 'vans' && app.van === id ? '' : id; app.pos = ''; app.job = null;
+        if (app.tab !== 'vans') show();
+        else if (V[app.van] && V[app.van].map !== app.view) { app.view = V[app.van].map; show(true); }
+        else vansDraw();
+      }
+      else if (act === 'view') { app.view = id; if (V[app.van] && V[app.van].map !== id) app.van = ''; show(true); }
       else if (act === 'pos') { app.pos = id; app.job = null; show(true); }
       else if (act === 'deliver') { app.pos = id; app.job = { id: id }; show(true); }
       else if (act === 'confirm-pos' && j) { P[j.id].proof = { at: hm(app.now) }; app.job = null; show(true); }
@@ -693,7 +732,7 @@
   doc.addEventListener('ben:lang', function (e) {
     lang = e.detail === 'en' ? 'en' : 'fr';
     if (!D) return;
-    if (flow.map) { mapWords(flow.map); flow.parts.capKey = ''; flowWords(); }
+    if (flow.map) { mapWords(flow.map); if (flow.far) mapWords(flow.far); flow.parts.capKey = ''; flowWords(); }
     if (appRoot && $('.logi__body', appRoot)) show(true);
   });
 })();
