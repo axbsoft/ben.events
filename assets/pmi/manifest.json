@@ -1,13 +1,13 @@
 {
  "v": 2,
- "rev": "78635eec",
+ "rev": "0517ecef",
  "kdf": {
   "name": "PBKDF2",
   "hash": "SHA-256",
   "iterations": 600000,
-  "salt": "u62Jd1C4VtNfVfh7wSBsxg=="
+  "salt": "wGCwpim2hF8XPgjh4lLuow=="
  },
- "check": "eu0drJnLOm3zNFF5WIQBwCN9+0dhai5tWJRLg+GoAj4dsXtd/p70MHUC",
+ "check": "Zceslr5DpapSDoYP6eIJopBBtO3jRSYYXDT7ITgtXSrttQV9jLwGHVH1",
  "langs": {
   "fr": {
    "count": 13,
