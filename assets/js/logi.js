@@ -401,12 +401,13 @@
   }
 
   function vDash() {
-    var o = totals(app.now), today = D.expenses.filter(function (e) { return e.status !== 'no' && (e.day.fr === 'Aujourd’hui'); }).reduce(function (s, e) { return s + e.amount; }, 0), al = alerts();
+    var o = totals(app.now), kept = D.expenses.filter(function (e) { return e.status !== 'no'; }), sum = function (a) { return a.reduce(function (s, e) { return s + e.amount; }, 0); },
+      today = sum(kept.filter(function (e) { return e.day.fr === 'Aujourd’hui'; })), al = alerts();
     return '<div class="lg-kpis">' +
       '<div class="lg-kpi" data-tip="dServed"><span>' + t('served') + '</span><b>' + o.served + '<small> / ' + o.all + '</small></b><i class="lg-bar"><b style="width:' + (100 * o.served / o.all) + '%"></b></i></div>' +
       '<div class="lg-kpi" data-tip="dCartons"><span>' + t('cartons') + '</span><b>' + o.cartons + '<small> / ' + o.allCartons + '</small></b><i class="lg-bar"><b style="width:' + (100 * o.cartons / o.allCartons) + '%"></b></i></div>' +
       '<div class="lg-kpi" data-tip="dRoad"><span>' + t('onRoad') + '</span><b>' + o.road + '<small> / ' + D.vans.length + '</small></b><em>' + o.stopped + ' ' + t('stopped') + ' · ' + num(o.km) + ' km</em></div>' +
-      '<div class="lg-kpi" data-tip="dSpent"><span>' + t('spent') + '</span><b>' + esc(money(Math.round(today))) + '</b><em>' + t('toCheck', { n: pending() }) + '</em></div></div>' +
+      '<div class="lg-kpi" data-tip="dSpent"><span>' + t('spent') + '</span><b>' + esc(money(Math.round(today))) + '</b><em>' + t('week') + ' · ' + esc(money(Math.round(sum(kept)))) + '</em></div></div>' +
       '<div class="lg-cols"><section class="lg-card" data-tip="dZones"><h3>' + t('byZone') + '</h3><ul class="lg-zones">' +
       D.zones.map(function (z, i) { var q = o.zones[z.id]; return '<li><span><i style="background:' + D.vans[i].colour + '"></i>' + esc(z.name) + '</span><i class="lg-bar"><b style="width:' + (100 * q.done / q.all) + '%;background:' + D.vans[i].colour + '"></b></i><em>' + q.done + '/' + q.all + '</em></li>'; }).join('') + '</ul></section>' +
       '<section class="lg-card" data-tip="dTodo"><h3>' + t('todo') + '</h3>' + (al.length ? '<ul class="lg-alerts">' + al.map(function (a) { return '<li class="is-' + a.kind + '"><button type="button" data-act="go" data-tab="' + a.tab + '" data-id="' + a.id + '"><i></i><span>' + esc(a.text) + '</span><em>' + t('see') + '</em></button></li>'; }).join('') + '</ul>' : '<p class="lg-none">' + t('nothing') + '</p>') +
@@ -575,9 +576,11 @@
      marker shows the word. On a computer the word also shows when the pointer rests on the part, help on or off. */
   var tip = { el: null, timer: 0, over: null, sticky: false, x: 0, y: 0 };
   var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var KEY = { dTodo: 1, dPhotos: 1, rScan: 1, sRefill: 1, lProof: 1, vMap: 1, vJourney: 1, eNew: 1 };
   function hots(root) {
     if (!root) return;
     $$('[data-tip]:not([data-quiet])', root).forEach(function (el) {
+      if (!KEY[el.getAttribute('data-tip')]) return;        // a marker only on what matters; the other words still show under the pointer
       for (var c = el.lastElementChild; c; c = c.previousElementSibling) if (c.className === 'lg-hot') return;
       var i = doc.createElement('i');
       i.className = 'lg-hot'; i.textContent = '?'; i.tabIndex = 0; i.setAttribute('role', 'button'); i.setAttribute('aria-label', t('guide'));
