@@ -490,6 +490,10 @@
 .gate .lockup__word::before { inset: -70% -30%; background: radial-gradient(closest-side, rgba(233, 75, 91, .34), transparent); }
 .gate__client { height: .9em; color: var(--text); }
 @media (max-width: 480px) { .gate .lockup__word .kgmark { height: .44em; } }
+/* a client shown by its own logo, as it was given: on its white ground, in a rounded tile (pmi.html) */
+.lockup__logo { border-radius: .36em; background: #fff; overflow: hidden; }
+.lockup__logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+b.gate__client { color: #fff; font-weight: 600; }
 
 /* ---------- Korea and Morocco on the access page (kgm.html): each word with its flag and its colours ---------- */
 .gate__title .flag { display: inline-block; height: .44em; width: auto; vertical-align: .1em; border-radius: .06em; box-shadow: 0 0 0 .012em rgba(255, 255, 255, .45), 0 .08em .3em rgba(0, 0, 0, .5); }

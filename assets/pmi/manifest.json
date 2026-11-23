@@ -1,0 +1,40 @@
+{
+ "v": 2,
+ "rev": "e72b60c9",
+ "kdf": {
+  "name": "PBKDF2",
+  "hash": "SHA-256",
+  "iterations": 600000,
+  "salt": "IQM7SnTWPcy8kyZsfsvq2g=="
+ },
+ "check": "ggrYQ6QnMPuC15xY7kc6Dlwpj77Iy+FoGFgg+my9pD+zpQMdvGzQHGTj",
+ "langs": {
+  "fr": {
+   "count": 13,
+   "type": "image/webp",
+   "thumbs": {
+    "type": "image/webp",
+    "columns": 6
+   },
+   "pdf": {
+    "name": "PMI-Force-de-terrain-et-logistique-benevents.pdf"
+   }
+  },
+  "en": {
+   "count": 13,
+   "type": "image/webp",
+   "thumbs": {
+    "type": "image/webp",
+    "columns": 6
+   },
+   "pdf": {
+    "name": "PMI-Field-force-and-logistics-benevents.pdf"
+   }
+  }
+ },
+ "meta": true,
+ "live": [
+  8,
+  12
+ ]
+}
