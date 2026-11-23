@@ -42,7 +42,7 @@
       aGap: 'Écart à la réception · {id}', aDue: 'Réception attendue · {id}', aHalt: 'Arrêt non planifié · {van} · {min} min', aLate: 'Départ retardé · {van} · {at}', aExp: '{n} justificatif(s) à valider', aRefill: 'Réassort à préparer · {van}',
       see: 'Voir', notes: 'Bons de livraison', from: 'Provenance', expected: 'Attendu', received: 'Reçu', cartonsU: 'cartons', cartonU: 'carton', sOk: 'Conforme', sGap: 'Écart', sDue: 'Attendu', sNew: 'À valider', sNo: 'Refusé', sValid: 'Validé',
       step1: 'Scanner le bon', step2: 'Compter et photographier', step3: 'Valider la réception', scan: 'Scanner', scanning: 'Lecture du code…', scanned: 'Code lu', photo: 'Prendre la photo', camera: 'Avec l’appareil photo', retake: 'Reprendre',
-      validate: 'Valider', checkedBy: 'Contrôlé par {who}', stock: 'Stock à l’entrepôt', inStock: 'en stock', loads: 'Chargements du jour', loaded: 'Chargé', left: 'Parti à {at}', team: '1 SPV + {n} CE',
+      validate: 'Valider', checkedBy: 'Contrôlé par {who}', stock: 'Stock à l’entrepôt', famGoodies: 'Goodies et PLV', famProduct: 'Produits', inStock: 'en stock', loads: 'Chargements du jour', loaded: 'Chargé', left: 'Parti à {at}', team: '1 SPV + {n} CE',
       refill: 'Réassort', refillFor: 'Réassort demandé par {van}', prepare: 'Préparer et scanner', handed: 'Remis à {van} à {at}', round: 'Tournée', stopN: 'Arrêt', pDone: 'Livré', pNow: 'Sur place', pNext: 'À livrer',
       deliver: 'Valider la livraison', proof: 'Preuve de livraison', proofNone: 'La photo apparaîtra ici une fois la livraison validée.', receivedBy: 'Réceptionné par', manager: 'le gérant', gps: 'Position confirmée', at: 'à',
       vDepot: 'À l’entrepôt', vDrive: 'En route', vStop: 'Au point de vente · {min} min', vHalt: 'Arrêt non planifié · {min} min', vBreak: 'Pause · {min} min', vBack: 'Rentré', journey: 'Journée de {van}', driven: 'Conduite', halted: 'Arrêts', dist: 'Distance',
@@ -59,7 +59,7 @@
         rList: 'Chaque livraison fournisseur arrive avec un bon. « Attendu » : pas encore contrôlé. « Écart » : il manquait des cartons.', rSteps: 'Trois gestes, toujours dans le même ordre : scanner le bon, compter et photographier, valider.',
         rScan: 'Sur le terrain, l’appareil photo du téléphone lit le code-barres du bon. Essayez.', rPhoto: 'Comptez avec + et −, puis prenez la photo : elle est horodatée et rattachée au bon.',
         rConfirm: 'Si le compte est inférieur à l’attendu, la réception passe en « Écart » et le responsable est alerté.', rProof: 'La preuve conservée : la photo, l’heure, la personne qui a contrôlé, ligne par ligne.',
-        sStock: 'Le stock se calcule tout seul : réceptions validées, moins ce qui est parti. Rien à ressaisir.', sLoads: 'Chaque véhicule est chargé pour sa tournée et scanné avant le départ ; l’heure de départ est enregistrée.',
+        sStock: 'Goodies et produits suivent le même circuit. Le stock se calcule tout seul : réceptions validées, moins ce qui est parti.', sLoads: 'Chaque véhicule est chargé pour sa tournée et scanné avant le départ ; l’heure de départ est enregistrée.',
         sRefill: 'Une équipe à court de goodies demande un réassort depuis son téléphone ; l’entrepôt le prépare et le scanne.',
         lVans: 'Une tournée par véhicule. Le compteur montre les points de vente déjà servis.', lRoute: 'L’ordre de passage de la tournée. Cliquez sur un point de vente livré pour revoir sa preuve.',
         lDeliver: 'Le SPV valide la livraison sur place : la photo est obligatoire. Essayez.', lProof: 'Ce qui est conservé : la photo, l’heure, la position et la personne qui a réceptionné.',
@@ -84,7 +84,7 @@
       aGap: 'Shortage on receipt · {id}', aDue: 'Delivery expected · {id}', aHalt: 'Unplanned stop · {van} · {min} min', aLate: 'Late departure · {van} · {at}', aExp: '{n} receipt(s) to approve', aRefill: 'Refill to prepare · {van}',
       see: 'View', notes: 'Delivery notes', from: 'From', expected: 'Expected', received: 'Received', cartonsU: 'cartons', cartonU: 'carton', sOk: 'Complete', sGap: 'Shortage', sDue: 'Expected', sNew: 'To approve', sNo: 'Refused', sValid: 'Approved',
       step1: 'Scan the note', step2: 'Count and photograph', step3: 'Confirm receipt', scan: 'Scan', scanning: 'Reading the code…', scanned: 'Code read', photo: 'Take the photo', camera: 'With the camera', retake: 'Retake',
-      validate: 'Confirm', checkedBy: 'Checked by {who}', stock: 'Warehouse stock', inStock: 'in stock', loads: 'Today’s loads', loaded: 'Loaded', left: 'Left at {at}', team: '1 SPV + {n} CE',
+      validate: 'Confirm', checkedBy: 'Checked by {who}', stock: 'Warehouse stock', famGoodies: 'Goodies and displays', famProduct: 'Products', inStock: 'in stock', loads: 'Today’s loads', loaded: 'Loaded', left: 'Left at {at}', team: '1 SPV + {n} CE',
       refill: 'Refill', refillFor: 'Refill requested by {van}', prepare: 'Prepare and scan', handed: 'Handed to {van} at {at}', round: 'Round', stopN: 'Stop', pDone: 'Delivered', pNow: 'On site', pNext: 'To deliver',
       deliver: 'Confirm delivery', proof: 'Proof of delivery', proofNone: 'The photo will appear here once the delivery is confirmed.', receivedBy: 'Received by', manager: 'the manager', gps: 'Position confirmed', at: 'at',
       vDepot: 'At the warehouse', vDrive: 'On the road', vStop: 'At the point of sale · {min} min', vHalt: 'Unplanned stop · {min} min', vBreak: 'Break · {min} min', vBack: 'Back', journey: '{van}’s day', driven: 'Driving', halted: 'Stops', dist: 'Distance',
@@ -101,7 +101,7 @@
         rList: 'Every supplier delivery comes with a note. “Expected”: not checked yet. “Shortage”: cartons were missing.', rSteps: 'Three steps, always in the same order: scan the note, count and photograph, confirm.',
         rScan: 'In the field, the phone’s camera reads the barcode of the note. Try it.', rPhoto: 'Count with + and −, then take the photo: it is time-stamped and attached to the note.',
         rConfirm: 'If the count is below what was expected, the delivery is marked “Shortage” and the manager is alerted.', rProof: 'The proof that is kept: the photo, the time, who checked, line by line.',
-        sStock: 'The stock works itself out: deliveries confirmed, minus what has left. Nothing to type again.', sLoads: 'Each van is loaded for its round and scanned before it leaves; the time it left is recorded.',
+        sStock: 'Goodies and products follow the same circuit. The stock works itself out: deliveries confirmed, minus what has left.', sLoads: 'Each van is loaded for its round and scanned before it leaves; the time it left is recorded.',
         sRefill: 'A team running short of goodies asks for a refill from its phone; the warehouse prepares and scans it.',
         lVans: 'One round per van. The counter shows the points of sale already served.', lRoute: 'The order of the round. Click a delivered point of sale to see its proof again.',
         lDeliver: 'The SPV confirms the delivery on site: the photo is compulsory. Try it.', lProof: 'What is kept: the photo, the time, the position and who received the goods.',
@@ -433,14 +433,14 @@
     var got = {}, all = 0, out = D.vans.reduce(function (s, v) { return s + v.cartons; }, 0) + (D.refill && D.refill.done ? D.refill.lines.reduce(function (s, l) { return s + l[1]; }, 0) : 0);
     D.skus.forEach(function (k) { got[k.id] = 0; });
     D.receipts.forEach(function (n) { n.lines.forEach(function (l) { got[l[0]] += l[2]; all += l[2]; }); });
-    return D.skus.map(function (k) { var here = Math.max(0, got[k.id] - Math.round(out * got[k.id] / (all || 1))); return { id: k.id, name: tr(k.name), here: here, got: got[k.id] }; });
+    return D.skus.map(function (k) { var here = Math.max(0, got[k.id] - Math.round(out * got[k.id] / (all || 1))); return { id: k.id, name: tr(k.name), here: here, got: got[k.id], fam: k.family || 'goodies' }; });
   }
   function vDisp() {
-    var st = stockOf(), most = Math.max.apply(null, st.map(function (s) { return s.got; })) || 1, rf = D.refill, j = app.job && app.job.id === 'refill' ? app.job : null;
+    var st = stockOf(), most = Math.max.apply(null, st.map(function (s) { return s.got; })) || 1, rf = D.refill, fams = ['goodies', 'product'].filter(function (f) { return st.some(function (s) { return s.fam === f; }); }), j = app.job && app.job.id === 'refill' ? app.job : null;
     var refill = !rf ? '' : '<div class="lg-refill" data-tip="sRefill"><h4>' + t('refillFor', { van: rf.van }) + '</h4><p>' + rf.lines.map(function (l) { return l[1] + ' × ' + esc(skuName(l[0])); }).join(' · ') + '</p>' +
       (rf.done ? '<p class="lg-ok">✓ ' + t('handed', { van: rf.van, at: rf.done }) + '</p>' + picBoxes('refill', rf.van + ' · ' + t('refill'), rf.van + ' · ' + tr(D.day) + ' ' + rf.done, false) :
         '<div class="lg-scan' + (j && j.scanning ? ' is-on' : '') + '">' + barcode(rf.van + '-R01') + '<i></i></div><div class="lg-actions"><button type="button" class="lg-btn" data-act="refill"' + (j && j.scanning ? ' disabled' : '') + '>' + (j && j.scanning ? t('scanning') : t('prepare')) + '</button></div>') + '</div>';
-    return '<div class="lg-cols lg-cols--side"><section class="lg-card" data-tip="sStock"><h3>' + t('stock') + '</h3><ul class="lg-stock">' + st.map(function (s) { return '<li><span><b>' + s.id + '</b> ' + esc(s.name) + '</span><i class="lg-bar"><b style="width:' + (100 * s.here / most) + '%"></b></i><em>' + s.here + '</em></li>'; }).join('') + '</ul>' + refill + '</section>' +
+    return '<div class="lg-cols lg-cols--side"><section class="lg-card" data-tip="sStock"><h3>' + t('stock') + '</h3><ul class="lg-stock">' + fams.map(function (f) { return (fams.length > 1 ? '<li class="lg-fam">' + t(f === 'product' ? 'famProduct' : 'famGoodies') + '</li>' : '') + st.filter(function (s) { return s.fam === f; }).map(function (s) { return '<li><span><b>' + s.id + '</b> ' + esc(s.name) + '</span><i class="lg-bar"><b style="width:' + (100 * s.here / most) + '%"></b></i><em>' + s.here + '</em></li>'; }).join(''); }).join('') + '</ul>' + refill + '</section>' +
       '<section class="lg-card" data-tip="sLoads"><h3>' + t('loads') + '</h3><ul class="lg-loads">' + D.vans.map(function (v) {
         var gone = app.now >= v.depart;
         return '<li><i class="lg-dot" style="background:' + v.colour + '">' + v.id.slice(1) + '</i><span><b>' + esc(vanLabel(v)) + '</b><small>' + esc(zoneName(v.zone)) + ' · ' + esc(v.lead) + ' · ' + t('team', { n: v.team }) + '</small></span><em>' + cu(v.cartons) + '</em>' +

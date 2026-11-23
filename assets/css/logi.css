@@ -169,6 +169,8 @@
 .lg-zones span i { flex: none; width: .7em; height: .7em; border-radius: 50%; }
 .lg-zones em, .lg-stock em { font-style: normal; text-align: right; color: var(--mute); font-variant-numeric: tabular-nums; }
 .lg-stock span b { font-weight: 600; color: var(--mute); font-size: .86em; }
+.lg-stock li.lg-fam { display: block; margin-top: .2em; font-size: .64em; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.lg-stock { gap: .5em; }
 .lg-alerts { list-style: none; display: grid; gap: .45em; margin-bottom: .9em; overflow: auto; }
 .lg-alerts button { display: flex; align-items: center; gap: .7em; width: 100%; padding: .62em .8em; border-radius: .8em; border: 1px solid var(--edge); background: rgba(255, 255, 255, .03); color: var(--text); font: inherit; font-size: .8em; text-align: left; cursor: pointer; transition: background .25s; }
 .lg-alerts button:hover, .lg-alerts button:focus-visible { background: rgba(255, 255, 255, .08); }
@@ -229,7 +231,9 @@
 .lg-empty svg { width: 2.6em; height: 2.6em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .lg-refill { margin-top: 1em; padding-top: 1em; border-top: 1px solid var(--edge); }
 .lg-refill p { font-size: .76em; color: var(--mute); line-height: 1.4; }
-.lg-refill .lg-scan, .lg-refill .lpic { margin-top: .7em; max-width: 15em; }
+.lg-refill { margin-top: .8em; padding-top: .8em; }
+.lg-refill .lg-scan, .lg-refill .lpic { margin-top: .5em; max-width: 8.6em; }
+.lg-refill .lg-actions { margin-top: .5em; }
 .lg-loads li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: .8em; padding: .55em .7em; border-radius: .8em; background: rgba(255, 255, 255, .03); }
 .lg-loads span { display: grid; min-width: 0; }
 .lg-loads span b { font-size: .84em; font-weight: 600; }
