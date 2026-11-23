@@ -122,13 +122,13 @@
       image: ['assets/img/reception-golden-spheres.jpg', 1280, 720],
       seo: {
         title: { en: 'Product Launches and Corporate Receptions in Morocco | benevents agency', fr: 'Lancement de produit et réceptions d’entreprise au Maroc | benevents agency' },
-        desc: { en: 'Product launches, inaugurations, press events and networking receptions in Morocco: a concept, a set in the colours of your brand and a journey for your guests.',
-                fr: 'Lancements de produit, inaugurations, événements presse et réceptions au Maroc : un concept, une scénographie à vos couleurs et un parcours pour vos invités.' }
+        desc: { en: 'Product launches, inaugurations, open days and receptions in Morocco: a concept, a set in the colours of your brand and a journey for your guests.',
+                fr: 'Lancements de produit, inaugurations, portes ouvertes et réceptions au Maroc : un concept, une scénographie à vos couleurs et un parcours pour vos invités.' }
       },
       text: {
-        en: ['A launch or an inauguration is a brand receiving guests at home. We start from your world to imagine a concept, a set in your colours and a journey that takes each guest from the welcome to the last conversation.',
+        en: ['A launch, an inauguration or an open day is a brand receiving guests at home. We start from your world to imagine a concept, a set in your colours and a journey that takes each guest from the welcome to the last conversation.',
              'Industrial hall, showroom, reception room or fan zone: we fit the place to the event, with the furniture, the lighting, the screens, the DJ and the entertainment that give it its atmosphere.'],
-        fr: ['Un lancement ou une inauguration, c’est une marque qui reçoit chez elle. Nous partons de votre univers pour imaginer un concept, une scénographie à vos couleurs et un parcours qui mène chaque invité de l’accueil au dernier échange.',
+        fr: ['Un lancement, une inauguration ou une journée portes ouvertes, c’est une marque qui reçoit chez elle. Nous partons de votre univers pour imaginer un concept, une scénographie à vos couleurs et un parcours qui mène chaque invité de l’accueil au dernier échange.',
              'Halle industrielle, showroom, salle de réception ou fan zone : nous adaptons le lieu à l’événement, avec le mobilier, la lumière, les écrans, le DJ et les animations qui lui donnent son ambiance.']
       },
       does: {
@@ -137,17 +137,22 @@
       },
       faq: {
         en: [
+          ['Do you organise open days in showrooms and dealerships?', 'Yes. For CUPRA, we dressed the showroom from morning to evening: the car on a lit stage, totems in the brand’s colours, a welcome bar, a DJ, the lighting of the evening and a game for the visitors.'],
           ['Can you organise a launch in our own showroom?', 'Yes. Showroom, industrial hall, reception room or fan zone: we fit the place to the event, with the furniture, the lighting, the screens and the entertainment that give it its atmosphere.'],
           ['Will the set carry our brand identity?', 'Yes. We start from your world to imagine a concept and a set in your colours, down to the furniture.'],
           ['Who takes care of the DJ and the entertainment?', 'We do. DJ, entertainment and games are part of what we take care of, like the journey of your guests from the welcome to the last conversation.']
         ],
         fr: [
+          ['Organisez-vous des journées portes ouvertes en showroom ou en concession ?', 'Oui. Pour CUPRA, nous avons habillé le showroom du matin jusqu’au soir : le véhicule sur un podium lumineux, des totems aux couleurs de la marque, un bar d’accueil, un DJ, la mise en lumière de la soirée et un jeu pour les visiteurs.'],
           ['Pouvez-vous organiser un lancement dans notre showroom ?', 'Oui. Showroom, halle industrielle, salle de réception ou fan zone : nous adaptons le lieu à l’événement, avec le mobilier, la lumière, les écrans et l’animation qui lui donnent son ambiance.'],
           ['Le décor reprendra-t-il notre identité de marque ?', 'Oui. Nous partons de votre univers pour imaginer un concept et une scénographie à vos couleurs, jusqu’au mobilier.'],
           ['Qui s’occupe du DJ et de l’animation ?', 'Nous. DJ, animations et jeux font partie de ce que nous prenons en charge, comme le parcours de vos invités, de l’accueil au dernier échange.']
         ]
       },
       ideas: [
+        { project: 'cupra-open-day',
+          title: { en: 'An open day in the showroom', fr: 'Une journée portes ouvertes en showroom' },
+          text: { en: 'The car on a lit stage, a DJ, a welcome bar and a game for visitors, from morning to evening.', fr: 'Le véhicule sur un podium lumineux, un DJ, un bar d’accueil et un jeu pour les visiteurs, du matin au soir.' } },
         { project: 'volvo-built-on-trust',
           title: { en: 'An unexpected venue', fr: 'Un lieu inattendu' },
           text: { en: 'An industrial hall turned into a brand evening, with LED screen and high tables in its colours.', fr: 'Une halle industrielle transformée en soirée de marque, avec écran LED et mange-debout à ses couleurs.' } },

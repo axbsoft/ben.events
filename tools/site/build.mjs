@@ -135,7 +135,7 @@ const W = {
 const KIND = {
   conferences: ['Masterclass', 'Tech event', 'Seminar', 'Convention', 'Institutional forum', 'Conference', 'Forum', 'Scientific meeting'],
   ceremonies: ['Closing ceremony', 'Competition final'],
-  receptions: ['Reception', 'Fan zone', 'Brand experience', 'Brand event', 'Corporate reception']
+  receptions: ['Reception', 'Fan zone', 'Brand experience', 'Brand event', 'Corporate reception', 'Open day']
 };
 const servicesOf = p => SERVICES.filter(s => (KIND[s.id] || []).includes(p.kind.en) || s.ideas.some(i => i.project === p.id));
 const projectsOf = s => PROJECTS.filter(p => servicesOf(p).includes(s));
@@ -492,7 +492,7 @@ PROJECTS.forEach((p, i) => {
     const did = p.did && p.did[l], story = p.story && p.story[l];
     const named = place && !title.includes(place) ? ' ' + w.inCity(place) : '';
     const head = seoHead({
-      l, title: `${title} — ${kind}${named} | benevents agency${named ? '' : ', ' + (l === 'fr' ? 'Maroc' : 'Morocco')}`, desc: short(intro), alt, xdef: alt.fr, image: '/' + p.photos[0][0], imageAlt: w.photoOf(title),
+      l, title: `${title}${title.toLowerCase().includes(kind.toLowerCase()) ? '' : ' — ' + kind}${named} | benevents agency${named ? '' : ', ' + (l === 'fr' ? 'Maroc' : 'Morocco')}`, desc: short(intro), alt, xdef: alt.fr, image: '/' + p.photos[0][0], imageAlt: w.photoOf(title),
       data: [Object.assign({ '@type': 'WebPage', '@id': SITE + alt[l] + '#page', name: title, description: intro, url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, about: { '@id': ORG },
         primaryImageOfPage: { '@type': 'ImageObject', url: SITE + '/' + p.photos[0][0], width: p.photos[0][1], height: p.photos[0][2] }, image: p.photos.map(ph => SITE + '/' + ph[0]) },
       place ? { contentLocation: { '@type': 'Place', name: p.venue || place, address: { '@type': 'PostalAddress', addressLocality: place, addressCountry: 'MA' } } } : {}),

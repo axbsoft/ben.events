@@ -41,7 +41,8 @@
     forum: { en: 'Forum', fr: 'Forum' },
     brand: { en: 'Brand event', fr: 'Événement de marque' },
     corporate: { en: 'Corporate reception', fr: 'Réception d’entreprise' },
-    science: { en: 'Scientific meeting', fr: 'Rencontre scientifique' }
+    science: { en: 'Scientific meeting', fr: 'Rencontre scientifique' },
+    openday: { en: 'Open day', fr: 'Journée portes ouvertes' }
   };
 
   // The places a project can name. page: true for the cities that have a page of their own
@@ -54,6 +55,35 @@
   };
 
   window.BEN_PROJECTS = [
+    {
+      id: 'cupra-open-day',
+      title: { en: 'CUPRA Open Day', fr: 'Journée portes ouvertes CUPRA' },
+      kind: KIND.openday,
+      client: 'CUPRA',
+      date: { en: 'November 2026', fr: 'Novembre 2026' },
+      cover: 'center 70%',
+      did: {
+        en: ['The Formentor on a black stage with a green glow', 'Totems in the brand’s colours, in the showroom and out on the street', 'DJ booth with a backlit CUPRA logo, moving heads and sound', 'Green and blue lighting of the showroom for the evening', 'Welcome bar and dressed high tables', 'A “Precision Challenge” game for the visitors'],
+        fr: ['Le Formentor sur un podium noir éclairé de vert', 'Totems aux couleurs de la marque, dans le showroom et sur le trottoir', 'Cabine DJ au logo CUPRA rétroéclairé, projecteurs asservis et sonorisation', 'Mise en lumière verte et bleue du showroom pour la soirée', 'Bar d’accueil et mange-debout habillés', 'Un jeu d’adresse « Precision Challenge » pour les visiteurs']
+      },
+      intro: {
+        en: 'An open day for CUPRA in the showroom, from morning to evening: the Formentor on a lit stage, a DJ, a welcome bar and a game for the visitors, then green and blue light after dark.',
+        fr: 'Une journée portes ouvertes CUPRA dans le showroom, du matin jusqu’au soir : le Formentor sur un podium lumineux, un DJ, un bar d’accueil et un jeu pour les visiteurs, puis une lumière verte et bleue à la nuit tombée.'
+      },
+      photos: [
+        ['assets/img/projects/cupra-open-day/01.webp', 900, 1600],
+        ['assets/img/projects/cupra-open-day/02.webp', 720, 1280],
+        ['assets/img/projects/cupra-open-day/03.webp', 720, 1280],
+        ['assets/img/projects/cupra-open-day/04.webp', 900, 1600],
+        ['assets/img/projects/cupra-open-day/05.webp', 1200, 1600],
+        ['assets/img/projects/cupra-open-day/06.webp', 720, 1280],
+        ['assets/img/projects/cupra-open-day/07.webp', 720, 1280],
+        ['assets/img/projects/cupra-open-day/08.webp', 1600, 900],
+        ['assets/img/projects/cupra-open-day/09.webp', 1600, 900],
+        ['assets/img/projects/cupra-open-day/10.webp', 1600, 900],
+        ['assets/img/projects/cupra-open-day/11.webp', 1600, 900]
+      ]
+    },
     {
       id: 'femmes-en-jeu',
       title: 'Femmes en jeu · Canal+ University',

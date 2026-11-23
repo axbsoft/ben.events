@@ -17,7 +17,7 @@ from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMG = os.path.normpath(os.path.join(HERE, '..', '..', 'assets', 'img'))
-SKIP_DIRS = {'_w', 'clients', 'thumbs'}                 # logos, and the thumbnails the photo wall already has
+SKIP_DIRS = {'_w', 'clients', 'thumbs', 'og'}   # logos, link previews, and the thumbnails the photo wall already has
 SKIP = ('og', 'logo', 'favicon', 'film-cover')
 WIDTHS = [480, 960]
 
