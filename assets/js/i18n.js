@@ -26,6 +26,7 @@ window.BEN_I18N = {
     'nav.contact': 'Contact',
     'nav.cta': 'Démarrer un projet',
     'book.cta': 'Réserver un appel',
+    'agent.cta': 'Parler à notre agent IA',
 
     'hero.eyebrow': 'Agence événementielle au Maroc',
     'hero.l1': 'Nous composons',
@@ -97,7 +98,7 @@ window.BEN_I18N = {
 
     'gal.eyebrow': 'Réalisations',
     'gal.title': 'Nous préférons montrer.',
-    'gal.hint': 'Continuez à défiler',
+    'gal.hint': 'Voir tout',
     'gal.view': 'Voir le projet',
     'gal.cta': 'Le prochain sera peut-être le vôtre',
 

@@ -197,6 +197,7 @@
       <button type="button" data-lang="fr" aria-pressed="false">FR</button>
     </div>
     <button class="btn btn--sm btn--ghost btn--book btn--icon" type="button" data-book aria-haspopup="dialog" aria-label="Book a call" data-i18n-aria="book.cta"><span></span></button>
+    <button class="btn btn--sm btn--ghost btn--icon btn--agent" type="button" data-agent aria-haspopup="dialog" aria-expanded="false" aria-controls="agent" aria-label="Talk to our AI agent" data-i18n-aria="agent.cta"><span></span></button>
     <a class="btn btn--sm magnetic" href="#contact"><span data-i18n="nav.cta">Start a project</span></a>
     <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
   </div>
@@ -300,21 +301,6 @@
         <span class="seal__core" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg></span>
       </a>
     </div>
-    <!-- Where we are: Morocco, drawn from Natural Earth's public map, with a dot on each warehouse.
-         To add a city, give its link the place of its longitude and latitude on the drawing:
-         --x = (longitude + 17.10) / 16.03, --y = (35.93 - latitude) / 15.12, both as percentages. -->
-    <div class="about__map" data-reveal>
-      <div class="about__map-say">
-        <p class="pillars__h" data-i18n="map.label">Where we are</p>
-        <h3 class="about__map-title" data-i18n="map.title">Three warehouses, and wherever your event takes place.</h3>
-      </div>
-      <div class="map" role="group" aria-label="Map of Morocco: our warehouses in Casablanca, Rabat and Marrakech" data-i18n-aria="map.aria">
-        <svg class="map__land" viewBox="0 0 400 429" aria-hidden="true"><defs><pattern id="mapDots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1"/></pattern></defs><path d="M291.9 0.0L294.8 0.8L293.4 2.1L293.4 5.3L299.1 13.1L305.9 18.4L311.1 20.5L318.5 21.8L334.4 18.5L337.0 19.9L341.9 20.4L346.6 19.6L352.4 14.9L352.9 17.5L355.7 22.7L371.2 23.4L373.3 27.2L381.8 33.4L380.4 37.5L383.3 41.5L381.9 44.3L383.9 49.8L383.7 60.9L385.8 67.1L384.6 74.1L387.9 81.0L388.9 86.6L390.4 89.2L398.8 95.8L400.0 98.2L395.6 101.9L395.1 103.8L396.0 108.4L394.7 108.9L365.4 107.8L355.1 109.3L353.4 110.3L351.2 116.2L340.7 119.8L332.6 120.3L330.6 122.2L332.0 129.6L330.9 134.2L336.1 137.9L336.1 139.8L335.1 140.9L327.1 142.3L318.7 148.4L302.6 155.0L297.4 163.5L290.6 169.4L276.8 173.0L264.9 173.3L263.9 177.8L261.0 180.4L248.0 179.2L239.8 185.4L234.8 186.6L210.5 204.5L209.9 207.3L210.0 281.8L126.8 281.8L126.6 353.4L117.9 357.7L111.7 359.0L101.5 366.7L98.4 371.8L98.3 375.5L99.9 381.0L101.8 413.9L3.3 414.1L0.9 426.3L1.3 428.9L0.0 427.5L4.2 397.9L7.6 390.6L10.3 387.3L14.5 385.6L18.4 378.2L19.8 371.4L22.4 368.3L23.2 365.8L22.2 363.9L32.7 344.2L32.3 342.8L27.8 347.7L29.9 342.8L37.7 336.3L47.6 324.8L51.4 322.8L54.7 317.9L55.9 313.6L56.3 303.8L57.5 298.5L64.2 283.7L65.6 277.0L67.0 274.4L69.5 273.2L73.1 269.8L78.5 267.8L87.8 260.8L89.9 256.9L92.1 249.1L97.8 234.8L101.2 231.4L103.5 227.4L107.4 225.5L115.5 224.6L127.5 221.2L138.3 216.1L141.4 214.1L150.1 204.7L165.0 194.7L180.8 173.6L185.4 165.1L186.4 158.2L185.7 155.5L182.8 151.1L180.7 149.9L180.2 147.8L181.2 144.2L181.9 127.8L185.2 119.7L193.4 109.0L194.9 104.7L195.9 95.2L206.1 85.4L214.2 76.0L219.5 72.5L237.9 64.9L254.4 55.6L258.0 51.0L268.1 32.7L278.8 4.1L286.3 2.9Z"/></svg>
-        <a class="map__city map__city--left" style="--x:59.3%;--y:15.59%" href="event-agency-casablanca" data-page="city:casablanca"><i aria-hidden="true"></i><span>Casablanca</span></a>
-        <a class="map__city" style="--x:63.97%;--y:12.63%" href="event-agency-rabat" data-page="city:rabat"><i aria-hidden="true"></i><span>Rabat</span></a>
-        <a class="map__city" style="--x:56.86%;--y:28.44%" href="event-agency-marrakech" data-page="city:marrakech"><i aria-hidden="true"></i><span>Marrakech</span></a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -395,7 +381,7 @@
         <p class="eyebrow" data-reveal><i></i><span data-i18n="gal.eyebrow">Portfolio</span></p>
         <h2 class="h2" data-reveal data-i18n="gal.title">We would rather show you.</h2>
       </div>
-      <p class="gallery__hint" data-reveal><span data-i18n="gal.hint">Keep scrolling</span><i></i></p>
+      <a class="gallery__hint" href="projects" data-page="projects" data-reveal><span data-i18n="gal.hint">View all</span><i></i></a>
     </header>
     <!-- the project cards are built from assets/js/projects.js -->
     <div class="gallery__track">
@@ -446,21 +432,19 @@
       </li>
     </ol>
 
-    <!-- The film. The play button is a link to the film's own page; when the address of its player is set
-         (FILM_PLAYER, at the top of assets/js/main.js) the film plays here instead, in the frame.
-         Nothing is asked of the video hosting before the visitor presses play. The cover: MEDIA.reel, same file. -->
-    <div class="reel" id="reel" data-reveal>
-      <div class="reel__say">
-        <p class="reel__kicker" data-i18n="reel.kicker">The film</p>
-        <h3 class="reel__title" data-i18n="reel.title">Behind the scenes</h3>
-        <p class="reel__sub" data-i18n="reel.sub">Our team at work, in one minute</p>
+    <!-- Where we are: Morocco, drawn from Natural Earth's public map, with a dot on each warehouse.
+         To add a city, give its link the place of its longitude and latitude on the drawing:
+         --x = (longitude + 17.10) / 16.03, --y = (35.93 - latitude) / 15.12, both as percentages. -->
+    <div class="about__map" id="where" data-reveal>
+      <div class="about__map-say">
+        <p class="pillars__h" data-i18n="map.label">Where we are</p>
+        <h3 class="about__map-title" data-i18n="map.title">Three warehouses, and wherever your event takes place.</h3>
       </div>
-      <div class="reel__frame">
-        <a class="reel__play" href="https://livid.com/watch/L6GCH7EFgl4D" target="_blank" rel="noopener" aria-label="Watch the film (opens in a new tab)" data-i18n-aria="reel.open">
-          <span class="reel__media media" data-img="reel"></span>
-          <span class="reel__shade" aria-hidden="true"></span>
-          <span class="reel__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.6 5.6v12.8L19 12z"/></svg></span>
-        </a>
+      <div class="map" role="group" aria-label="Map of Morocco: our warehouses in Casablanca, Rabat and Marrakech" data-i18n-aria="map.aria">
+        <svg class="map__land" viewBox="0 0 400 429" aria-hidden="true"><defs><pattern id="mapDots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1"/></pattern></defs><path d="M291.9 0.0L294.8 0.8L293.4 2.1L293.4 5.3L299.1 13.1L305.9 18.4L311.1 20.5L318.5 21.8L334.4 18.5L337.0 19.9L341.9 20.4L346.6 19.6L352.4 14.9L352.9 17.5L355.7 22.7L371.2 23.4L373.3 27.2L381.8 33.4L380.4 37.5L383.3 41.5L381.9 44.3L383.9 49.8L383.7 60.9L385.8 67.1L384.6 74.1L387.9 81.0L388.9 86.6L390.4 89.2L398.8 95.8L400.0 98.2L395.6 101.9L395.1 103.8L396.0 108.4L394.7 108.9L365.4 107.8L355.1 109.3L353.4 110.3L351.2 116.2L340.7 119.8L332.6 120.3L330.6 122.2L332.0 129.6L330.9 134.2L336.1 137.9L336.1 139.8L335.1 140.9L327.1 142.3L318.7 148.4L302.6 155.0L297.4 163.5L290.6 169.4L276.8 173.0L264.9 173.3L263.9 177.8L261.0 180.4L248.0 179.2L239.8 185.4L234.8 186.6L210.5 204.5L209.9 207.3L210.0 281.8L126.8 281.8L126.6 353.4L117.9 357.7L111.7 359.0L101.5 366.7L98.4 371.8L98.3 375.5L99.9 381.0L101.8 413.9L3.3 414.1L0.9 426.3L1.3 428.9L0.0 427.5L4.2 397.9L7.6 390.6L10.3 387.3L14.5 385.6L18.4 378.2L19.8 371.4L22.4 368.3L23.2 365.8L22.2 363.9L32.7 344.2L32.3 342.8L27.8 347.7L29.9 342.8L37.7 336.3L47.6 324.8L51.4 322.8L54.7 317.9L55.9 313.6L56.3 303.8L57.5 298.5L64.2 283.7L65.6 277.0L67.0 274.4L69.5 273.2L73.1 269.8L78.5 267.8L87.8 260.8L89.9 256.9L92.1 249.1L97.8 234.8L101.2 231.4L103.5 227.4L107.4 225.5L115.5 224.6L127.5 221.2L138.3 216.1L141.4 214.1L150.1 204.7L165.0 194.7L180.8 173.6L185.4 165.1L186.4 158.2L185.7 155.5L182.8 151.1L180.7 149.9L180.2 147.8L181.2 144.2L181.9 127.8L185.2 119.7L193.4 109.0L194.9 104.7L195.9 95.2L206.1 85.4L214.2 76.0L219.5 72.5L237.9 64.9L254.4 55.6L258.0 51.0L268.1 32.7L278.8 4.1L286.3 2.9Z"/></svg>
+        <a class="map__city map__city--left" style="--x:59.3%;--y:15.59%" href="event-agency-casablanca" data-page="city:casablanca"><i aria-hidden="true"></i><span>Casablanca</span></a>
+        <a class="map__city" style="--x:63.97%;--y:12.63%" href="event-agency-rabat" data-page="city:rabat"><i aria-hidden="true"></i><span>Rabat</span></a>
+        <a class="map__city" style="--x:56.86%;--y:28.44%" href="event-agency-marrakech" data-page="city:marrakech"><i aria-hidden="true"></i><span>Marrakech</span></a>
       </div>
     </div>
   </div>
@@ -777,6 +761,7 @@
 
 <script src="assets/js/stats.js"></script>
 <script src="assets/js/booking.js"></script>
+<script src="assets/js/agent.js"></script>
 <script src="assets/js/i18n.js"></script>
 <script src="assets/js/projects.js"></script>
 <script src="assets/js/voices.js"></script>

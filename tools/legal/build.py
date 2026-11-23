@@ -27,6 +27,7 @@ PAGES = {
                  '<b>When you contact us by email, by phone or on WhatsApp:</b> the information you choose to give us.',
                  '<b>When you book a call with us:</b> what you enter in the booking calendar (your name, your email address, the time you choose and anything you add). The calendar is run by Lunacal, which sends us these details so that we can hold the call.',
                  '<b>When you have your first name written at one of our calligraphy activities:</b> your first name, your email address if you give it, and whether you agreed to be contacted by the brand hosting the event. Your address is used to send you your calligraphy; it is passed on to that brand only if you agreed. The page the email leads to draws your first name from its own address and records nothing. If the bookmark carries a QR code, scanning it opens a page of ours that counts the scan, like any visit to this site and without identifying you, then takes you to the brand’s offer.',
+                 '<b>When you talk to our AI voice agent:</b> your voice and what you say during the call, processed by Dialora, which runs the agent, so that it can answer you and pass your request on to us.',
                  '<b>When you browse the site:</b> like any website, our hosting provider records technical data (IP address, type of browser, pages requested, date and time) needed to deliver the pages and keep them secure.'],
                 'We ask for no sensitive data, and the site is not intended for minors.']),
             ('What we use it for', [
@@ -43,7 +44,7 @@ PAGES = {
                 'A few elements come from other services, which then receive your IP address and apply their own rules:',
                 ['audience measurement is provided by Rybbit (rybbit.io);',
                  'the typefaces are supplied by Google Fonts;',
-                 'the film is only loaded from its video host (livid.com) if you press play;',
+                 'the AI voice agent that opens from the headset button at the top of the pages is provided by Dialora (dialora.ai), which uses Google reCAPTCHA to tell people from robots: it is only loaded when you press that button, the call only starts when you press the agent’s own button, once your browser has asked you for the microphone, and what you say is handled by Dialora under its own rules;',
                  'the calendar that opens when you press “Book a call” is provided by Lunacal (lunacal.ai): it is only loaded when you point at, touch or press one of these buttons, or open the page to book a call (ben.events/book), and what you enter in it is handled by Lunacal under its own rules;',
                  'the WhatsApp, Instagram and LinkedIn links only take you there if you click them.']]),
             ('Photos and videos of our events', [
@@ -64,6 +65,7 @@ PAGES = {
                  '<b>Quand vous nous contactez par e-mail, par téléphone ou sur WhatsApp :</b> les informations que vous choisissez de nous donner.',
                  '<b>Quand vous réservez un appel avec nous :</b> ce que vous saisissez dans le calendrier de réservation (votre nom, votre adresse e-mail, le créneau choisi et ce que vous y ajoutez). Le calendrier est exploité par Lunacal, qui nous transmet ces informations pour que nous puissions tenir l’appel.',
                  '<b>Quand vous faites tracer votre prénom lors d’une de nos animations de calligraphie :</b> votre prénom, votre adresse e-mail si vous la donnez, et votre accord ou non pour être recontacté(e) par la marque qui reçoit. Votre adresse sert à vous envoyer votre calligraphie ; elle n’est transmise à cette marque que si vous avez donné votre accord. La page vers laquelle conduit l’e-mail trace votre prénom à partir de sa propre adresse et n’enregistre rien. Si le marque-page porte un code QR, le scanner ouvre une page de notre site qui compte le scan, comme toute visite de ce site et sans vous identifier, puis vous conduit vers l’offre de la marque.',
+                 '<b>Quand vous parlez à notre agent vocal IA :</b> votre voix et ce que vous dites pendant l’appel, traités par Dialora, qui fait fonctionner l’agent, pour qu’il vous réponde et nous transmette votre demande.',
                  '<b>Quand vous consultez le site :</b> comme pour tout site, notre hébergeur enregistre des données techniques (adresse IP, type de navigateur, pages demandées, date et heure) nécessaires à l’affichage des pages et à leur sécurité.'],
                 'Nous ne demandons aucune donnée sensible, et le site ne s’adresse pas aux mineurs.']),
             ('À quoi cela nous sert', [
@@ -80,7 +82,7 @@ PAGES = {
                 'Quelques éléments viennent d’autres services, qui reçoivent alors votre adresse IP et appliquent leurs propres règles :',
                 ['la mesure d’audience est assurée par Rybbit (rybbit.io) ;',
                  'les polices de caractères sont fournies par Google Fonts ;',
-                 'le film n’est chargé depuis son hébergeur vidéo (livid.com) que si vous appuyez sur lecture ;',
+                 'l’agent vocal IA qui s’ouvre depuis le bouton casque en haut des pages est fourni par Dialora (dialora.ai), qui utilise Google reCAPTCHA pour distinguer les personnes des robots : il n’est chargé que si vous appuyez sur ce bouton, l’appel ne commence que si vous appuyez sur le bouton de l’agent, après que votre navigateur vous a demandé l’accès au micro, et ce que vous dites est traité par Dialora selon ses propres règles ;',
                  'le calendrier qui s’ouvre quand vous appuyez sur « Réserver un appel » est fourni par Lunacal (lunacal.ai) : il n’est chargé que si vous pointez, touchez ou appuyez sur l’un de ces boutons, ou ouvrez la page de réservation (ben.events/book), et ce que vous y saisissez est traité par Lunacal selon ses propres règles ;',
                  'les liens WhatsApp, Instagram et LinkedIn ne vous y conduisent que si vous cliquez dessus.']]),
             ('Photos et vidéos de nos événements', [

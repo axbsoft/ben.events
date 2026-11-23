@@ -319,6 +319,7 @@ ${STATS}
       ${LANGS.map(k => k === l ? `<a href="${alt[k]}" aria-current="true" lang="${k}">${k.toUpperCase()}</a>` : `<a href="${alt[k]}" hreflang="${k}" lang="${k}">${k.toUpperCase()}</a>`).join('\n      <span>·</span>\n      ')}
     </div>
     <button class="btn btn--sm btn--ghost btn--book btn--icon" type="button" data-book aria-haspopup="dialog" aria-label="${att(t['book.cta'])}" title="${att(t['book.cta'])}"><span></span></button>
+    <button class="btn btn--sm btn--ghost btn--icon btn--agent" type="button" data-agent aria-haspopup="dialog" aria-expanded="false" aria-controls="agent" aria-label="${att(t['agent.cta'] || EN.aria['agent.cta'])}" title="${att(t['agent.cta'] || EN.aria['agent.cta'])}"><span></span></button>
     <a class="btn btn--sm" href="${U.at(l, '#contact')}"><span>${esc(w.cta)}</span></a>
   </div>
 </header>
@@ -375,6 +376,7 @@ ${main}
 </nav>
 <script src="/assets/js/stats.js"></script>
 <script src="/assets/js/booking.js"></script>
+<script src="/assets/js/agent.js"></script>
 <script>document.querySelectorAll('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>
