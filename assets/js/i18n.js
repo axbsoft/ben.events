@@ -86,7 +86,7 @@ window.BEN_I18N = {
     'srv.3.t': 'Réceptions & Événements de marque',
     'srv.3.d': 'Lancements de produit, inaugurations, journées portes ouvertes, événements presse et réceptions de networking qui rapprochent votre marque de vos invités.',
     'srv.3.a': 'Lancements',
-    'srv.3.b': 'Inaugurations',
+    'srv.3.b': 'Portes ouvertes',
     'srv.3.c': 'Réceptions',
     'srv.4.t': 'Scène & Production audiovisuelle',
     'srv.4.d': 'Murs LED, scénographie, lumière, son, captation multicaméra et réalisation en direct, assurés par notre propre équipe technique.',
