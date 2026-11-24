@@ -136,7 +136,7 @@ const W = {
     fServices: 'Services', fAgency: 'The agency', fContact: 'Contact', approach: 'Our approach', contact: 'Contact', rights: 'All rights reserved.',
     privacy: 'Privacy policy', terms: 'Terms of use', deck: 'Our presentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency on Instagram', onLinkedin: 'benevents agency on LinkedIn',
     photoOf: t => `Photo of the event: ${t}`, serviceImg: t => `${t}: an event produced by benevents agency`,
-    faq: 'Frequent questions', quick: 'Quick contact', call: 'Call', cities: 'Where we work', fEvents: 'Events we produce', guides: 'Guides', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
+    faq: 'Frequent questions', quick: 'Quick contact', call: 'Call', cities: 'Where we work', fEvents: 'Events we produce', guides: 'Guides', dServices: 'Our services', allEvents: 'All events', allGuides: 'All guides', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
   },
   fr: {
     skip: 'Aller au contenu', nav: 'Principal', language: 'Langue', crumbs: 'Vous êtes ici', homeName: 'Accueil', cta: 'Démarrer un projet',
@@ -150,7 +150,7 @@ const W = {
     fServices: 'Savoir-faire', fAgency: 'L’agence', fContact: 'Contact', approach: 'Notre approche', contact: 'Contact', rights: 'Tous droits réservés.',
     privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation', deck: 'Notre présentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency sur Instagram', onLinkedin: 'benevents agency sur LinkedIn',
     photoOf: t => `Photo de l’événement : ${t}`, serviceImg: t => `${t} : un événement produit par benevents agency`,
-    faq: 'Questions fréquentes', quick: 'Contact rapide', call: 'Appeler', cities: 'Nos villes', fEvents: 'Nos événements', guides: 'Guides', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
+    faq: 'Questions fréquentes', quick: 'Contact rapide', call: 'Appeler', cities: 'Nos villes', fEvents: 'Nos événements', guides: 'Guides', dServices: 'Nos savoir-faire', allEvents: 'Tous les événements', allGuides: 'Tous les guides', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
   }
 };
 
@@ -237,6 +237,47 @@ function seoHead({ l, title: full, desc, alt, xdef, image, imageAlt, data }) {
 const site = l => ({ '@type': 'WebSite', '@id': SITE + '/#site', name: 'benevents agency', url: SITE + '/', inLanguage: LANGS, publisher: { '@id': ORG } });
 const homeHead = l => seoHead({ l, title: I18N.meta[l].title, desc: I18N.meta[l].desc, alt: { en: '/', fr: '/fr' }, xdef: '/', data: [agency(l), site(l)] });
 
+/* ---------- the Services menu of the header, and the events and guides of the phone menu ---------- */
+// home: the home page switches language in place, so each link carries its address and its words in both languages
+function dropMenu(l, home) {
+  // the events and the guides carry their address in both languages; the services and the projects get theirs from main.js, like the other links of the home page
+  const both = (page, words) => home ? ` data-page="${page}"${/^(event|guide)s?(:|$)/.test(page) ? LANGS.map(k => ` data-alt-${k}="${pageHref(k, page)}"`).join('') : ''}${LANGS.map(k => ` data-text-${k}="${att(words(k))}"`).join('')}` : '';
+  const words = (k, key) => W[k][key];
+  const link = (page, name, cls = '') => `<a${cls ? ` class="${cls}"` : ''} href="${home ? pageHref(l, page).slice(1) : pageHref(l, page)}"${both(page, name)}>${esc(name(l))}</a>`;
+  const head = key => `<p class="drop__h"${home ? LANGS.map(k => ` data-text-${k}="${att(words(k, key))}"`).join('') : ''}>${esc(words(l, key))}</p>`;
+  return `<div class="drop">
+      <a class="drop__btn" href="${home ? '#services' : U.at(l, '#services')}"${home ? ' data-i18n="nav.services"' : ''} aria-haspopup="true" aria-expanded="false" aria-controls="drop-panel">${esc(T[l]['nav.services'])}</a>
+      <div class="drop__panel" id="drop-panel">
+        <div class="drop__col">
+          ${head('dServices')}
+          ${SERVICES.map((s, i) => link('service:' + s.id, k => T[k]['srv.' + (i + 1) + '.t'])).join('\n          ')}
+          ${link('projects', k => W[k].allWork, 'drop__all')}
+        </div>
+        <div class="drop__col">
+          ${head('fEvents')}
+          ${EVENTS.map(e => link('event:' + e.id, k => tr(e.name, k))).join('\n          ')}
+          ${link('events', k => W[k].allEvents, 'drop__all')}
+        </div>
+        <div class="drop__col">
+          ${head('guides')}
+          ${GUIDES.map(g => link('guide:' + g.id, k => tr(g.short, k))).join('\n          ')}
+          ${link('guides', k => W[k].allGuides, 'drop__all')}
+        </div>
+      </div>
+    </div>`;
+}
+function menuMore(l) {
+  const both = (page, words) => `data-page="${page}"${LANGS.map(k => ` data-alt-${k}="${pageHref(k, page)}"`).join('')}${LANGS.map(k => ` data-text-${k}="${att(words(k))}"`).join('')}`;
+  return `<div class="menu__more">
+    <p data-i18n="ft.events">${esc(W[l].fEvents)}</p>
+    ${EVENTS.map(e => `<a href="${pageHref(l, 'event:' + e.id)}" ${both('event:' + e.id, k => tr(e.name, k))}>${esc(tr(e.name, l))}</a>`).join('\n    ')}
+    <a href="${pageHref(l, 'guides')}" ${both('guides', k => W[k].guides)}>${esc(W[l].guides)}</a>
+  </div>`;
+}
+const DROP_BLOCK = /(<!-- nav:drop -->\n)[\s\S]*?(\n *<!-- \/nav:drop -->)/, MORE_BLOCK = /(<!-- menu:more -->\n)[\s\S]*?(\n *<!-- \/menu:more -->)/;
+if (!DROP_BLOCK.test(home) || !MORE_BLOCK.test(home)) throw new Error('index.html: the lines "nav:drop" … "/nav:drop" or "menu:more" … "/menu:more" are missing');
+home = home.replace(DROP_BLOCK, (m, a, b) => a + '    ' + dropMenu('en', true) + b).replace(MORE_BLOCK, (m, a, b) => a + '  ' + menuMore('en') + b);
+
 /* ---------- 1. the home page: its head in English, and the whole page in French ---------- */
 const BLOCK = /(<!-- head:seo[^>]*-->\n)[\s\S]*?(\n<!-- \/head:seo -->)/;
 if (!BLOCK.test(home)) throw new Error('index.html: the lines "head:seo" … "/head:seo" are missing from the head');
@@ -252,6 +293,7 @@ write('index.html', home);
 
 function french(page) {
   let s = page.replace('<html lang="en">', '<html lang="fr">');
+  s = s.replace(DROP_BLOCK, (m, a, b) => a + '    ' + dropMenu('fr', true) + b).replace(MORE_BLOCK, (m, a, b) => a + '  ' + menuMore('fr') + b);
   s = s.replace(BLOCK, (m, a, b) => a + homeHead('fr') + b);
   s = s.replace(TEXT, (m, open, tag, key, text, close) => open + (I18N.fr[key] != null ? esc(I18N.fr[key]) : text) + close);
   for (const [kind, mark, name] of ATTR) {
@@ -339,7 +381,7 @@ ${STATS}
   <a class="logo" href="${U.home(l)}" aria-label="benevents agency"><span class="logo__text">${BRAND}</span></a>
   <nav class="nav__links" aria-label="${att(w.nav)}">
     <a href="${U.agency(l)}">${esc(t['nav.about'])}</a>
-    <a href="${U.at(l, '#services')}">${esc(t['nav.services'])}</a>
+    ${dropMenu(l, false)}
     <a href="${U.projects(l)}">${esc(t['nav.gallery'])}</a>
     <a href="${U.at(l, '#process')}">${esc(t['nav.process'])}</a>
     <a href="${U.at(l, '#contact')}">${esc(t['nav.contact'])}</a>
@@ -412,6 +454,7 @@ ${main}
 <script src="/assets/js/stats.js"></script>
 <script src="/assets/js/booking.js"></script>
 <script src="/assets/js/agent.js"></script>
+<script src="/assets/js/menu.js"></script>
 <script>document.querySelectorAll('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>

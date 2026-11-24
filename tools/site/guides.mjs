@@ -7,6 +7,7 @@
    slug    : the end of the page's address, in each language
    date    : the day it was written (and updated, when it is: 'updated')
    image   : the photo at the top, from one of our projects: ['path', width, height]
+   short   : a short name, for the menu of the header
    title   : the big title, in two parts (the second in italics)
    card    : one sentence for the card that leads to it
    lede    : the sentence under the title
@@ -17,6 +18,7 @@
 export const GUIDES = [
   {
     id: 'seminar-checklist',
+    short: { en: 'Organising a seminar', fr: 'Organiser un séminaire' },
     slug: { en: 'how-to-organise-a-corporate-seminar-in-morocco', fr: 'organiser-un-seminaire-d-entreprise-au-maroc' },
     date: '2026-11-24',
     image: ['assets/img/leo-regional-conference.jpg', 1280, 720],
@@ -122,6 +124,7 @@ export const GUIDES = [
   },
   {
     id: 'choose-the-city',
+    short: { en: 'Choosing the city', fr: 'Choisir la ville' },
     slug: { en: 'casablanca-rabat-marrakech-or-tangier-where-to-hold-your-event', fr: 'casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement' },
     date: '2026-11-24',
     image: ['assets/img/reception-golden-spheres.jpg', 1280, 720],
@@ -195,6 +198,7 @@ export const GUIDES = [
   },
   {
     id: 'technical-set-up',
+    short: { en: 'LED wall, sound and light', fr: 'Écran LED, son et lumière' },
     slug: { en: 'led-wall-sound-and-lighting-for-a-corporate-event', fr: 'ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise' },
     date: '2026-11-24',
     image: ['assets/img/control-desk-ballroom.jpg', 1280, 960],

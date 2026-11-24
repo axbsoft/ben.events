@@ -350,6 +350,7 @@
     svText();
     $$('[data-legal]').forEach(function (a) { a.href = a.getAttribute('data-legal') + '?lang=' + lang; });   // the legal pages and the presentation open in the same language
     // the pages of the services and projects, in the language on screen (a plain press still opens them over the site)
+    $$('[data-text-en]').forEach(function (n) { n.textContent = n.getAttribute('data-text-' + lang); });      // the menu of the header carries its words in both languages
     $$('[data-page]').forEach(function (a) {
       var both = a.getAttribute('data-alt-' + lang);           // the kinds of events and the guides: their address in each language is written in the link
       if (both) { a.href = both; return; }

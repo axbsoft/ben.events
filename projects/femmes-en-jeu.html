@@ -122,7 +122,35 @@
   <a class="logo" href="/" aria-label="benevents agency"><span class="logo__text"><span class="brand"><span class="brand__w"><b>ben</b>events</span><span class="brand__bar"><i></i><i></i><i></i><i></i></span><span class="brand__a">agency</span></span></span></a>
   <nav class="nav__links" aria-label="Primary">
     <a href="/agency">The Agency</a>
-    <a href="/#services">Services</a>
+    <div class="drop">
+      <a class="drop__btn" href="/#services" aria-haspopup="true" aria-expanded="false" aria-controls="drop-panel">Services</a>
+      <div class="drop__panel" id="drop-panel">
+        <div class="drop__col">
+          <p class="drop__h">Our services</p>
+          <a href="/services/conferences-conventions">Conferences &amp; Conventions</a>
+          <a href="/services/ceremonies-gala-evenings">Ceremonies &amp; Gala Evenings</a>
+          <a href="/services/brand-corporate-receptions">Brand &amp; Corporate Receptions</a>
+          <a href="/services/stage-audiovisual-production">Stage &amp; Audiovisual Production</a>
+          <a class="drop__all" href="/projects">All projects</a>
+        </div>
+        <div class="drop__col">
+          <p class="drop__h">Events we produce</p>
+          <a href="/events/seminar-organisation-morocco">Seminar</a>
+          <a href="/events/corporate-convention-morocco">Convention</a>
+          <a href="/events/gala-dinner-morocco">Gala evening</a>
+          <a href="/events/product-launch-morocco">Product launch</a>
+          <a href="/events/open-day-showroom-morocco">Open day</a>
+          <a class="drop__all" href="/events">All events</a>
+        </div>
+        <div class="drop__col">
+          <p class="drop__h">Guides</p>
+          <a href="/guides/how-to-organise-a-corporate-seminar-in-morocco">Organising a seminar</a>
+          <a href="/guides/casablanca-rabat-marrakech-or-tangier-where-to-hold-your-event">Choosing the city</a>
+          <a href="/guides/led-wall-sound-and-lighting-for-a-corporate-event">LED wall, sound and light</a>
+          <a class="drop__all" href="/guides">All guides</a>
+        </div>
+      </div>
+    </div>
     <a href="/projects">Portfolio</a>
     <a href="/#process">Approach</a>
     <a href="/#contact">Contact</a>
@@ -253,6 +281,7 @@
 <script src="/assets/js/stats.js"></script>
 <script src="/assets/js/booking.js"></script>
 <script src="/assets/js/agent.js"></script>
+<script src="/assets/js/menu.js"></script>
 <script>document.querySelectorAll('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>

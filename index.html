@@ -185,7 +185,37 @@
   </a>
   <nav class="nav__links" aria-label="Primary">
     <a href="#about" data-i18n="nav.about">The Agency</a>
-    <a href="#services" data-i18n="nav.services">Services</a>
+    <!-- nav:drop -->
+    <div class="drop">
+      <a class="drop__btn" href="#services" data-i18n="nav.services" aria-haspopup="true" aria-expanded="false" aria-controls="drop-panel">Services</a>
+      <div class="drop__panel" id="drop-panel">
+        <div class="drop__col">
+          <p class="drop__h" data-text-en="Our services" data-text-fr="Nos savoir-faire">Our services</p>
+          <a href="services/conferences-conventions" data-page="service:conferences" data-text-en="Conferences &amp; Conventions" data-text-fr="Conférences &amp; Conventions">Conferences &amp; Conventions</a>
+          <a href="services/ceremonies-gala-evenings" data-page="service:ceremonies" data-text-en="Ceremonies &amp; Gala Evenings" data-text-fr="Cérémonies &amp; Soirées de gala">Ceremonies &amp; Gala Evenings</a>
+          <a href="services/brand-corporate-receptions" data-page="service:receptions" data-text-en="Brand &amp; Corporate Receptions" data-text-fr="Réceptions &amp; Événements de marque">Brand &amp; Corporate Receptions</a>
+          <a href="services/stage-audiovisual-production" data-page="service:production" data-text-en="Stage &amp; Audiovisual Production" data-text-fr="Scène &amp; Production audiovisuelle">Stage &amp; Audiovisual Production</a>
+          <a class="drop__all" href="projects" data-page="projects" data-text-en="All projects" data-text-fr="Toutes les réalisations">All projects</a>
+        </div>
+        <div class="drop__col">
+          <p class="drop__h" data-text-en="Events we produce" data-text-fr="Nos événements">Events we produce</p>
+          <a href="events/seminar-organisation-morocco" data-page="event:seminar" data-text-en="Seminar" data-text-fr="Séminaire" data-alt-en="/events/seminar-organisation-morocco" data-alt-fr="/fr/evenements/organisation-seminaire-maroc">Seminar</a>
+          <a href="events/corporate-convention-morocco" data-page="event:convention" data-text-en="Convention" data-text-fr="Convention" data-alt-en="/events/corporate-convention-morocco" data-alt-fr="/fr/evenements/organisation-convention-entreprise-maroc">Convention</a>
+          <a href="events/gala-dinner-morocco" data-page="event:gala" data-text-en="Gala evening" data-text-fr="Soirée de gala" data-alt-en="/events/gala-dinner-morocco" data-alt-fr="/fr/evenements/soiree-de-gala-maroc">Gala evening</a>
+          <a href="events/product-launch-morocco" data-page="event:launch" data-text-en="Product launch" data-text-fr="Lancement de produit" data-alt-en="/events/product-launch-morocco" data-alt-fr="/fr/evenements/lancement-de-produit-maroc">Product launch</a>
+          <a href="events/open-day-showroom-morocco" data-page="event:openday" data-text-en="Open day" data-text-fr="Journée portes ouvertes" data-alt-en="/events/open-day-showroom-morocco" data-alt-fr="/fr/evenements/journee-portes-ouvertes-maroc">Open day</a>
+          <a class="drop__all" href="events" data-page="events" data-text-en="All events" data-text-fr="Tous les événements" data-alt-en="/events" data-alt-fr="/fr/evenements">All events</a>
+        </div>
+        <div class="drop__col">
+          <p class="drop__h" data-text-en="Guides" data-text-fr="Guides">Guides</p>
+          <a href="guides/how-to-organise-a-corporate-seminar-in-morocco" data-page="guide:seminar-checklist" data-text-en="Organising a seminar" data-text-fr="Organiser un séminaire" data-alt-en="/guides/how-to-organise-a-corporate-seminar-in-morocco" data-alt-fr="/fr/guides/organiser-un-seminaire-d-entreprise-au-maroc">Organising a seminar</a>
+          <a href="guides/casablanca-rabat-marrakech-or-tangier-where-to-hold-your-event" data-page="guide:choose-the-city" data-text-en="Choosing the city" data-text-fr="Choisir la ville" data-alt-en="/guides/casablanca-rabat-marrakech-or-tangier-where-to-hold-your-event" data-alt-fr="/fr/guides/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement">Choosing the city</a>
+          <a href="guides/led-wall-sound-and-lighting-for-a-corporate-event" data-page="guide:technical-set-up" data-text-en="LED wall, sound and light" data-text-fr="Écran LED, son et lumière" data-alt-en="/guides/led-wall-sound-and-lighting-for-a-corporate-event" data-alt-fr="/fr/guides/ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise">LED wall, sound and light</a>
+          <a class="drop__all" href="guides" data-page="guides" data-text-en="All guides" data-text-fr="Tous les guides" data-alt-en="/guides" data-alt-fr="/fr/guides">All guides</a>
+        </div>
+      </div>
+    </div>
+    <!-- /nav:drop -->
     <a href="#gallery" data-i18n="nav.gallery">Portfolio</a>
     <a href="#process" data-i18n="nav.process">Approach</a>
     <a href="#contact" data-i18n="nav.contact">Contact</a>
@@ -212,6 +242,17 @@
     <a href="#process"><em>04</em><span data-i18n="nav.process">Approach</span></a>
     <a href="#contact"><em>05</em><span data-i18n="nav.contact">Contact</span></a>
   </nav>
+  <!-- menu:more -->
+  <div class="menu__more">
+    <p data-i18n="ft.events">Events we produce</p>
+    <a href="events/seminar-organisation-morocco" data-page="event:seminar" data-text-en="Seminar" data-text-fr="Séminaire" data-alt-en="/events/seminar-organisation-morocco" data-alt-fr="/fr/evenements/organisation-seminaire-maroc">Seminar</a>
+    <a href="events/corporate-convention-morocco" data-page="event:convention" data-text-en="Convention" data-text-fr="Convention" data-alt-en="/events/corporate-convention-morocco" data-alt-fr="/fr/evenements/organisation-convention-entreprise-maroc">Convention</a>
+    <a href="events/gala-dinner-morocco" data-page="event:gala" data-text-en="Gala evening" data-text-fr="Soirée de gala" data-alt-en="/events/gala-dinner-morocco" data-alt-fr="/fr/evenements/soiree-de-gala-maroc">Gala evening</a>
+    <a href="events/product-launch-morocco" data-page="event:launch" data-text-en="Product launch" data-text-fr="Lancement de produit" data-alt-en="/events/product-launch-morocco" data-alt-fr="/fr/evenements/lancement-de-produit-maroc">Product launch</a>
+    <a href="events/open-day-showroom-morocco" data-page="event:openday" data-text-en="Open day" data-text-fr="Journée portes ouvertes" data-alt-en="/events/open-day-showroom-morocco" data-alt-fr="/fr/evenements/journee-portes-ouvertes-maroc">Open day</a>
+    <a href="guides" data-page="guides" data-text-en="Guides" data-text-fr="Guides" data-alt-en="/guides" data-alt-fr="/fr/guides">Guides</a>
+  </div>
+  <!-- /menu:more -->
   <div class="menu__foot">
     <button class="btn btn--ghost btn--book menu__book" type="button" data-book aria-haspopup="dialog"><span data-i18n="book.cta">Book a call</span></button>
     <div class="lang lang--menu" role="group" aria-label="Language">
@@ -776,5 +817,6 @@
 <script src="assets/js/voices.js"></script>
 <script src="assets/js/services.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/menu.js"></script>
 </body>
 </html>
