@@ -6,15 +6,16 @@ What the team changes most often lives here, as data, and is edited on the admin
 | File | What it holds | Shown on |
 |---|---|---|
 | `projects.json` | the portfolio: each project, its photos and facts; the kinds of events and the places | home page, /projects, each project's page, the pages of the cities and the events |
-| `blog/<id>.json` | one article of the blog each | /blog, each article, the Services menu |
+| `blog/<id>.json` | one article of the blog each | /blog, each article |
 | `voices.json` | key figures and client quotes | home page (under the client logos), /agency |
 
 Each save on the admin page is a commit to this repository, signed with the name of the person who made it.
-Vercel then builds the site again (`node tools/site/build.mjs`, set in `vercel.json`) and puts it online,
+Vercel then builds the site again (`node tools/site/build.mjs && node tools/site/dist.mjs`, set in `vercel.json`) and puts it online,
 about a minute later. A project or an article marked **draft** stays off the site.
 
-These files are not served by the site (`vercel.json` sends `/content/…` to the home page), but anyone who can
-read this repository can read them, drafts included: keep the repository private.
+These files are not published: Vercel builds the site and publishes only `dist/` (`tools/site/dist.mjs`),
+without `content/`, `tools/` or `api/`. Anyone who can read this repository can read them, drafts included:
+keep the repository private.
 
 ## Setting up the admin
 

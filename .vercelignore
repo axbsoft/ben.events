@@ -1,2 +1,3 @@
-# kept in the repository, not part of the published site
-tools
+# Vercel gets the whole repository: it builds the site with tools/ and content/, then publishes only dist/
+# (tools/site/dist.mjs). A local dist/ is never sent.
+dist

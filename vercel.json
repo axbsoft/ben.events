@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "node tools/site/build.mjs",
-  "outputDirectory": ".",
+  "buildCommand": "node tools/site/build.mjs && node tools/site/dist.mjs",
+  "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
@@ -208,11 +208,6 @@
     }
   ],
   "redirects": [
-    {
-      "source": "/content/(.*)",
-      "destination": "/",
-      "permanent": false
-    },
     {
       "source": "/book",
       "destination": "/#contact",
