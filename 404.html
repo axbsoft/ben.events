@@ -40,7 +40,7 @@
 (function () {
   var stored = null;
   try { stored = localStorage.getItem('ben-lang'); } catch (e) {}
-  var fr = /^\/fr(\/|$)/.test(location.pathname) || (!/^\/(services|projects)(\/|$)/.test(location.pathname) && (stored ? stored === 'fr' : /^(fr|ar-ma)/i.test(navigator.language || '')));
+  var fr = /^\/fr(\/|$)/.test(location.pathname) || (!/^\/(services|projects)(\/|$)/.test(location.pathname) && stored === 'fr');   // English unless the address or the visitor's own choice says French
   if (!fr) return;
   document.documentElement.lang = 'fr';
   document.title = "Page introuvable | benevents agency";

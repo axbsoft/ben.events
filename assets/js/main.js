@@ -378,14 +378,12 @@
     return fr ? 'fr/realisations' : 'projects';
   }
 
-  var stored = null;
-  try { stored = localStorage.getItem('ben-lang'); } catch (e) {}
   var qs = /[?&]lang=(en|fr)\b/.exec(location.search);
   var CLEAN = /^\/(fr)?$/.test(location.pathname);                    // served at its own address (not opened as a file)
   var FRENCH = /\/fr(\.html)?$/.test(location.pathname);              // the French page
-  // on the French page, French; elsewhere the language asked for, else the one chosen before, else the browser's
-  // (a browser set to Moroccan Arabic gets French rather than English)
-  var initial = FRENCH ? 'fr' : (qs && qs[1]) || stored || (/^(fr|ar-ma)/i.test(navigator.language || '') ? 'fr' : 'en');
+  // English is the main language: the home page opens in English, whatever the browser's language;
+  // French on the French page (/fr), or when asked for (?lang=fr)
+  var initial = FRENCH ? 'fr' : (qs && qs[1]) || 'en';
 
   $$('[data-lang]').forEach(function (b) {
     b.addEventListener('click', function () {
