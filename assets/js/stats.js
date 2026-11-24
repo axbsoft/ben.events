@@ -66,6 +66,7 @@
     if (a.classList.contains('wa')) return 'floating button';
     if (a.closest('.mbar')) return 'phone bar';
     if (a.closest('footer')) return 'footer';
+    if (a.closest('#compose')) return 'compose your event';
     if (a.closest('#contact')) return 'contact section';
     if (a.closest('.pj__cta')) return 'end of a project';
     return 'page';

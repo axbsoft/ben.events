@@ -15,8 +15,18 @@ clients type, not measured search volumes.
 | `/fr/agence-evenementielle-marrakech` | agence événementielle Marrakech | séminaire, soirée de gala, réception |
 | `/fr/services/conferences-conventions` | organisation de conférences et conventions au Maroc | forum, séminaire, convention d'entreprise, captation |
 | `/fr/services/ceremonies-soirees-de-gala` | organisation de cérémonies et soirées de gala au Maroc | remise de prix, cérémonie institutionnelle, dîner de gala |
-| `/fr/services/receptions-evenements-de-marque` | lancement de produit au Maroc | réception d'entreprise, inauguration, événement de marque |
+| `/fr/services/receptions-evenements-de-marque` | réceptions d'entreprise et événements de marque au Maroc | inauguration, portes ouvertes, lancement |
 | `/fr/services/scene-production-audiovisuelle` | production audiovisuelle événementielle au Maroc | scénographie, régie technique, sonorisation, éclairage, écran LED |
+| `/fr/evenements` | événements d'entreprise organisés au Maroc | séminaire, convention, soirée de gala, lancement, portes ouvertes |
+| `/fr/evenements/organisation-seminaire-maroc` | organisation de séminaire d'entreprise au Maroc | plénière, ateliers, soirée, Tanger, Marrakech |
+| `/fr/evenements/organisation-convention-entreprise-maroc` | organisation de convention d'entreprise au Maroc | réunion commerciale, distributeurs, scène centrale, captation |
+| `/fr/evenements/soiree-de-gala-maroc` | organisation de soirée de gala au Maroc | dîner de gala, scénographie, mur LED, lumière |
+| `/fr/evenements/lancement-de-produit-maroc` | organisation de lancement de produit au Maroc | événement de marque, présentation, showroom |
+| `/fr/evenements/journee-portes-ouvertes-maroc` | organisation de journée portes ouvertes au Maroc | showroom, concession, animation, DJ |
+| `/fr/guides` | guides pour organiser un événement d'entreprise au Maroc | conseils, checklist |
+| `/fr/guides/organiser-un-seminaire-d-entreprise-au-maroc` | organiser un séminaire au Maroc | checklist, lieu, déroulé, technique |
+| `/fr/guides/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement` | quelle ville pour un événement au Maroc | Casablanca, Rabat, Marrakech, Tanger |
+| `/fr/guides/ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise` | écran LED, son et lumière pour un événement | régie, captation, mur LED |
 | `/fr/agence` | benevents agency (the name) | conception et production d'événements, équipe, principes |
 | `/fr/realisations` | événements d'entreprise réalisés au Maroc | réalisations, études de cas |
 | `/fr/realisations/<event>` | the name of the event, with its type and its city | |
@@ -27,6 +37,10 @@ The English pages mirror the French ones (event agency in Morocco, event agency 
 
 - **organisation événement entreprise Maroc**: the home page. It is what the agency is.
 - **organisation cérémonie institutionnelle Maroc**: the ceremonies page.
+- **team building Maroc**: no page until the agency has produced one. A page needs a real project to show.
+- A project page names its own event ("CUPRA Open Day"): it tells one case, while the page of its kind of
+  event aims at the phrase. Their titles differ: "Journée portes ouvertes CUPRA" against "Organisation de journée
+  portes ouvertes au Maroc".
 - **scénographie événementielle, régie technique, sonorisation, éclairage, écran LED**: the audiovisual page.
   One page that covers the whole production is stronger than five short ones that would compete with each other.
 

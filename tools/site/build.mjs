@@ -12,12 +12,17 @@
      agency.html, fr/agence.html            the page about the agency                    -> /agency, /fr/agence
      event-agency-<city>.html               one page per city where we work              -> /event-agency-<city>
      fr/agence-evenementielle-<city>.html   the same in French                           -> /fr/agence-evenementielle-<city>
+     events.html, events/<slug>.html        the kinds of events we produce, one page each -> /events, /events/<slug>
+     fr/evenements.html, fr/evenements/<slug>.html     the same in French                 -> /fr/evenements, …
+     guides.html, guides/<slug>.html        the guides, and the page that lists them      -> /guides, /guides/<slug>
+     fr/guides.html, fr/guides/<slug>.html  the same in French                           -> /fr/guides, …
      404.html                               what a visitor sees when an address does not exist
      sitemap.xml                            the list of all of them, with the day each last changed and its pictures
 
    It also rewrites, in index.html, the lines between "head:seo" and "/head:seo" (title, description,
    addresses of the two languages, data for search engines), from assets/js/i18n.js (meta).
 
+   The words of the kinds of events are in tools/site/events.mjs, those of the guides in tools/site/guides.mjs.
    The words of the agency page and of the cities are in tools/site/pages.mjs; the key figures and the
    quotes of clients (assets/js/voices.js) are shown on the agency page too.
 
@@ -41,6 +46,8 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import { CITIES, CITY_WORDS, AGENCY, TEAM, COMPANY } from './pages.mjs';
+import { EVENTS, EVENT_WORDS } from './events.mjs';
+import { GUIDES, GUIDE_WORDS } from './guides.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = 'https://www.ben.events';
@@ -66,6 +73,18 @@ for (const pr of PROJECTS) if (pr.city && !PLACES[pr.city]) throw new Error(`pro
 // the cities that have a page are the same on both sides: PLACES (projects.js, "page: true") and CITIES (pages.mjs)
 for (const c of CITIES) if (!PLACES[c.id] || !PLACES[c.id].page) throw new Error(`the city "${c.id}" has a page (tools/site/pages.mjs) but is not marked "page: true" in the places of projects.js`);
 for (const k of Object.keys(PLACES)) if (PLACES[k].page && !CITIES.some(c => c.id === k)) throw new Error(`projects.js marks the place "${k}" as having a page, but tools/site/pages.mjs has no city of that name`);
+// the pages of the kinds of events and the guides only point to what exists
+for (const e of EVENTS) {
+  if (!SERVICES.some(s => s.id === e.service)) throw new Error(`events.mjs: "${e.id}" belongs to the service "${e.service}", which services.js does not have`);
+  for (const i of e.ideas) if (!PROJECTS.some(p => p.id === i.project)) throw new Error(`events.mjs: "${e.id}" shows the project "${i.project}", which projects.js does not have`);
+}
+for (const g of GUIDES) {
+  const r = g.related || {};
+  for (const id of r.events || []) if (!EVENTS.some(e => e.id === id)) throw new Error(`guides.mjs: "${g.id}" leads to the event "${id}", which events.mjs does not have`);
+  for (const id of r.services || []) if (!SERVICES.some(s => s.id === id)) throw new Error(`guides.mjs: "${g.id}" leads to the service "${id}", which services.js does not have`);
+  for (const id of r.cities || []) if (!CITIES.some(c => c.id === id)) throw new Error(`guides.mjs: "${g.id}" leads to the city "${id}", which pages.mjs does not have`);
+  for (const id of r.guides || []) if (!GUIDES.some(x => x.id === id)) throw new Error(`guides.mjs: "${g.id}" leads to the guide "${id}", which does not exist`);
+}
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const att = s => esc(s).replace(/"/g, '&quot;');
@@ -95,7 +114,11 @@ const U = {
   projects: l => l === 'fr' ? '/fr/realisations' : '/projects',
   agency: l => (l === 'fr' ? '/fr/' : '/') + AGENCY[l].slug,
   city: (l, c) => (l === 'fr' ? '/fr/' : '/') + CITY_WORDS[l].slug + c.id,
-  legal: (l, k) => '/' + k + '?lang=' + l
+  legal: (l, k) => '/' + k + '?lang=' + l,
+  event: (l, e) => EVENT_WORDS[l].folder + e.slug[l],
+  events: l => EVENT_WORDS[l].index,
+  guide: (l, g) => GUIDE_WORDS[l].folder + g.slug[l],
+  guides: l => GUIDE_WORDS[l].index
 };
 const fileOf = path => (path === '/' ? 'index' : path.slice(1)) + '.html';
 
@@ -113,7 +136,7 @@ const W = {
     fServices: 'Services', fAgency: 'The agency', fContact: 'Contact', approach: 'Our approach', contact: 'Contact', rights: 'All rights reserved.',
     privacy: 'Privacy policy', terms: 'Terms of use', deck: 'Our presentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency on Instagram', onLinkedin: 'benevents agency on LinkedIn',
     photoOf: t => `Photo of the event: ${t}`, serviceImg: t => `${t}: an event produced by benevents agency`,
-    faq: 'Frequent questions', quick: 'Quick contact', call: 'Call', cities: 'Where we work', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
+    faq: 'Frequent questions', quick: 'Quick contact', call: 'Call', cities: 'Where we work', fEvents: 'Events we produce', guides: 'Guides', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
   },
   fr: {
     skip: 'Aller au contenu', nav: 'Principal', language: 'Langue', crumbs: 'Vous êtes ici', homeName: 'Accueil', cta: 'Démarrer un projet',
@@ -127,7 +150,7 @@ const W = {
     fServices: 'Savoir-faire', fAgency: 'L’agence', fContact: 'Contact', approach: 'Notre approche', contact: 'Contact', rights: 'Tous droits réservés.',
     privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation', deck: 'Notre présentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency sur Instagram', onLinkedin: 'benevents agency sur LinkedIn',
     photoOf: t => `Photo de l’événement : ${t}`, serviceImg: t => `${t} : un événement produit par benevents agency`,
-    faq: 'Questions fréquentes', quick: 'Contact rapide', call: 'Appeler', cities: 'Nos villes', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
+    faq: 'Questions fréquentes', quick: 'Contact rapide', call: 'Appeler', cities: 'Nos villes', fEvents: 'Nos événements', guides: 'Guides', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
   }
 };
 
@@ -222,6 +245,14 @@ home = home.replace(BLOCK, (m, a, b) => a + homeHead('en') + b);
 // the links to a service or a project page follow the addresses decided here
 const PAGE_LINK = /(<a\b[^>]*?\shref=")[^"]*("[^>]*\sdata-page="([^"]+)")/g;
 home = home.replace(PAGE_LINK, (m, a, b, page) => a + pageHref('en', page).slice(1) + b);
+// a link to a kind of event or to a guide carries its address in both languages: the page switches language in place
+const ALT_LINK = /<a\b[^>]*\sdata-page="((?:event|guide)s?(?::[^"]*)?)"[^>]*>/g;
+home = home.replace(ALT_LINK, (tag, page) => tag.replace(/\sdata-alt-(en|fr)="[^"]*"/g, '').replace(/>$/, ` data-alt-en="${pageHref('en', page)}" data-alt-fr="${pageHref('fr', page)}">`));
+// the addresses and names of the kinds of events, for "Compose your event"
+const EV_BLOCK = /(<!-- events:pages -->\n)[\s\S]*?(\n<!-- \/events:pages -->)/;
+if (!EV_BLOCK.test(home)) throw new Error('index.html: the lines "events:pages" … "/events:pages" are missing');
+const evPages = Object.fromEntries(EVENTS.map(e => [e.id, { en: U.event('en', e), fr: U.event('fr', e), name: e.name }]));
+home = home.replace(EV_BLOCK, (m, a, b) => a + '<script>window.BEN_EVENT_PAGES = ' + JSON.stringify(evPages).replace(/</g, '\\u003c') + ';</script>' + b);
 write('index.html', home);
 
 function french(page) {
@@ -249,6 +280,10 @@ function pageHref(l, page) {
   if (kind === 'projects') return U.projects(l);
   if (kind === 'agency') return U.agency(l);
   if (kind === 'city') return U.city(l, CITIES.find(c => c.id === id));
+  if (kind === 'event') { const e = EVENTS.find(x => x.id === id); if (!e) throw new Error('unknown event: ' + id); return U.event(l, e); }
+  if (kind === 'events') return U.events(l);
+  if (kind === 'guide') { const g = GUIDES.find(x => x.id === id); if (!g) throw new Error('unknown guide: ' + id); return U.guide(l, g); }
+  if (kind === 'guides') return U.guides(l);
   throw new Error('unknown page: ' + page);
 }
 write('fr.html', french(home));
@@ -341,11 +376,16 @@ ${main}
       <h2>${esc(w.fServices)}</h2>
       ${SERVICES.map((s, i) => `<a href="${U.service(l, s)}">${esc(t['srv.' + (i + 1) + '.t'])}</a>`).join('\n      ')}
     </nav>
+    <nav class="pfoot__col" aria-label="${att(w.fEvents)}">
+      <h2>${esc(w.fEvents)}</h2>
+      ${EVENTS.map(e => `<a href="${U.event(l, e)}">${esc(tr(e.name, l))}</a>`).join('\n      ')}
+    </nav>
     <nav class="pfoot__col" aria-label="${att(w.fAgency)}">
       <h2>${esc(w.fAgency)}</h2>
       <a href="${U.home(l)}">${esc(w.homeName)}</a>
       <a href="${U.agency(l)}">${esc(AGENCY[l].name)}</a>
       <a href="${U.projects(l)}">${esc(w.work)}</a>
+      <a href="${U.guides(l)}">${esc(w.guides)}</a>
       <a href="${U.at(l, '#process')}">${esc(w.approach)}</a>
       <a href="/presentation?lang=${l}">${esc(w.deck)}</a>
     </nav>
@@ -406,6 +446,15 @@ const projectCard = (l, p, text) => {
     </a>`;
 };
 
+const eventCard = (l, e) => `<a class="pcard" href="${U.event(l, e)}">
+      <span class="pcard__ph">${img(e.image, EVENT_WORDS[l].cover(tr(e.name, l)), ' loading="lazy"', 'card')}</span>
+      <span class="pcard__in"><b>${esc(tr(e.name, l))}</b><span>${esc(tr(e.lede, l))}</span><small>${esc(EVENT_WORDS[l].card)}</small></span>
+    </a>`;
+const guideCard = (l, g) => `<a class="pcard" href="${U.guide(l, g)}">
+      <span class="pcard__ph">${img(g.image, GUIDE_WORDS[l].cover(g.title[l].join(' ')), ' loading="lazy"', 'card')}</span>
+      <span class="pcard__in"><b>${esc(g.title[l].join(' '))}</b><span>${esc(tr(g.card, l))}</span><small>${esc(GUIDE_WORDS[l].card)}</small></span>
+    </a>`;
+
 const pages = [];        // every page written: { alt: {en, fr}, images: its pictures, for the list of pages }
 for (const s of SERVICES) {
   const n = SERVICES.indexOf(s) + 1, alt = Object.fromEntries(LANGS.map(l => [l, U.service(l, s)]));
@@ -457,6 +506,12 @@ ${s.more ? `<section class="pg__sec">
   <h2 class="pg__h2">${esc(w.more)}</h2>
   <div class="pcards">
     ${mine.map(p => projectCard(l, p)).join('\n    ')}
+  </div>
+</section>` : ''}${EVENTS.some(e => e.service === s.id) ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(EVENT_WORDS[l].ofKind)}</h2>
+  <div class="pcards${EVENTS.filter(e => e.service === s.id).length < 3 ? ' pcards--few' : ''}">
+    ${EVENTS.filter(e => e.service === s.id).map(e => eventCard(l, e)).join('\n    ')}
   </div>
 </section>` : ''}${s.faq ? `
 <section class="pg__sec">
@@ -717,6 +772,223 @@ ${cta(l, a.endTitle, w.endText)}
   }
 }
 
+/* ---------- 3b. the kinds of events we produce, and the guides (their words are in tools/site/events.mjs and guides.mjs) ---------- */
+const serviceName = (l, s) => T[l]['srv.' + (SERVICES.indexOf(s) + 1) + '.t'];
+// in a guide, {words|kind:id} is a link to a page of the site: kind is guide, event, service, city or project
+const LINK_IN = /\{([^|{}]+)\|(guide|event|service|city|project):([a-z0-9-]+)\}/g;
+const linkTo = (l, kind, id) => {
+  const page = kind === 'guide' ? GUIDES.find(x => x.id === id) : kind === 'event' ? EVENTS.find(x => x.id === id)
+    : kind === 'service' ? SERVICES.find(x => x.id === id) : kind === 'city' ? CITIES.find(x => x.id === id) : byId[id];
+  if (!page) throw new Error(`a link to the ${kind} "${id}", which does not exist`);
+  return U[kind](l, page);
+};
+const rich = (l, s) => esc(s).replace(LINK_IN, (m, words, kind, id) => `<a href="${linkTo(l, kind, id)}">${words}</a>`);
+const plain = s => s.replace(LINK_IN, (m, words) => words);
+const words = list => list.join(' ').split(/\s+/).filter(Boolean).length;
+const longDate = (l, d) => new Date(d + 'T12:00:00Z').toLocaleDateString(l === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+for (const e of EVENTS) {
+  const alt = Object.fromEntries(LANGS.map(l => [l, U.event(l, e)]));
+  pages.push({ alt, xdef: alt.fr, kind: 'event', images: [e.image[0], ...e.ideas.map(i => byId[i.project].photos[0][0])] });
+  const s = SERVICES.find(x => x.id === e.service);
+  for (const l of LANGS) {
+    const w = W[l], ew = EVENT_WORDS[l], name = tr(e.name, l), title = e.title[l], steps = e.steps && e.steps[l];
+    const trail = [[w.homeName, U.home(l)], [ew.name, U.events(l)], [name]];
+    const reading = GUIDES.filter(g => (g.related.events || []).includes(e.id));
+    const head = seoHead({
+      l, title: e.seo.title[l], desc: e.seo.desc[l], alt, xdef: alt.fr, image: '/' + e.image[0], imageAlt: ew.cover(name),
+      data: [{ '@type': 'Service', '@id': SITE + alt[l] + '#service', name: title.join(' '), serviceType: name, description: e.seo.desc[l], url: SITE + alt[l], image: SITE + '/' + e.image[0],
+        provider: { '@id': ORG }, areaServed: { '@type': 'Country', name: l === 'fr' ? 'Maroc' : 'Morocco' }, isRelatedTo: { '@type': 'Service', name: serviceName(l, s), url: SITE + U.service(l, s) } },
+        { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/' }, crumbs(l, trail),
+        { '@type': 'FAQPage', '@id': SITE + alt[l] + '#faq', inLanguage: l, mainEntity: e.faq[l].map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }]
+    });
+    const main = `${crumbNav(l, trail)}
+<header class="pg__head${e.image[1] < e.image[2] ? ' pg__head--tall' : ''}">
+  <div>
+    <p class="eyebrow"><i></i><span>${esc(ew.eyebrow)} · ${esc(name)}</span></p>
+    <h1 class="pg__title">${esc(title[0])} <em>${esc(title[1])}</em></h1>
+    <p class="pg__lede">${esc(tr(e.lede, l))}</p>
+    <p class="pg__tags"><span>${esc(ew.service)}</span><a href="${U.service(l, s)}">${esc(serviceName(l, s))}</a></p>
+    <a class="btn" href="${U.at(l, '#contact')}"><span>${esc(w.talk)}</span></a>
+  </div>
+  <figure class="pg__cover">${img(e.image, ew.cover(name), ' fetchpriority="high"', 'cover')}</figure>
+</header>
+<section class="pg__cols">
+  <div class="pg__text">
+    ${e.text[l].map(p => `<p>${esc(p)}</p>`).join('\n    ')}
+  </div>
+  <div class="pg__does">
+    <h2 class="pg__h">${esc(w.does)}</h2>
+    <ul>
+      ${e.does[l].map(d => `<li>${esc(d)}</li>`).join('\n      ')}
+    </ul>
+  </div>
+</section>${steps ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(steps.title)}</h2>
+  <p class="pg__lede pg__lede--wide">${esc(steps.intro)}</p>
+  <ul class="pg__notes pg__notes--named pg__notes--n${steps.points.length}">
+    ${steps.points.map(([k, v]) => `<li><b>${esc(k)}</b>${esc(v)}</li>`).join('\n    ')}
+  </ul>
+</section>` : ''}
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(w.ideas)}</h2>
+  <div class="pcards pcards--two">
+    ${e.ideas.map(i => projectCard(l, byId[i.project], [tr(i.title, l), tr(i.text, l)])).join('\n    ')}
+  </div>
+</section>
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(w.faq)}</h2>
+  <div class="pg__faq">
+    ${e.faq[l].map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n    ')}
+  </div>
+</section>${reading.length ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(GUIDE_WORDS[l].next)}</h2>
+  <div class="pcards pcards--few">
+    ${reading.map(g => guideCard(l, g)).join('\n    ')}
+  </div>
+</section>` : ''}
+${cta(l, w.endTitle, w.endText)}
+<nav class="pg__others" aria-label="${att(ew.others)}">
+  <h2 class="pg__h">${esc(ew.others)}</h2>
+  ${EVENTS.filter(o => o !== e).map(o => `<a href="${U.event(l, o)}">${esc(tr(o.name, l))}</a>`).join('\n  ')}
+  <a href="${U.guides(l)}">${esc(w.guides)}</a>
+</nav>`;
+    write(fileOf(alt[l]), shell({ l, head, alt, main }));
+  }
+}
+
+{
+  const alt = Object.fromEntries(LANGS.map(l => [l, U.events(l)]));
+  pages.push({ alt, xdef: alt.fr, kind: 'events', images: EVENTS.map(e => e.image[0]) });
+  for (const l of LANGS) {
+    const w = W[l], ew = EVENT_WORDS[l], trail = [[w.homeName, U.home(l)], [ew.name]];
+    const head = seoHead({
+      l, title: ew.seo[0], desc: ew.seo[1], alt, xdef: alt.fr, image: '/' + EVENTS[0].image[0], imageAlt: ew.cover(tr(EVENTS[0].name, l)),
+      data: [{ '@type': 'CollectionPage', '@id': SITE + alt[l] + '#page', name: ew.title.join(' '), description: ew.seo[1], url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, about: { '@id': ORG },
+        mainEntity: { '@type': 'ItemList', itemListElement: EVENTS.map((e, i) => ({ '@type': 'ListItem', position: i + 1, name: tr(e.name, l), url: SITE + U.event(l, e) })) } },
+        { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/' }, crumbs(l, trail)]
+    });
+    const main = `${crumbNav(l, trail)}
+<header class="pg__top">
+  <p class="eyebrow"><i></i><span>${esc(ew.eyebrow)}</span></p>
+  <h1 class="pg__title">${esc(ew.title[0])} <em>${esc(ew.title[1])}</em></h1>
+  <p class="pg__lede">${esc(ew.lede)}</p>
+</header>
+<section class="pg__sec">
+  <div class="pcards">
+    ${EVENTS.map((e, i) => i < 4 ? eventCard(l, e).replace(' loading="lazy"', '') : eventCard(l, e)).join('\n    ')}
+  </div>
+</section>
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(GUIDE_WORDS[l].title.join(' '))}</h2>
+  <div class="pcards">
+    ${GUIDES.map(g => guideCard(l, g)).join('\n    ')}
+  </div>
+</section>
+${cta(l, w.endTitle, w.endText)}
+<nav class="pg__others" aria-label="${att(w.others)}">
+  <h2 class="pg__h">${esc(w.others)}</h2>
+  ${serviceLinks(l)}
+  <a href="${U.projects(l)}">${esc(w.allWork)}</a>
+</nav>`;
+    write(fileOf(alt[l]), shell({ l, head, alt, main }));
+  }
+}
+
+for (const g of GUIDES) {
+  const alt = Object.fromEntries(LANGS.map(l => [l, U.guide(l, g)]));
+  pages.push({ alt, xdef: alt.fr, kind: 'guide', images: [g.image[0]] });
+  for (const l of LANGS) {
+    const w = W[l], gw = GUIDE_WORDS[l], title = g.title[l], body = g.body[l], full = title.join(' ');
+    const trail = [[w.homeName, U.home(l)], [gw.name, U.guides(l)], [full]];
+    const all = body.flatMap(b => [b.h, ...b.p, ...(b.list || []), ...(b.after || [])]).map(plain);
+    const minutes = Math.max(2, Math.round(words(all) / 220));
+    const anchor = (b, i) => 'g' + (i + 1);
+    const r = g.related || {};
+    const leads = [...(r.events || []).map(id => eventCard(l, EVENTS.find(e => e.id === id))),
+      ...(r.guides || []).map(id => guideCard(l, GUIDES.find(x => x.id === id))),
+      ...(r.cities || []).map(id => cityCard(l, CITIES.find(c => c.id === id)))];
+    const head = seoHead({
+      l, title: g.seo.title[l], desc: g.seo.desc[l], alt, xdef: alt.fr, image: '/' + g.image[0], imageAlt: gw.cover(full),
+      data: [{ '@type': 'Article', '@id': SITE + alt[l] + '#article', headline: full, description: g.seo.desc[l], url: SITE + alt[l], mainEntityOfPage: SITE + alt[l], inLanguage: l,
+        image: { '@type': 'ImageObject', url: SITE + '/' + g.image[0], width: g.image[1], height: g.image[2] }, datePublished: g.date, dateModified: g.updated || g.date,
+        wordCount: words(all), author: { '@id': ORG }, publisher: { '@id': ORG }, isPartOf: { '@id': SITE + '/#site' } },
+        { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/', logo: SITE + '/assets/img/logo.png' }, crumbs(l, trail)]
+    });
+    const main = `${crumbNav(l, trail)}
+<header class="pg__head">
+  <div>
+    <p class="eyebrow"><i></i><span>${esc(gw.eyebrow)} · ${esc(gw.read(minutes))}</span></p>
+    <h1 class="pg__title pg__title--long">${esc(title[0])} <em>${esc(title[1])}</em></h1>
+    <p class="pg__lede">${esc(g.lede[l])}</p>
+    <p class="pg__meta">${esc(gw.by)} · ${g.updated ? esc(gw.updated) + ' ' + esc(longDate(l, g.updated)) : esc(gw.written) + ' ' + esc(longDate(l, g.date))}</p>
+  </div>
+  <figure class="pg__cover">${img(g.image, gw.cover(full), ' fetchpriority="high"', 'cover')}</figure>
+</header>
+<div class="gd">
+  <nav class="gd__toc" aria-label="${att(gw.contents)}">
+    <h2 class="pg__h">${esc(gw.contents)}</h2>
+    <ol>
+      ${body.map((b, i) => `<li><a href="#${anchor(b, i)}">${esc(plain(b.h))}</a></li>`).join('\n      ')}
+    </ol>
+  </nav>
+  <article class="gd__body">
+    ${body.map((b, i) => `<section id="${anchor(b, i)}">
+      <h2>${rich(l, b.h)}</h2>${b.p.map(p => `\n      <p>${rich(l, p)}</p>`).join('')}${b.list ? `\n      <ul>\n        ${b.list.map(x => `<li>${rich(l, x)}</li>`).join('\n        ')}\n      </ul>` : ''}${(b.after || []).map(p => `\n      <p>${rich(l, p)}</p>`).join('')}
+    </section>`).join('\n    ')}
+  </article>
+</div>${leads.length ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(gw.next)}</h2>
+  <div class="pcards">
+    ${leads.join('\n    ')}
+  </div>
+</section>` : ''}
+${cta(l, gw.endTitle, gw.endText)}
+<nav class="pg__others" aria-label="${att(gw.name)}">
+  <h2 class="pg__h">${esc(gw.name)}</h2>
+  ${GUIDES.filter(o => o !== g).map(o => `<a href="${U.guide(l, o)}">${esc(o.title[l].join(' '))}</a>`).join('\n  ')}
+  <a href="${U.guides(l)}">${esc(gw.title.join(' '))}</a>
+</nav>`;
+    write(fileOf(alt[l]), shell({ l, head, alt, main }));
+  }
+}
+
+{
+  const alt = Object.fromEntries(LANGS.map(l => [l, U.guides(l)]));
+  pages.push({ alt, xdef: alt.fr, kind: 'guides', images: GUIDES.map(g => g.image[0]) });
+  for (const l of LANGS) {
+    const w = W[l], gw = GUIDE_WORDS[l], trail = [[w.homeName, U.home(l)], [gw.name]];
+    const head = seoHead({
+      l, title: gw.seo[0], desc: gw.seo[1], alt, xdef: alt.fr, image: '/' + GUIDES[0].image[0], imageAlt: gw.cover(GUIDES[0].title[l].join(' ')),
+      data: [{ '@type': 'CollectionPage', '@id': SITE + alt[l] + '#page', name: gw.title.join(' '), description: gw.seo[1], url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, about: { '@id': ORG },
+        mainEntity: { '@type': 'ItemList', itemListElement: GUIDES.map((g, i) => ({ '@type': 'ListItem', position: i + 1, name: g.title[l].join(' '), url: SITE + U.guide(l, g) })) } },
+        { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/' }, crumbs(l, trail)]
+    });
+    const main = `${crumbNav(l, trail)}
+<header class="pg__top">
+  <p class="eyebrow"><i></i><span>${esc(gw.name)}</span></p>
+  <h1 class="pg__title">${esc(gw.title[0])} <em>${esc(gw.title[1])}</em></h1>
+  <p class="pg__lede">${esc(gw.lede)}</p>
+</header>
+<section class="pg__sec">
+  <div class="pcards">
+    ${GUIDES.map(g => guideCard(l, g).replace(' loading="lazy"', '')).join('\n    ')}
+  </div>
+</section>
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(EVENT_WORDS[l].name)}</h2>
+  <div class="pcards">
+    ${EVENTS.map(e => eventCard(l, e)).join('\n    ')}
+  </div>
+</section>
+${cta(l, gw.endTitle, gw.endText)}`;
+    write(fileOf(alt[l]), shell({ l, head, alt, main }));
+  }
+}
+
 /* ---------- 4. the page shown when an address does not exist ----------
    One file for both languages (the hosting serves 404.html for every unknown address): a few lines of script
    show the French words when the address or the visitor's language says so. */
@@ -807,7 +1079,7 @@ ${urls.join('\n')}
 
 // pages of a project or service that no longer exists are removed
 const kept = new Set(pages.flatMap(pg => LANGS.map(l => fileOf(pg.alt[l]))));
-for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations']) {
+for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations', 'events', 'fr/evenements', 'guides', 'fr/guides']) {
   if (!existsSync(join(ROOT, dir))) continue;
   for (const f of readdirSync(join(ROOT, dir))) if (f.endsWith('.html') && !kept.has(dir + '/' + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + '/' + f); }
 }
@@ -815,5 +1087,5 @@ for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations']) {
 for (const [dir, start] of [['', CITY_WORDS.en.slug], ['fr/', CITY_WORDS.fr.slug]]) {
   for (const f of readdirSync(join(ROOT, dir))) if (f.startsWith(start) && f.endsWith('.html') && !kept.has(dir + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + f); }
 }
-console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, the agency, ${CITIES.length} cities, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);
+console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, the agency, ${CITIES.length} cities, ${EVENTS.length} kinds of events and their list, ${GUIDES.length} guides and their list, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);
 if (NO_PREVIEW.size) console.log(`\n${NO_PREVIEW.size} picture(s) have no preview yet (their pages show the agency's picture in a shared link):\n  ${[...NO_PREVIEW].join('\n  ')}\nMake them: python3 tools/site/previews.py && node tools/site/build.mjs`);

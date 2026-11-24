@@ -531,6 +531,59 @@
   </div>
 </section>
 
+<!-- Compose your event: the kind of event, the guests and the city; a similar event we produced; the brief sent on WhatsApp (assets/js/compose.js) -->
+<section class="compose section" id="compose">
+  <div class="wrap compose__grid">
+    <div class="compose__form">
+      <p class="eyebrow" data-reveal><i></i><span data-i18n="cp.eyebrow">Your event</span></p>
+      <h2 class="h2" data-reveal data-i18n="cp.title">Compose it in a few clicks.</h2>
+      <p class="lede" data-reveal data-i18n="cp.lede">Choose the kind of event, the number of guests and the city: we show you a similar event we produced, and you send us your brief in one tap.</p>
+      <fieldset class="compose__set" data-reveal>
+        <legend data-i18n="cp.type">Type of event</legend>
+        <div class="chips">
+            <label class="chip"><input type="radio" name="cp-type" value="seminar" checked><span data-i18n="cp.t.seminar">Seminar</span></label>
+            <label class="chip"><input type="radio" name="cp-type" value="convention"><span data-i18n="cp.t.convention">Convention</span></label>
+            <label class="chip"><input type="radio" name="cp-type" value="conference"><span data-i18n="cp.t.conference">Conference</span></label>
+            <label class="chip"><input type="radio" name="cp-type" value="gala"><span data-i18n="cp.t.gala">Gala evening</span></label>
+            <label class="chip"><input type="radio" name="cp-type" value="ceremony"><span data-i18n="cp.t.ceremony">Ceremony</span></label>
+            <label class="chip"><input type="radio" name="cp-type" value="launch"><span data-i18n="cp.t.launch">Product launch</span></label>
+            <label class="chip"><input type="radio" name="cp-type" value="openday"><span data-i18n="cp.t.openday">Open day</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="compose__set" data-reveal>
+        <legend><span data-i18n="cp.guests">Guests</span> <output class="compose__n" for="cp-guests">150</output></legend>
+        <input class="compose__range" id="cp-guests" type="range" min="20" max="1000" step="10" value="150" aria-label="Number of guests" data-i18n-aria="cp.guests.aria">
+      </fieldset>
+      <fieldset class="compose__set" data-reveal>
+        <legend data-i18n="cp.city">City</legend>
+        <div class="chips">
+            <label class="chip"><input type="radio" name="cp-city" value="casablanca" checked><span>Casablanca</span></label>
+            <label class="chip"><input type="radio" name="cp-city" value="rabat"><span>Rabat</span></label>
+            <label class="chip"><input type="radio" name="cp-city" value="marrakech"><span>Marrakech</span></label>
+            <label class="chip"><input type="radio" name="cp-city" value="tangier"><span data-i18n="cp.c.tangier">Tangier</span></label>
+            <label class="chip"><input type="radio" name="cp-city" value="other"><span data-i18n="cp.c.other">Elsewhere in Morocco</span></label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="compose__card" data-reveal>
+      <figure class="compose__ph">
+        <img src="assets/img/mta-cycle-meeting.jpg" width="960" height="1280" alt="" loading="lazy">
+        <figcaption class="compose__seen"><span data-i18n="cp.seen">Seen in our project</span> <a href="projects/mta-cycle-meeting" data-project="mta-cycle-meeting">MTA Cycle Meeting</a></figcaption>
+        <div class="compose__dots" role="group" aria-label="Other photos" data-i18n-aria="cp.photos"></div>
+      </figure>
+      <p class="compose__sum" aria-live="polite"></p>
+      <div class="compose__actions">
+        <a class="btn compose__wa" href="#contact" target="_blank" rel="noopener"><span data-i18n="cp.send">Send on WhatsApp</span></a>
+        <a class="link-arrow compose__to-form" href="#contact" data-i18n="cp.form">Or fill in the form</a>
+      </div>
+      <p class="compose__note"><span data-i18n="cp.note">No commitment: we come back to you with first ideas.</span> <a class="compose__page" href="events/seminar-organisation-morocco"></a></p>
+    </div>
+  </div>
+<!-- events:pages -->
+<script>window.BEN_EVENT_PAGES = {"seminar":{"en":"/events/seminar-organisation-morocco","fr":"/fr/evenements/organisation-seminaire-maroc","name":{"en":"Seminar","fr":"Séminaire"}},"convention":{"en":"/events/corporate-convention-morocco","fr":"/fr/evenements/organisation-convention-entreprise-maroc","name":{"en":"Convention","fr":"Convention"}},"gala":{"en":"/events/gala-dinner-morocco","fr":"/fr/evenements/soiree-de-gala-maroc","name":{"en":"Gala evening","fr":"Soirée de gala"}},"launch":{"en":"/events/product-launch-morocco","fr":"/fr/evenements/lancement-de-produit-maroc","name":{"en":"Product launch","fr":"Lancement de produit"}},"openday":{"en":"/events/open-day-showroom-morocco","fr":"/fr/evenements/journee-portes-ouvertes-maroc","name":{"en":"Open day","fr":"Journée portes ouvertes"}}};</script>
+<!-- /events:pages -->
+</section>
+
 <!-- Contact -->
 <section class="contact section" id="contact">
   <div class="contact__glow" aria-hidden="true"></div>
@@ -610,6 +663,15 @@
         <a href="#process" data-i18n="nav.process">Approach</a>
         <a href="#wall" data-i18n="wall.eyebrow">In pictures</a>
         <a href="presentation" data-legal="presentation" data-i18n="ft.deck">Our presentation</a>
+      </nav>
+      <nav class="footer__col" aria-label="Events we produce" data-i18n-aria="ft.events">
+        <h4 data-i18n="ft.events">Events we produce</h4>
+        <a href="events/seminar-organisation-morocco" data-page="event:seminar" data-i18n="cp.t.seminar" data-alt-en="/events/seminar-organisation-morocco" data-alt-fr="/fr/evenements/organisation-seminaire-maroc">Seminar</a>
+        <a href="events/corporate-convention-morocco" data-page="event:convention" data-i18n="cp.t.convention" data-alt-en="/events/corporate-convention-morocco" data-alt-fr="/fr/evenements/organisation-convention-entreprise-maroc">Convention</a>
+        <a href="events/gala-dinner-morocco" data-page="event:gala" data-i18n="cp.t.gala" data-alt-en="/events/gala-dinner-morocco" data-alt-fr="/fr/evenements/soiree-de-gala-maroc">Gala evening</a>
+        <a href="events/product-launch-morocco" data-page="event:launch" data-i18n="cp.t.launch" data-alt-en="/events/product-launch-morocco" data-alt-fr="/fr/evenements/lancement-de-produit-maroc">Product launch</a>
+        <a href="events/open-day-showroom-morocco" data-page="event:openday" data-i18n="cp.t.openday" data-alt-en="/events/open-day-showroom-morocco" data-alt-fr="/fr/evenements/journee-portes-ouvertes-maroc">Open day</a>
+        <a href="guides" data-page="guides" data-i18n="ft.guides" data-alt-en="/guides" data-alt-fr="/fr/guides">Guides</a>
       </nav>
       <nav class="footer__col" aria-label="Where we work" data-i18n-aria="ft.where">
         <h4 data-i18n="ft.where">Where we work</h4>
@@ -767,5 +829,6 @@
 <script src="assets/js/voices.js"></script>
 <script src="assets/js/services.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/compose.js"></script>
 </body>
 </html>

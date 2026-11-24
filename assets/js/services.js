@@ -121,7 +121,7 @@
       slug: { en: 'brand-corporate-receptions', fr: 'receptions-evenements-de-marque' },
       image: ['assets/img/reception-golden-spheres.jpg', 1280, 720],
       seo: {
-        title: { en: 'Product Launches and Corporate Receptions in Morocco | benevents agency', fr: 'Lancement de produit et réceptions d’entreprise au Maroc | benevents agency' },
+        title: { en: 'Corporate Receptions and Brand Events in Morocco | benevents agency', fr: 'Réceptions d’entreprise et événements de marque au Maroc | benevents agency' },
         desc: { en: 'Product launches, inaugurations, open days and receptions in Morocco: a concept, a set in the colours of your brand and a journey for your guests.',
                 fr: 'Lancements de produit, inaugurations, portes ouvertes et réceptions au Maroc : un concept, une scénographie à vos couleurs et un parcours pour vos invités.' }
       },
