@@ -19,7 +19,7 @@
   // The photo wall is listed in index.html, not here.
   var MEDIA = {
     logo: '',        // e.g. 'assets/img/logo-white.svg' (replaces the drawn wordmark)
-    hero: 'assets/img/gala-dinner.webp',     // a lighter copy of gala-dinner.jpg, made by tools/site/images.py
+    hero: ['assets/img/hero.webp', '68% center'],   // a lighter copy of hero.jpg, made by tools/site/images.py; on a phone the glass stays in view
     about1: 'assets/img/stage-runway.jpg',
     about2: 'assets/img/control-desk-ballroom.jpg',
     service1: 'assets/img/conference-opening.jpg',

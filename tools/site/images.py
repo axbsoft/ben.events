@@ -4,7 +4,7 @@ For every photo in assets/img/ (the projects, the wall, the photos of the servic
 copies in assets/img/_w/<width>/, as WebP:
     480 pixels wide   for every photo
     960 pixels wide   for the large ones, and for the JPEG photos of that width (the copy is about half their weight)
-and a WebP copy of the first picture of the home page (assets/img/gala-dinner.webp).
+and a WebP copy of the first picture of the home page (assets/img/hero.webp).
 The pages written by tools/site/build.mjs offer these copies to the browser, which picks the right one.
 
 Run it from the root of the site when photos are added or replaced, before tools/site/build.mjs:
@@ -18,7 +18,7 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMG = os.path.normpath(os.path.join(HERE, '..', '..', 'assets', 'img'))
 SKIP_DIRS = {'_w', 'clients', 'thumbs', 'og'}   # logos, link previews, and the thumbnails the photo wall already has
-SKIP = ('og', 'logo', 'favicon', 'film-cover')
+SKIP = ('og', 'logo', 'favicon', 'film-cover', 'hero')   # the hero has its own copy, below
 WIDTHS = [480, 960]
 
 
@@ -53,7 +53,7 @@ for folder, dirs, files in os.walk(IMG):
                 total += os.path.getsize(out)
 
 # the first picture of the home page: the same photo, lighter
-hero, light = os.path.join(IMG, 'gala-dinner.jpg'), os.path.join(IMG, 'gala-dinner.webp')
+hero, light = os.path.join(IMG, 'hero.jpg'), os.path.join(IMG, 'hero.webp')
 if not os.path.exists(light) or os.path.getmtime(light) < os.path.getmtime(hero):
     with Image.open(hero) as im:
         im.convert('RGB').save(light, 'WEBP', quality=70, method=6)
