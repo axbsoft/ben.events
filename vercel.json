@@ -218,6 +218,26 @@
       ],
       "destination": "/fr",
       "permanent": true
+    },
+    {
+      "source": "/guides",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/guides/:slug",
+      "destination": "/blog/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/fr/guides",
+      "destination": "/fr/blog",
+      "permanent": true
+    },
+    {
+      "source": "/fr/guides/:slug",
+      "destination": "/fr/blog/:slug",
+      "permanent": true
     }
   ]
 }

@@ -23,10 +23,10 @@ clients type, not measured search volumes.
 | `/fr/evenements/soiree-de-gala-maroc` | organisation de soirée de gala au Maroc | dîner de gala, scénographie, mur LED, lumière |
 | `/fr/evenements/lancement-de-produit-maroc` | organisation de lancement de produit au Maroc | événement de marque, présentation, showroom |
 | `/fr/evenements/journee-portes-ouvertes-maroc` | organisation de journée portes ouvertes au Maroc | showroom, concession, animation, DJ |
-| `/fr/guides` | guides pour organiser un événement d'entreprise au Maroc | conseils, checklist |
-| `/fr/guides/organiser-un-seminaire-d-entreprise-au-maroc` | organiser un séminaire au Maroc | checklist, lieu, déroulé, technique |
-| `/fr/guides/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement` | quelle ville pour un événement au Maroc | Casablanca, Rabat, Marrakech, Tanger |
-| `/fr/guides/ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise` | écran LED, son et lumière pour un événement | régie, captation, mur LED |
+| `/fr/blog` | blog : organiser un événement d'entreprise au Maroc | conseils, guides, checklist |
+| `/fr/blog/organiser-un-seminaire-d-entreprise-au-maroc` | organiser un séminaire au Maroc | checklist, lieu, déroulé, technique |
+| `/fr/blog/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement` | quelle ville pour un événement au Maroc | Casablanca, Rabat, Marrakech, Tanger |
+| `/fr/blog/ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise` | écran LED, son et lumière pour un événement | régie, captation, mur LED |
 | `/fr/agence` | benevents agency (the name) | conception et production d'événements, équipe, principes |
 | `/fr/realisations` | événements d'entreprise réalisés au Maroc | réalisations, études de cas |
 | `/fr/realisations/<event>` | the name of the event, with its type and its city | |

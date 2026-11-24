@@ -1,5 +1,6 @@
-/* benevents agency — the guides: practical answers to what people ask before an event
-   (guides/<slug>, fr/guides/<slug>), and the page that lists them (guides, fr/guides). Written by tools/site/build.mjs.
+/* benevents agency — the blog: practical answers to what people ask before an event
+   (blog/<slug>, fr/blog/<slug>), and the page that lists them, newest first (blog, fr/blog). Written by tools/site/build.mjs.
+   Its articles are called guides in this file and in the builder.
 
    Advice in our own words, and examples taken only from our real projects. No figure we cannot stand behind.
 
@@ -283,21 +284,21 @@ export const GUIDES = [
 // the words of these pages and of the page that lists them
 export const GUIDE_WORDS = {
   en: {
-    folder: '/guides/', index: '/guides', name: 'Guides', eyebrow: 'Guide', read: n => `${n} min read`, updated: 'Updated', written: 'Published',
-    title: ['Guides', 'to organise your event'],
+    folder: '/blog/', index: '/blog', name: 'Blog', eyebrow: 'Blog', read: n => `${n} min read`, updated: 'Updated', written: 'Published',
+    title: ['Blog', 'ideas and advice for your events'],
     lede: 'Practical answers to the questions our clients ask before an event in Morocco: the city, the venue, the programme and the technical side.',
-    seo: ['Guides to Organise a Corporate Event in Morocco | benevents agency', 'Practical guides to organise a corporate event in Morocco: seminars, the choice of the city, the venue, the programme and the technical set-up.'],
-    contents: 'In this guide', next: 'To go further', card: 'Read the guide', by: 'benevents agency',
+    seo: ['Blog: Organising Corporate Events in Morocco | benevents agency', 'Practical advice to organise a corporate event in Morocco: seminars, the choice of the city and the venue, the programme and the technical side.'],
+    contents: 'In this article', next: 'To go further', card: 'Read the article', by: 'benevents agency',
     endTitle: 'An event in preparation?', endText: 'Tell us the date, the city and the number of guests: we will come back with first ideas.',
-    cover: t => `${t}: a guide by benevents agency`
+    cover: t => `${t}: an article by benevents agency`
   },
   fr: {
-    folder: '/fr/guides/', index: '/fr/guides', name: 'Guides', eyebrow: 'Guide', read: n => `${n} min de lecture`, updated: 'Mis à jour', written: 'Publié',
-    title: ['Guides', 'pour organiser votre événement'],
+    folder: '/fr/blog/', index: '/fr/blog', name: 'Blog', eyebrow: 'Blog', read: n => `${n} min de lecture`, updated: 'Mis à jour', written: 'Publié',
+    title: ['Blog', 'idées et conseils pour vos événements'],
     lede: 'Des réponses pratiques aux questions que nos clients posent avant un événement au Maroc : la ville, le lieu, le programme et la technique.',
-    seo: ['Guides pour organiser un événement d’entreprise au Maroc | benevents agency', 'Des guides pratiques pour organiser un événement d’entreprise au Maroc : séminaires, choix de la ville, du lieu, programme et technique.'],
-    contents: 'Dans ce guide', next: 'Pour aller plus loin', card: 'Lire le guide', by: 'benevents agency',
+    seo: ['Blog : organiser un événement d’entreprise au Maroc | benevents agency', 'Des conseils pratiques pour organiser un événement d’entreprise au Maroc : séminaires, choix de la ville et du lieu, programme et technique.'],
+    contents: 'Dans cet article', next: 'Pour aller plus loin', card: 'Lire l’article', by: 'benevents agency',
     endTitle: 'Un événement en préparation ?', endText: 'Donnez-nous la date, la ville et le nombre d’invités : nous revenons vers vous avec de premières idées.',
-    cover: t => `${t} : un guide de benevents agency`
+    cover: t => `${t} : un article de benevents agency`
   }
 };

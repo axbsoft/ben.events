@@ -173,7 +173,7 @@ ul, ol { padding: 0; list-style: none; }
 }
 .nav.is-scrolled, .menu-open .nav { background: rgba(14, 14, 17, .68); border-color: var(--line); -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); }
 .nav.is-hidden { transform: translateY(calc(-100% - 30px)); }
-.nav__links { display: flex; gap: 4px; }
+.nav__links { display: flex; align-items: center; gap: 4px; }
 .nav__links a { position: relative; font-size: 14.5px; font-weight: 500; padding: 9px 15px; border-radius: 99px; color: rgba(246, 245, 241, .82); transition: color .3s, background .3s; }
 .nav__links a:hover { color: #fff; background: rgba(255, 255, 255, .1); }
 .nav__side { display: flex; align-items: center; gap: 14px; }
@@ -207,7 +207,7 @@ ul, ol { padding: 0; list-style: none; }
 .menu-open .menu nav a:nth-child(3) { transition-delay: .39s; } .menu-open .menu nav a:nth-child(4) { transition-delay: .46s; }
 .menu-open .menu nav a:nth-child(5) { transition-delay: .53s; }
 /* the Services menu of the header (assets/js/menu.js): opens on hover or focus, without a script too */
-.drop { position: relative; }
+.drop { position: relative; display: flex; align-items: center; }
 .drop__btn::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-3px) rotate(45deg); transition: transform .3s var(--ease); }
 .drop:hover .drop__btn::after, .drop:focus-within .drop__btn::after, .drop.is-open .drop__btn::after { transform: translateY(0) rotate(225deg); }
 .drop__panel {

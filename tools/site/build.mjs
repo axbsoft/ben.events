@@ -14,15 +14,15 @@
      fr/agence-evenementielle-<city>.html   the same in French                           -> /fr/agence-evenementielle-<city>
      events.html, events/<slug>.html        the kinds of events we produce, one page each -> /events, /events/<slug>
      fr/evenements.html, fr/evenements/<slug>.html     the same in French                 -> /fr/evenements, …
-     guides.html, guides/<slug>.html        the guides, and the page that lists them      -> /guides, /guides/<slug>
-     fr/guides.html, fr/guides/<slug>.html  the same in French                           -> /fr/guides, …
+     blog.html, blog/<slug>.html            the blog (its articles are the guides of guides.mjs) -> /blog, /blog/<slug>
+     fr/blog.html, fr/blog/<slug>.html      the same in French                           -> /fr/blog, …
      404.html                               what a visitor sees when an address does not exist
      sitemap.xml                            the list of all of them, with the day each last changed and its pictures
 
    It also rewrites, in index.html, the lines between "head:seo" and "/head:seo" (title, description,
    addresses of the two languages, data for search engines), from assets/js/i18n.js (meta).
 
-   The words of the kinds of events are in tools/site/events.mjs, those of the guides in tools/site/guides.mjs.
+   The words of the kinds of events are in tools/site/events.mjs, those of the blog in tools/site/guides.mjs.
    The words of the agency page and of the cities are in tools/site/pages.mjs; the key figures and the
    quotes of clients (assets/js/voices.js) are shown on the agency page too.
 
@@ -136,7 +136,7 @@ const W = {
     fServices: 'Services', fAgency: 'The agency', fContact: 'Contact', approach: 'Our approach', contact: 'Contact', rights: 'All rights reserved.',
     privacy: 'Privacy policy', terms: 'Terms of use', deck: 'Our presentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency on Instagram', onLinkedin: 'benevents agency on LinkedIn',
     photoOf: t => `Photo of the event: ${t}`, serviceImg: t => `${t}: an event produced by benevents agency`,
-    faq: 'Frequent questions', quick: 'Quick contact', call: 'Call', cities: 'Where we work', fEvents: 'Events we produce', guides: 'Guides', dServices: 'Our services', allEvents: 'All events', allGuides: 'All guides', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
+    faq: 'Frequent questions', quick: 'Quick contact', call: 'Call', cities: 'Where we work', fEvents: 'Events we produce', guides: 'Blog', dServices: 'Our services', allEvents: 'All events', allGuides: 'All articles', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
   },
   fr: {
     skip: 'Aller au contenu', nav: 'Principal', language: 'Langue', crumbs: 'Vous êtes ici', homeName: 'Accueil', cta: 'Démarrer un projet',
@@ -150,7 +150,7 @@ const W = {
     fServices: 'Savoir-faire', fAgency: 'L’agence', fContact: 'Contact', approach: 'Notre approche', contact: 'Contact', rights: 'Tous droits réservés.',
     privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation', deck: 'Notre présentation', whatsapp: 'WhatsApp', onInstagram: 'benevents agency sur Instagram', onLinkedin: 'benevents agency sur LinkedIn',
     photoOf: t => `Photo de l’événement : ${t}`, serviceImg: t => `${t} : un événement produit par benevents agency`,
-    faq: 'Questions fréquentes', quick: 'Contact rapide', call: 'Appeler', cities: 'Nos villes', fEvents: 'Nos événements', guides: 'Guides', dServices: 'Nos savoir-faire', allEvents: 'Tous les événements', allGuides: 'Tous les guides', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
+    faq: 'Questions fréquentes', quick: 'Contact rapide', call: 'Appeler', cities: 'Nos villes', fEvents: 'Nos événements', guides: 'Blog', dServices: 'Nos savoir-faire', allEvents: 'Tous les événements', allGuides: 'Tous les articles', fFor: 'Pour', fWhere: 'Lieu', fWhen: 'Date', fGuests: 'Invités', did: 'Ce que nous avons réalisé', story: 'Le projet', result: 'Le résultat :', inCity: n => 'à ' + n
   }
 };
 
@@ -490,7 +490,7 @@ const eventCard = (l, e) => `<a class="pcard" href="${U.event(l, e)}">
     </a>`;
 const guideCard = (l, g) => `<a class="pcard" href="${U.guide(l, g)}">
       <span class="pcard__ph">${img(g.image, GUIDE_WORDS[l].cover(g.title[l].join(' ')), ' loading="lazy"', 'card')}</span>
-      <span class="pcard__in"><b>${esc(g.title[l].join(' '))}</b><span>${esc(tr(g.card, l))}</span><small>${esc(GUIDE_WORDS[l].card)}</small></span>
+      <span class="pcard__in"><b>${esc(g.title[l].join(' '))}</b><span>${esc(tr(g.card, l))}</span><small><time datetime="${g.updated || g.date}">${esc(new Date((g.updated || g.date) + 'T12:00:00Z').toLocaleDateString(l === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }))}</time> · ${esc(GUIDE_WORDS[l].card)}</small></span>
     </a>`;
 
 const pages = [];        // every page written: { alt: {en, fr}, images: its pictures, for the list of pages }
@@ -920,7 +920,7 @@ ${cta(l, w.endTitle, w.endText)}
   </div>
 </section>
 <section class="pg__sec">
-  <h2 class="pg__h2">${esc(GUIDE_WORDS[l].title.join(' '))}</h2>
+  <h2 class="pg__h2">${esc(GUIDE_WORDS[l].name)}</h2>
   <div class="pcards">
     ${GUIDES.map(g => guideCard(l, g)).join('\n    ')}
   </div>
@@ -950,9 +950,9 @@ for (const g of GUIDES) {
       ...(r.cities || []).map(id => cityCard(l, CITIES.find(c => c.id === id)))];
     const head = seoHead({
       l, title: g.seo.title[l], desc: g.seo.desc[l], alt, xdef: alt.fr, image: '/' + g.image[0], imageAlt: gw.cover(full),
-      data: [{ '@type': 'Article', '@id': SITE + alt[l] + '#article', headline: full, description: g.seo.desc[l], url: SITE + alt[l], mainEntityOfPage: SITE + alt[l], inLanguage: l,
+      data: [{ '@type': 'BlogPosting', '@id': SITE + alt[l] + '#article', headline: full, description: g.seo.desc[l], url: SITE + alt[l], mainEntityOfPage: SITE + alt[l], inLanguage: l,
         image: { '@type': 'ImageObject', url: SITE + '/' + g.image[0], width: g.image[1], height: g.image[2] }, datePublished: g.date, dateModified: g.updated || g.date,
-        wordCount: words(all), author: { '@id': ORG }, publisher: { '@id': ORG }, isPartOf: { '@id': SITE + '/#site' } },
+        wordCount: words(all), author: { '@id': ORG }, publisher: { '@id': ORG }, isPartOf: { '@id': SITE + U.guides(l) + '#blog' } },
         { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/', logo: SITE + '/assets/img/logo.png' }, crumbs(l, trail)]
     });
     const main = `${crumbNav(l, trail)}
@@ -996,13 +996,14 @@ ${cta(l, gw.endTitle, gw.endText)}
 
 {
   const alt = Object.fromEntries(LANGS.map(l => [l, U.guides(l)]));
-  pages.push({ alt, xdef: alt.fr, kind: 'guides', images: GUIDES.map(g => g.image[0]) });
+  const NEWEST = [...GUIDES].sort((a, b) => (b.updated || b.date).localeCompare(a.updated || a.date) || GUIDES.indexOf(a) - GUIDES.indexOf(b));
+  pages.push({ alt, xdef: alt.fr, kind: 'guides', images: NEWEST.map(g => g.image[0]) });
   for (const l of LANGS) {
     const w = W[l], gw = GUIDE_WORDS[l], trail = [[w.homeName, U.home(l)], [gw.name]];
     const head = seoHead({
       l, title: gw.seo[0], desc: gw.seo[1], alt, xdef: alt.fr, image: '/' + GUIDES[0].image[0], imageAlt: gw.cover(GUIDES[0].title[l].join(' ')),
-      data: [{ '@type': 'CollectionPage', '@id': SITE + alt[l] + '#page', name: gw.title.join(' '), description: gw.seo[1], url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, about: { '@id': ORG },
-        mainEntity: { '@type': 'ItemList', itemListElement: GUIDES.map((g, i) => ({ '@type': 'ListItem', position: i + 1, name: g.title[l].join(' '), url: SITE + U.guide(l, g) })) } },
+      data: [{ '@type': 'Blog', '@id': SITE + alt[l] + '#blog', name: 'benevents agency — ' + gw.title.join(' : '), description: gw.seo[1], url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, publisher: { '@id': ORG },
+        blogPost: NEWEST.map(g => ({ '@type': 'BlogPosting', headline: g.title[l].join(' '), url: SITE + U.guide(l, g), datePublished: g.date, dateModified: g.updated || g.date })) },
         { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/' }, crumbs(l, trail)]
     });
     const main = `${crumbNav(l, trail)}
@@ -1013,7 +1014,7 @@ ${cta(l, gw.endTitle, gw.endText)}
 </header>
 <section class="pg__sec">
   <div class="pcards">
-    ${GUIDES.map(g => guideCard(l, g).replace(' loading="lazy"', '')).join('\n    ')}
+    ${NEWEST.map(g => guideCard(l, g).replace(' loading="lazy"', '')).join('\n    ')}
   </div>
 </section>
 <section class="pg__sec">
@@ -1117,7 +1118,7 @@ ${urls.join('\n')}
 
 // pages of a project or service that no longer exists are removed
 const kept = new Set(pages.flatMap(pg => LANGS.map(l => fileOf(pg.alt[l]))));
-for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations', 'events', 'fr/evenements', 'guides', 'fr/guides']) {
+for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations', 'events', 'fr/evenements', 'blog', 'fr/blog', 'guides', 'fr/guides']) {
   if (!existsSync(join(ROOT, dir))) continue;
   for (const f of readdirSync(join(ROOT, dir))) if (f.endsWith('.html') && !kept.has(dir + '/' + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + '/' + f); }
 }
@@ -1125,5 +1126,5 @@ for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations', 'ev
 for (const [dir, start] of [['', CITY_WORDS.en.slug], ['fr/', CITY_WORDS.fr.slug]]) {
   for (const f of readdirSync(join(ROOT, dir))) if (f.startsWith(start) && f.endsWith('.html') && !kept.has(dir + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + f); }
 }
-console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, the agency, ${CITIES.length} cities, ${EVENTS.length} kinds of events and their list, ${GUIDES.length} guides and their list, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);
+console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, the agency, ${CITIES.length} cities, ${EVENTS.length} kinds of events and their list, ${GUIDES.length} blog articles and their list, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);
 if (NO_PREVIEW.size) console.log(`\n${NO_PREVIEW.size} picture(s) have no preview yet (their pages show the agency's picture in a shared link):\n  ${[...NO_PREVIEW].join('\n  ')}\nMake them: python3 tools/site/previews.py && node tools/site/build.mjs`);

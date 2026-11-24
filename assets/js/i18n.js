@@ -207,7 +207,7 @@ window.BEN_I18N = {
     'mbar.label': 'Contact rapide',
     'ft.linkedin': 'benevents agency sur LinkedIn',
     'ft.events': 'Nos événements',
-    'ft.guides': 'Guides',
+    'ft.guides': 'Blog',
     'ev.seminar': 'Séminaire',
     'ev.convention': 'Convention',
     'ev.gala': 'Soirée de gala',
