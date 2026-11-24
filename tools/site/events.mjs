@@ -3,7 +3,7 @@
 
    Only kinds of events the portfolio shows, and only what is true today: an answer is a promise.
 
-   id      : short name, used by the home page ("Compose your event") and in data-page="event:<id>"
+   id      : short name, used in data-page="event:<id>" (the links of the home page)
    service : the service (assets/js/services.js) this kind of event belongs to
    slug    : the end of the page's address, in each language
    name    : what the event is called, short (cards, links, the footer)

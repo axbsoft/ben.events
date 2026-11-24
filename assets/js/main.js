@@ -10,7 +10,6 @@
   // Address that receives enquiries from the contact form.
   var CONTACT_EMAIL = 'contact@ben.events';
   var WHATSAPP = '+212 661 11 85 90';       // the number WhatsApp opens, with its country code; empty: no WhatsApp links
-  window.BEN_WHATSAPP = WHATSAPP.replace(/\D/g, '');      // the same number for the other scripts of the page (compose.js)
   var FILM_PLAYER = 'https://livid.com/embed/L6GCH7EFgl4D';     // the address of the film's player, the "src" of the embed code its hosting gives; empty: the play button opens the film's own page
 
   // Photos and logo. Put files in assets/img/ and set the path here.
@@ -359,7 +358,6 @@
     $$('a[data-project]').forEach(function (a) { a.href = pageUrl('project', a.getAttribute('data-project')); });
     labelViewer();
     root.lang = lang;
-    try { doc.dispatchEvent(new CustomEvent('ben:lang', { detail: lang })); } catch (e) {}      // for the other scripts of the page (compose.js)
     var m = I18N.meta[lang];
     if (m) { doc.title = m.title; var d = $('meta[name="description"]'); if (d) d.content = m.desc; }
     $$('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });

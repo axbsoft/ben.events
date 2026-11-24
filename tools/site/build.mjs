@@ -248,11 +248,6 @@ home = home.replace(PAGE_LINK, (m, a, b, page) => a + pageHref('en', page).slice
 // a link to a kind of event or to a guide carries its address in both languages: the page switches language in place
 const ALT_LINK = /<a\b[^>]*\sdata-page="((?:event|guide)s?(?::[^"]*)?)"[^>]*>/g;
 home = home.replace(ALT_LINK, (tag, page) => tag.replace(/\sdata-alt-(en|fr)="[^"]*"/g, '').replace(/>$/, ` data-alt-en="${pageHref('en', page)}" data-alt-fr="${pageHref('fr', page)}">`));
-// the addresses and names of the kinds of events, for "Compose your event"
-const EV_BLOCK = /(<!-- events:pages -->\n)[\s\S]*?(\n<!-- \/events:pages -->)/;
-if (!EV_BLOCK.test(home)) throw new Error('index.html: the lines "events:pages" … "/events:pages" are missing');
-const evPages = Object.fromEntries(EVENTS.map(e => [e.id, { en: U.event('en', e), fr: U.event('fr', e), name: e.name }]));
-home = home.replace(EV_BLOCK, (m, a, b) => a + '<script>window.BEN_EVENT_PAGES = ' + JSON.stringify(evPages).replace(/</g, '\\u003c') + ';</script>' + b);
 write('index.html', home);
 
 function french(page) {
