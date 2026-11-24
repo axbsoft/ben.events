@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": null,
+  "buildCommand": "node tools/site/build.mjs",
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
@@ -173,6 +173,32 @@
           "value": "strict-origin-when-cross-origin"
         }
       ]
+    },
+    {
+      "source": "/admin",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/assets/admin/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
     }
   ],
   "rewrites": [
@@ -182,6 +208,11 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/content/(.*)",
+      "destination": "/",
+      "permanent": false
+    },
     {
       "source": "/book",
       "destination": "/#contact",

@@ -1,0 +1,37 @@
+<!doctype html>
+<!-- The admin of the site, for the team: projects, blog and client quotes. Its server side is api/admin.js. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin | benevents agency</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#08080a">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/admin/admin.css">
+</head>
+<body>
+<header class="top">
+  <a class="top__brand" href="/admin"><b>ben</b>events <span>admin</span></a>
+  <nav class="top__tabs" aria-label="Sections" hidden>
+    <a href="#projects" data-tab="projects">Projects</a>
+    <a href="#blog" data-tab="blog">Blog</a>
+    <a href="#voices" data-tab="voices">Quotes &amp; figures</a>
+  </nav>
+  <div class="top__side">
+    <a class="top__site" href="/" target="_blank" rel="noopener">View the site</a>
+    <span class="top__user" hidden></span>
+    <button class="top__out" type="button" hidden>Sign out</button>
+  </div>
+</header>
+<main id="app" class="app" aria-live="polite">
+  <p class="wait">Loading…</p>
+</main>
+<div class="toast" role="status" aria-live="polite" hidden></div>
+<noscript><p class="wait">The admin needs JavaScript.</p></noscript>
+<script src="/assets/admin/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+{
+  "id": "choose-the-city",
+  "order": 2,
+  "draft": false,
+  "short": {
+    "en": "Choosing the city",
+    "fr": "Choisir la ville"
+  },
+  "slug": {
+    "en": "casablanca-rabat-marrakech-or-tangier-where-to-hold-your-event",
+    "fr": "casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement"
+  },
+  "date": "2026-11-24",
+  "image": [
+    "assets/img/reception-golden-spheres.jpg",
+    1280,
+    720
+  ],
+  "title": {
+    "en": [
+      "Casablanca, Rabat, Marrakech or Tangier:",
+      "where to hold your event"
+    ],
+    "fr": [
+      "Casablanca, Rabat, Marrakech ou Tanger :",
+      "où organiser votre événement"
+    ]
+  },
+  "card": {
+    "en": "Who travels, what kind of event, which season: how to choose the city for a corporate event in Morocco.",
+    "fr": "Qui voyage, quel type d’événement, quelle saison : comment choisir la ville d’un événement d’entreprise au Maroc."
+  },
+  "lede": {
+    "en": "Each city suits some events better than others. Here is how we help clients choose, from the events we produce in Casablanca, Rabat, Marrakech and Tangier.",
+    "fr": "Chaque ville convient mieux à certains événements qu’à d’autres. Voici comment nous aidons nos clients à choisir, à partir des événements que nous produisons à Casablanca, Rabat, Marrakech et Tanger."
+  },
+  "seo": {
+    "title": {
+      "en": "Casablanca, Rabat, Marrakech, Tangier: Which City? | benevents agency",
+      "fr": "Casablanca, Rabat, Marrakech, Tanger : quelle ville ? | benevents agency"
+    },
+    "desc": {
+      "en": "Choosing the city of a corporate event in Morocco: who travels, the kind of event, the season, and what Casablanca, Rabat, Marrakech and Tangier do best.",
+      "fr": "La ville d’un événement d’entreprise au Maroc : qui voyage, le type d’événement, la saison, et ce que Casablanca, Rabat, Marrakech et Tanger font de mieux."
+    }
+  },
+  "body": {
+    "en": [
+      {
+        "h": "Three questions decide the city",
+        "p": [
+          "Before comparing hotels, answer three questions:"
+        ],
+        "list": [
+          "Who travels, and from where? The city should be easy for most of your guests.",
+          "What kind of event is it? A working day, an official event and a stay with an evening do not need the same city.",
+          "When? Some seasons suit some cities better, and some months are busier everywhere."
+        ]
+      },
+      {
+        "h": "Casablanca: business, flights and big rooms",
+        "p": [
+          "Casablanca is where most working events with a public side take place: conventions that end with a gala dinner, forums that are filmed, launches that the press and the dealers must both remember. Mohammed V International Airport is the country’s main hub, which makes it the natural choice when guests fly in from several countries.",
+          "The city has the rooms for large events, from hotel ballrooms and conference centres to showrooms and industrial halls that can be dressed from floor to ceiling. We produced the {WeXchange forum|project:wexchange-forum} at the Barceló Anfa there, filmed and directed live from our control desk. The last months of the year are the busiest for conventions: the earlier the date is fixed, the wider the choice of rooms."
+        ]
+      },
+      {
+        "h": "Rabat: institutions and protocol",
+        "p": [
+          "In Rabat we mostly produce forums, conferences, masterclasses, closing ceremonies and official receptions. They share senior speakers, several languages in the room, cameras, and a programme that must run to the minute. Institutional events have their own rules, order of precedence, accreditation, several languages, and we plan for them from the first meeting.",
+          "Rabat and Casablanca are about an hour apart by train, so guests from both cities can meet for a half-day event. In Rabat we produced the {“Femmes en jeu” masterclass|project:femmes-en-jeu} with CANAL+ University during the Africa Cup of Nations."
+        ]
+      },
+      {
+        "h": "Marrakech: a stay, and an evening to remember",
+        "p": [
+          "An event in Marrakech is usually a stay: plenary sessions by day, an evening that people will talk about, sometimes a dinner outside the city. The settings are the reason to come, from hotel ballrooms and gardens to riads, palaces and the Agafay desert, and each has its own constraints of power, sound and access.",
+          "Marrakech has direct flights from many European cities, and Marrakech-Menara airport is a short drive from the centre. Spring and autumn are the most pleasant seasons; in summer, outdoor evenings start late and daytime sessions stay indoors. An outdoor setting needs its own power supply, respect for sound limits and a plan B for wind or rain."
+        ]
+      },
+      {
+        "h": "Tangier: between two seas, linked by high-speed train",
+        "p": [
+          "Tangier is linked to Casablanca and Rabat by the Al Boraq high-speed train, which makes it possible to bring teams from the three cities together. Its hotels can host a seminar of several days, with sessions by day and a gala by night.",
+          "We produced {MTA’s cycle meeting|project:mta-cycle-meeting} at the Fairmont Tazi Palace in Tangier: plenary sessions on a stage with a centre LED wall, then a gala dinner in front of a wall of LED artwork in the same room."
+        ]
+      },
+      {
+        "h": "In short",
+        "p": [],
+        "list": [
+          "Guests flying in from several countries: Casablanca.",
+          "An official event, with protocol and several languages: Rabat.",
+          "A stay with an evening to remember: Marrakech.",
+          "Teams from the north and from the Casablanca–Rabat axis together: Tangier."
+        ],
+        "after": [
+          "Wherever you choose, the technical team, the stage and the control desk travel with us: we work all over Morocco."
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "h": "Trois questions décident de la ville",
+        "p": [
+          "Avant de comparer les hôtels, répondez à trois questions :"
+        ],
+        "list": [
+          "Qui voyage, et d’où ? La ville doit être simple d’accès pour la plupart de vos invités.",
+          "De quel type d’événement s’agit-il ? Une journée de travail, un événement officiel et un séjour avec une soirée ne demandent pas la même ville.",
+          "Quand ? Certaines saisons conviennent mieux à certaines villes, et certains mois sont chargés partout."
+        ]
+      },
+      {
+        "h": "Casablanca : les affaires, les vols et les grandes salles",
+        "p": [
+          "Casablanca accueille la plupart des événements de travail qui ont une dimension publique : conventions qui se terminent par un dîner de gala, forums filmés, lancements dont la presse et les concessionnaires doivent se souvenir. L’aéroport international Mohammed V est la principale porte d’entrée du pays : c’est le choix naturel quand les invités arrivent de plusieurs pays.",
+          "La ville a les salles des grands événements, des salles de bal d’hôtel et centres de congrès aux showrooms et halles industrielles que l’on peut habiller du sol au plafond. Nous y avons produit le {forum WeXchange|project:wexchange-forum} au Barceló Anfa, filmé et réalisé en direct depuis notre régie. Les derniers mois de l’année sont les plus chargés en conventions : plus la date est fixée tôt, plus le choix des salles est large."
+        ]
+      },
+      {
+        "h": "Rabat : les institutions et le protocole",
+        "p": [
+          "À Rabat, nous produisons surtout des forums, des conférences, des masterclasses, des cérémonies de clôture et des réceptions officielles. Ils ont en commun des intervenants de haut niveau, plusieurs langues dans la salle, des caméras et un programme qui doit tenir à la minute. Les événements institutionnels ont leurs règles, ordre protocolaire, accréditations, plusieurs langues, et nous les prévoyons dès la première réunion.",
+          "Rabat et Casablanca sont à environ une heure de train : les invités des deux villes peuvent se retrouver pour une demi-journée. À Rabat, nous avons produit la {masterclass « Femmes en jeu »|project:femmes-en-jeu} avec CANAL+ University pendant la Coupe d’Afrique des Nations."
+        ]
+      },
+      {
+        "h": "Marrakech : un séjour, et une soirée mémorable",
+        "p": [
+          "Un événement à Marrakech est le plus souvent un séjour : des plénières le jour, une soirée dont on parlera, parfois un dîner hors de la ville. Les lieux sont la raison de venir, des salles de bal et jardins d’hôtel aux riads, palais et au désert d’Agafay, et chacun a ses contraintes d’électricité, de son et d’accès.",
+          "Marrakech a des vols directs depuis de nombreuses villes européennes, et l’aéroport de Marrakech-Ménara est à quelques minutes du centre. Le printemps et l’automne sont les saisons les plus agréables ; en été, les soirées en extérieur commencent tard et les sessions de journée restent à l’intérieur. Un lieu en plein air demande sa propre alimentation électrique, le respect des limites sonores et un plan B en cas de vent ou de pluie."
+        ]
+      },
+      {
+        "h": "Tanger : entre deux mers, reliée par la grande vitesse",
+        "p": [
+          "Tanger est reliée à Casablanca et Rabat par la ligne à grande vitesse Al Boraq, ce qui permet de réunir les équipes des trois villes. Ses hôtels peuvent accueillir un séminaire de plusieurs jours, avec des sessions le jour et un gala le soir.",
+          "Nous avons produit le {cycle meeting de MTA|project:mta-cycle-meeting} au Fairmont Tazi Palace de Tanger : des plénières sur une scène avec un mur LED central, puis un dîner de gala devant un mur d’œuvres LED dans la même salle."
+        ]
+      },
+      {
+        "h": "En bref",
+        "p": [],
+        "list": [
+          "Des invités qui arrivent de plusieurs pays : Casablanca.",
+          "Un événement officiel, avec protocole et plusieurs langues : Rabat.",
+          "Un séjour avec une soirée mémorable : Marrakech.",
+          "Des équipes du Nord et de l’axe Casablanca–Rabat réunies : Tanger."
+        ],
+        "after": [
+          "Quelle que soit la ville, l’équipe technique, la scène et la régie voyagent avec nous : nous travaillons partout au Maroc."
+        ]
+      }
+    ]
+  },
+  "related": {
+    "cities": [
+      "casablanca",
+      "rabat",
+      "marrakech"
+    ],
+    "events": [
+      "seminar",
+      "gala"
+    ],
+    "guides": [
+      "seminar-checklist"
+    ]
+  }
+}

@@ -47,7 +47,7 @@ import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import { CITIES, CITY_WORDS, AGENCY, TEAM, COMPANY } from './pages.mjs';
 import { EVENTS, EVENT_WORDS } from './events.mjs';
-import { GUIDES, GUIDE_WORDS } from './guides.mjs';
+import { GUIDE_WORDS } from './guides.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = 'https://www.ben.events';
@@ -61,14 +61,49 @@ const LANGS = ['en', 'fr'];
 
 const read = f => readFileSync(join(ROOT, f), 'utf8');
 const LIST = process.argv.includes('--previews');        // only say which preview pictures the pages need
-const write = (f, s) => { if (LIST) return; mkdirSync(dirname(join(ROOT, f)), { recursive: true }); writeFileSync(join(ROOT, f), s); };
+const CHANGED = new Set();      // the files this run writes differently from what was there
+const write = (f, s) => {
+  if (LIST) return;
+  let before = null;
+  try { before = readFileSync(join(ROOT, f), 'utf8'); } catch (e) {}
+  if (before === s) return;
+  CHANGED.add(f);
+  mkdirSync(dirname(join(ROOT, f)), { recursive: true });
+  writeFileSync(join(ROOT, f), s);
+};
+// the dates the sitemap gave each address before this run: what Vercel's build has, without the history of the site
+const BEFORE = (() => { try { return new Map([...readFileSync(join(ROOT, 'sitemap.xml'), 'utf8').matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map(m => [m[1], m[2]])); } catch (e) { return new Map(); } })();
 
 /* ---------- what the site says ---------- */
 const box = { window: {} };
 vm.createContext(box);
-for (const f of ['i18n.js', 'projects.js', 'services.js', 'voices.js']) vm.runInContext(read('assets/js/' + f), box, { filename: f });
-const I18N = box.window.BEN_I18N, PROJECTS = box.window.BEN_PROJECTS, SERVICES = box.window.BEN_SERVICES, PLACES = box.window.BEN_PLACES || {};
-const FIGURES = (box.window.BEN_FIGURES || []).slice(0, 4), QUOTES = box.window.BEN_QUOTES || [];
+for (const f of ['i18n.js', 'services.js']) vm.runInContext(read('assets/js/' + f), box, { filename: f });
+const I18N = box.window.BEN_I18N, SERVICES = box.window.BEN_SERVICES;
+// the projects, the quotes and the blog are data in content/, edited on the admin page (/admin, api/admin.js);
+// what is marked "draft" there stays off the site
+const json = f => JSON.parse(read(f));
+const CONTENT = json('content/projects.json'), VOICES = json('content/voices.json'), PLACES = CONTENT.places;
+const WARN = [];        // what the team wrote that could not be used: left out, and said at the end of the run
+const seen = new Set();
+const PROJECTS = CONTENT.projects.filter(p => {
+  const why = p.draft ? '' : !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.id || '') ? 'its id is not valid' : seen.has(p.id) ? 'its id is used twice'
+    : !CONTENT.kinds[p.kind] ? `its kind "${p.kind}" is not in the list` : !(p.photos && p.photos.length) ? 'it has no photo' : p.city && !PLACES[p.city] ? `its city "${p.city}" is not in the list` : '';
+  if (why) WARN.push(`content/projects.json: "${p.id}" left out: ${why}`);
+  seen.add(p.id);
+  return !p.draft && !why;
+}).map(p => { const o = Object.assign({}, p, { kind: CONTENT.kinds[p.kind] }); delete o.draft; delete o.saved; return o; });
+const FIGURES = (VOICES.figures || []).slice(0, 4), QUOTES = VOICES.quotes || [];
+const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+const GUIDES = readdirSync(join(ROOT, 'content/blog')).filter(f => f.endsWith('.json')).map(f => {
+  try { return json('content/blog/' + f); } catch (e) { WARN.push(`content/blog/${f} left out: it cannot be read (${e.message})`); return null; }
+}).filter(g => {
+  if (!g || g.draft) return false;
+  const why = !SLUG.test(g.id || '') ? 'its id is not valid' : !['en', 'fr'].every(l => g.slug && SLUG.test(g.slug[l] || '')) ? 'its address is not valid'
+    : !/^\d{4}-\d{2}-\d{2}$/.test(g.date || '') ? 'its date is not valid' : !(g.image && g.title && g.body && ['en', 'fr'].every(l => g.title[l] && g.body[l] && g.body[l].length)) ? 'its picture, title or text is missing' : '';
+  if (why) WARN.push(`content/blog/${g.id}.json left out: ${why}`);
+  return !why;
+}).sort((a, b) => (a.order || 0) - (b.order || 0) || a.id.localeCompare(b.id));
+for (const g of GUIDES) g.related = g.related || {};
 for (const pr of PROJECTS) if (pr.city && !PLACES[pr.city]) throw new Error(`projects.js: the city "${pr.city}" of "${pr.id}" is not in the list of places`);
 // the cities that have a page are the same on both sides: PLACES (projects.js, "page: true") and CITIES (pages.mjs)
 for (const c of CITIES) if (!PLACES[c.id] || !PLACES[c.id].page) throw new Error(`the city "${c.id}" has a page (tools/site/pages.mjs) but is not marked "page: true" in the places of projects.js`);
@@ -76,19 +111,25 @@ for (const k of Object.keys(PLACES)) if (PLACES[k].page && !CITIES.some(c => c.i
 // the pages of the kinds of events and the guides only point to what exists
 for (const e of EVENTS) {
   if (!SERVICES.some(s => s.id === e.service)) throw new Error(`events.mjs: "${e.id}" belongs to the service "${e.service}", which services.js does not have`);
-  for (const i of e.ideas) if (!PROJECTS.some(p => p.id === i.project)) throw new Error(`events.mjs: "${e.id}" shows the project "${i.project}", which projects.js does not have`);
+  // a project shown as an idea may have been taken off the portfolio (or be a draft): its card is left out
+  e.ideas = e.ideas.filter(i => PROJECTS.some(p => p.id === i.project) || (WARN.push(`events.mjs: the page "${e.id}" no longer shows the project "${i.project}", which is not on the site`), false));
 }
 for (const g of GUIDES) {
-  const r = g.related || {};
-  for (const id of r.events || []) if (!EVENTS.some(e => e.id === id)) throw new Error(`guides.mjs: "${g.id}" leads to the event "${id}", which events.mjs does not have`);
-  for (const id of r.services || []) if (!SERVICES.some(s => s.id === id)) throw new Error(`guides.mjs: "${g.id}" leads to the service "${id}", which services.js does not have`);
-  for (const id of r.cities || []) if (!CITIES.some(c => c.id === id)) throw new Error(`guides.mjs: "${g.id}" leads to the city "${id}", which pages.mjs does not have`);
-  for (const id of r.guides || []) if (!GUIDES.some(x => x.id === id)) throw new Error(`guides.mjs: "${g.id}" leads to the guide "${id}", which does not exist`);
+  const r = g.related, keep = (key, list, what) => { r[key] = (r[key] || []).filter(id => list.some(x => x.id === id) || (WARN.push(`content/blog/${g.id}.json: the ${what} "${id}" it leads to does not exist`), false)); };
+  keep('events', EVENTS, 'event'); keep('services', SERVICES, 'service'); keep('cities', CITIES, 'city'); keep('guides', GUIDES, 'article');
 }
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const att = s => esc(s).replace(/"/g, '&quot;');
 const unesc = s => s.replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, '\'').replace(/&amp;/g, '&');
+
+{
+  const note = what => `/* benevents agency — ${what}, for the home page.
+   Written by tools/site/build.mjs from content/ (edited on the admin page, /admin): do not change it here. */\n`;
+  const list = a => '[\n' + a.map(x => '  ' + JSON.stringify(x)).join(',\n') + '\n]';
+  write('assets/js/projects.js', note('the portfolio and the places it names') + 'window.BEN_PLACES = ' + JSON.stringify(PLACES) + ';\nwindow.BEN_PROJECTS = ' + list(PROJECTS) + ';\n');
+  write('assets/js/voices.js', note('key figures and client quotes') + 'window.BEN_FIGURES = ' + list(FIGURES) + ';\nwindow.BEN_QUOTES = ' + list(QUOTES) + ';\n');
+}
 
 let home = read('index.html');
 // the English words of the home page: its own text
@@ -811,10 +852,10 @@ const LINK_IN = /\{([^|{}]+)\|(guide|event|service|city|project):([a-z0-9-]+)\}/
 const linkTo = (l, kind, id) => {
   const page = kind === 'guide' ? GUIDES.find(x => x.id === id) : kind === 'event' ? EVENTS.find(x => x.id === id)
     : kind === 'service' ? SERVICES.find(x => x.id === id) : kind === 'city' ? CITIES.find(x => x.id === id) : byId[id];
-  if (!page) throw new Error(`a link to the ${kind} "${id}", which does not exist`);
+  if (!page) { WARN.push(`a link to the ${kind} "${id}", which does not exist: left as plain words`); return null; }
   return U[kind](l, page);
 };
-const rich = (l, s) => esc(s).replace(LINK_IN, (m, words, kind, id) => `<a href="${linkTo(l, kind, id)}">${words}</a>`);
+const rich = (l, s) => esc(s).replace(LINK_IN, (m, words, kind, id) => { const href = linkTo(l, kind, id); return href ? `<a href="${href}">${words}</a>` : words; });
 const plain = s => s.replace(LINK_IN, (m, words) => words);
 const words = list => list.join(' ').split(/\s+/).filter(Boolean).length;
 const longDate = (l, d) => new Date(d + 'T12:00:00Z').toLocaleDateString(l === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
@@ -1022,6 +1063,21 @@ ${cta(l, gw.endTitle, gw.endText)}`;
   }
 }
 
+/* ---------- 3c. what the admin page (/admin) needs to know about the site as published ----------
+   The names it offers in its lists, and when each project, article and the quotes were last saved: once the
+   site in place shows that time, the admin page tells its user that the change is online. */
+write('assets/admin/site.json', JSON.stringify({
+  kinds: CONTENT.kinds, places: PLACES,
+  events: EVENTS.map(e => ({ id: e.id, name: e.name })),
+  services: SERVICES.map((s, i) => ({ id: s.id, name: { en: T.en['srv.' + (i + 1) + '.t'], fr: T.fr['srv.' + (i + 1) + '.t'] } })),
+  cities: CITIES.map(c => ({ id: c.id, name: { en: tr(c.name, 'en'), fr: tr(c.name, 'fr') } })),
+  published: {
+    projects: Object.fromEntries(PROJECTS.map(p => [p.id, (CONTENT.projects.find(x => x.id === p.id) || {}).saved || ''])),
+    blog: Object.fromEntries(GUIDES.map(g => [g.id, g.saved || ''])),
+    voices: VOICES.saved || ''
+  }
+}, null, 1) + '\n');
+
 /* ---------- 4. the page shown when an address does not exist ----------
    One file for both languages (the hosting serves 404.html for every unknown address): a few lines of script
    show the French words when the address or the visitor's language says so. */
@@ -1084,19 +1140,21 @@ ${STATS}
 if (LIST) { for (const [src, out] of PREVIEWS) console.log(src.slice(1) + '\t' + out.slice(1)); process.exit(0); }
 
 /* ---------- 5. the list of pages, for search engines ---------- */
-// The day a page last changed: today when this run has just written it differently, else the day of its last
-// change in the history of the site (git). Left out when git cannot say.
+// The day a page last changed: today when this run writes it differently, or when it has changed since the
+// last commit; else the day of its last change in the history of the site (git); where there is no history
+// (Vercel builds without it), the day the sitemap already gave it.
+const quiet = { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] };
 const changedNow = (() => {
-  try { return new Set(execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean).map(x => x.slice(3).replace(/^"|"$/g, ''))); } catch (e) { return null; }
+  try { return new Set(execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], quiet).split('\n').filter(Boolean).map(x => x.slice(3).replace(/^"|"$/g, ''))); } catch (e) { return null; }
 })();
 const today = new Date().toISOString().slice(0, 10);
-const lastmod = file => {
-  if (!changedNow) return '';
-  if (changedNow.has(file)) return today;
-  try { return execFileSync('git', ['log', '-1', '--format=%cs', '--', file], { cwd: ROOT, encoding: 'utf8' }).trim(); } catch (e) { return ''; }
+const lastmod = (file, loc) => {
+  if (CHANGED.has(file) || (changedNow && changedNow.has(file))) return today;
+  if (changedNow) { try { const d = execFileSync('git', ['log', '-1', '--format=%cs', '--', file], quiet).trim(); if (d) return d; } catch (e) {} }
+  return BEFORE.get(SITE + loc) || '';
 };
 const entry = (loc, links, images = [], file = fileOf(loc)) => {
-  const day = lastmod(file);
+  const day = lastmod(file, loc);
   return `  <url>\n    <loc>${SITE + loc}</loc>\n${day ? `    <lastmod>${day}</lastmod>\n` : ''}${links.map(([k, href]) => `    <xhtml:link rel="alternate" hreflang="${k}" href="${SITE + href}"/>`).join('\n')}${[...new Set(images)].slice(0, 30).map(src => `\n    <image:image><image:loc>${SITE}/${src}</image:loc></image:image>`).join('')}\n  </url>`;
 };
 const urls = [];
@@ -1121,4 +1179,5 @@ for (const [dir, start] of [['', CITY_WORDS.en.slug], ['fr/', CITY_WORDS.fr.slug
   for (const f of readdirSync(join(ROOT, dir))) if (f.startsWith(start) && f.endsWith('.html') && !kept.has(dir + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + f); }
 }
 console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, the agency, ${CITIES.length} cities, ${EVENTS.length} kinds of events and their list, ${GUIDES.length} blog articles and their list, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);
+if (WARN.length) console.log(`\n${WARN.length} thing(s) left out of the pages:\n  ${[...new Set(WARN)].join('\n  ')}`);
 if (NO_PREVIEW.size) console.log(`\n${NO_PREVIEW.size} picture(s) have no preview yet (their pages show the agency's picture in a shared link):\n  ${[...NO_PREVIEW].join('\n  ')}\nMake them: python3 tools/site/previews.py && node tools/site/build.mjs`);

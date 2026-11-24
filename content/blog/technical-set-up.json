@@ -1,0 +1,184 @@
+{
+  "id": "technical-set-up",
+  "order": 3,
+  "draft": false,
+  "short": {
+    "en": "LED wall, sound and light",
+    "fr": "Écran LED, son et lumière"
+  },
+  "slug": {
+    "en": "led-wall-sound-and-lighting-for-a-corporate-event",
+    "fr": "ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise"
+  },
+  "date": "2026-11-24",
+  "image": [
+    "assets/img/control-desk-ballroom.jpg",
+    1280,
+    960
+  ],
+  "title": {
+    "en": [
+      "LED wall, sound and lighting:",
+      "the technical side, explained"
+    ],
+    "fr": [
+      "Écran LED, son et lumière :",
+      "la technique expliquée"
+    ]
+  },
+  "card": {
+    "en": "Screen, sound, light, control desk and filming: what each one does, and the questions to ask before you book.",
+    "fr": "Écran, son, lumière, régie et captation : à quoi sert chacun, et les questions à poser avant de réserver."
+  },
+  "lede": {
+    "en": "What a corporate event needs on the technical side, in plain words: how to choose a screen, why sound matters most, what light is for, and who runs it all on the day.",
+    "fr": "Ce dont un événement d’entreprise a besoin côté technique, en termes simples : comment choisir un écran, pourquoi le son compte le plus, à quoi sert la lumière, et qui mène tout le jour J."
+  },
+  "seo": {
+    "title": {
+      "en": "LED Wall, Sound and Lighting for Corporate Events | benevents agency",
+      "fr": "Écran LED, son et lumière pour vos événements | benevents agency"
+    },
+    "desc": {
+      "en": "How to choose an LED wall, plan the sound and the lighting, and run a corporate event from one control desk, with filming and broadcast: a plain-words guide.",
+      "fr": "Comment choisir un écran LED, prévoir le son et la lumière, et mener un événement d’entreprise depuis une régie, avec captation et diffusion : le guide en termes simples."
+    }
+  },
+  "body": {
+    "en": [
+      {
+        "h": "Start from the room and the audience",
+        "p": [
+          "The technical side of an event is not a list of equipment. It starts with two questions: how big is the room, and what must the audience see and hear? A forum where every word counts, a gala where the atmosphere does, and a launch where one product must shine do not need the same set-up, even in the same room."
+        ]
+      },
+      {
+        "h": "The screen: LED wall or projector",
+        "p": [
+          "An LED wall gives its own light: it stays bright in a lit room, it can be any size, and it can take any shape, wide, curved or split into several screens. A projector needs a dark room and a clear line between the lens and the screen. For most corporate events today, the LED wall is the better choice.",
+          "Three things to decide:"
+        ],
+        "list": [
+          "The size: the slides must be readable from the back row. In a long room, side screens bring the image closer to the people at the back.",
+          "The shape: a wide wall, a curved wall or three separate screens. We built a wide curved wall for the {“Femmes en jeu” masterclass|project:femmes-en-jeu} in Rabat, and {three screens for LEO’s regional conference|project:leo-regional-conference}.",
+          "The content: a wall wider than a slide needs content made for its shape. Plan it with the speakers, not the night before."
+        ],
+        "after": [
+          "LED walls are described by their pixel pitch, the distance between two lights in millimetres. The smaller it is, the closer the audience can sit without seeing the dots."
+        ]
+      },
+      {
+        "h": "Sound: what the audience remembers least, and notices first",
+        "p": [
+          "Nobody remembers good sound, and everybody remembers bad sound. For a speech, what matters is that every word is understood in every seat, without echo or feedback. Plan one microphone per speaker, headset or lavalier for those who move, handheld microphones for questions from the room, and someone at the desk to follow every voice.",
+          "Music has its own needs: the walk-in, the transitions between speakers, the dinner, the party. Outdoors, check the sound limits of the place and the neighbourhood before choosing the system."
+        ]
+      },
+      {
+        "h": "Light: for faces, for cameras, for the mood",
+        "p": [
+          "Light has three jobs. First, to light the faces on stage, so that the audience and the cameras see the speakers. Second, to dress the room: a wash of colour on the walls, in the brand’s colours if you like, changes a hotel ballroom into your room. Third, to give rhythm: moving heads and effects for a show, an award or the end of the evening.",
+          "Haze, which makes light beams visible, is not allowed in every venue because of smoke detectors: ask before you plan it."
+        ]
+      },
+      {
+        "h": "The control desk: one place, one team",
+        "p": [
+          "Sound, light, screens and cameras are run from the control desk, by people who know the running order by heart. Each change, a speaker arriving, a video starting, the light changing for dinner, is a cue written in advance and rehearsed. The fewer teams involved, the fewer things fall between two of them. That is why we run sound, light and video from our own control desk, with our own team."
+        ]
+      },
+      {
+        "h": "Filming and broadcast",
+        "p": [
+          "If the event is filmed, decide it at the same time as the stage: where the cameras stand, how the stage is lit for them, and who directs. Several cameras and a live director give a film that can be shown on the screens in the room, broadcast to people who could not come, and kept for afterwards."
+        ]
+      },
+      {
+        "h": "Questions to ask before you book",
+        "p": [],
+        "list": [
+          "Who will be at the control desk on the day, and have they seen the running order?",
+          "What happens if a computer, a microphone or a screen fails?",
+          "How long does the set-up take, and when can it start?",
+          "How much power does the set-up need, and does the venue have it where the stage stands?",
+          "Who makes the content for the screens, and when is it ready?",
+          "Is a rehearsal planned with the speakers?"
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "h": "Partir de la salle et du public",
+        "p": [
+          "La technique d’un événement n’est pas une liste de matériel. Elle commence par deux questions : quelle est la taille de la salle, et que doit voir et entendre le public ? Un forum où chaque mot compte, un gala où l’atmosphère compte, et un lancement où un produit doit briller ne demandent pas le même dispositif, même dans la même salle."
+        ]
+      },
+      {
+        "h": "L’écran : mur LED ou vidéoprojecteur",
+        "p": [
+          "Un mur LED produit sa propre lumière : il reste lumineux dans une salle éclairée, il peut avoir n’importe quelle taille, et prendre n’importe quelle forme, large, incurvé ou divisé en plusieurs écrans. Un vidéoprojecteur demande une salle sombre et un passage libre entre l’objectif et l’écran. Pour la plupart des événements d’entreprise aujourd’hui, le mur LED est le meilleur choix.",
+          "Trois choses à décider :"
+        ],
+        "list": [
+          "La taille : les slides doivent être lisibles depuis le dernier rang. Dans une salle longue, des écrans latéraux rapprochent l’image des derniers rangs.",
+          "La forme : un mur large, un mur incurvé ou trois écrans séparés. Nous avons construit un large mur incurvé pour la {masterclass « Femmes en jeu »|project:femmes-en-jeu} à Rabat, et {trois écrans pour la conférence régionale de LEO|project:leo-regional-conference}.",
+          "Le contenu : un mur plus large qu’une slide demande des contenus faits pour sa forme. Prévoyez-les avec les intervenants, pas la veille."
+        ],
+        "after": [
+          "Les murs LED se décrivent par leur pitch, la distance entre deux points lumineux en millimètres. Plus il est petit, plus le public peut s’asseoir près sans voir les points."
+        ]
+      },
+      {
+        "h": "Le son : ce que le public retient le moins, et remarque en premier",
+        "p": [
+          "Personne ne se souvient d’un bon son, et tout le monde se souvient d’un mauvais. Pour une prise de parole, l’essentiel est que chaque mot soit compris à chaque place, sans écho ni larsen. Prévoyez un micro par intervenant, serre-tête ou cravate pour ceux qui bougent, des micros main pour les questions de la salle, et quelqu’un à la console pour suivre chaque voix.",
+          "La musique a ses propres besoins : l’entrée du public, les transitions entre intervenants, le dîner, la fête. En extérieur, vérifiez les limites sonores du lieu et du voisinage avant de choisir le système."
+        ]
+      },
+      {
+        "h": "La lumière : pour les visages, pour les caméras, pour l’ambiance",
+        "p": [
+          "La lumière a trois rôles. D’abord éclairer les visages sur scène, pour que le public et les caméras voient les intervenants. Ensuite habiller la salle : une couleur sur les murs, aux couleurs de la marque si vous le souhaitez, transforme une salle de bal d’hôtel en votre salle. Enfin donner du rythme : projecteurs asservis et effets pour un spectacle, une remise de prix ou la fin de la soirée.",
+          "La brume, qui rend les faisceaux visibles, n’est pas autorisée partout à cause des détecteurs de fumée : demandez avant de la prévoir."
+        ]
+      },
+      {
+        "h": "La régie : un seul endroit, une seule équipe",
+        "p": [
+          "Le son, la lumière, les écrans et les caméras se pilotent depuis la régie, par des personnes qui connaissent le déroulé par cœur. Chaque changement, l’arrivée d’un intervenant, le lancement d’une vidéo, la lumière qui change pour le dîner, est un top écrit à l’avance et répété. Moins il y a d’équipes, moins il y a de choses qui tombent entre deux. C’est pourquoi nous menons le son, la lumière et la vidéo depuis notre propre régie, avec notre propre équipe."
+        ]
+      },
+      {
+        "h": "La captation et la diffusion",
+        "p": [
+          "Si l’événement est filmé, décidez-le en même temps que la scène : où se placent les caméras, comment la scène est éclairée pour elles, et qui réalise. Plusieurs caméras et un réalisateur en direct donnent un film que l’on peut montrer sur les écrans de la salle, diffuser à ceux qui n’ont pas pu venir, et garder pour la suite."
+        ]
+      },
+      {
+        "h": "Les questions à poser avant de réserver",
+        "p": [],
+        "list": [
+          "Qui sera à la régie le jour J, et a-t-il vu le déroulé ?",
+          "Que se passe-t-il si un ordinateur, un micro ou un écran tombe en panne ?",
+          "Combien de temps dure l’installation, et quand peut-elle commencer ?",
+          "De quelle puissance électrique le dispositif a-t-il besoin, et le lieu l’a-t-il là où sera la scène ?",
+          "Qui prépare les contenus des écrans, et quand sont-ils prêts ?",
+          "Une répétition est-elle prévue avec les intervenants ?"
+        ]
+      }
+    ]
+  },
+  "related": {
+    "services": [
+      "production",
+      "conferences"
+    ],
+    "events": [
+      "convention",
+      "gala"
+    ],
+    "guides": [
+      "seminar-checklist"
+    ]
+  }
+}

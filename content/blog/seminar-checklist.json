@@ -1,0 +1,236 @@
+{
+  "id": "seminar-checklist",
+  "order": 1,
+  "draft": false,
+  "short": {
+    "en": "Organising a seminar",
+    "fr": "Organiser un séminaire"
+  },
+  "slug": {
+    "en": "how-to-organise-a-corporate-seminar-in-morocco",
+    "fr": "organiser-un-seminaire-d-entreprise-au-maroc"
+  },
+  "date": "2026-11-24",
+  "image": [
+    "assets/img/leo-regional-conference.jpg",
+    1280,
+    720
+  ],
+  "title": {
+    "en": [
+      "How to organise a corporate seminar",
+      "in Morocco"
+    ],
+    "fr": [
+      "Organiser un séminaire d’entreprise",
+      "au Maroc"
+    ]
+  },
+  "card": {
+    "en": "The objective, the city, the venue, the running order, the technical side and the day itself: the steps, in order.",
+    "fr": "L’objectif, la ville, le lieu, le déroulé, la technique et le jour J : les étapes, dans l’ordre."
+  },
+  "lede": {
+    "en": "A step-by-step guide, from the first question to ask to the day after, with what we have learnt producing seminars and conventions across Morocco.",
+    "fr": "Un guide étape par étape, de la première question à se poser au lendemain de l’événement, avec ce que nous avons appris en produisant séminaires et conventions partout au Maroc."
+  },
+  "seo": {
+    "title": {
+      "en": "Organising a Seminar in Morocco: the Checklist | benevents agency",
+      "fr": "Organiser un séminaire au Maroc : la checklist | benevents agency"
+    },
+    "desc": {
+      "en": "Objective, city, venue, running order, technical set-up, guests and rehearsal: a step-by-step checklist to organise a corporate seminar in Morocco.",
+      "fr": "Objectif, ville, lieu, déroulé, technique, invités et répétition : la checklist étape par étape pour organiser un séminaire d’entreprise au Maroc."
+    }
+  },
+  "body": {
+    "en": [
+      {
+        "h": "Start with the objective, not the venue",
+        "p": [
+          "Before choosing a hotel or a city, write down in one sentence what the seminar must achieve: share a strategy, launch a plan for the year, train a team, thank it, or bring two teams together. Everything else follows from that sentence.",
+          "An information seminar needs a plenary room where everyone sees and hears. A working seminar needs smaller rooms for workshops. A seminar that rewards a team needs an evening worth remembering. Most seminars mix the three, and the mix decides the programme."
+        ]
+      },
+      {
+        "h": "Choose the city for the people who travel",
+        "p": [
+          "Look at where your guests come from. Casablanca, with Mohammed V International Airport, is the natural choice when people fly in from several countries. Rabat is about an hour from Casablanca by train, which makes a half-day event possible for teams from both cities. Tangier is linked to both by the Al Boraq high-speed train. Marrakech turns a seminar into a stay, with direct flights from many European cities."
+        ],
+        "after": [
+          "Our {guide to choosing the city|guide:choose-the-city} goes further, city by city."
+        ]
+      },
+      {
+        "h": "Check the venue against your programme",
+        "p": [
+          "Visit with the programme in hand, and with these questions:"
+        ],
+        "list": [
+          "Does the plenary room hold everyone in the layout you need: theatre, classroom or round tables?",
+          "Is the ceiling high enough for a stage, an LED wall and lighting?",
+          "Are there rooms nearby for workshops, and a space for breaks?",
+          "Where does dinner take place? The plenary room can be turned into a dinner room, {as we did for MTA in Tangier|project:mta-cycle-meeting}, but it needs time and a plan.",
+          "When can the technical team get in to set up, and when must the room be empty?",
+          "Is there enough power where the stage will stand?"
+        ]
+      },
+      {
+        "h": "Fix the date early",
+        "p": [
+          "The best rooms go first. The last months of the year are the busiest for conventions, and in Marrakech spring and autumn are the most sought-after seasons. Once the date is fixed, the choice of venues is wider and the budget easier to hold."
+        ]
+      },
+      {
+        "h": "Write the running order",
+        "p": [
+          "The running order is the backbone of the seminar: who speaks, when, for how long, with which slides, and what happens between two speakers. Leave room for questions, for breaks that really are breaks, and for moments when people work together rather than listen.",
+          "If guests speak different languages, decide early: speeches in one language with slides in the other, or interpretation, which needs booths and headsets."
+        ]
+      },
+      {
+        "h": "Plan the technical side around the room",
+        "p": [
+          "The screen must be readable from the back row, the sound clear in every seat, and the stage lit for the audience and for the cameras. Plan one microphone per speaker, and handheld microphones for the questions. If the seminar is filmed or broadcast, the cameras, the direction and the recording are decided at the same time as the stage."
+        ],
+        "after": [
+          "Our {guide to the technical set-up|guide:technical-set-up} explains each of these choices."
+        ]
+      },
+      {
+        "h": "Think of the guests’ day",
+        "p": [
+          "Seen from a guest’s seat, a seminar is a journey: the arrival, the welcome desk and the badge, finding the room, the breaks, the meals, the evening, the way back. Signage, transfers and dietary needs are small things that people notice when they are missing."
+        ]
+      },
+      {
+        "h": "Rehearse, and plan for what can go wrong",
+        "p": [
+          "Every speaker should go on stage before the guests arrive, with their slides and their microphone. Keep a spare computer with every presentation on it, spare microphones and batteries, and a plan B for anything outdoors. On the day, one person must be able to make decisions: the producer."
+        ]
+      },
+      {
+        "h": "After the seminar",
+        "p": [
+          "Send the participants the photos, the key slides or a short film while the seminar is still fresh. Ask them what they thought. And write down what worked and what did not: it is the first page of the brief for the next one."
+        ]
+      },
+      {
+        "h": "The checklist",
+        "p": [],
+        "list": [
+          "One sentence for the objective",
+          "The city, chosen for the people who travel",
+          "A venue visited with the programme in hand",
+          "The date fixed early",
+          "A running order, minute by minute",
+          "A technical plan drawn for the room",
+          "The guests’ day, from arrival to departure",
+          "A rehearsal with every speaker",
+          "Photos, film and feedback after the event"
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "h": "Partir de l’objectif, pas du lieu",
+        "p": [
+          "Avant de choisir un hôtel ou une ville, écrivez en une phrase ce que le séminaire doit accomplir : partager une stratégie, lancer le plan de l’année, former une équipe, la remercier, ou rapprocher deux équipes. Tout le reste découle de cette phrase.",
+          "Un séminaire d’information demande une salle de plénière où chacun voit et entend. Un séminaire de travail demande des salles plus petites pour les ateliers. Un séminaire qui récompense une équipe demande une soirée dont on se souviendra. La plupart mêlent les trois, et ce mélange décide du programme."
+        ]
+      },
+      {
+        "h": "Choisir la ville pour ceux qui voyagent",
+        "p": [
+          "Regardez d’où viennent vos invités. Casablanca, avec l’aéroport international Mohammed V, s’impose quand les participants arrivent de plusieurs pays. Rabat est à environ une heure de Casablanca en train, ce qui permet une demi-journée réunissant les équipes des deux villes. Tanger est reliée aux deux par la ligne à grande vitesse Al Boraq. Marrakech fait du séminaire un séjour, avec des vols directs depuis de nombreuses villes européennes."
+        ],
+        "after": [
+          "Notre {guide pour choisir la ville|guide:choose-the-city} va plus loin, ville par ville."
+        ]
+      },
+      {
+        "h": "Vérifier le lieu avec le programme en main",
+        "p": [
+          "Visitez avec le programme en main, et avec ces questions :"
+        ],
+        "list": [
+          "La salle de plénière accueille-t-elle tout le monde dans la disposition voulue : théâtre, salle de classe ou tables rondes ?",
+          "La hauteur sous plafond permet-elle une scène, un mur LED et de la lumière ?",
+          "Y a-t-il des salles à proximité pour les ateliers, et un espace pour les pauses ?",
+          "Où a lieu le dîner ? La salle de plénière peut devenir salle de dîner, {comme nous l’avons fait pour MTA à Tanger|project:mta-cycle-meeting}, mais cela demande du temps et un plan.",
+          "Quand l’équipe technique peut-elle entrer pour installer, et quand la salle doit-elle être libérée ?",
+          "Y a-t-il assez de puissance électrique là où sera la scène ?"
+        ]
+      },
+      {
+        "h": "Fixer la date tôt",
+        "p": [
+          "Les meilleures salles partent les premières. Les derniers mois de l’année sont les plus chargés en conventions, et à Marrakech le printemps et l’automne sont les saisons les plus demandées. Une fois la date fixée, le choix des lieux est plus large et le budget plus facile à tenir."
+        ]
+      },
+      {
+        "h": "Écrire le déroulé",
+        "p": [
+          "Le déroulé est la colonne vertébrale du séminaire : qui parle, quand, combien de temps, avec quelles slides, et ce qui se passe entre deux intervenants. Laissez de la place pour les questions, pour des pauses qui en sont vraiment, et pour des moments où l’on travaille ensemble plutôt que d’écouter.",
+          "Si les invités parlent des langues différentes, décidez tôt : interventions dans une langue avec des slides dans l’autre, ou interprétation, qui demande des cabines et des casques."
+        ]
+      },
+      {
+        "h": "Penser la technique autour de la salle",
+        "p": [
+          "L’écran doit être lisible depuis le dernier rang, le son clair à chaque place, et la scène éclairée pour le public comme pour les caméras. Prévoyez un micro par intervenant, et des micros main pour les questions. Si le séminaire est filmé ou retransmis, les caméras, la réalisation et l’enregistrement se décident en même temps que la scène."
+        ],
+        "after": [
+          "Notre {guide de la technique|guide:technical-set-up} explique chacun de ces choix."
+        ]
+      },
+      {
+        "h": "Penser à la journée des invités",
+        "p": [
+          "Vu depuis la place d’un invité, un séminaire est un parcours : l’arrivée, l’accueil et le badge, la salle à trouver, les pauses, les repas, la soirée, le retour. Signalétique, transferts et régimes alimentaires sont de petites choses que l’on remarque quand elles manquent."
+        ]
+      },
+      {
+        "h": "Répéter, et prévoir ce qui peut mal tourner",
+        "p": [
+          "Chaque intervenant doit monter sur scène avant l’arrivée des invités, avec ses slides et son micro. Gardez un ordinateur de secours avec toutes les présentations, des micros et des piles de rechange, et un plan B pour tout ce qui se passe en extérieur. Le jour J, une personne doit pouvoir décider : le chef de projet."
+        ]
+      },
+      {
+        "h": "Après le séminaire",
+        "p": [
+          "Envoyez aux participants les photos, les slides clés ou un court film pendant que le séminaire est encore frais. Demandez-leur ce qu’ils en ont pensé. Et notez ce qui a marché et ce qui n’a pas marché : c’est la première page du brief du suivant."
+        ]
+      },
+      {
+        "h": "La checklist",
+        "p": [],
+        "list": [
+          "Une phrase pour l’objectif",
+          "La ville, choisie pour ceux qui voyagent",
+          "Un lieu visité avec le programme en main",
+          "La date fixée tôt",
+          "Un déroulé, minute par minute",
+          "Un plan technique dessiné pour la salle",
+          "La journée des invités, de l’arrivée au départ",
+          "Une répétition avec chaque intervenant",
+          "Photos, film et retours après l’événement"
+        ]
+      }
+    ]
+  },
+  "related": {
+    "events": [
+      "seminar",
+      "convention"
+    ],
+    "services": [
+      "conferences"
+    ],
+    "guides": [
+      "choose-the-city",
+      "technical-set-up"
+    ]
+  }
+}

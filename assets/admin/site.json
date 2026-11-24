@@ -1,0 +1,206 @@
+{
+ "kinds": {
+  "masterclass": {
+   "en": "Masterclass",
+   "fr": "Masterclass"
+  },
+  "tech": {
+   "en": "Tech event",
+   "fr": "Événement tech"
+  },
+  "reception": {
+   "en": "Reception",
+   "fr": "Réception"
+  },
+  "seminar": {
+   "en": "Seminar",
+   "fr": "Séminaire"
+  },
+  "ceremony": {
+   "en": "Closing ceremony",
+   "fr": "Cérémonie de clôture"
+  },
+  "convention": {
+   "en": "Convention",
+   "fr": "Convention"
+  },
+  "institutional": {
+   "en": "Institutional forum",
+   "fr": "Forum institutionnel"
+  },
+  "conference": {
+   "en": "Conference",
+   "fr": "Conférence"
+  },
+  "final": {
+   "en": "Competition final",
+   "fr": "Finale de compétition"
+  },
+  "fanzone": {
+   "en": "Fan zone",
+   "fr": "Fan zone"
+  },
+  "experience": {
+   "en": "Brand experience",
+   "fr": "Expérience de marque"
+  },
+  "forum": {
+   "en": "Forum",
+   "fr": "Forum"
+  },
+  "brand": {
+   "en": "Brand event",
+   "fr": "Événement de marque"
+  },
+  "corporate": {
+   "en": "Corporate reception",
+   "fr": "Réception d’entreprise"
+  },
+  "science": {
+   "en": "Scientific meeting",
+   "fr": "Rencontre scientifique"
+  },
+  "openday": {
+   "en": "Open day",
+   "fr": "Journée portes ouvertes"
+  }
+ },
+ "places": {
+  "casablanca": {
+   "en": "Casablanca",
+   "fr": "Casablanca",
+   "page": true
+  },
+  "rabat": {
+   "en": "Rabat",
+   "fr": "Rabat",
+   "page": true
+  },
+  "marrakech": {
+   "en": "Marrakech",
+   "fr": "Marrakech",
+   "page": true
+  },
+  "tangier": {
+   "en": "Tangier",
+   "fr": "Tanger"
+  }
+ },
+ "events": [
+  {
+   "id": "seminar",
+   "name": {
+    "en": "Seminar",
+    "fr": "Séminaire"
+   }
+  },
+  {
+   "id": "convention",
+   "name": {
+    "en": "Convention",
+    "fr": "Convention"
+   }
+  },
+  {
+   "id": "gala",
+   "name": {
+    "en": "Gala evening",
+    "fr": "Soirée de gala"
+   }
+  },
+  {
+   "id": "launch",
+   "name": {
+    "en": "Product launch",
+    "fr": "Lancement de produit"
+   }
+  },
+  {
+   "id": "openday",
+   "name": {
+    "en": "Open day",
+    "fr": "Journée portes ouvertes"
+   }
+  }
+ ],
+ "services": [
+  {
+   "id": "conferences",
+   "name": {
+    "en": "Conferences & Conventions",
+    "fr": "Conférences & Conventions"
+   }
+  },
+  {
+   "id": "ceremonies",
+   "name": {
+    "en": "Ceremonies & Gala Evenings",
+    "fr": "Cérémonies & Soirées de gala"
+   }
+  },
+  {
+   "id": "receptions",
+   "name": {
+    "en": "Brand & Corporate Receptions",
+    "fr": "Réceptions & Événements de marque"
+   }
+  },
+  {
+   "id": "production",
+   "name": {
+    "en": "Stage & Audiovisual Production",
+    "fr": "Scène & Production audiovisuelle"
+   }
+  }
+ ],
+ "cities": [
+  {
+   "id": "casablanca",
+   "name": {
+    "en": "Casablanca",
+    "fr": "Casablanca"
+   }
+  },
+  {
+   "id": "rabat",
+   "name": {
+    "en": "Rabat",
+    "fr": "Rabat"
+   }
+  },
+  {
+   "id": "marrakech",
+   "name": {
+    "en": "Marrakech",
+    "fr": "Marrakech"
+   }
+  }
+ ],
+ "published": {
+  "projects": {
+   "cupra-open-day": "",
+   "femmes-en-jeu": "",
+   "tech-fest-maroc": "",
+   "marrakech-cocktail": "",
+   "mta-cycle-meeting": "",
+   "a-chance-to-reset": "",
+   "rma-convention": "",
+   "uae-morocco-forum": "",
+   "gsk-day": "",
+   "sustainable-innovation-fest": "",
+   "fanzone-can-2025": "",
+   "gillette-watch-party": "",
+   "leo-regional-conference": "",
+   "wexchange-forum": "",
+   "volvo-built-on-trust": "",
+   "centrale-automobile-cherifienne": "",
+   "onco-days": ""
+  },
+  "blog": {
+   "seminar-checklist": "",
+   "choose-the-city": "",
+   "technical-set-up": ""
+  },
+  "voices": ""
+ }
+}
