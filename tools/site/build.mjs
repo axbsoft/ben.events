@@ -237,7 +237,7 @@ function seoHead({ l, title: full, desc, alt, xdef, image, imageAlt, data }) {
 const site = l => ({ '@type': 'WebSite', '@id': SITE + '/#site', name: 'benevents agency', url: SITE + '/', inLanguage: LANGS, publisher: { '@id': ORG } });
 const homeHead = l => seoHead({ l, title: I18N.meta[l].title, desc: I18N.meta[l].desc, alt: { en: '/', fr: '/fr' }, xdef: '/', data: [agency(l), site(l)] });
 
-/* ---------- the Services menu of the header, and the events and guides of the phone menu ---------- */
+/* ---------- the Services menu of the header (services and events), and the events of the phone menu ---------- */
 // home: the home page switches language in place, so each link carries its address and its words in both languages
 function dropMenu(l, home) {
   // the events and the guides carry their address in both languages; the services and the projects get theirs from main.js, like the other links of the home page
@@ -258,11 +258,6 @@ function dropMenu(l, home) {
           ${EVENTS.map(e => link('event:' + e.id, k => tr(e.name, k))).join('\n          ')}
           ${link('events', k => W[k].allEvents, 'drop__all')}
         </div>
-        <div class="drop__col">
-          ${head('guides')}
-          ${GUIDES.map(g => link('guide:' + g.id, k => tr(g.short, k))).join('\n          ')}
-          ${link('guides', k => W[k].allGuides, 'drop__all')}
-        </div>
       </div>
     </div>`;
 }
@@ -271,7 +266,6 @@ function menuMore(l) {
   return `<div class="menu__more">
     <p data-i18n="ft.events">${esc(W[l].fEvents)}</p>
     ${EVENTS.map(e => `<a href="${pageHref(l, 'event:' + e.id)}" ${both('event:' + e.id, k => tr(e.name, k))}>${esc(tr(e.name, l))}</a>`).join('\n    ')}
-    <a href="${pageHref(l, 'guides')}" ${both('guides', k => W[k].guides)}>${esc(W[l].guides)}</a>
   </div>`;
 }
 const DROP_BLOCK = /(<!-- nav:drop -->\n)[\s\S]*?(\n *<!-- \/nav:drop -->)/, MORE_BLOCK = /(<!-- menu:more -->\n)[\s\S]*?(\n *<!-- \/menu:more -->)/;
@@ -383,7 +377,7 @@ ${STATS}
     <a href="${U.agency(l)}">${esc(t['nav.about'])}</a>
     ${dropMenu(l, false)}
     <a href="${U.projects(l)}">${esc(t['nav.gallery'])}</a>
-    <a href="${U.at(l, '#process')}">${esc(t['nav.process'])}</a>
+    <a href="${U.guides(l)}">${esc(w.guides)}</a>
     <a href="${U.at(l, '#contact')}">${esc(t['nav.contact'])}</a>
   </nav>
   <div class="nav__side">
