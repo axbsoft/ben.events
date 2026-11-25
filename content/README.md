@@ -23,6 +23,7 @@ In the Vercel project of the site, **Settings → Environment Variables**, then 
 
 - `ADMIN_USERS`: who may sign in, one person per line (or separated by `;`), as `Name:password`.
   Every password needs at least 12 characters. Remove a line to remove a person.
+  Or the names only (`Sara; Youssef`), with one password for all of them in a variable `Password`.
 - `GITHUB_TOKEN`: a GitHub *fine-grained personal access token* for this repository only, with the
   permission **Contents: Read and write**.
 

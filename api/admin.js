@@ -8,6 +8,8 @@
      ADMIN_USERS    who may sign in, one person per line or separated by ";":  Name:password
                     e.g.  Sara:a-long-password-of-her-own; Youssef:another-long-password
                     A password needs at least 12 characters. Remove a line to remove a person.
+                    Or the names only (Sara; Youssef), with one password for all of them in a variable
+                    "Password" (or ADMIN_PASSWORD).
      GITHUB_TOKEN   a GitHub "fine-grained personal access token" for the repository axbsoft/ben.events only,
                     with the permission "Contents: Read and write" (github.com → Settings → Developer settings).
    Optional:
@@ -29,9 +31,11 @@ const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const MAX_PHOTO = 3 * 1024 * 1024;           // bytes of one photo, once decoded (the request itself stays under Vercel's 4.5 MB)
 
 /* ---------- configuration ---------- */
+const shared = () => (process.env.ADMIN_PASSWORD || process.env.Password || process.env.PASSWORD || '').trim();
 function users() {
   return (process.env.ADMIN_USERS || '').split(/[;\n]/).map(x => x.trim()).filter(Boolean).map(x => {
     const k = x.indexOf(':');
+    if (k < 0) return { name: x, password: shared() };             // a name only: the shared password
     return k < 1 ? null : { name: x.slice(0, k).trim(), password: x.slice(k + 1).trim() };
   }).filter(u => u && u.name && u.password.length >= 12);
 }
@@ -40,12 +44,13 @@ function setup() {
   const repo = process.env.GITHUB_REPO || (process.env.VERCEL_GIT_REPO_OWNER && process.env.VERCEL_GIT_REPO_SLUG ? process.env.VERCEL_GIT_REPO_OWNER + '/' + process.env.VERCEL_GIT_REPO_SLUG : 'axbsoft/ben.events');
   const branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || 'main';
   const missing = [];
-  if (!users().length) missing.push((process.env.ADMIN_USERS || '').trim() ? 'ADMIN_USERS: every password needs at least 12 characters' : 'ADMIN_USERS');
+  if (!users().length) missing.push(!(process.env.ADMIN_USERS || '').trim() ? 'ADMIN_USERS'
+    : 'ADMIN_USERS (Name:password, or names only with a Password variable): every password needs at least 12 characters');
   if (!local && !process.env.GITHUB_TOKEN) missing.push('GITHUB_TOKEN');
   return { local, repo, branch, missing };
 }
 // the key that signs sessions: it changes, and everyone is signed out, when the people or the token change
-const key = () => crypto.createHash('sha256').update('ben.events admin\n' + (process.env.ADMIN_USERS || '') + '\n' + (process.env.GITHUB_TOKEN || process.env.ADMIN_LOCAL_REPO || '')).digest();
+const key = () => crypto.createHash('sha256').update('ben.events admin\n' + (process.env.ADMIN_USERS || '') + '\n' + shared() + '\n' + (process.env.GITHUB_TOKEN || process.env.ADMIN_LOCAL_REPO || '')).digest();
 
 /* ---------- sessions ---------- */
 const b64u = b => Buffer.from(b).toString('base64').replace(/=+$/, '').replace(/\+/g, '-').replace(/\//g, '_');
