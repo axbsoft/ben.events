@@ -48,6 +48,7 @@ import vm from 'node:vm';
 import { CITIES, CITY_WORDS, AGENCY, TEAM, COMPANY } from './pages.mjs';
 import { EVENTS, EVENT_WORDS } from './events.mjs';
 import { GUIDE_WORDS } from './guides.mjs';
+import { PRODUCTION, STAGE_OFFER, PRODUCTION_WORDS } from './production.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = 'https://www.ben.events';
@@ -204,7 +205,20 @@ const KIND = {
 const servicesOf = p => SERVICES.filter(s => (KIND[s.id] || []).includes(p.kind.en) || s.ideas.some(i => i.project === p.id));
 const projectsOf = s => PROJECTS.filter(p => servicesOf(p).includes(s));
 const byId = Object.fromEntries(PROJECTS.map(p => [p.id, p]));
-const cityOf = p => CITIES.find(c => c.id === p.city);        // the city of a project, when it has a page
+const cityOf = p => CITIES.find(c => c.id === p.city);
+const photoOf = ({ project, photo }) => (byId[project] && byId[project].photos[photo || 0]) || null;
+for (const pr of PRODUCTION) {
+  pr.ideas = pr.ideas.filter(i => photoOf(i) || (WARN.push(`production.mjs: the page "${pr.id}" no longer shows the project "${i.project}" (photo ${i.photo}), which is not on the site`), false));
+  pr.photo = photoOf(pr.cover);
+  if (!pr.photo) {                       // its cover is gone: the first photo of its ideas takes its place
+    const i = pr.ideas[0];
+    if (!i) throw new Error(`production.mjs: the page "${pr.id}" has no photo left (cover and ideas are not on the site)`);
+    WARN.push(`production.mjs: the cover of "${pr.id}" (${pr.cover.project}) is not on the site; the photo of "${i.project}" is used instead`);
+    pr.cover = { project: i.project, photo: i.photo, caption: i.title };
+    pr.photo = photoOf(i);
+  }
+}
+const FEATURED = ['cupra-open-day', 'femmes-en-jeu', 'mta-cycle-meeting'].filter(id => byId[id]);     // the projects shown in the Services menu        // the city of a project, when it has a page
 const short = (s, n = 158) => s.length <= n ? s : s.slice(0, s.lastIndexOf(' ', n - 1)).replace(/[\s,;:.–—-]+$/, '') + '…';
 const titleParts = t => { const k = t.indexOf(' · '); return k < 0 ? [t, ''] : [t.slice(0, k), t.slice(k + 3)]; };
 
@@ -220,7 +234,8 @@ const agency = l => ({
   areaServed: [...CITIES.map(c => ({ '@type': 'City', name: tr(c.name, l) })), { '@type': 'Country', name: l === 'fr' ? 'Maroc' : 'Morocco' }],
   contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email: MAIL, telephone: PHONE.replace(/\s/g, ''), areaServed: 'MA', availableLanguage: ['fr', 'en'] },
   knowsAbout: SERVICES.map((s, i) => T[l]['srv.' + (i + 1) + '.t']), sameAs: [SOCIAL.instagram, SOCIAL.linkedin],
-  hasOfferCatalog: { '@type': 'OfferCatalog', name: T[l]['srv.eyebrow'], itemListElement: SERVICES.map((s, i) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: T[l]['srv.' + (i + 1) + '.t'], description: T[l]['srv.' + (i + 1) + '.d'], url: SITE + U.service(l, s) } })) }
+  hasOfferCatalog: { '@type': 'OfferCatalog', name: T[l]['srv.eyebrow'], itemListElement: [...SERVICES.map((s, i) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: T[l]['srv.' + (i + 1) + '.t'], description: T[l]['srv.' + (i + 1) + '.d'], url: SITE + U.service(l, s) } })),
+    ...PRODUCTION.map(pr => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: tr(pr.name, l), description: pr.seo.desc[l], url: SITE + U.service(l, pr) } }))] }
 });
 
 /* ---------- the head lines that change with the page and its language ---------- */
@@ -281,30 +296,58 @@ const homeHead = l => seoHead({ l, title: I18N.meta[l].title, desc: I18N.meta[l]
 /* ---------- the Services menu of the header (services and events), and the events of the phone menu ---------- */
 // home: the home page switches language in place, so each link carries its address and its words in both languages
 function dropMenu(l, home) {
-  // the events and the guides carry their address in both languages; the services and the projects get theirs from main.js, like the other links of the home page
-  const both = (page, words) => home ? ` data-page="${page}"${/^(event|guide)s?(:|$)/.test(page) ? LANGS.map(k => ` data-alt-${k}="${pageHref(k, page)}"`).join('') : ''}${LANGS.map(k => ` data-text-${k}="${att(words(k))}"`).join('')}` : '';
-  const words = (k, key) => W[k][key];
-  const link = (page, name, cls = '') => `<a${cls ? ` class="${cls}"` : ''} href="${home ? pageHref(l, page).slice(1) : pageHref(l, page)}"${both(page, name)}>${esc(name(l))}</a>`;
-  const head = key => `<p class="drop__h"${home ? LANGS.map(k => ` data-text-${k}="${att(words(k, key))}"`).join('') : ''}>${esc(words(l, key))}</p>`;
+  // on the home page, every link carries its words in both languages (main.js switches them in place), and the address
+  // of each language when main.js cannot work it out (the events, the guides, the production pages, the anchors)
+  const pw = PRODUCTION_WORDS;
+  const texts = f => home ? LANGS.map(k => ` data-text-${k}="${att(f(k))}"`).join('') : '';
+  const alts = page => /^(event|guide|production)s?(:|$)/.test(page) || page.includes('#') ? LANGS.map(k => ` data-alt-${k}="${pageHref(k, page)}"`).join('') : '';
+  const link = (page, name, cls = '') => `<a${cls ? ` class="${cls}"` : ''} href="${home ? pageHref(l, page).slice(1) : pageHref(l, page)}"${home ? ` data-page="${page}"${alts(page)}` : ''}${texts(name)}>${esc(name(l))}</a>`;
+  const col = (n, head, items) => `<div class="drop__col drop__col--${n}">
+          ${link(head[0], head[1], 'drop__h')}
+          ${items.map(([page, name]) => link(page, name)).join('\n          ')}
+        </div>`;
+  const srv = i => k => T[k]['srv.' + i + '.t'];
+  const ev = id => [`event:${id}`, k => (pw[k].kinds && pw[k].kinds[id]) || tr(EVENTS.find(e => e.id === id).name, k)];
+  const thumb = ph => {
+    const copy = ph[0].replace(/^assets\/img\//, '').replace(/\.\w+$/, '.webp');
+    const small = existsSync(join(ROOT, 'assets/img/_w/480', copy)) ? '/assets/img/_w/480/' + copy : '/' + ph[0];
+    return small;                                                                         // shown when the menu first opens (menu.js)
+  };
+  const featured = FEATURED.map(id => {
+    const p = byId[id], client = tr(p.client, l).split(' · ')[0];
+    return `<a class="drop__pj" href="${home ? pageHref(l, 'project:' + id).slice(1) : pageHref(l, 'project:' + id)}"${home ? ` data-page="project:${id}"` : ''}>
+            <span class="drop__pjimg" data-bg="${thumb(p.photos[0])}" aria-hidden="true"></span>
+            <span class="drop__pjtx"><b>${esc(client)}</b><span${texts(k => tr(p.kind, k))}>${esc(tr(p.kind, l))}</span><small${texts(k => pw[k].seeProject)}>${esc(pw[l].seeProject)}</small></span>
+          </a>`;
+  }).join('\n          ');
   return `<div class="drop">
       <a class="drop__btn" href="${home ? '#services' : U.at(l, '#services')}"${home ? ' data-i18n="nav.services"' : ''} aria-haspopup="true" aria-expanded="false" aria-controls="drop-panel">${esc(T[l]['nav.services'])}</a>
       <div class="drop__panel" id="drop-panel">
-        <div class="drop__col">
-          ${head('dServices')}
-          ${SERVICES.map((s, i) => link('service:' + s.id, k => T[k]['srv.' + (i + 1) + '.t'])).join('\n          ')}
-          ${link('projects', k => W[k].allWork, 'drop__all')}
+        <div class="drop__top">
+          <p class="drop__eyebrow"${texts(k => pw[k].menuEyebrow)}>${esc(pw[l].menuEyebrow)}</p>
+          <p class="drop__title"${texts(k => pw[k].menuTitle)}>${esc(pw[l].menuTitle)}</p>
         </div>
-        <div class="drop__col">
-          ${head('fEvents')}
-          ${EVENTS.map(e => link('event:' + e.id, k => tr(e.name, k))).join('\n          ')}
-          ${link('events', k => W[k].allEvents, 'drop__all')}
+        ${col(1, ['events', k => pw[k].events], [['service:conferences', srv(1)], ['service:ceremonies', srv(2)], ['service:receptions', srv(3)], ev('seminar'), ev('launch'), ev('openday')])}
+        ${col(2, ['service:production', k => pw[k].stage], STAGE_OFFER.map(o => ['service:production#' + o.id, k => tr(o.name, k)]))}
+        ${PRODUCTION.map((pr, i) => col(3 + i, ['production:' + pr.id, k => tr(pr.name, k)], pr.offer.map(o => [`production:${pr.id}#${o.id}`, k => tr(o.name, k)]))).join('\n        ')}
+        <div class="drop__pjs">
+          <p class="drop__eyebrow"${texts(k => pw[k].featured)}>${esc(pw[l].featured)}</p>
+          ${featured}
+        </div>
+        <div class="drop__foot">
+          <span${texts(k => pw[k].cities)}>${esc(pw[l].cities)}</span>
+          <a class="drop__tel" href="tel:${PHONE.replace(/\s/g, '')}">${esc(PHONE)}</a>
+          ${link('projects', k => W[k].allWork, 'drop__all')}
         </div>
       </div>
     </div>`;
 }
 function menuMore(l) {
   const both = (page, words) => `data-page="${page}"${LANGS.map(k => ` data-alt-${k}="${pageHref(k, page)}"`).join('')}${LANGS.map(k => ` data-text-${k}="${att(words(k))}"`).join('')}`;
+  const pages = [...SERVICES.map((sv, i) => ['service:' + sv.id, k => T[k]['srv.' + (i + 1) + '.t']]), ...PRODUCTION.map(pr => ['production:' + pr.id, k => tr(pr.name, k)])];
   return `<div class="menu__more">
+    <p data-i18n="nav.services">${esc(T[l]['nav.services'])}</p>
+    ${pages.map(([page, name]) => `<a href="${pageHref(l, page).slice(1)}" ${both(page, name)}>${esc(name(l))}</a>`).join('\n    ')}
     <p data-i18n="ft.events">${esc(W[l].fEvents)}</p>
     ${EVENTS.map(e => `<a href="${pageHref(l, 'event:' + e.id)}" ${both('event:' + e.id, k => tr(e.name, k))}>${esc(tr(e.name, l))}</a>`).join('\n    ')}
   </div>`;
@@ -312,6 +355,15 @@ function menuMore(l) {
 const DROP_BLOCK = /(<!-- nav:drop -->\n)[\s\S]*?(\n *<!-- \/nav:drop -->)/, MORE_BLOCK = /(<!-- menu:more -->\n)[\s\S]*?(\n *<!-- \/menu:more -->)/;
 if (!DROP_BLOCK.test(home) || !MORE_BLOCK.test(home)) throw new Error('index.html: the lines "nav:drop" … "/nav:drop" or "menu:more" … "/menu:more" are missing');
 home = home.replace(DROP_BLOCK, (m, a, b) => a + '    ' + dropMenu('en', true) + b).replace(MORE_BLOCK, (m, a, b) => a + '  ' + menuMore('en') + b);
+// under the four crafts of the home page: what we produce around the event, each with its page
+const ALSO_BLOCK = /(<!-- srv:also -->\n)[\s\S]*?(\n *<!-- \/srv:also -->)/;
+if (!ALSO_BLOCK.test(home)) throw new Error('index.html: the lines "srv:also" … "/srv:also" are missing');
+const srvAlso = l => `    <div class="srv__also" data-reveal>
+      <p${LANGS.map(k => ` data-text-${k}="${att(PRODUCTION_WORDS[k].also)}"`).join('')}>${esc(PRODUCTION_WORDS[l].also)}</p>
+      ${[['service:production', k => PRODUCTION_WORDS[k].stage], ...PRODUCTION.map(pr => ['production:' + pr.id, k => tr(pr.name, k)])].map(([page, name]) =>
+        `<a href="${pageHref(l, page).slice(1)}" data-page="${page}"${/^production:/.test(page) ? LANGS.map(k => ` data-alt-${k}="${pageHref(k, page)}"`).join('') : ''}${LANGS.map(k => ` data-text-${k}="${att(name(k))}"`).join('')}>${esc(name(l))}</a>`).join('\n      ')}
+    </div>`;
+home = home.replace(ALSO_BLOCK, (m, a, b) => a + srvAlso('en') + b);
 
 /* ---------- 1. the home page: its head in English, and the whole page in French ---------- */
 const BLOCK = /(<!-- head:seo[^>]*-->\n)[\s\S]*?(\n<!-- \/head:seo -->)/;
@@ -328,7 +380,7 @@ write('index.html', home);
 
 function french(page) {
   let s = page.replace('<html lang="en">', '<html lang="fr">');
-  s = s.replace(DROP_BLOCK, (m, a, b) => a + '    ' + dropMenu('fr', true) + b).replace(MORE_BLOCK, (m, a, b) => a + '  ' + menuMore('fr') + b);
+  s = s.replace(DROP_BLOCK, (m, a, b) => a + '    ' + dropMenu('fr', true) + b).replace(MORE_BLOCK, (m, a, b) => a + '  ' + menuMore('fr') + b).replace(ALSO_BLOCK, (m, a, b) => a + srvAlso('fr') + b);
   s = s.replace(BLOCK, (m, a, b) => a + homeHead('fr') + b);
   s = s.replace(TEXT, (m, open, tag, key, text, close) => open + (I18N.fr[key] != null ? esc(I18N.fr[key]) : text) + close);
   for (const [kind, mark, name] of ATTR) {
@@ -346,7 +398,10 @@ function french(page) {
   return s.replace('<!doctype html>\n', '<!doctype html>\n<!-- Written by tools/site/build.mjs from index.html and assets/js/i18n.js: change those, then run it again. -->\n');
 }
 function pageHref(l, page) {
+  const at = page.indexOf('#');
+  if (at > 0) return pageHref(l, page.slice(0, at)) + page.slice(at);
   const [kind, id] = page.split(':');
+  if (kind === 'production') { const pr = PRODUCTION.find(x => x.id === id); if (!pr) throw new Error('unknown production page: ' + id); return U.service(l, pr); }
   if (kind === 'service') return U.service(l, SERVICES.find(s => s.id === id));
   if (kind === 'project') return U.project(l, byId[id]);
   if (kind === 'projects') return U.projects(l);
@@ -447,6 +502,7 @@ ${main}
     <nav class="pfoot__col" aria-label="${att(w.fServices)}">
       <h2>${esc(w.fServices)}</h2>
       ${SERVICES.map((s, i) => `<a href="${U.service(l, s)}">${esc(t['srv.' + (i + 1) + '.t'])}</a>`).join('\n      ')}
+      ${PRODUCTION.map(pr => `<a href="${U.service(l, pr)}">${esc(tr(pr.name, l))}</a>`).join('\n      ')}
     </nav>
     <nav class="pfoot__col" aria-label="${att(w.fEvents)}">
       <h2>${esc(w.fEvents)}</h2>
@@ -498,6 +554,12 @@ ${main}
 }
 
 const crumbNav = (l, items) => `<nav class="crumbs" aria-label="${att(W[l].crumbs)}"><ol>${items.map(([name, path]) => path ? `<li><a href="${path}">${esc(name)}</a></li>` : `<li aria-current="page">${esc(name)}</li>`).join('')}</ol></nav>`;
+const offerSection = (l, offer) => `<section class="pg__sec">
+  <h2 class="pg__h2">${esc(PRODUCTION_WORDS[l].offer)}</h2>
+  <div class="offer offer--n${offer.length}">
+    ${offer.map((o, i) => `<article class="offer__item" id="${o.id}"><span class="offer__n">${String(i + 1).padStart(2, '0')}</span><h3>${esc(tr(o.name, l))}</h3><p>${esc(tr(o.text, l))}</p></article>`).join('\n    ')}
+  </div>
+</section>`;
 const cta = (l, title, text) => `<section class="pj__cta pg__cta">
   <div class="pj__cta-in">
     <div class="pj__cta-main">
@@ -512,10 +574,10 @@ const cta = (l, title, text) => `<section class="pj__cta pg__cta">
   </div>
 </section>`;
 const quoteBlock = (l, q) => `<figure class="pg__quote"><blockquote>${esc(tr(q.text, l))}</blockquote><figcaption><b>${esc(q.name || '')}</b><span>${esc([tr(q.role || '', l), q.company].filter(Boolean).join(' · '))}</span></figcaption></figure>`;
-const projectCard = (l, p, text) => {
+const projectCard = (l, p, text, photo = 0) => {
   const title = tr(p.title, l);
   return `<a class="pcard" href="${U.project(l, p)}">
-      <span class="pcard__ph">${img(p.photos[0], W[l].photoOf(title), ' loading="lazy"', text ? 'wide' : 'card')}</span>
+      <span class="pcard__ph">${img(p.photos[photo] || p.photos[0], W[l].photoOf(title), ' loading="lazy"', text ? 'wide' : 'card')}</span>
       <span class="pcard__in">${text ? `<b>${esc(text[0])}</b><span>${esc(text[1])}</span><small>${esc(W[l].see)} ${esc(titleParts(title)[0])}</small>` : `<b>${esc(title)}</b><small>${esc(tr(p.kind, l))}</small>`}</span>
     </a>`;
 };
@@ -563,7 +625,7 @@ for (const s of SERVICES) {
     </ul>
   </div>
 </section>
-${s.more ? `<section class="pg__sec">
+${s.id === 'production' ? offerSection(l, STAGE_OFFER) + '\n' : ''}${s.more ? `<section class="pg__sec">
   <h2 class="pg__h2">${esc(s.more[l].title)}</h2>
   <p class="pg__lede pg__lede--wide">${esc(s.more[l].intro)}</p>
   <ul class="pg__notes pg__notes--named pg__notes--n${s.more[l].points.length}">
@@ -598,6 +660,65 @@ ${cta(l, w.endTitle, w.endText)}
 <nav class="pg__others" aria-label="${att(w.others)}">
   <h2 class="pg__h">${esc(w.others)}</h2>
   ${SERVICES.filter(o => o !== s).map(o => `<a href="${U.service(l, o)}">${esc(t['srv.' + (SERVICES.indexOf(o) + 1) + '.t'])}</a>`).join('\n  ')}
+  ${PRODUCTION.map(pr => `<a href="${U.service(l, pr)}">${esc(tr(pr.name, l))}</a>`).join('\n  ')}
+</nav>`;
+    write(fileOf(alt[l]), shell({ l, head, alt, main }));
+  }
+}
+
+for (const pr of PRODUCTION) {
+  const alt = Object.fromEntries(LANGS.map(l => [l, U.service(l, pr)]));
+  pages.push({ alt, xdef: alt.fr, kind: 'production', images: [pr.photo[0], ...pr.ideas.map(i => photoOf(i)[0])] });
+  for (const l of LANGS) {
+    const w = W[l], t = T[l], pw = PRODUCTION_WORDS[l], name = tr(pr.name, l), title = pr.title[l], steps = pr.steps[l], caption = tr(pr.cover.caption, l);
+    const trail = [[w.homeName, U.home(l)], [t['nav.services'], U.at(l, '#services')], [name]];
+    const head = seoHead({
+      l, title: pr.seo.title[l], desc: pr.seo.desc[l], alt, xdef: alt.fr, image: '/' + pr.photo[0], imageAlt: caption,
+      data: [{ '@type': 'Service', '@id': SITE + alt[l] + '#service', name: title.join(' '), serviceType: name, description: pr.seo.desc[l], url: SITE + alt[l], image: SITE + '/' + pr.photo[0],
+        provider: { '@id': ORG }, areaServed: { '@type': 'Country', name: l === 'fr' ? 'Maroc' : 'Morocco' },
+        hasOfferCatalog: { '@type': 'OfferCatalog', name: pw.offer, itemListElement: pr.offer.map(o => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: tr(o.name, l), description: tr(o.text, l), url: SITE + alt[l] + '#' + o.id } })) } },
+        { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/' }, crumbs(l, trail)]
+    });
+    const main = `${crumbNav(l, trail)}
+<header class="pg__head${pr.photo[1] < pr.photo[2] ? ' pg__head--tall' : ''}">
+  <div>
+    <p class="eyebrow"><i></i><span>${esc(pw.eyebrow)} · ${esc(name)}</span></p>
+    <h1 class="pg__title">${esc(title[0])} <em>${esc(title[1])}</em></h1>
+    <p class="pg__lede">${esc(tr(pr.lede, l))}</p>
+    <a class="btn" href="${U.at(l, '#contact')}"><span>${esc(w.talk)}</span></a>
+  </div>
+  <figure class="pg__cover">${img(pr.photo, caption, ' fetchpriority="high"', 'cover')}<figcaption><a href="${U.project(l, byId[pr.cover.project])}">${esc(caption)}</a></figcaption></figure>
+</header>
+<section class="pg__cols">
+  <div class="pg__text">
+    ${pr.text[l].map(x => `<p>${esc(x)}</p>`).join('\n    ')}
+  </div>
+  <div class="pg__does">
+    <h2 class="pg__h">${esc(w.does)}</h2>
+    <ul>
+      ${pr.offer.map(o => `<li><a href="#${o.id}">${esc(tr(o.name, l))}</a></li>`).join('\n      ')}
+    </ul>
+  </div>
+</section>
+${offerSection(l, pr.offer)}
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(steps.title)}</h2>
+  <p class="pg__lede pg__lede--wide">${esc(steps.intro)}</p>
+  <ul class="pg__notes pg__notes--named pg__notes--n${steps.points.length}">
+    ${steps.points.map(([k, v]) => `<li><b>${esc(k)}</b>${esc(v)}</li>`).join('\n    ')}
+  </ul>
+</section>${pr.ideas.length ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(w.ideas)}</h2>
+  <div class="pcards pcards--two">
+    ${pr.ideas.map(i => projectCard(l, byId[i.project], [tr(i.title, l), tr(i.text, l)], i.photo)).join('\n    ')}
+  </div>
+</section>` : ''}
+${cta(l, w.endTitle, w.endText)}
+<nav class="pg__others" aria-label="${att(pw.others)}">
+  <h2 class="pg__h">${esc(pw.others)}</h2>
+  ${PRODUCTION.filter(o => o !== pr).map(o => `<a href="${U.service(l, o)}">${esc(tr(o.name, l))}</a>`).join('\n  ')}
+  ${SERVICES.map((o, i) => `<a href="${U.service(l, o)}">${esc(t['srv.' + (i + 1) + '.t'])}</a>`).join('\n  ')}
 </nav>`;
     write(fileOf(alt[l]), shell({ l, head, alt, main }));
   }
@@ -1180,6 +1301,6 @@ for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations', 'ev
 for (const [dir, start] of [['', CITY_WORDS.en.slug], ['fr/', CITY_WORDS.fr.slug]]) {
   for (const f of readdirSync(join(ROOT, dir))) if (f.startsWith(start) && f.endsWith('.html') && !kept.has(dir + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + f); }
 }
-console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PROJECTS.length} projects and their list, the agency, ${CITIES.length} cities, ${EVENTS.length} kinds of events and their list, ${GUIDES.length} blog articles and their list, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);
+console.log(`written: fr.html, 404.html, ${pages.length * 2} pages (${SERVICES.length} services, ${PRODUCTION.length} production pages, ${PROJECTS.length} projects and their list, the agency, ${CITIES.length} cities, ${EVENTS.length} kinds of events and their list, ${GUIDES.length} blog articles and their list, in ${LANGS.length} languages), sitemap.xml with ${urls.length} addresses`);
 if (WARN.length) console.log(`\n${WARN.length} thing(s) left out of the pages:\n  ${[...new Set(WARN)].join('\n  ')}`);
 if (NO_PREVIEW.size) console.log(`\n${NO_PREVIEW.size} picture(s) have no preview yet (their pages show the agency's picture in a shared link):\n  ${[...NO_PREVIEW].join('\n  ')}\nMake them: python3 tools/site/previews.py && node tools/site/build.mjs`);

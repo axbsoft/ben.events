@@ -24,6 +24,21 @@
 .pg__head .btn { margin-top: clamp(24px, 3vw, 38px); }
 .pg__cover { margin: 0; overflow: hidden; border-radius: var(--r); background: var(--card-2); }
 .pg__cover img { width: 100%; height: auto; max-height: min(78vh, 760px); object-fit: cover; }
+/* the photo of a production page says which project it comes from */
+.pg__cover figcaption { padding: 12px 16px 14px; font-size: 13.5px; line-height: 1.4; color: var(--mute); }
+.pg__cover figcaption a { transition: color .3s; }
+.pg__cover figcaption a:hover, .pg__cover figcaption a:focus-visible { color: var(--c1); }
+/* what we provide: one card per offer, each the target of a line of the Services menu */
+.offer { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); margin-top: clamp(20px, 3vw, 34px); }
+.offer--n4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.offer__item { position: relative; padding: clamp(22px, 2.4vw, 32px); border-radius: var(--r); border: 1px solid var(--line); background: var(--card); scroll-margin-top: 120px; transition: border-color .4s; }
+.offer__item:target { border-color: rgba(249, 178, 78, .6); }
+.offer__n { display: block; margin-bottom: 18px; font-family: var(--serif); font-size: 18px; color: var(--c1); }
+.offer__item:nth-child(4n + 2) .offer__n { color: var(--c2); } .offer__item:nth-child(4n + 3) .offer__n { color: var(--c3); } .offer__item:nth-child(4n) .offer__n { color: var(--c4); }
+.offer__item h3 { margin: 0 0 10px; font-family: var(--display); font-size: clamp(19px, 1.5vw, 23px); font-weight: 600; letter-spacing: -.02em; line-height: 1.2; }
+.offer__item p { margin: 0; font-size: 15.5px; line-height: 1.55; color: rgba(246, 245, 241, .78); }
+@media (max-width: 1000px) { .offer, .offer--n4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .offer, .offer--n4 { grid-template-columns: 1fr; } }
 .pg__tags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: clamp(20px, 2.4vw, 30px); font-size: 13.5px; }
 .pg__tags span { margin-right: 6px; font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
 .pg__tags a { padding: 7px 15px; border-radius: 99px; border: 1px solid var(--line); background: rgba(255, 255, 255, .05); font-weight: 500; transition: background .3s, color .3s; }

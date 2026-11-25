@@ -17,6 +17,9 @@ clients type, not measured search volumes.
 | `/fr/services/ceremonies-soirees-de-gala` | organisation de cérémonies et soirées de gala au Maroc | remise de prix, cérémonie institutionnelle, dîner de gala |
 | `/fr/services/receptions-evenements-de-marque` | réceptions d'entreprise et événements de marque au Maroc | inauguration, portes ouvertes, lancement |
 | `/fr/services/scene-production-audiovisuelle` | production audiovisuelle événementielle au Maroc | scénographie, régie technique, sonorisation, éclairage, écran LED |
+| `/fr/services/stands-exposition-maroc` | conception et fabrication de stands au Maroc | stand de salon, stand textile, caisson lumineux, montage |
+| `/fr/services/impression-signaletique-maroc` | impression et signalétique événementielle au Maroc | grand format, textile SEG, bâche, photocall, roll-up |
+| `/fr/services/location-materiel-evenementiel-maroc` | location de matériel événementiel au Maroc | mobilier, tentes et chapiteaux, informatique, décoration |
 | `/fr/evenements` | événements d'entreprise organisés au Maroc | séminaire, convention, soirée de gala, lancement, portes ouvertes |
 | `/fr/evenements/organisation-seminaire-maroc` | organisation de séminaire d'entreprise au Maroc | plénière, ateliers, soirée, Tanger, Marrakech |
 | `/fr/evenements/organisation-convention-entreprise-maroc` | organisation de convention d'entreprise au Maroc | réunion commerciale, distributeurs, scène centrale, captation |
