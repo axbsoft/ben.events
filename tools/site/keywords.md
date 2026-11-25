@@ -20,12 +20,14 @@ clients type, not measured search volumes.
 | `/fr/services/stands-exposition-maroc` | conception et fabrication de stands au Maroc | stand de salon, stand textile, caisson lumineux, montage |
 | `/fr/services/impression-signaletique-maroc` | impression et signalétique événementielle au Maroc | grand format, textile SEG, bâche, photocall, roll-up |
 | `/fr/services/location-materiel-evenementiel-maroc` | location de matériel événementiel au Maroc | mobilier, tentes et chapiteaux, informatique, décoration |
+| `/fr/services/hotesses-accueil-inscriptions-maroc` | hôtesses d'accueil événementielles au Maroc | inscriptions, badges, contrôle d'accès, VIP |
 | `/fr/evenements` | événements d'entreprise organisés au Maroc | séminaire, convention, soirée de gala, lancement, portes ouvertes |
 | `/fr/evenements/organisation-seminaire-maroc` | organisation de séminaire d'entreprise au Maroc | plénière, ateliers, soirée, Tanger, Marrakech |
 | `/fr/evenements/organisation-convention-entreprise-maroc` | organisation de convention d'entreprise au Maroc | réunion commerciale, distributeurs, scène centrale, captation |
 | `/fr/evenements/soiree-de-gala-maroc` | organisation de soirée de gala au Maroc | dîner de gala, scénographie, mur LED, lumière |
 | `/fr/evenements/lancement-de-produit-maroc` | organisation de lancement de produit au Maroc | événement de marque, présentation, showroom |
 | `/fr/evenements/journee-portes-ouvertes-maroc` | organisation de journée portes ouvertes au Maroc | showroom, concession, animation, DJ |
+| `/fr/evenements/team-building-maroc` | organisation de team building au Maroc | séminaire, défis, activités, soirée |
 | `/fr/blog` | blog : organiser un événement d'entreprise au Maroc | conseils, guides, checklist |
 | `/fr/blog/organiser-un-seminaire-d-entreprise-au-maroc` | organiser un séminaire au Maroc | checklist, lieu, déroulé, technique |
 | `/fr/blog/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement` | quelle ville pour un événement au Maroc | Casablanca, Rabat, Marrakech, Tanger |

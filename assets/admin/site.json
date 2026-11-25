@@ -121,6 +121,13 @@
     "en": "Open day",
     "fr": "Journée portes ouvertes"
    }
+  },
+  {
+   "id": "teambuilding",
+   "name": {
+    "en": "Team building",
+    "fr": "Team building"
+   }
   }
  ],
  "services": [

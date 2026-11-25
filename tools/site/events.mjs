@@ -1,7 +1,9 @@
 /* benevents agency — one page per kind of event we produce (events/<slug>, fr/evenements/<slug>),
    and the page that lists them (events, fr/evenements). Written by tools/site/build.mjs.
 
-   Only kinds of events the portfolio shows, and only what is true today: an answer is a promise.
+   Only kinds of events we run, and only what is true today: an answer is a promise. When the portfolio has no
+   project of that kind yet (team building), the photos come from related projects and say so in their caption.
+   caption : optional, under the photo at the top: { project: '<id>', text } (also its description for search engines)
 
    id      : short name, used in data-page="event:<id>" (the links of the home page)
    service : the service (assets/js/services.js) this kind of event belongs to
@@ -14,7 +16,7 @@
    text    : two or three paragraphs
    does    : what we take care of, a few short lines
    steps   : how we run it: { en: { title, intro, points: [['name', 'sentence'], …] }, fr: { … } }
-   ideas   : projects of the portfolio that show it: { project: '<id in projects.js>', title, text }
+   ideas   : projects of the portfolio that show it: { project: '<id in projects.js>', photo (optional, its number from 0), title, text }
    faq     : questions and answers: { en: [['question', 'answer'], …], fr: [ … ] } */
 
 export const EVENTS = [
@@ -364,6 +366,78 @@ export const EVENTS = [
         ['À quel moment connaît-on le budget ?', 'Avant toute réservation. Le concept et un budget clair vous sont présentés ensemble.']
       ]
     }
+  },
+  {
+    id: 'teambuilding',
+    service: 'conferences',
+    slug: { en: 'team-building-morocco', fr: 'team-building-maroc' },
+    name: { en: 'Team building', fr: 'Team building' },
+    title: { en: ['Team building', 'in Morocco'], fr: ['Team building', 'au Maroc'] },
+    lede: {
+      en: 'Challenges, games and shared moments that bring a team together, designed around what you want your people to feel and take back to work.',
+      fr: 'Défis, jeux et moments partagés qui rassemblent une équipe, conçus autour de ce que vos collaborateurs doivent ressentir et rapporter au travail.'
+    },
+    seo: {
+      title: { en: 'Team Building Organisation in Morocco | benevents agency', fr: 'Organisation de team building au Maroc | benevents agency' },
+      desc: {
+        en: 'Team building in Casablanca, Marrakech, Rabat or Tangier: challenges, games, indoor or outdoor activities and evenings, designed and run by benevents agency.',
+        fr: 'Team building à Casablanca, Marrakech, Rabat ou Tanger : défis, jeux, activités en salle ou en extérieur et soirées, conçus et animés par benevents agency.'
+      }
+    },
+    image: ['assets/img/projects/cupra-open-day/10.webp', 1600, 900],
+    caption: { project: 'cupra-open-day', text: { en: 'CUPRA open day: a precision challenge built for the guests.', fr: 'Portes ouvertes CUPRA : un défi de précision construit pour les invités.' } },
+    text: {
+      en: ['A good team building is not a day off. It is a few hours in which people who work side by side discover each other differently, and go back to the office with something in common. We start from what you want the team to feel: closer, more confident, proud of a year’s work.',
+           'From there we design the activities: challenges and games built for the day, a quiz on the big screen, a creative workshop, an outdoor activity, or an evening in which everyone takes part. Each activity is designed so that every person has a role, not only the most athletic.',
+           'It can stand on its own, or fit into a seminar, as a half-day or as the evening. We take care of the venue, the equipment, the hosts, the sound and the screens, and you deal with one producer from start to finish.'],
+      fr: ['Un bon team building n’est pas un jour de congé. Ce sont quelques heures pendant lesquelles des personnes qui travaillent côte à côte se découvrent autrement, et rentrent au bureau avec quelque chose en commun. Nous partons de ce que l’équipe doit ressentir : plus soudée, plus confiante, fière d’une année de travail.',
+           'Nous concevons ensuite les activités : défis et jeux construits pour l’occasion, quiz sur grand écran, atelier créatif, activité en extérieur, ou une soirée à laquelle chacun participe. Chaque activité est pensée pour que chacun ait un rôle, pas seulement les plus sportifs.',
+           'Il peut se suffire à lui-même, ou s’intégrer à un séminaire, sur une demi-journée ou en soirée. Nous prenons en charge le lieu, le matériel, l’animation, le son et les écrans, et vous avez un seul chef de projet du début à la fin.']
+    },
+    does: {
+      en: ['Activities designed around your objective', 'The venue, indoors or outdoors', 'Challenges, games and their equipment', 'Hosts and facilitators', 'Sound, screens and prizes', 'Photos and video of the day'],
+      fr: ['Des activités conçues autour de votre objectif', 'Le lieu, en salle ou en extérieur', 'Défis, jeux et leur matériel', 'Animateurs et encadrants', 'Son, écrans et récompenses', 'Photos et vidéo de la journée']
+    },
+    steps: {
+      en: { title: 'How we run a team building', intro: 'Four steps, with the same producer at each of them.', points: [
+        ['Listen', 'Your team, its size, the moment of the year, and what the day should change.'],
+        ['Design', 'Activities, venue and timing, with a clear budget, presented before anything is booked.'],
+        ['Prepare', 'Equipment, hosts, teams and running order, tested before the day.'],
+        ['Run', 'On the day, our team runs each activity and keeps the rhythm, from the welcome to the prizes.']] },
+      fr: { title: 'Comment nous menons un team building', intro: 'Quatre étapes, avec le même chef de projet à chacune.', points: [
+        ['Écouter', 'Votre équipe, sa taille, le moment de l’année, et ce que la journée doit changer.'],
+        ['Concevoir', 'Activités, lieu et horaires, avec un budget clair, présentés avant toute réservation.'],
+        ['Préparer', 'Matériel, animateurs, équipes et déroulé, testés avant le jour J.'],
+        ['Animer', 'Le jour J, notre équipe mène chaque activité et tient le rythme, de l’accueil à la remise des prix.']] }
+    },
+    ideas: [
+      { project: 'gillette-watch-party', photo: 1,
+        title: { en: 'Watching together', fr: 'Vibrer ensemble' },
+        text: { en: 'Bean bags in front of a giant screen, and a prize draw during the match.', fr: 'Des poufs face à un écran géant, et une tombola pendant le match.' } },
+      { project: 'sustainable-innovation-fest', photo: 0,
+        title: { en: 'Teams on stage', fr: 'Des équipes sur scène' },
+        text: { en: 'Student teams competing for a national title, and celebrating it together.', fr: 'Des équipes d’étudiants en compétition pour un titre national, qui le fêtent ensemble.' } },
+      { project: 'mta-cycle-meeting', photo: 0,
+        title: { en: 'An evening that brings people together', fr: 'Une soirée qui rassemble' },
+        text: { en: 'After the sessions of a seminar, a show on stage for the whole team.', fr: 'Après les sessions d’un séminaire, un spectacle sur scène pour toute l’équipe.' } },
+      { project: 'cupra-open-day', photo: 2,
+        title: { en: 'Music for the moment', fr: 'La musique du moment' },
+        text: { en: 'A DJ booth lit in the colours of the brand.', fr: 'Une cabine DJ éclairée aux couleurs de la marque.' } }
+    ],
+    faq: {
+      en: [
+        ['Can team building be part of a seminar?', 'Yes. It can take a half-day of the programme, or the evening, in the venue of the seminar or close to it.'],
+        ['Indoors or outdoors?', 'Both. We choose the activities for the venue, the season and the size of the team, and plan for the weather when it is outdoors.'],
+        ['Can everyone take part?', 'Yes. We design activities in which each person has a role, whatever their age or fitness.'],
+        ['When do we know the budget?', 'Before anything is booked. The activities and a clear budget are presented to you together.']
+      ],
+      fr: [
+        ['Le team building peut-il faire partie d’un séminaire ?', 'Oui. Il peut occuper une demi-journée du programme, ou la soirée, sur le lieu du séminaire ou à proximité.'],
+        ['En salle ou en extérieur ?', 'Les deux. Nous choisissons les activités selon le lieu, la saison et la taille de l’équipe, et nous prévoyons la météo quand c’est en extérieur.'],
+        ['Tout le monde peut-il participer ?', 'Oui. Nous concevons des activités où chacun a un rôle, quels que soient son âge ou sa condition physique.'],
+        ['À quel moment connaît-on le budget ?', 'Avant toute réservation. Les activités et un budget clair vous sont présentés ensemble.']
+      ]
+    }
   }
 ];
 
@@ -372,14 +446,14 @@ export const EVENT_WORDS = {
   en: {
     folder: '/events/', index: '/events', name: 'Events we produce', eyebrow: 'Events', how: 'How we run it',
     title: ['Events we produce', 'in Morocco'],
-    lede: 'Seminars, conventions, gala evenings, launches and open days: each kind of event has its own page, with the projects that show how we run it.',
+    lede: 'Seminars, conventions, gala evenings, launches, open days and team building: each kind of event has its own page, with the projects that show how we run it.',
     seo: ['Corporate Events We Organise in Morocco | benevents agency', 'Seminars, conventions, gala evenings, product launches and open days in Morocco, designed and produced by benevents agency, with the projects that show them.'],
     others: 'Other events we produce', card: 'See how we run it', service: 'The service:', ofKind: 'Events of this kind', cover: n => `${n}: an event produced by benevents agency`
   },
   fr: {
     folder: '/fr/evenements/', index: '/fr/evenements', name: 'Les événements que nous produisons', eyebrow: 'Événements', how: 'Comment nous le menons',
     title: ['Les événements', 'que nous produisons'],
-    lede: 'Séminaires, conventions, soirées de gala, lancements et journées portes ouvertes : chaque type d’événement a sa page, avec les réalisations qui montrent comment nous le menons.',
+    lede: 'Séminaires, conventions, soirées de gala, lancements, journées portes ouvertes et team building : chaque type d’événement a sa page, avec les réalisations qui montrent comment nous le menons.',
     seo: ['Événements d’entreprise organisés au Maroc | benevents agency', 'Séminaires, conventions, soirées de gala, lancements de produit et journées portes ouvertes au Maroc, conçus et produits par benevents agency, avec nos réalisations.'],
     others: 'Les autres événements que nous produisons', card: 'Voir comment nous le menons', service: 'Le savoir-faire :', ofKind: 'Les événements de ce type', cover: n => `${n} : un événement produit par benevents agency`
   }

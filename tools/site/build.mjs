@@ -167,6 +167,7 @@ const fileOf = path => (path === '/' ? 'index' : path.slice(1)) + '.html';
 /* ---------- words these pages add ---------- */
 const W = {
   en: {
+    tag: 'Corporate event design and production.',
     skip: 'Skip to content', nav: 'Primary', language: 'Language', crumbs: 'You are here', homeName: 'Home', cta: 'Start a project',
     talk: 'Talk to us about your event', craft: 'What we create', does: 'What we take care of', ideas: 'Ideas, seen in our projects', see: 'See the project:',
     more: 'More events of this kind', others: 'Our other services', work: 'Portfolio', allWork: 'All projects',
@@ -181,6 +182,7 @@ const W = {
     faq: 'Frequent questions', quick: 'Quick contact', call: 'Call', cities: 'Where we work', fEvents: 'Events we produce', guides: 'Blog', dServices: 'Our services', allEvents: 'All events', allGuides: 'All articles', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
   },
   fr: {
+    tag: 'Conception et production d’événements d’entreprise.',
     skip: 'Aller au contenu', nav: 'Principal', language: 'Langue', crumbs: 'Vous êtes ici', homeName: 'Accueil', cta: 'Démarrer un projet',
     talk: 'Parlons de votre événement', craft: 'Ce que nous créons', does: 'Ce que nous prenons en charge', ideas: 'Des idées, vues dans nos réalisations', see: 'Voir le projet :',
     more: 'D’autres événements de ce type', others: 'Nos autres savoir-faire', work: 'Réalisations', allWork: 'Toutes les réalisations',
@@ -327,7 +329,7 @@ function dropMenu(l, home) {
           <p class="drop__eyebrow"${texts(k => pw[k].menuEyebrow)}>${esc(pw[l].menuEyebrow)}</p>
           <p class="drop__title"${texts(k => pw[k].menuTitle)}>${esc(pw[l].menuTitle)}</p>
         </div>
-        ${col(1, ['events', k => pw[k].events], [['service:conferences', srv(1)], ['service:ceremonies', srv(2)], ['service:receptions', srv(3)], ev('seminar'), ev('launch'), ev('openday')])}
+        ${col(1, ['events', k => pw[k].events], [['service:conferences', srv(1)], ['service:ceremonies', srv(2)], ['service:receptions', srv(3)], ev('seminar'), ev('launch'), ev('openday'), ev('teambuilding')])}
         ${col(2, ['service:production', k => pw[k].stage], STAGE_OFFER.map(o => ['service:production#' + o.id, k => tr(o.name, k)]))}
         ${PRODUCTION.map((pr, i) => col(3 + i, ['production:' + pr.id, k => tr(pr.name, k)], pr.offer.map(o => [`production:${pr.id}#${o.id}`, k => tr(o.name, k)]))).join('\n        ')}
         <div class="drop__pjs">
@@ -335,7 +337,7 @@ function dropMenu(l, home) {
           ${featured}
         </div>
         <div class="drop__foot">
-          <span${texts(k => pw[k].cities)}>${esc(pw[l].cities)}</span>
+          <p class="drop__cities">${CITIES.map(c => link('city:' + c.id, k => tr(c.name, k))).join('<i>·</i>')}<i>·</i><span${texts(k => pw[k].allMorocco)}>${esc(pw[l].allMorocco)}</span></p>
           <a class="drop__tel" href="tel:${PHONE.replace(/\s/g, '')}">${esc(PHONE)}</a>
           ${link('projects', k => W[k].allWork, 'drop__all')}
         </div>
@@ -496,7 +498,7 @@ ${main}
   <div class="wrap pfoot__in">
     <div class="pfoot__lead">
       <a class="logo logo--footer" href="${U.home(l)}" aria-label="benevents agency"><span class="logo__text">${BRAND}</span></a>
-      <p>${esc(t['ft.tag'])}</p>
+      <p>${esc(w.tag)}</p>
       <a class="link-arrow" href="${U.at(l, '#contact')}">${esc(w.talk)}</a>
     </div>
     <nav class="pfoot__col" aria-label="${att(w.fServices)}">
@@ -534,6 +536,7 @@ ${main}
   </div>
   <div class="wrap pfoot__base">
     <span>© <span data-year>${new Date().getFullYear()}</span> benevents agency. ${esc(w.rights)}</span>
+    <p class="pfoot__cities">${CITIES.map(c => `<a href="${U.city(l, c)}">${esc(tr(c.name, l))}</a>`).join('<i>·</i>')}<i>·</i><span>${esc(PRODUCTION_WORDS[l].allMorocco)}</span></p>
     <nav aria-label="Legal"><a href="${U.legal(l, 'privacy')}">${esc(w.privacy)}</a><a href="${U.legal(l, 'terms')}">${esc(w.terms)}</a></nav>
   </div>
 </footer>
@@ -583,7 +586,7 @@ const projectCard = (l, p, text, photo = 0) => {
 };
 
 const eventCard = (l, e) => `<a class="pcard" href="${U.event(l, e)}">
-      <span class="pcard__ph">${img(e.image, EVENT_WORDS[l].cover(tr(e.name, l)), ' loading="lazy"', 'card')}</span>
+      <span class="pcard__ph">${img(e.image, e.caption ? tr(e.caption.text, l) : EVENT_WORDS[l].cover(tr(e.name, l)), ' loading="lazy"', 'card')}</span>
       <span class="pcard__in"><b>${esc(tr(e.name, l))}</b><span>${esc(tr(e.lede, l))}</span><small>${esc(EVENT_WORDS[l].card)}</small></span>
     </a>`;
 const guideCard = (l, g) => `<a class="pcard" href="${U.guide(l, g)}">
@@ -984,14 +987,14 @@ const longDate = (l, d) => new Date(d + 'T12:00:00Z').toLocaleDateString(l === '
 
 for (const e of EVENTS) {
   const alt = Object.fromEntries(LANGS.map(l => [l, U.event(l, e)]));
-  pages.push({ alt, xdef: alt.fr, kind: 'event', images: [e.image[0], ...e.ideas.map(i => byId[i.project].photos[0][0])] });
+  pages.push({ alt, xdef: alt.fr, kind: 'event', images: [e.image[0], ...e.ideas.map(i => (byId[i.project].photos[i.photo || 0] || byId[i.project].photos[0])[0])] });
   const s = SERVICES.find(x => x.id === e.service);
   for (const l of LANGS) {
     const w = W[l], ew = EVENT_WORDS[l], name = tr(e.name, l), title = e.title[l], steps = e.steps && e.steps[l];
     const trail = [[w.homeName, U.home(l)], [ew.name, U.events(l)], [name]];
     const reading = GUIDES.filter(g => (g.related.events || []).includes(e.id));
     const head = seoHead({
-      l, title: e.seo.title[l], desc: e.seo.desc[l], alt, xdef: alt.fr, image: '/' + e.image[0], imageAlt: ew.cover(name),
+      l, title: e.seo.title[l], desc: e.seo.desc[l], alt, xdef: alt.fr, image: '/' + e.image[0], imageAlt: e.caption ? tr(e.caption.text, l) : ew.cover(name),
       data: [{ '@type': 'Service', '@id': SITE + alt[l] + '#service', name: title.join(' '), serviceType: name, description: e.seo.desc[l], url: SITE + alt[l], image: SITE + '/' + e.image[0],
         provider: { '@id': ORG }, areaServed: { '@type': 'Country', name: l === 'fr' ? 'Maroc' : 'Morocco' }, isRelatedTo: { '@type': 'Service', name: serviceName(l, s), url: SITE + U.service(l, s) } },
         { '@type': 'Organization', '@id': ORG, name: 'benevents agency', url: SITE + '/' }, crumbs(l, trail),
@@ -1006,7 +1009,7 @@ for (const e of EVENTS) {
     <p class="pg__tags"><span>${esc(ew.service)}</span><a href="${U.service(l, s)}">${esc(serviceName(l, s))}</a></p>
     <a class="btn" href="${U.at(l, '#contact')}"><span>${esc(w.talk)}</span></a>
   </div>
-  <figure class="pg__cover">${img(e.image, ew.cover(name), ' fetchpriority="high"', 'cover')}</figure>
+  <figure class="pg__cover">${img(e.image, e.caption ? tr(e.caption.text, l) : ew.cover(name), ' fetchpriority="high"', 'cover')}${e.caption && byId[e.caption.project] ? `<figcaption><a href="${U.project(l, byId[e.caption.project])}">${esc(tr(e.caption.text, l))}</a></figcaption>` : ''}</figure>
 </header>
 <section class="pg__cols">
   <div class="pg__text">
@@ -1029,7 +1032,7 @@ for (const e of EVENTS) {
 <section class="pg__sec">
   <h2 class="pg__h2">${esc(w.ideas)}</h2>
   <div class="pcards pcards--two">
-    ${e.ideas.map(i => projectCard(l, byId[i.project], [tr(i.title, l), tr(i.text, l)])).join('\n    ')}
+    ${e.ideas.map(i => projectCard(l, byId[i.project], [tr(i.title, l), tr(i.text, l)], i.photo)).join('\n    ')}
   </div>
 </section>
 <section class="pg__sec">

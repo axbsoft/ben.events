@@ -199,6 +199,64 @@ export const PRODUCTION = [
         title: { en: 'A room set for a gala dinner', fr: 'Une salle dressée pour un dîner de gala' },
         text: { en: 'Round tables laid for dinner, in front of the LED wall.', fr: 'Des tables rondes dressées pour le dîner, devant le mur LED.' } }
     ]
+  },
+  {
+    id: 'welcome',
+    slug: { en: 'event-hostesses-registration-morocco', fr: 'hotesses-accueil-inscriptions-maroc' },
+    name: { en: 'Hostesses & registration', fr: 'Hôtesses & inscriptions' },
+    title: { en: ['Hostesses, registration', 'and badges'], fr: ['Hôtesses, inscriptions', 'et badges'] },
+    lede: {
+      en: 'From the invitation to the seat: guests registered, welcomed, given their badge and shown the way by a team dressed for your event.',
+      fr: 'De l’invitation à la place assise : des invités inscrits, accueillis, badgés et guidés par une équipe à l’image de votre événement.'
+    },
+    seo: {
+      title: { en: 'Event Hostesses and Registration in Morocco | benevents agency', fr: 'Hôtesses d’accueil et inscriptions au Maroc | benevents agency' },
+      desc: {
+        en: 'Hostesses and hosts, welcome desks, online registration, printed badges, check-in and access control for corporate events in Morocco, run by benevents.',
+        fr: 'Hôtesses et hôtes d’accueil, inscriptions en ligne, badges imprimés, enregistrement et contrôle d’accès pour vos événements au Maroc, assurés par benevents.'
+      }
+    },
+    cover: { project: 'centrale-automobile-cherifienne', photo: 0, caption: { en: 'Centrale Automobile Chérifienne: guests gathered in the showroom before the presentation.', fr: 'Centrale Automobile Chérifienne : les invités réunis dans le showroom avant la présentation.' } },
+    text: {
+      en: ['Guests judge an event in its first minutes: how they were invited, how quickly they get in, whether someone knows their name. A smooth welcome puts them in the right mood for everything that follows, and gives you an exact picture of who came.',
+           'We take care of the whole path of your guests: the registration form and the confirmations, the badges, the welcome desk and the hostesses, the check-in at the door, and the people who take speakers and VIP guests to their seat. After the event, you receive the list of who came.'],
+      fr: ['Vos invités jugent un événement dans ses premières minutes : la façon dont ils ont été invités, la rapidité de leur entrée, le fait que quelqu’un connaisse leur nom. Un accueil fluide les met dans le bon état d’esprit pour tout ce qui suit, et vous donne une image exacte de qui est venu.',
+           'Nous prenons en charge tout le parcours de vos invités : le formulaire d’inscription et les confirmations, les badges, la banque d’accueil et les hôtesses, l’enregistrement à l’entrée, et l’accompagnement des intervenants et des invités VIP jusqu’à leur place. Après l’événement, vous recevez la liste des présents.']
+    },
+    offer: [
+      { id: 'hostesses', name: { en: 'Hostesses and hosts', fr: 'Hôtesses et hôtes' },
+        text: { en: 'A team briefed on your event and dressed to match it, at the entrance, in the rooms and backstage.', fr: 'Une équipe briefée sur votre événement et habillée à son image, à l’entrée, dans les salles et en coulisses.' } },
+      { id: 'desk', name: { en: 'Welcome desk', fr: 'Banque d’accueil' },
+        text: { en: 'A desk in your colours, where guests are greeted, checked in and given what they need for the day.', fr: 'Une banque à vos couleurs, où les invités sont accueillis, enregistrés et reçoivent ce qu’il leur faut pour la journée.' } },
+      { id: 'registration', name: { en: 'Online registration', fr: 'Inscriptions en ligne' },
+        text: { en: 'A registration form for your guests, confirmation messages, and an up-to-date list of who is coming.', fr: 'Un formulaire d’inscription pour vos invités, des messages de confirmation, et une liste à jour des participants.' } },
+      { id: 'badges', name: { en: 'Badges and lanyards', fr: 'Badges et tours de cou' },
+        text: { en: 'Badges printed in advance or on site, with names, companies and a colour for each type of guest.', fr: 'Des badges imprimés à l’avance ou sur place, avec noms, sociétés et une couleur par type d’invité.' } },
+      { id: 'access', name: { en: 'Check-in and access control', fr: 'Enregistrement et contrôle d’accès' },
+        text: { en: 'Guests checked in at the door, access to each room or area controlled, and the attendance list sent to you after the event.', fr: 'Les invités enregistrés à l’entrée, l’accès à chaque salle ou espace contrôlé, et la liste des présents envoyée après l’événement.' } },
+      { id: 'vip', name: { en: 'Speakers and VIP guests', fr: 'Intervenants et invités VIP' },
+        text: { en: 'Someone to meet each speaker and VIP guest, and take them to their seat and to the stage on time.', fr: 'Une personne pour accueillir chaque intervenant et invité VIP, et l’accompagner à sa place et sur scène à l’heure.' } }
+    ],
+    steps: {
+      en: { title: 'The path of your guests', intro: 'Four steps, from the first invitation to the last guest.', points: [
+        ['List', 'Who is invited, how they register, and what each type of guest needs.'],
+        ['Prepare', 'Registration form, badges and the briefing of the team, ready before the day.'],
+        ['Welcome', 'Desk, hostesses and signs in place before the first guest arrives.'],
+        ['Report', 'Who came, sent to you after the event.']] },
+      fr: { title: 'Le parcours de vos invités', intro: 'Quatre étapes, de la première invitation au dernier invité.', points: [
+        ['Lister', 'Qui est invité, comment il s’inscrit, et ce dont chaque type d’invité a besoin.'],
+        ['Préparer', 'Formulaire d’inscription, badges et briefing de l’équipe, prêts avant le jour J.'],
+        ['Accueillir', 'Banque, hôtesses et signalétique en place avant l’arrivée du premier invité.'],
+        ['Rendre compte', 'La liste des présents, envoyée après l’événement.']] }
+    },
+    ideas: [
+      { project: 'uae-morocco-forum', photo: 0,
+        title: { en: 'Tables set for official guests', fr: 'Des tables dressées pour des invités officiels' },
+        text: { en: 'Round tables with the flags of both countries, for a forum between delegations.', fr: 'Des tables rondes aux drapeaux des deux pays, pour un forum entre délégations.' } },
+      { project: 'onco-days', photo: 0,
+        title: { en: 'A room ready before the first guest', fr: 'Une salle prête avant le premier invité' },
+        text: { en: 'Every chair dressed and every table set, facing the stage.', fr: 'Chaque chaise habillée et chaque table dressée, face à la scène.' } }
+    ]
   }
 ];
 
@@ -219,10 +277,10 @@ export const STAGE_OFFER = [
 export const PRODUCTION_WORDS = {
   en: { eyebrow: 'What we produce', offer: 'What we provide', others: 'Everything around the event', cover: n => `${n}: a project by benevents agency`,
         menuTitle: 'Everything an event needs, one team.', menuEyebrow: 'Our services', events: 'Events', stage: 'Stage & technical', allOf: 'See the page',
-        featured: 'Recent projects', seeProject: 'See the project', cities: 'Casablanca · Rabat · Marrakech · Tangier · all of Morocco',
-        kinds: { seminar: 'Seminars', launch: 'Product launches', openday: 'Open days' }, also: 'Around the event, by the same team' },
+        featured: 'Recent projects', seeProject: 'See the project', allMorocco: 'all of Morocco',
+        kinds: { seminar: 'Seminars', launch: 'Product launches', openday: 'Open days', teambuilding: 'Team building' }, also: 'Around the event, by the same team' },
   fr: { eyebrow: 'Ce que nous produisons', offer: 'Ce que nous fournissons', others: 'Tout autour de l’événement', cover: n => `${n} : une réalisation de benevents agency`,
         menuTitle: 'Tout ce qu’un événement demande, une seule équipe.', menuEyebrow: 'Nos services', events: 'Événements', stage: 'Scène & technique', allOf: 'Voir la page',
-        featured: 'Réalisations récentes', seeProject: 'Voir la réalisation', cities: 'Casablanca · Rabat · Marrakech · Tanger · tout le Maroc',
-        kinds: { seminar: 'Séminaires', launch: 'Lancements de produit', openday: 'Journées portes ouvertes' }, also: 'Autour de l’événement, par la même équipe' }
+        featured: 'Réalisations récentes', seeProject: 'Voir la réalisation', allMorocco: 'tout le Maroc',
+        kinds: { seminar: 'Séminaires', launch: 'Lancements de produit', openday: 'Journées portes ouvertes', teambuilding: 'Team building' }, also: 'Autour de l’événement, par la même équipe' }
 };

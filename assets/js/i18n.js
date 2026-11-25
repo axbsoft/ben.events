@@ -180,7 +180,7 @@ window.BEN_I18N = {
     'f.ref': 'À propos du projet',
     'f.ref.x': 'Retirer cette référence',
 
-    'ft.tag': 'Conception et production d’événements d’entreprise.',
+    'ft.morocco': 'tout le Maroc',
     'ft.cta1': 'Votre prochain événement',
     'ft.cta2': 'commence ici.',
     'ft.explore': 'Explorer',
@@ -213,7 +213,8 @@ window.BEN_I18N = {
     'ev.convention': 'Convention',
     'ev.gala': 'Soirée de gala',
     'ev.launch': 'Lancement de produit',
-    'ev.openday': 'Journée portes ouvertes'
+    'ev.openday': 'Journée portes ouvertes',
+    'ev.teambuilding': 'Team building'
   },
   /* Strings used only from JavaScript */
   js: {

@@ -196,6 +196,7 @@
 .pfoot .footer__social .is-dot { fill: currentColor; stroke: none; }
 .pfoot__base { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 30px; padding-top: 18px; padding-bottom: 24px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--mute); }
 .pfoot__base nav { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+@media (max-width: 1100px) { .pfoot__cities { display: none; } }      /* the cities are in their column of the footer */
 .pfoot__base a:hover, .pfoot__base a:focus-visible { color: var(--text); }
 
 @media (max-width: 1100px) {

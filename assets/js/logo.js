@@ -1,8 +1,9 @@
 /* benevents agency — the logo plays sound and light with the scroll, on every page that shows it.
 
-   Scrolling down:  <html data-logo="sound">, the line of the logo breaks into bars that play like a sound meter.
-   Scrolling up:    <html data-logo="light">, the line brightens and its colours run faster.
-   A moment after the scroll stops, the logo comes back to rest (its colours drift slowly).
+   Scrolling down:  <html data-logo="sound">, the line of the logo breaks into bars that play like a sound meter,
+                    and they keep playing once the scroll stops, until the visitor scrolls up or is back at the top.
+   Scrolling up:    <html data-logo="light">, the line brightens and its colours run faster; a moment after the
+                    scroll stops, the logo comes back to rest (its colours drift slowly).
    The looks are in assets/css/style.css ("the logo plays sound and light"); the bars in assets/img/logo-bars.svg.
    Nothing moves for visitors who ask their device for less motion. */
 (function () {
@@ -37,9 +38,9 @@
     var y = window.scrollY, d = y - last;
     if (Math.abs(d) < 2) return;
     last = y;
-    var m = d > 0 ? 'sound' : 'light';
-    if (root.getAttribute('data-logo') !== m) mode(m);
+    var m = y < 40 ? '' : d > 0 ? 'sound' : 'light';           // back at the top of the page: at rest
+    if ((root.getAttribute('data-logo') || '') !== m) mode(m);
     clearTimeout(timer);
-    timer = setTimeout(function () { mode(''); }, 900);
+    if (m === 'light') timer = setTimeout(function () { mode(''); }, 900);      // the sound keeps playing
   }, { passive: true });
 })();

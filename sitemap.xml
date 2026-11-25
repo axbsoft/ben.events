@@ -148,6 +148,26 @@
     <image:image><image:loc>https://www.ben.events/assets/img/wall/ballroom-purple.jpg</image:loc></image:image>
   </url>
   <url>
+    <loc>https://www.ben.events/services/event-hostesses-registration-morocco</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/event-hostesses-registration-morocco"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/hotesses-accueil-inscriptions-maroc"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/hotesses-accueil-inscriptions-maroc"/>
+    <image:image><image:loc>https://www.ben.events/assets/img/showroom-reception.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/uae-morocco-forum.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/onco-days.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://www.ben.events/fr/services/hotesses-accueil-inscriptions-maroc</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/event-hostesses-registration-morocco"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/hotesses-accueil-inscriptions-maroc"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/hotesses-accueil-inscriptions-maroc"/>
+    <image:image><image:loc>https://www.ben.events/assets/img/showroom-reception.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/uae-morocco-forum.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/onco-days.jpg</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://www.ben.events/projects/cupra-open-day</loc>
     <lastmod>2026-11-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/cupra-open-day"/>
@@ -728,6 +748,30 @@
     <image:image><image:loc>https://www.ben.events/assets/img/showroom-reception.jpg</image:loc></image:image>
   </url>
   <url>
+    <loc>https://www.ben.events/events/team-building-morocco</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/team-building-morocco"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/team-building-maroc"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/team-building-maroc"/>
+    <image:image><image:loc>https://www.ben.events/assets/img/projects/cupra-open-day/10.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/projects/gillette-watch-party/01.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/awards-celebration.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/mta-cycle-meeting.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/projects/cupra-open-day/03.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://www.ben.events/fr/evenements/team-building-maroc</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/team-building-morocco"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/team-building-maroc"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/team-building-maroc"/>
+    <image:image><image:loc>https://www.ben.events/assets/img/projects/cupra-open-day/10.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/projects/gillette-watch-party/01.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/awards-celebration.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/mta-cycle-meeting.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/projects/cupra-open-day/03.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://www.ben.events/events</loc>
     <lastmod>2026-11-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events"/>
@@ -738,6 +782,7 @@
     <image:image><image:loc>https://www.ben.events/assets/img/wall/gala-tables-led-art.jpg</image:loc></image:image>
     <image:image><image:loc>https://www.ben.events/assets/img/volvo-built-on-trust.jpg</image:loc></image:image>
     <image:image><image:loc>https://www.ben.events/assets/img/projects/cupra-open-day/01.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/projects/cupra-open-day/10.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.ben.events/fr/evenements</loc>
@@ -750,6 +795,7 @@
     <image:image><image:loc>https://www.ben.events/assets/img/wall/gala-tables-led-art.jpg</image:loc></image:image>
     <image:image><image:loc>https://www.ben.events/assets/img/volvo-built-on-trust.jpg</image:loc></image:image>
     <image:image><image:loc>https://www.ben.events/assets/img/projects/cupra-open-day/01.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.ben.events/assets/img/projects/cupra-open-day/10.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.ben.events/blog/how-to-organise-a-corporate-seminar-in-morocco</loc>

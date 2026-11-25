@@ -242,7 +242,7 @@ ul, ol { padding: 0; list-style: none; }
 .drop:hover .drop__btn::after, .drop:focus-within .drop__btn::after, .drop.is-open .drop__btn::after { transform: translateY(0) rotate(225deg); }
 .drop__panel {
   position: absolute; top: calc(100% + 12px); left: 0; right: 0; z-index: 5;
-  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px 18px; padding: 26px 26px 18px;
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px 16px; padding: 26px 24px 18px;
   max-height: calc(100vh - 120px); overflow-y: auto; overscroll-behavior: contain;
   border-radius: 28px; border: 1px solid var(--line); background: var(--bg-2);      /* opaque: under the blurred header of the pages, a see-through panel lets the page show */
   box-shadow: 0 34px 80px -24px rgba(0, 0, 0, .8); opacity: 0; visibility: hidden; transform: translateY(8px);
@@ -259,7 +259,7 @@ ul, ol { padding: 0; list-style: none; }
 .nav__links .drop__panel a.drop__h { margin-bottom: 6px; font-family: var(--display); font-size: 15.5px; font-weight: 600; letter-spacing: -.01em; color: var(--text); }
 .drop__h::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 9px; border-radius: 50%; background: var(--c1); transform: translateY(-1px); }
 .drop__col--2 .drop__h::before { background: var(--c2); } .drop__col--3 .drop__h::before { background: var(--c3); }
-.drop__col--4 .drop__h::before { background: var(--c4); } .drop__col--5 .drop__h::before { background: var(--grad); }
+.drop__col--4 .drop__h::before { background: var(--c4); } .drop__col--5 .drop__h::before { background: var(--c1); } .drop__col--6 .drop__h::before { background: var(--c2); }
 .nav__links .drop__panel a:hover, .nav__links .drop__panel a:focus-visible { color: #fff; background: rgba(255, 255, 255, .08); }
 .drop__pjs { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 18px; margin-top: 16px; padding: 16px 0 0; border-top: 1px solid var(--line); }
 .drop__pjs .drop__eyebrow { grid-column: 1 / -1; padding: 0 10px 2px; }
@@ -272,11 +272,13 @@ ul, ol { padding: 0; list-style: none; }
 .drop__pjtx small::after { content: ""; width: .75em; height: .75em; margin-left: 6px; background: currentColor; -webkit-mask: var(--arrow-ne) center / contain no-repeat; mask: var(--arrow-ne) center / contain no-repeat; }
 .drop__pj:hover .drop__pjtx small, .drop__pj:focus-visible .drop__pjtx small { color: var(--c1); }
 .drop__foot { grid-column: 1 / -1; display: flex; align-items: center; gap: 22px; margin-top: 12px; padding: 14px 10px 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--mute); }
-.drop__foot > span { margin-right: auto; }
+.drop__cities { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 8px; margin: 0 auto 0 0; }
+.nav__links .drop__panel .drop__cities a { padding: 2px 2px; font-size: 13px; color: var(--mute); }
+.nav__links .drop__panel .drop__cities a:hover, .nav__links .drop__panel .drop__cities a:focus-visible { color: var(--text); background: none; }
 .nav__links .drop__panel a.drop__tel { padding: 4px 8px; font-size: 13px; letter-spacing: .02em; color: var(--mute); }
 .nav__links .drop__panel a.drop__all { padding: 4px 8px; font-size: 13px; color: var(--text); }
 .nav__links .drop__panel a.drop__all::after { content: ""; display: inline-block; width: .8em; height: .7em; margin-left: 8px; background: currentColor; -webkit-mask: var(--arrow-e) center / contain no-repeat; mask: var(--arrow-e) center / contain no-repeat; }
-@media (max-width: 1240px) { .drop__panel { gap: 4px 10px; padding: 22px 18px 16px; } .nav__links .drop__panel a { font-size: 13.5px; } .nav__links .drop__panel a.drop__h { font-size: 14.5px; } .drop__pjimg { width: 72px; } }
+@media (max-width: 1240px) { .drop__panel { gap: 4px 6px; padding: 22px 14px 16px; } .nav__links .drop__panel a { padding: 6px 8px; font-size: 13px; } .nav__links .drop__panel a.drop__h { font-size: 14px; } .drop__pjimg { width: 72px; } }
 /* the phone menu of the home page: the kinds of events and the guides, under the big links */
 .menu__more { display: flex; flex-wrap: wrap; gap: 8px; }
 .menu__more p { width: 100%; margin-bottom: 4px; font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
@@ -730,7 +732,11 @@ a.sv__idea:hover img { transform: scale(1.05); }
 .footer__base { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px 30px; flex-wrap: wrap; max-width: 1440px; margin: 0 auto; padding: 18px calc(var(--pad) - var(--gap)) 20px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--mute); }
 .footer__legal { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 26px; }
 .footer__legal a { transition: color .3s; }
-@media (max-width: 1240px) { .footer__tag { display: none; } }      /* the copyright, the legal pages and the way up come first */
+.footer__cities, .pfoot__cities { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; margin: 0; }
+.footer__cities i, .pfoot__cities i, .drop__cities i { font-style: normal; opacity: .5; }
+.footer__cities a, .pfoot__cities a { transition: color .3s; }
+.footer__cities a:hover, .footer__cities a:focus-visible, .pfoot__cities a:hover, .pfoot__cities a:focus-visible { color: var(--text); }
+@media (max-width: 1240px) { .footer__cities { display: none; } }      /* the copyright, the legal pages and the way up come first; the cities are in their column */
 .footer__legal a:hover, .footer__legal a:focus-visible { color: var(--text); }
 .to-top { display: inline-flex; align-items: center; gap: 12px; font-weight: 500; color: var(--text); }
 .to-top i { position: relative; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: rgba(255, 255, 255, .06); transition: background .3s, color .3s, transform .5s var(--ease); }
@@ -894,7 +900,6 @@ a.sv__idea:hover img { transform: scale(1.05); }
   .footer__col a[data-mail] { font-size: 15px; }
   .footer__ghost { -webkit-text-stroke-width: 1.5px; }
   .footer__base { padding: 16px 20px 18px; }
-  .footer__tag { display: none; }
   .lightbox { grid-template-columns: minmax(0, 1fr); padding: 78px 14px 92px; }
   .lightbox__fig { grid-column: 1; }
   .lightbox__img { max-height: calc(100vh - 260px); max-height: calc(100svh - 260px); border-radius: 14px; }
