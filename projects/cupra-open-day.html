@@ -2,14 +2,20 @@
 <!-- Written by tools/site/build.mjs from assets/js/services.js, projects.js and i18n.js: change those, then run it again. -->
 <html lang="en">
 <head>
-<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head -->
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<meta charset="utf-8">
+<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head.
+     Google's consent mode starts at "denied" (or at the visitor's choice of the last six months): nothing is stored
+     by Google's tools until the visitor accepts cookies in the banner of assets/js/consent.js. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  (function () { var c = null; try { c = JSON.parse(localStorage.getItem('ben-consent')); } catch (e) {}
+    var v = c && c.v === 'granted' && Date.now() - c.t < 15724800000 ? 'granted' : 'denied';
+    gtag('consent', 'default', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v, wait_for_update: 500 }); })();
   gtag('js', new Date());
 </script>
-<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<script src="/assets/js/consent.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CUPRA Open Day | benevents agency, Morocco</title>
 <meta name="description" content="An open day for CUPRA in the showroom, from morning to evening: the Formentor on a lit stage, a DJ, a welcome bar and a game for the visitors, then green and…">
@@ -334,7 +340,7 @@
   <div class="wrap pfoot__base">
     <span>© <span data-year>2026</span> benevents agency. All rights reserved.</span>
     <p class="pfoot__cities"><a href="/event-agency-casablanca">Casablanca</a><i>·</i><a href="/event-agency-rabat">Rabat</a><i>·</i><a href="/event-agency-marrakech">Marrakech</a><i>·</i><span>all of Morocco</span></p>
-    <nav aria-label="Legal"><a href="/privacy?lang=en">Privacy policy</a><a href="/terms?lang=en">Terms of use</a></nav>
+    <nav aria-label="Legal"><a href="/privacy?lang=en">Privacy policy</a><a href="/terms?lang=en">Terms of use</a><button type="button" data-consent-open>Cookie settings</button></nav>
   </div>
 </footer>
 <!-- on phones: WhatsApp and a call, fixed at the bottom of the screen -->

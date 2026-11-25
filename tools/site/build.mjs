@@ -58,8 +58,8 @@ const WA = 'https://wa.me/' + PHONE.replace(/\D/g, '');
 const SOCIAL = { instagram: 'https://www.instagram.com/benevents.agency', linkedin: 'https://www.linkedin.com/company/benevents/' };
 // audience measurement (Rybbit, without cookies): the same line is in index.html, presentation.html and tools/legal/build.py
 const STATS = '<script src="https://app.rybbit.io/api/script.js?siteId=5ad12948434d" defer></script>';
-// the Google tag (Google Tag Manager), right after <head> on every page that is measured
-const GTAG = '<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head -->\n<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag(\'js\', new Date());\n</script>';
+// the Google tag (Google Tag Manager), first in the head of every page that is measured, with the cookie choice (assets/js/consent.js)
+const GTAG = '<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head.\n     Google\'s consent mode starts at "denied" (or at the visitor\'s choice of the last six months): nothing is stored\n     by Google\'s tools until the visitor accepts cookies in the banner of assets/js/consent.js. -->\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  (function () { var c = null; try { c = JSON.parse(localStorage.getItem(\'ben-consent\')); } catch (e) {}\n    var v = c && c.v === \'granted\' && Date.now() - c.t < 15724800000 ? \'granted\' : \'denied\';\n    gtag(\'consent\', \'default\', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v, wait_for_update: 500 }); })();\n  gtag(\'js\', new Date());\n</script>\n<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>\n<script src="/assets/js/consent.js" defer></script>';
 const LANGS = ['en', 'fr'];
 
 const read = f => readFileSync(join(ROOT, f), 'utf8');
@@ -169,7 +169,7 @@ const fileOf = path => (path === '/' ? 'index' : path.slice(1)) + '.html';
 /* ---------- words these pages add ---------- */
 const W = {
   en: {
-    tag: 'Corporate event design and production.',
+    tag: 'Corporate event design and production.', cookies: 'Cookie settings',
     skip: 'Skip to content', nav: 'Primary', language: 'Language', crumbs: 'You are here', homeName: 'Home', cta: 'Start a project',
     talk: 'Talk to us about your event', craft: 'What we create', does: 'What we take care of', ideas: 'Ideas, seen in our projects', see: 'See the project:',
     more: 'More events of this kind', others: 'Our other services', work: 'Portfolio', allWork: 'All projects',
@@ -184,7 +184,7 @@ const W = {
     faq: 'Frequent questions', quick: 'Quick contact', call: 'Call', cities: 'Where we work', fEvents: 'Events we produce', guides: 'Blog', dServices: 'Our services', allEvents: 'All events', allGuides: 'All articles', fFor: 'For', fWhere: 'Where', fWhen: 'When', fGuests: 'Guests', did: 'What we delivered', story: 'The project', result: 'The result:', inCity: n => 'in ' + n
   },
   fr: {
-    tag: 'Conception et production d’événements d’entreprise.',
+    tag: 'Conception et production d’événements d’entreprise.', cookies: 'Gérer les cookies',
     skip: 'Aller au contenu', nav: 'Principal', language: 'Langue', crumbs: 'Vous êtes ici', homeName: 'Accueil', cta: 'Démarrer un projet',
     talk: 'Parlons de votre événement', craft: 'Ce que nous créons', does: 'Ce que nous prenons en charge', ideas: 'Des idées, vues dans nos réalisations', see: 'Voir le projet :',
     more: 'D’autres événements de ce type', others: 'Nos autres savoir-faire', work: 'Réalisations', allWork: 'Toutes les réalisations',
@@ -454,8 +454,8 @@ function shell({ l, head, alt, main }) {
 <!-- Written by tools/site/build.mjs from assets/js/services.js, projects.js and i18n.js: change those, then run it again. -->
 <html lang="${l}">
 <head>
-${GTAG}
 <meta charset="utf-8">
+${GTAG}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ${head}
 <meta name="theme-color" content="#08080a">
@@ -540,7 +540,7 @@ ${main}
   <div class="wrap pfoot__base">
     <span>© <span data-year>${new Date().getFullYear()}</span> benevents agency. ${esc(w.rights)}</span>
     <p class="pfoot__cities">${CITIES.map(c => `<a href="${U.city(l, c)}">${esc(tr(c.name, l))}</a>`).join('<i>·</i>')}<i>·</i><span>${esc(PRODUCTION_WORDS[l].allMorocco)}</span></p>
-    <nav aria-label="Legal"><a href="${U.legal(l, 'privacy')}">${esc(w.privacy)}</a><a href="${U.legal(l, 'terms')}">${esc(w.terms)}</a></nav>
+    <nav aria-label="Legal"><a href="${U.legal(l, 'privacy')}">${esc(w.privacy)}</a><a href="${U.legal(l, 'terms')}">${esc(w.terms)}</a><button type="button" data-consent-open>${esc(w.cookies)}</button></nav>
   </div>
 </footer>
 <!-- on phones: WhatsApp and a call, fixed at the bottom of the screen -->
@@ -1223,8 +1223,8 @@ write('assets/admin/site.json', JSON.stringify({
 <!-- Written by tools/site/build.mjs: change it there, then run it again. -->
 <html lang="en">
 <head>
-${GTAG}
 <meta charset="utf-8">
+${GTAG}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(L.en.doc)}</title>
 <meta name="robots" content="noindex">

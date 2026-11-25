@@ -2,14 +2,20 @@
 <!-- Written by tools/site/build.mjs from assets/js/services.js, projects.js and i18n.js: change those, then run it again. -->
 <html lang="fr">
 <head>
-<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head -->
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<meta charset="utf-8">
+<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head.
+     Google's consent mode starts at "denied" (or at the visitor's choice of the last six months): nothing is stored
+     by Google's tools until the visitor accepts cookies in the banner of assets/js/consent.js. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  (function () { var c = null; try { c = JSON.parse(localStorage.getItem('ben-consent')); } catch (e) {}
+    var v = c && c.v === 'granted' && Date.now() - c.t < 15724800000 ? 'granted' : 'denied';
+    gtag('consent', 'default', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v, wait_for_update: 500 }); })();
   gtag('js', new Date());
 </script>
-<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<script src="/assets/js/consent.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hôtesses d’accueil et inscriptions au Maroc | benevents agency</title>
 <meta name="description" content="Hôtesses et hôtes d’accueil, inscriptions en ligne, badges imprimés, enregistrement et contrôle d’accès pour vos événements au Maroc, assurés par benevents.">
@@ -408,7 +414,7 @@
   <div class="wrap pfoot__base">
     <span>© <span data-year>2026</span> benevents agency. Tous droits réservés.</span>
     <p class="pfoot__cities"><a href="/fr/agence-evenementielle-casablanca">Casablanca</a><i>·</i><a href="/fr/agence-evenementielle-rabat">Rabat</a><i>·</i><a href="/fr/agence-evenementielle-marrakech">Marrakech</a><i>·</i><span>tout le Maroc</span></p>
-    <nav aria-label="Legal"><a href="/privacy?lang=fr">Politique de confidentialité</a><a href="/terms?lang=fr">Conditions d’utilisation</a></nav>
+    <nav aria-label="Legal"><a href="/privacy?lang=fr">Politique de confidentialité</a><a href="/terms?lang=fr">Conditions d’utilisation</a><button type="button" data-consent-open>Gérer les cookies</button></nav>
   </div>
 </footer>
 <!-- on phones: WhatsApp and a call, fixed at the bottom of the screen -->

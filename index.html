@@ -4,14 +4,20 @@
      It rewrites the French page (fr.html), the pages of the services and projects, and the sitemap. -->
 <html lang="en">
 <head>
-<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head -->
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<meta charset="utf-8">
+<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head.
+     Google's consent mode starts at "denied" (or at the visitor's choice of the last six months): nothing is stored
+     by Google's tools until the visitor accepts cookies in the banner of assets/js/consent.js. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  (function () { var c = null; try { c = JSON.parse(localStorage.getItem('ben-consent')); } catch (e) {}
+    var v = c && c.v === 'granted' && Date.now() - c.t < 15724800000 ? 'granted' : 'denied';
+    gtag('consent', 'default', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v, wait_for_update: 500 }); })();
   gtag('js', new Date());
 </script>
-<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<script src="/assets/js/consent.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- head:seo: written by tools/site/build.mjs from assets/js/i18n.js (meta); do not edit these lines by hand -->
 <title>Event Agency in Morocco | benevents agency</title>
@@ -765,6 +771,7 @@
         <a href="#process" data-i18n="nav.process">Approach</a>
         <a href="#wall" data-i18n="wall.eyebrow">In pictures</a>
         <a href="presentation" data-legal="presentation" data-i18n="ft.deck">Our presentation</a>
+        <button type="button" class="footer__cookies" data-consent-open data-i18n="ft.cookies">Cookie settings</button>
       </nav>
       <nav class="footer__col" aria-label="Events we produce" data-i18n-aria="ft.events">
         <h4 data-i18n="ft.events">Events we produce</h4>

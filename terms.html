@@ -1,14 +1,20 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head -->
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<meta charset="utf-8">
+<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head.
+     Google's consent mode starts at "denied" (or at the visitor's choice of the last six months): nothing is stored
+     by Google's tools until the visitor accepts cookies in the banner of assets/js/consent.js. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  (function () { var c = null; try { c = JSON.parse(localStorage.getItem('ben-consent')); } catch (e) {}
+    var v = c && c.v === 'granted' && Date.now() - c.t < 15724800000 ? 'granted' : 'denied';
+    gtag('consent', 'default', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v, wait_for_update: 500 }); })();
   gtag('js', new Date());
 </script>
-<meta charset="utf-8">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<script src="/assets/js/consent.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Terms of use — benevents agency</title>
 <meta name="description" content="The terms that apply to the use of the benevents agency website.">
@@ -130,6 +136,7 @@
     <nav aria-label="Legal">
         <a href="privacy" data-href="privacy"><span lang="en">Privacy policy</span><span lang="fr">Politique de confidentialité</span></a>
         <a href="terms" data-href="terms" aria-current="page"><span lang="en">Terms of use</span><span lang="fr">Conditions d’utilisation</span></a>
+        <button type="button" data-consent-open><span lang="en">Cookie settings</span><span lang="fr">Gérer les cookies</span></button>
     </nav>
   </div>
 </footer>

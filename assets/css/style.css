@@ -732,6 +732,8 @@ a.sv__idea:hover img { transform: scale(1.05); }
 .footer__base { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px 30px; flex-wrap: wrap; max-width: 1440px; margin: 0 auto; padding: 18px calc(var(--pad) - var(--gap)) 20px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--mute); }
 .footer__legal { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 26px; }
 .footer__legal a { transition: color .3s; }
+.footer__cookies { align-self: flex-start; padding: 6px 0; border: 0; background: none; font: inherit; font-size: 17px; font-weight: 500; color: inherit; text-align: left; cursor: pointer; transition: color .3s, transform .5s var(--ease); }
+.footer__col .footer__cookies:hover, .footer__col .footer__cookies:focus-visible { color: var(--c1); transform: translateX(6px); }      /* "Cookie settings" (assets/js/consent.js), styled as the links of its column */
 .footer__cities, .pfoot__cities { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; margin: 0; }
 .footer__cities i, .pfoot__cities i, .drop__cities i { font-style: normal; opacity: .5; }
 .footer__cities a, .pfoot__cities a { transition: color .3s; }

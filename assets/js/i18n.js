@@ -181,6 +181,7 @@ window.BEN_I18N = {
     'f.ref.x': 'Retirer cette référence',
 
     'ft.morocco': 'tout le Maroc',
+    'ft.cookies': 'Gérer les cookies',
     'ft.cta1': 'Votre prochain événement',
     'ft.cta2': 'commence ici.',
     'ft.explore': 'Explorer',
