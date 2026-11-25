@@ -58,6 +58,8 @@ const WA = 'https://wa.me/' + PHONE.replace(/\D/g, '');
 const SOCIAL = { instagram: 'https://www.instagram.com/benevents.agency', linkedin: 'https://www.linkedin.com/company/benevents/' };
 // audience measurement (Rybbit, without cookies): the same line is in index.html, presentation.html and tools/legal/build.py
 const STATS = '<script src="https://app.rybbit.io/api/script.js?siteId=5ad12948434d" defer></script>';
+// the Google tag (Google Tag Manager), right after <head> on every page that is measured
+const GTAG = '<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head -->\n<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag(\'js\', new Date());\n</script>';
 const LANGS = ['en', 'fr'];
 
 const read = f => readFileSync(join(ROOT, f), 'utf8');
@@ -452,6 +454,7 @@ function shell({ l, head, alt, main }) {
 <!-- Written by tools/site/build.mjs from assets/js/services.js, projects.js and i18n.js: change those, then run it again. -->
 <html lang="${l}">
 <head>
+${GTAG}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ${head}
@@ -1220,6 +1223,7 @@ write('assets/admin/site.json', JSON.stringify({
 <!-- Written by tools/site/build.mjs: change it there, then run it again. -->
 <html lang="en">
 <head>
+${GTAG}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(L.en.doc)}</title>
