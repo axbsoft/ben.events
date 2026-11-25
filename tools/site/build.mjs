@@ -490,6 +490,7 @@ ${main}
 <script src="/assets/js/booking.js"></script>
 <script src="/assets/js/agent.js"></script>
 <script src="/assets/js/menu.js"></script>
+<script src="/assets/js/logo.js"></script>
 <script>document.querySelectorAll('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>
@@ -1120,6 +1121,7 @@ ${STATS}
 </div>
 </main>
 <script src="/assets/js/stats.js"></script>
+<script src="/assets/js/logo.js"></script>
 <script>
 (function () {
   var stored = null;

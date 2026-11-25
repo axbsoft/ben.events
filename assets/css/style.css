@@ -132,6 +132,33 @@ ul, ol { padding: 0; list-style: none; }
 .brand__bar i:nth-child(1) { background: var(--c1); } .brand__bar i:nth-child(2) { background: var(--c2); }
 .brand__bar i:nth-child(3) { background: var(--c3); } .brand__bar i:nth-child(4) { background: var(--c4); }
 .logo:hover .brand__bar i:nth-child(odd) { flex: 1.8; }
+/* the logo plays sound and light (header and footer of every page; assets/js/logo.js sets html[data-logo] from the scroll):
+   at rest, its colours drift slowly along the line; scrolling down (or under the mouse), the line breaks into bars
+   that play like a sound meter (assets/img/logo-bars.svg, a mask: the bars take the colours of the line);
+   scrolling up, the line brightens and its colours run faster, like light. Still for visitors who ask for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .logo .brand__bar { position: relative; }
+  .logo .brand__bar i:nth-child(n) { display: none; background: none; }
+  .logo .brand__bar i:nth-child(-n+2) { display: block; position: absolute; left: 0; right: 0; overflow: hidden; }
+  .logo .brand__bar i:nth-child(-n+2)::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 200%;
+    background: linear-gradient(90deg, var(--c1), var(--c2) 12.5%, var(--c3) 25%, var(--c4) 37.5%, var(--c1) 50%, var(--c2) 62.5%, var(--c3) 75%, var(--c4) 87.5%, var(--c1));
+    animation: logo-flow 14s linear infinite;
+  }
+  .logo .brand__bar i:nth-child(1) { top: 0; bottom: 0; transition: opacity .5s var(--ease), filter .6s; }
+  .logo .brand__bar i:nth-child(2) {
+    top: 50%; height: .5em; margin-top: -.25em;
+    -webkit-mask: url(/assets/img/logo-bars.svg) 0 0 / 100% 100% no-repeat; mask: url(/assets/img/logo-bars.svg) 0 0 / 100% 100% no-repeat;
+    opacity: 0; visibility: hidden; transform: scaleY(.22);
+    transition: opacity .45s, transform .7s var(--ease), visibility 0s .7s;
+  }
+  html[data-logo="sound"] .logo .brand__bar i:nth-child(2), .logo:hover .brand__bar i:nth-child(2), .logo:focus-visible .brand__bar i:nth-child(2) {
+    opacity: 1; visibility: visible; transform: none; transition: opacity .3s, transform .6s var(--ease), visibility 0s;
+  }
+  html[data-logo="sound"] .logo .brand__bar i:nth-child(1), .logo:hover .brand__bar i:nth-child(1), .logo:focus-visible .brand__bar i:nth-child(1) { opacity: 0; }
+  html[data-logo="light"] .logo .brand__bar i:nth-child(1) { filter: brightness(1.3) saturate(1.15) drop-shadow(0 0 .12em rgba(255, 236, 200, .55)); }
+}
+@keyframes logo-flow { to { transform: translateX(-50%); } }
 .brand__a { font-weight: 300; font-size: .34em; letter-spacing: .62em; text-indent: .62em; text-align: center; opacity: .9; }
 .logo__img { height: 40px; width: auto; }
 
