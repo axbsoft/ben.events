@@ -404,6 +404,9 @@
     });
   });
 
+  // once the page has loaded (this script may come after that: the home page fetches it once its first view is painted)
+  function whenLoaded(fn) { if (doc.readyState === 'complete') setTimeout(fn, 0); else window.addEventListener('load', fn); }
+
   /* ---------- Preloader ---------- */
   var counter = $('.preloader__count'), bar = $('.preloader__bar b');
   function finishLoad() { body.classList.remove('is-loading'); body.classList.add('is-loaded'); }
@@ -589,14 +592,14 @@
     ['touchstart', 'pointerdown', 'wheel', 'keydown'].forEach(function (type) {
       track.addEventListener(type, function () { swiped = true; }, { passive: true });
     });
-    window.addEventListener('load', function () { if (!swiped) track.scrollLeft = 0; });
+    whenLoaded(function () { if (!swiped) track.scrollLeft = 0; });
   }
   if (track) track.addEventListener('scroll', function () {   // phones: the strip is swiped
     paintGalleryRest();
     if (!desktop) galleryBar(track.scrollLeft / Math.max(1, track.scrollWidth - track.clientWidth));
   }, { passive: true });
   window.addEventListener('resize', measure);
-  window.addEventListener('load', measure);
+  whenLoaded(measure);
   if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { fitSeal(); measure(); });
 
   /* ---------- Magnetic buttons, tilt (mouse only) ---------- */

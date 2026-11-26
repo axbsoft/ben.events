@@ -397,8 +397,9 @@ function french(page) {
   s = s.replace(/(<a\b[^>]*?\shref=")[^"]*("[^>]*\sdata-legal="([^"]+)")/g, (m, a, b, k) => a + k + '?lang=fr' + b);
   // the English words travel with the French page, so that it can still switch language in place
   const words = '<script>window.BEN_EN = ' + JSON.stringify(EN).replace(/</g, '\\u003c') + ';</script>\n';
-  if (!s.includes('<script src="assets/js/i18n.js" defer></script>')) throw new Error('index.html: the i18n script line was not found');
-  s = s.replace('<script src="assets/js/i18n.js" defer></script>', words + '<script src="assets/js/i18n.js" defer></script>');
+  const LOADER = '<!-- the scripts of the page: fetched once its first view is on screen';
+  if (!s.includes(LOADER)) throw new Error('index.html: the script loader at the foot of the page was not found');
+  s = s.replace(LOADER, words + LOADER);
   return s.replace('<!doctype html>\n', '<!doctype html>\n<!-- Written by tools/site/build.mjs from index.html and assets/js/i18n.js: change those, then run it again. -->\n');
 }
 function pageHref(l, page) {
@@ -461,6 +462,8 @@ ${head}
 <meta name="theme-color" content="#08080a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/inter-tight-v9-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-serif-v5-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/open-sans-v44-logo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/fonts.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/pages.css">
@@ -1231,6 +1234,8 @@ ${GTAG}
 <meta name="theme-color" content="#08080a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/inter-tight-v9-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-serif-v5-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/open-sans-v44-logo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/fonts.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/pages.css">

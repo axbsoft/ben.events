@@ -288,6 +288,10 @@ ul, ol { padding: 0; list-style: none; }
 
 /* ---------- Media ---------- */
 .media { position: absolute; inset: -8%; background-color: var(--card-2); background-size: cover; background-position: center; will-change: transform; }
+/* the first picture of the home page, painted with the first view; phones held upright get its middle, which is all
+   they show of it (assets/img/hero-phone.webp, made by tools/site/images.py), like the preloads in the head of index.html */
+.media--hero { background-image: url("../img/hero.webp"); }
+@media (max-width: 700px) and (max-aspect-ratio: 5/8) { .media--hero { background-image: url("../img/hero-phone.webp"); } }
 .media:not(.has-img) { background-image: radial-gradient(60% 60% at 30% 25%, rgba(249, 178, 78, .35), transparent 70%), radial-gradient(55% 55% at 80% 80%, rgba(0, 173, 176, .3), transparent 70%); }
 
 /* ---------- Hero (inset rounded frame) ---------- */

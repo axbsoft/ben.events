@@ -4,7 +4,8 @@ For every photo in assets/img/ (the projects, the wall, the photos of the servic
 copies in assets/img/_w/<width>/, as WebP:
     480 pixels wide   for every photo
     960 pixels wide   for the large ones, and for the JPEG photos of that width (the copy is about half their weight)
-and a WebP copy of the first picture of the home page (assets/img/hero.webp).
+and a WebP copy of the first picture of the home page (assets/img/hero.webp), with a narrower one for phones held upright
+(assets/img/hero-phone.webp: the middle of the photo, which is all a phone shows of it).
 The pages written by tools/site/build.mjs offer these copies to the browser, which picks the right one.
 
 Run it from the root of the site when photos are added or replaced, before tools/site/build.mjs:
@@ -57,6 +58,15 @@ hero, light = os.path.join(IMG, 'hero.jpg'), os.path.join(IMG, 'hero.webp')
 if not os.path.exists(light) or os.path.getmtime(light) < os.path.getmtime(hero):
     with Image.open(hero) as im:
         im.convert('RGB').save(light, 'WEBP', quality=70, method=6)
+    made += 1
+# phones held upright show only the middle of the square photo (style.css, "media--hero"): this is that middle,
+# a little wider than any phone shows, so the picture is the same and the download lighter
+phone = os.path.join(IMG, 'hero-phone.webp')
+if not os.path.exists(phone) or os.path.getmtime(phone) < os.path.getmtime(hero):
+    with Image.open(hero) as im:
+        w, h = im.size
+        cw = round(h * 0.66)
+        im.convert('RGB').crop(((w - cw) // 2, 0, (w - cw) // 2 + cw, h)).save(phone, 'WEBP', quality=70, method=6)
     made += 1
 print('%d copies written, %d already there, %.1f MB in assets/img/_w; first picture of the home page: %d KB (was %d KB)' % (
     made, kept, total / 1048576, os.path.getsize(light) // 1024, os.path.getsize(hero) // 1024))
