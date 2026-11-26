@@ -3,21 +3,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.ben.events/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/"/>
   </url>
   <url>
     <loc>https://www.ben.events/fr</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/"/>
   </url>
   <url>
     <loc>https://www.ben.events/services/conferences-conventions</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/conferences-conventions"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/conferences-conventions"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/conferences-conventions"/>
@@ -25,7 +25,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/services/conferences-conventions</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/conferences-conventions"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/conferences-conventions"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/conferences-conventions"/>
@@ -33,7 +33,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/services/ceremonies-gala-evenings</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/ceremonies-gala-evenings"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/ceremonies-soirees-de-gala"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/ceremonies-soirees-de-gala"/>
@@ -41,7 +41,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/services/ceremonies-soirees-de-gala</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/ceremonies-gala-evenings"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/ceremonies-soirees-de-gala"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/ceremonies-soirees-de-gala"/>
@@ -49,7 +49,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/services/brand-corporate-receptions</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/brand-corporate-receptions"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/receptions-evenements-de-marque"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/receptions-evenements-de-marque"/>
@@ -57,7 +57,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/services/receptions-evenements-de-marque</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/brand-corporate-receptions"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/receptions-evenements-de-marque"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/receptions-evenements-de-marque"/>
@@ -65,7 +65,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/services/stage-audiovisual-production</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/stage-audiovisual-production"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/scene-production-audiovisuelle"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/scene-production-audiovisuelle"/>
@@ -73,7 +73,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/services/scene-production-audiovisuelle</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/stage-audiovisual-production"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/scene-production-audiovisuelle"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/scene-production-audiovisuelle"/>
@@ -81,7 +81,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/services/exhibition-stands-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/exhibition-stands-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/stands-exposition-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/stands-exposition-maroc"/>
@@ -91,7 +91,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/services/stands-exposition-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/exhibition-stands-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/stands-exposition-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/stands-exposition-maroc"/>
@@ -101,7 +101,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/services/printing-signage-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/printing-signage-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/impression-signaletique-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/impression-signaletique-maroc"/>
@@ -113,7 +113,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/services/impression-signaletique-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/printing-signage-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/impression-signaletique-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/impression-signaletique-maroc"/>
@@ -125,7 +125,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/services/event-rental-fit-out-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/event-rental-fit-out-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/location-materiel-evenementiel-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/location-materiel-evenementiel-maroc"/>
@@ -137,7 +137,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/services/location-materiel-evenementiel-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/event-rental-fit-out-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/location-materiel-evenementiel-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/location-materiel-evenementiel-maroc"/>
@@ -149,7 +149,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/services/event-hostesses-registration-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/event-hostesses-registration-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/hotesses-accueil-inscriptions-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/hotesses-accueil-inscriptions-maroc"/>
@@ -159,7 +159,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/services/hotesses-accueil-inscriptions-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/services/event-hostesses-registration-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/services/hotesses-accueil-inscriptions-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/services/hotesses-accueil-inscriptions-maroc"/>
@@ -169,7 +169,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/cupra-open-day</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/cupra-open-day"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/cupra-open-day"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/cupra-open-day"/>
@@ -187,7 +187,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/cupra-open-day</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/cupra-open-day"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/cupra-open-day"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/cupra-open-day"/>
@@ -205,7 +205,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/femmes-en-jeu</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/femmes-en-jeu"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/femmes-en-jeu"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/femmes-en-jeu"/>
@@ -220,7 +220,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/femmes-en-jeu</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/femmes-en-jeu"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/femmes-en-jeu"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/femmes-en-jeu"/>
@@ -235,7 +235,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/tech-fest-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/tech-fest-maroc"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/tech-fest-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/tech-fest-maroc"/>
@@ -245,7 +245,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/tech-fest-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/tech-fest-maroc"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/tech-fest-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/tech-fest-maroc"/>
@@ -255,7 +255,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/marrakech-cocktail</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/marrakech-cocktail"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/marrakech-cocktail"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/marrakech-cocktail"/>
@@ -267,7 +267,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/marrakech-cocktail</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/marrakech-cocktail"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/marrakech-cocktail"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/marrakech-cocktail"/>
@@ -279,7 +279,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/mta-cycle-meeting</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/mta-cycle-meeting"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/mta-cycle-meeting"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/mta-cycle-meeting"/>
@@ -290,7 +290,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/mta-cycle-meeting</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/mta-cycle-meeting"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/mta-cycle-meeting"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/mta-cycle-meeting"/>
@@ -301,7 +301,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/a-chance-to-reset</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/a-chance-to-reset"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/a-chance-to-reset"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/a-chance-to-reset"/>
@@ -315,7 +315,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/a-chance-to-reset</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/a-chance-to-reset"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/a-chance-to-reset"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/a-chance-to-reset"/>
@@ -329,7 +329,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/rma-convention</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/rma-convention"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/rma-convention"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/rma-convention"/>
@@ -339,7 +339,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/rma-convention</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/rma-convention"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/rma-convention"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/rma-convention"/>
@@ -349,7 +349,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/uae-morocco-forum</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/uae-morocco-forum"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/uae-morocco-forum"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/uae-morocco-forum"/>
@@ -357,7 +357,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/uae-morocco-forum</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/uae-morocco-forum"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/uae-morocco-forum"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/uae-morocco-forum"/>
@@ -365,7 +365,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/gsk-day</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/gsk-day"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/gsk-day"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/gsk-day"/>
@@ -374,7 +374,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/gsk-day</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/gsk-day"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/gsk-day"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/gsk-day"/>
@@ -383,7 +383,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/sustainable-innovation-fest</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/sustainable-innovation-fest"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/sustainable-innovation-fest"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/sustainable-innovation-fest"/>
@@ -393,7 +393,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/sustainable-innovation-fest</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/sustainable-innovation-fest"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/sustainable-innovation-fest"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/sustainable-innovation-fest"/>
@@ -403,7 +403,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/fanzone-can-2025</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/fanzone-can-2025"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/fanzone-can-2025"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/fanzone-can-2025"/>
@@ -411,7 +411,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/fanzone-can-2025</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/fanzone-can-2025"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/fanzone-can-2025"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/fanzone-can-2025"/>
@@ -419,7 +419,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/gillette-watch-party</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/gillette-watch-party"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/gillette-watch-party"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/gillette-watch-party"/>
@@ -429,7 +429,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/gillette-watch-party</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/gillette-watch-party"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/gillette-watch-party"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/gillette-watch-party"/>
@@ -439,7 +439,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/leo-regional-conference</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/leo-regional-conference"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/leo-regional-conference"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/leo-regional-conference"/>
@@ -449,7 +449,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/leo-regional-conference</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/leo-regional-conference"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/leo-regional-conference"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/leo-regional-conference"/>
@@ -459,7 +459,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/wexchange-forum</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/wexchange-forum"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/wexchange-forum"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/wexchange-forum"/>
@@ -468,7 +468,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/wexchange-forum</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/wexchange-forum"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/wexchange-forum"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/wexchange-forum"/>
@@ -477,7 +477,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/volvo-built-on-trust</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/volvo-built-on-trust"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/volvo-built-on-trust"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/volvo-built-on-trust"/>
@@ -486,7 +486,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/volvo-built-on-trust</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/volvo-built-on-trust"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/volvo-built-on-trust"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/volvo-built-on-trust"/>
@@ -495,7 +495,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/centrale-automobile-cherifienne</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/centrale-automobile-cherifienne"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/centrale-automobile-cherifienne"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/centrale-automobile-cherifienne"/>
@@ -503,7 +503,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/centrale-automobile-cherifienne</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/centrale-automobile-cherifienne"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/centrale-automobile-cherifienne"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/centrale-automobile-cherifienne"/>
@@ -511,7 +511,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects/onco-days</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/onco-days"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/onco-days"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/onco-days"/>
@@ -519,7 +519,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations/onco-days</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects/onco-days"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations/onco-days"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations/onco-days"/>
@@ -527,7 +527,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/projects</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations"/>
@@ -551,7 +551,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/realisations</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/projects"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/realisations"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/realisations"/>
@@ -575,7 +575,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/event-agency-casablanca</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-casablanca"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-casablanca"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-casablanca"/>
@@ -583,7 +583,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/agence-evenementielle-casablanca</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-casablanca"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-casablanca"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-casablanca"/>
@@ -591,7 +591,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/event-agency-rabat</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-rabat"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-rabat"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-rabat"/>
@@ -599,7 +599,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/agence-evenementielle-rabat</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-rabat"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-rabat"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-rabat"/>
@@ -607,7 +607,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/event-agency-marrakech</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-marrakech"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-marrakech"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-marrakech"/>
@@ -615,7 +615,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/agence-evenementielle-marrakech</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/event-agency-marrakech"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence-evenementielle-marrakech"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence-evenementielle-marrakech"/>
@@ -623,7 +623,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/agency</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/agency"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence"/>
@@ -631,7 +631,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/agence</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/agency"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/agence"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/agence"/>
@@ -639,7 +639,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/events/seminar-organisation-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/seminar-organisation-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/organisation-seminaire-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/organisation-seminaire-maroc"/>
@@ -650,7 +650,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/evenements/organisation-seminaire-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/seminar-organisation-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/organisation-seminaire-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/organisation-seminaire-maroc"/>
@@ -661,7 +661,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/events/corporate-convention-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/corporate-convention-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/organisation-convention-entreprise-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/organisation-convention-entreprise-maroc"/>
@@ -673,7 +673,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/evenements/organisation-convention-entreprise-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/corporate-convention-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/organisation-convention-entreprise-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/organisation-convention-entreprise-maroc"/>
@@ -685,7 +685,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/events/gala-dinner-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/gala-dinner-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/soiree-de-gala-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/soiree-de-gala-maroc"/>
@@ -697,7 +697,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/evenements/soiree-de-gala-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/gala-dinner-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/soiree-de-gala-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/soiree-de-gala-maroc"/>
@@ -709,7 +709,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/events/product-launch-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/product-launch-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/lancement-de-produit-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/lancement-de-produit-maroc"/>
@@ -720,7 +720,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/evenements/lancement-de-produit-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/product-launch-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/lancement-de-produit-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/lancement-de-produit-maroc"/>
@@ -731,7 +731,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/events/open-day-showroom-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/open-day-showroom-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/journee-portes-ouvertes-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/journee-portes-ouvertes-maroc"/>
@@ -740,7 +740,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/evenements/journee-portes-ouvertes-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/open-day-showroom-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/journee-portes-ouvertes-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/journee-portes-ouvertes-maroc"/>
@@ -749,7 +749,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/events/team-building-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/team-building-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/team-building-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/team-building-maroc"/>
@@ -761,7 +761,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/evenements/team-building-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events/team-building-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements/team-building-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements/team-building-maroc"/>
@@ -773,7 +773,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/events</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements"/>
@@ -786,7 +786,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/evenements</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/events"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/evenements"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/evenements"/>
@@ -799,7 +799,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/blog/how-to-organise-a-corporate-seminar-in-morocco</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/blog/how-to-organise-a-corporate-seminar-in-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/blog/organiser-un-seminaire-d-entreprise-au-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/blog/organiser-un-seminaire-d-entreprise-au-maroc"/>
@@ -807,7 +807,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/blog/organiser-un-seminaire-d-entreprise-au-maroc</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/blog/how-to-organise-a-corporate-seminar-in-morocco"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/blog/organiser-un-seminaire-d-entreprise-au-maroc"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/blog/organiser-un-seminaire-d-entreprise-au-maroc"/>
@@ -815,7 +815,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/blog/casablanca-rabat-marrakech-or-tangier-where-to-hold-your-event</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/blog/casablanca-rabat-marrakech-or-tangier-where-to-hold-your-event"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/blog/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/blog/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement"/>
@@ -823,7 +823,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/blog/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/blog/casablanca-rabat-marrakech-or-tangier-where-to-hold-your-event"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/blog/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/blog/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement"/>
@@ -831,7 +831,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/blog/led-wall-sound-and-lighting-for-a-corporate-event</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/blog/led-wall-sound-and-lighting-for-a-corporate-event"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/blog/ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/blog/ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise"/>
@@ -839,7 +839,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/blog/ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/blog/led-wall-sound-and-lighting-for-a-corporate-event"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/blog/ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/blog/ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise"/>
@@ -847,7 +847,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/blog</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/blog"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/blog"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/blog"/>
@@ -857,7 +857,7 @@
   </url>
   <url>
     <loc>https://www.ben.events/fr/blog</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ben.events/blog"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ben.events/fr/blog"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ben.events/fr/blog"/>

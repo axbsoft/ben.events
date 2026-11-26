@@ -947,3 +947,17 @@ a.sv__idea:hover img { transform: scale(1.05); }
   .pj__ph img { opacity: 1; transform: none; }
   .grain { display: none; }
 }
+
+/* ---------- LED wall: a project photo switches on like an LED screen (assets/js/led.js) ----------
+   The panel is off (dark, with its pixels faintly visible); a warm scan line runs down and lights the photo row by row,
+   seen through the pixel grid of the screen; then the grid fades and leaves the photo. */
+.led-host { position: relative; }
+.led { position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none; border-radius: inherit; transition: opacity .95s var(--ease); }
+.led::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(6, 6, 8, .88) 50%) 0 0 / 5px 5px; }
+.led b { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, .06) 0 28%, transparent 40%) 0 0 / 5px 5px, #08080a; transform: translateY(0); transition: transform 1.2s cubic-bezier(.5, 0, .3, 1); will-change: transform; }
+.led b::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: rgba(255, 244, 228, .95); box-shadow: 0 0 16px 3px rgba(255, 222, 178, .5); }
+.led b::after { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 24%; background: linear-gradient(0deg, rgba(255, 238, 214, .2), transparent); }
+.led.is-scan b { transform: translateY(126%); }
+.led.is-done { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .led { display: none; } }
+@media print { .led { display: none; } }
