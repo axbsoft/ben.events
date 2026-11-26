@@ -16,7 +16,12 @@
     gtag('consent', 'default', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v, wait_for_update: 500 }); })();
   gtag('js', new Date());
 </script>
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<script>
+  // Google Tag Manager is fetched once the page has loaded, so that it does not slow the first view down;
+  // what the page sends to the dataLayer before that is kept and read when it arrives
+  addEventListener('load', function () { var g = document.createElement('script'); g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH'; document.head.appendChild(g); });
+</script>
 <script src="/assets/js/consent.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- head:seo: written by tools/site/build.mjs from assets/js/i18n.js (meta); do not edit these lines by hand -->
@@ -201,13 +206,13 @@
 <!-- /head:seo -->
 <meta name="theme-color" content="#08080a">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- the first picture of the page is asked for at once -->
 <link rel="preload" as="image" href="assets/img/hero.webp" type="image/webp" fetchpriority="high">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/inter-tight-v9-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <!-- audience measurement (Rybbit), without cookies -->
+<script src="assets/js/stats.js" defer></script>
 <script src="https://app.rybbit.io/api/script.js?siteId=5ad12948434d" defer></script>
 </head>
 <body class="is-loading">
@@ -377,7 +382,7 @@
 
 <!-- Hero -->
 <section class="hero" id="top">
-  <div class="hero__media media media--hero" data-img="hero" data-parallax="0.18"></div>
+  <div class="hero__media media media--hero has-img" data-img="hero" data-parallax="0.18" style="background-image: url(&quot;assets/img/hero.webp&quot;)"></div>
   <canvas class="hero__canvas" aria-hidden="true"></canvas>
   <div class="hero__veil" aria-hidden="true"></div>
 
@@ -763,7 +768,7 @@
         </a>
       </div>
       <nav class="footer__col" aria-label="Footer">
-        <h4 data-i18n="ft.explore">Explore</h4>
+        <h3 data-i18n="ft.explore">Explore</h3>
         <a href="#about" data-i18n="nav.about">The Agency</a>
         <a href="#services" data-i18n="nav.services">Services</a>
         <a href="#gallery" data-i18n="nav.gallery">Portfolio</a>
@@ -774,7 +779,7 @@
         <button type="button" class="footer__cookies" data-consent-open data-i18n="ft.cookies">Cookie settings</button>
       </nav>
       <nav class="footer__col" aria-label="Events we produce" data-i18n-aria="ft.events">
-        <h4 data-i18n="ft.events">Events we produce</h4>
+        <h3 data-i18n="ft.events">Events we produce</h3>
         <a href="events/seminar-organisation-morocco" data-page="event:seminar" data-i18n="ev.seminar" data-alt-en="/events/seminar-organisation-morocco" data-alt-fr="/fr/evenements/organisation-seminaire-maroc">Seminar</a>
         <a href="events/corporate-convention-morocco" data-page="event:convention" data-i18n="ev.convention" data-alt-en="/events/corporate-convention-morocco" data-alt-fr="/fr/evenements/organisation-convention-entreprise-maroc">Convention</a>
         <a href="events/gala-dinner-morocco" data-page="event:gala" data-i18n="ev.gala" data-alt-en="/events/gala-dinner-morocco" data-alt-fr="/fr/evenements/soiree-de-gala-maroc">Gala evening</a>
@@ -784,14 +789,14 @@
         <a href="blog" data-page="guides" data-i18n="ft.guides" data-alt-en="/blog" data-alt-fr="/fr/blog">Blog</a>
       </nav>
       <nav class="footer__col" aria-label="Where we work" data-i18n-aria="ft.where">
-        <h4 data-i18n="ft.where">Where we work</h4>
+        <h3 data-i18n="ft.where">Where we work</h3>
         <a href="event-agency-casablanca" data-page="city:casablanca">Casablanca</a>
         <a href="event-agency-rabat" data-page="city:rabat">Rabat</a>
         <a href="event-agency-marrakech" data-page="city:marrakech">Marrakech</a>
         <a href="agency" data-page="agency" data-i18n="ft.agency">About the agency</a>
       </nav>
       <div class="footer__col">
-        <h4 data-i18n="ft.contact">Contact</h4>
+        <h3 data-i18n="ft.contact">Contact</h3>
         <a data-mail href="#"></a>
         <a href="#contact" data-i18n="nav.cta">Start a project</a>
         <button class="footer__book" type="button" data-book aria-haspopup="dialog" data-i18n="book.cta">Book a call</button>
@@ -931,16 +936,15 @@
   </div>
 </div>
 
-<script src="assets/js/stats.js"></script>
-<script src="assets/js/booking.js"></script>
-<script src="assets/js/agent.js"></script>
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/projects.js"></script>
-<script src="assets/js/voices.js"></script>
-<script src="assets/js/services.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/menu.js"></script>
-<script src="assets/js/led.js"></script>
-<script src="assets/js/logo.js"></script>
+<script src="assets/js/booking.js" defer></script>
+<script src="assets/js/agent.js" defer></script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/projects.js" defer></script>
+<script src="assets/js/voices.js" defer></script>
+<script src="assets/js/services.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/menu.js" defer></script>
+<script src="assets/js/led.js" defer></script>
+<script src="assets/js/logo.js" defer></script>
 </body>
 </html>

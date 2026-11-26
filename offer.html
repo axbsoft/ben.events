@@ -13,7 +13,12 @@
     gtag('consent', 'default', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v, wait_for_update: 500 }); })();
   gtag('js', new Date());
 </script>
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<script>
+  // Google Tag Manager is fetched once the page has loaded, so that it does not slow the first view down;
+  // what the page sends to the dataLayer before that is kept and read when it arrives
+  addEventListener('load', function () { var g = document.createElement('script'); g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH'; document.head.appendChild(g); });
+</script>
 <script src="/assets/js/consent.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>benevents agency</title>
@@ -36,9 +41,7 @@
 <meta name="twitter:image" content="https://www.ben.events/assets/img/og.jpg">
 <meta name="theme-color" content="#08080a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/fonts.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/calli-app.css">
 <script src="https://app.rybbit.io/api/script.js?siteId=5ad12948434d" defer onerror="window.benNoStats = 1"></script>

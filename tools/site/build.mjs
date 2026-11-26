@@ -59,7 +59,7 @@ const SOCIAL = { instagram: 'https://www.instagram.com/benevents.agency', linked
 // audience measurement (Rybbit, without cookies): the same line is in index.html, presentation.html and tools/legal/build.py
 const STATS = '<script src="https://app.rybbit.io/api/script.js?siteId=5ad12948434d" defer></script>';
 // the Google tag (Google Tag Manager), first in the head of every page that is measured, with the cookie choice (assets/js/consent.js)
-const GTAG = '<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head.\n     Google\'s consent mode starts at "denied" (or at the visitor\'s choice of the last six months): nothing is stored\n     by Google\'s tools until the visitor accepts cookies in the banner of assets/js/consent.js. -->\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  (function () { var c = null; try { c = JSON.parse(localStorage.getItem(\'ben-consent\')); } catch (e) {}\n    var v = c && c.v === \'granted\' && Date.now() - c.t < 15724800000 ? \'granted\' : \'denied\';\n    gtag(\'consent\', \'default\', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v, wait_for_update: 500 }); })();\n  gtag(\'js\', new Date());\n</script>\n<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>\n<script src="/assets/js/consent.js" defer></script>';
+const GTAG = '<!-- Google tag (Google Tag Manager, container GTM-PS4HGTDH): one per page, first in the head.\n     Google\'s consent mode starts at "denied" (or at the visitor\'s choice of the last six months): nothing is stored\n     by Google\'s tools until the visitor accepts cookies in the banner of assets/js/consent.js. -->\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  (function () { var c = null; try { c = JSON.parse(localStorage.getItem(\'ben-consent\')); } catch (e) {}\n    var v = c && c.v === \'granted\' && Date.now() - c.t < 15724800000 ? \'granted\' : \'denied\';\n    gtag(\'consent\', \'default\', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v, wait_for_update: 500 }); })();\n  gtag(\'js\', new Date());\n</script>\n<script>\n  // Google Tag Manager is fetched once the page has loaded, so that it does not slow the first view down;\n  // what the page sends to the dataLayer before that is kept and read when it arrives\n  addEventListener(\'load\', function () { var g = document.createElement(\'script\'); g.async = true;\n    g.src = \'https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH\'; document.head.appendChild(g); });\n</script>\n<script src="/assets/js/consent.js" defer></script>';
 const LANGS = ['en', 'fr'];
 
 const read = f => readFileSync(join(ROOT, f), 'utf8');
@@ -397,8 +397,8 @@ function french(page) {
   s = s.replace(/(<a\b[^>]*?\shref=")[^"]*("[^>]*\sdata-legal="([^"]+)")/g, (m, a, b, k) => a + k + '?lang=fr' + b);
   // the English words travel with the French page, so that it can still switch language in place
   const words = '<script>window.BEN_EN = ' + JSON.stringify(EN).replace(/</g, '\\u003c') + ';</script>\n';
-  if (!s.includes('<script src="assets/js/i18n.js"></script>')) throw new Error('index.html: the i18n script line was not found');
-  s = s.replace('<script src="assets/js/i18n.js"></script>', words + '<script src="assets/js/i18n.js"></script>');
+  if (!s.includes('<script src="assets/js/i18n.js" defer></script>')) throw new Error('index.html: the i18n script line was not found');
+  s = s.replace('<script src="assets/js/i18n.js" defer></script>', words + '<script src="assets/js/i18n.js" defer></script>');
   return s.replace('<!doctype html>\n', '<!doctype html>\n<!-- Written by tools/site/build.mjs from index.html and assets/js/i18n.js: change those, then run it again. -->\n');
 }
 function pageHref(l, page) {
@@ -460,11 +460,11 @@ ${GTAG}
 ${head}
 <meta name="theme-color" content="#08080a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/inter-tight-v9-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/pages.css">
+<script src="/assets/js/stats.js" defer></script>
 ${STATS}
 </head>
 <body class="page">
@@ -548,12 +548,11 @@ ${main}
   <a class="mbar__wa" href="${WA}" target="_blank" rel="noopener">${ICON.whatsapp}<span>WhatsApp</span></a>
   <a class="mbar__call" href="tel:${PHONE.replace(/\s/g, '')}">${ICON.phone}<span>${esc(w.call)}</span></a>
 </nav>
-<script src="/assets/js/stats.js"></script>
-<script src="/assets/js/booking.js"></script>
-<script src="/assets/js/agent.js"></script>
-<script src="/assets/js/menu.js"></script>
-<script src="/assets/js/logo.js"></script>
-<script src="/assets/js/led.js"></script>
+<script src="/assets/js/booking.js" defer></script>
+<script src="/assets/js/agent.js" defer></script>
+<script src="/assets/js/menu.js" defer></script>
+<script src="/assets/js/logo.js" defer></script>
+<script src="/assets/js/led.js" defer></script>
 <script>document.querySelectorAll('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>
@@ -1231,9 +1230,8 @@ ${GTAG}
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#08080a">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/inter-tight-v9-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/pages.css">
 ${STATS}

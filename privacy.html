@@ -13,7 +13,12 @@
     gtag('consent', 'default', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v, wait_for_update: 500 }); })();
   gtag('js', new Date());
 </script>
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH"></script>
+<script>
+  // Google Tag Manager is fetched once the page has loaded, so that it does not slow the first view down;
+  // what the page sends to the dataLayer before that is kept and read when it arrives
+  addEventListener('load', function () { var g = document.createElement('script'); g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PS4HGTDH'; document.head.appendChild(g); });
+</script>
 <script src="/assets/js/consent.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy policy — benevents agency</title>
@@ -40,9 +45,7 @@
 <meta name="twitter:description" content="What the benevents agency website collects, why, and what you can ask us.">
 <meta name="twitter:image" content="https://www.ben.events/assets/img/og.jpg">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/legal.css">
 <!-- the page holds its text in English and in French; this shows the right one -->
@@ -74,7 +77,7 @@
     <div class="legal__in">
       <a class="legal__back" href="./" data-href="./"><span lang="en">Back to the site</span><span lang="fr">Retour au site</span></a>
       <h1 class="legal__title"><span lang="en">Privacy policy</span><span lang="fr">Politique de confidentialité</span></h1>
-      <p class="legal__date"><span lang="en">Last updated: 25 November 2026</span><span lang="fr">Dernière mise à jour : 25 novembre 2026</span></p>
+      <p class="legal__date"><span lang="en">Last updated: 26 November 2026</span><span lang="fr">Dernière mise à jour : 26 novembre 2026</span></p>
       <p class="legal__lede"><span lang="en">This page explains what the ben.events website collects, why, and what you can ask us. In short: we only collect what you write to us, in order to answer you.</span><span lang="fr">Cette page explique ce que le site ben.events recueille, pourquoi, et ce que vous pouvez nous demander. En bref : nous ne recueillons que ce que vous nous écrivez, pour vous répondre.</span></p>
 
       <div class="legal__text" lang="en">
@@ -105,7 +108,6 @@
       <ul>
         <li>audience measurement is provided by Rybbit (rybbit.io);</li>
         <li>the site loads Google Tag Manager (Google). Through it, we may use Google’s measurement and advertising tools, such as Google Analytics and Google Ads, which can set cookies in your browser to measure visits and the results of our advertising. They only do so if you accept cookies in the banner shown at your first visit; your choice is kept in your browser for six months, and you can change it at any time with “Cookie settings” at the foot of the pages. Google handles that information under its own rules (policies.google.com);</li>
-        <li>the typefaces are supplied by Google Fonts;</li>
         <li>the AI voice agent that opens from the headset button at the top of the pages is provided by Dialora (dialora.ai), which uses Google reCAPTCHA to tell people from robots: it is only loaded when you press that button, the call only starts when you press the agent’s own button, once your browser has asked you for the microphone, and what you say is handled by Dialora under its own rules;</li>
         <li>the calendar that opens when you press “Book a call” is provided by Lunacal (lunacal.ai): it is only loaded when you point at, touch or press one of these buttons, or open the page to book a call (ben.events/book), and what you enter in it is handled by Lunacal under its own rules;</li>
         <li>the WhatsApp, Instagram and LinkedIn links only take you there if you click them.</li>
@@ -149,7 +151,6 @@
       <ul>
         <li>la mesure d’audience est assurée par Rybbit (rybbit.io) ;</li>
         <li>le site charge Google Tag Manager (Google). Par son intermédiaire, nous pouvons utiliser les outils de mesure et de publicité de Google, comme Google Analytics et Google Ads, qui peuvent déposer des cookies dans votre navigateur pour mesurer les visites et les résultats de nos publicités. Ils ne le font que si vous acceptez les cookies dans le bandeau affiché lors de votre première visite ; votre choix est gardé dans votre navigateur pendant six mois, et vous pouvez le modifier à tout moment avec « Gérer les cookies » en bas des pages. Google traite ces informations selon ses propres règles (policies.google.com) ;</li>
-        <li>les polices de caractères sont fournies par Google Fonts ;</li>
         <li>l’agent vocal IA qui s’ouvre depuis le bouton casque en haut des pages est fourni par Dialora (dialora.ai), qui utilise Google reCAPTCHA pour distinguer les personnes des robots : il n’est chargé que si vous appuyez sur ce bouton, l’appel ne commence que si vous appuyez sur le bouton de l’agent, après que votre navigateur vous a demandé l’accès au micro, et ce que vous dites est traité par Dialora selon ses propres règles ;</li>
         <li>le calendrier qui s’ouvre quand vous appuyez sur « Réserver un appel » est fourni par Lunacal (lunacal.ai) : il n’est chargé que si vous pointez, touchez ou appuyez sur l’un de ces boutons, ou ouvrez la page de réservation (ben.events/book), et ce que vous y saisissez est traité par Lunacal selon ses propres règles ;</li>
         <li>les liens WhatsApp, Instagram et LinkedIn ne vous y conduisent que si vous cliquez dessus.</li>

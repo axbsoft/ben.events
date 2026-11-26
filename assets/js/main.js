@@ -211,7 +211,7 @@
       track.appendChild(card);
     });
     if (last) track.appendChild(last);
-    if (track) track.scrollLeft = 0;
+    if (track) requestAnimationFrame(function () { track.scrollLeft = 0; });
   })();
 
   /* ---------- Media slots (photos load as their section comes near) ---------- */
@@ -300,15 +300,19 @@
   $$('[data-i18n-alt]').forEach(function (n) { var k = n.getAttribute('data-i18n-alt'); if (!(k in enAlt)) enAlt[k] = n.getAttribute('alt'); });
   $$('[data-i18n-aria]').forEach(function (n) { var k = n.getAttribute('data-i18n-aria'); if (!(k in enAria)) enAria[k] = n.getAttribute('aria-label'); });
 
+  // the words of a sentence that appear one by one; screen readers read the sentence once, from a hidden copy at the end
   function splitWords(el) {
     var words = el.textContent.trim().split(/\s+/);
-    el.setAttribute('aria-label', words.join(' '));
+    el.removeAttribute('aria-label');
     el.textContent = '';
     words.forEach(function (w, i) {
       var sp = doc.createElement('span');
       sp.className = 'w'; sp.setAttribute('aria-hidden', 'true'); sp.style.setProperty('--i', i); sp.textContent = w;
       el.appendChild(sp); el.appendChild(doc.createTextNode(' '));
     });
+    var said = doc.createElement('span');
+    said.className = 'vh'; said.textContent = words.join(' ');
+    el.appendChild(said);
   }
 
   // the words around the round button are spaced to close the circle exactly, whatever the language
@@ -405,12 +409,12 @@
   function finishLoad() { body.classList.remove('is-loading'); body.classList.add('is-loaded'); }
   if (reduced || !counter) { finishLoad(); }
   else {
-    var t0 = performance.now(), dur = 1700;
+    var t0 = performance.now(), dur = 1000;
     (function tick(now) {
       var p = clamp((now - t0) / dur, 0, 1), e = 1 - Math.pow(1 - p, 3);
       counter.textContent = Math.round(e * 100);
       bar.style.transform = 'scaleX(' + e + ')';
-      if (p < 1) requestAnimationFrame(tick); else setTimeout(finishLoad, 250);
+      if (p < 1) requestAnimationFrame(tick); else setTimeout(finishLoad, 150);
     })(t0);
     setTimeout(finishLoad, 4000); // safety net if the tab was in the background
   }
