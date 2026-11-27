@@ -32,6 +32,16 @@ clients type, not measured search volumes.
 | `/fr/blog/organiser-un-seminaire-d-entreprise-au-maroc` | organiser un séminaire au Maroc | checklist, lieu, déroulé, technique |
 | `/fr/blog/casablanca-rabat-marrakech-ou-tanger-ou-organiser-votre-evenement` | quelle ville pour un événement au Maroc | Casablanca, Rabat, Marrakech, Tanger |
 | `/fr/blog/ecran-led-son-et-lumiere-pour-un-evenement-d-entreprise` | écran LED, son et lumière pour un événement | régie, captation, mur LED |
+| `/fr/blog/prix-et-devis-d-un-evenement-d-entreprise-a-casablanca` | prix agence événementielle Casablanca | devis événement entreprise, brief, comparer des devis |
+| `/fr/blog/organiser-un-seminaire-a-marrakech` | organiser un séminaire à Marrakech | saison, lieux, programme, soirée |
+| `/fr/blog/location-d-ecran-led-au-maroc-comment-choisir` | location écran LED Maroc | mur LED, pitch, distance de vision, régie |
+| `/fr/blog/organiser-une-soiree-de-gala-au-maroc` | dîner de gala au Maroc | plan de salle, scène, lumière, déroulé |
+| `/fr/blog/hotesses-d-accueil-et-inscriptions-pour-votre-evenement-au-maroc` | hôtesses d'accueil événement Maroc | accueil, inscriptions, badges, VIP |
+| `/fr/blog/stand-d-exposition-au-maroc-de-la-conception-au-montage` | stand d'exposition Maroc | conception de stand, salon, montage, signalétique |
+| `/fr/carrieres` | emploi événementiel Maroc | carrières, postes ouverts, candidature |
+| `/fr/carrieres/<poste>` | the title of the position, with its city | offre d'emploi (Google Jobs) |
+| `/fr/travailler-avec-nous` | hôtesse d'accueil et technicien événementiel Maroc | freelance, technicien son, lumière, vidéo, machiniste |
+| `/fr/demo-inscriptions` | inscription et badge événement | QR code, accueil, contrôle d'accès, liste des présents |
 | `/fr/agence` | benevents agency (the name) | conception et production d'événements, équipe, principes |
 | `/fr/realisations` | événements d'entreprise réalisés au Maroc | réalisations, études de cas |
 | `/fr/realisations/<event>` | the name of the event, with its type and its city | |

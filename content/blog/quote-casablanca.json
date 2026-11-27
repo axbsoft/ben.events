@@ -1,0 +1,267 @@
+{
+  "id": "quote-casablanca",
+  "order": 4,
+  "draft": false,
+  "short": {
+    "en": "Prices and quotes",
+    "fr": "Prix et devis"
+  },
+  "slug": {
+    "en": "corporate-event-prices-and-quotes-in-casablanca",
+    "fr": "prix-et-devis-d-un-evenement-d-entreprise-a-casablanca"
+  },
+  "date": "2026-11-27",
+  "image": [
+    "assets/img/production-desk.jpg",
+    2000,
+    1125
+  ],
+  "title": {
+    "en": [
+      "The price of an event in Casablanca:",
+      "understanding and comparing quotes"
+    ],
+    "fr": [
+      "Le prix d’un événement à Casablanca :",
+      "comprendre et comparer les devis"
+    ]
+  },
+  "card": {
+    "en": "Guests, venue, length, technical set-up, set-up days, season: what makes the price of an event, and how to get an accurate quote.",
+    "fr": "Invités, lieu, durée, technique, montage, saison : ce qui fait le prix d’un événement, et comment obtenir un devis juste."
+  },
+  "lede": {
+    "en": "Why no event has a catalogue price, what a corporate event quote is made of, the brief that gets you an accurate one, and how to compare two proposals.",
+    "fr": "Pourquoi aucun événement n’a de prix catalogue, ce qui compose le devis d’un événement d’entreprise, le brief qui permet de l’établir juste, et la façon de comparer deux propositions."
+  },
+  "seo": {
+    "title": {
+      "en": "Event Prices and Quotes in Casablanca | benevents agency",
+      "fr": "Prix et devis d’un événement à Casablanca | benevents agency"
+    },
+    "desc": {
+      "en": "Event agency in Casablanca: what makes the price of a corporate event, the brief that gets an accurate quote, and how to compare quotes line by line.",
+      "fr": "Agence événementielle à Casablanca : ce qui fait le prix d’un événement d’entreprise, le brief qui donne un devis juste, et comment comparer les devis."
+    }
+  },
+  "body": {
+    "en": [
+      {
+        "h": "Why there is no catalogue price",
+        "p": [
+          "“How much does an event in Casablanca cost?” is often the first question, and the honest answer is always the same: it depends on what the event must achieve. A two-day convention with a gala dinner and a morning presentation in a showroom have almost nothing in common, apart from the word “event”.",
+          "A serious quote does not start from a price list, then, but from a brief. It is built line by line, from a few variables you already know, often without realising it. Here they are."
+        ]
+      },
+      {
+        "h": "What makes the price of an event",
+        "p": [
+          "Each line of a quote goes back to one of these variables:"
+        ],
+        "list": [
+          "The number of guests: it sets the size of the room, the stage and the screen, the power of the sound and the number of people at the welcome desk.",
+          "The venue: what it already provides (furniture, technical equipment, catering) and what must be brought in. An empty hall needs more than a fitted ballroom.",
+          "The length: half a day, a day or several days, with or without an evening. Each day adds hours of crew and of rental.",
+          "The stage and the technical side: the size of the stage, the surface and the pitch of the {LED wall|guide:led-screen-rental}, sound, light, the control desk, and filming if the event is recorded or broadcast.",
+          "Set-up and take-down: depending on the room and the set-up, a full day or a whole night may be needed before the event, and time after it. On those days the crew is working, and the room may be charged.",
+          "Printing and signage: stage backdrops, photocall, totems, wayfinding, badges.",
+          "The welcome: hostesses, registration, badges, cloakroom.",
+          "Timing: the last months of the year are the busiest for conventions, and a date that is close leaves less choice of venues and equipment."
+        ]
+      },
+      {
+        "h": "The brief that gets an accurate quote",
+        "p": [
+          "The more precise the brief, the more precise the quote. It does not need to be long, but it should answer these questions:"
+        ],
+        "list": [
+          "The objective, in one sentence: inform, motivate, thank, launch a product.",
+          "The date, or the possible dates, and how flexible they are.",
+          "The city and the venue, if they are already chosen; if not, the kind of venue you have in mind.",
+          "The number of guests, and where they come from.",
+          "The format: plenary, workshops, dinner, evening, and the order of the day.",
+          "What the audience must see and hear: presentations, videos, remote speakers, interpretation, filming.",
+          "What is already taken care of, by you or by the venue.",
+          "Your budget, if you have one."
+        ],
+        "after": [
+          "The last point often feels awkward. Yet a stated budget makes it possible to propose the set-up that fits it, rather than an ideal proposal that must then be cut back. Our {seminar checklist|guide:seminar-checklist} helps to gather all of this."
+        ]
+      },
+      {
+        "h": "What a good quote should detail",
+        "p": [
+          "A total at the bottom of the page is not enough. A clear quote details:"
+        ],
+        "list": [
+          "Each item, with its quantities and dimensions: the size of the stage, the surface and pitch of the screen, the number of microphones, lights and cameras.",
+          "The crews: technicians, stage managers, hostesses, and their hours.",
+          "The days of set-up, rehearsal, event and take-down.",
+          "Transport, delivery and installation.",
+          "What is included and what is not: the room, catering, the content for the screens, accommodation, transfers.",
+          "Options, priced separately.",
+          "Whether amounts are before or after tax, how long the quote is valid, and the terms of payment and cancellation."
+        ]
+      },
+      {
+        "h": "Comparing two quotes without being misled",
+        "p": [
+          "Two quotes can only be compared if they answer the same brief. Send the same document to every agency, then compare line by line rather than total against total.",
+          "A much lower quote may hide a missing line: no set-up day, no rehearsal, a smaller screen, a coarser pitch, one technician for both sound and light, or no spare equipment. A higher quote, on the other hand, may include what the other one leaves to you. Ask each agency the same question: what is not included? The answer is often telling.",
+          "Finally, look at who will do the work. Ask for comparable projects, with photos, and for who will be on site on the day."
+        ]
+      },
+      {
+        "h": "Adjusting the budget without spoiling the event",
+        "p": [
+          "If the first quote goes beyond the budget, it is better to rethink the set-up than to cut a little from everything. A few levers:"
+        ],
+        "list": [
+          "Keep what the audience sees and hears: clear sound and a readable screen come before effects.",
+          "Use one room for several moments. A plenary room can become a dinner room, {as for MTA in Tangier|project:mta-cycle-meeting}: it saves booking a second room, as long as the time to change it over is planned.",
+          "Choose a venue you can access the day before: a set-up at night, squeezed between two events, needs a bigger crew.",
+          "Fit the size and shape of the screen to the room, not the other way round.",
+          "Fix the date early, to keep the choice."
+        ]
+      },
+      {
+        "h": "In Casablanca, the venue changes everything",
+        "p": [
+          "Casablanca offers a wide choice of venues: hotel ballrooms, conference centres, showrooms, industrial halls. That is good news for the budget, as long as venues are compared with the technical side in mind: a fitted room you can access the day before is not the same job as an empty space to dress from floor to ceiling.",
+          "At the {WeXchange forum|project:wexchange-forum}, at the Barceló Anfa, the panel discussions were filmed with several cameras and directed live from our control desk. Filming of this kind is planned together with the stage and the light, and appears as an item of its own in the quote. See also our page {event agency in Casablanca|city:casablanca}."
+        ]
+      },
+      {
+        "h": "Questions to ask before you sign",
+        "p": [],
+        "list": [
+          "Does the quote answer the whole brief, and only the brief?",
+          "What is not included?",
+          "Who will be on site on the day, and who decides if something unexpected happens?",
+          "How long does the set-up take, and when can it start?",
+          "Is a rehearsal planned?",
+          "What happens if the number of guests or the programme changes?",
+          "Until when is the quote valid?"
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "h": "Pourquoi il n’existe pas de prix catalogue",
+        "p": [
+          "« Combien coûte un événement à Casablanca ? » est souvent la première question, et la réponse honnête est toujours la même : cela dépend de ce que l’événement doit accomplir. Une convention de deux jours avec dîner de gala et une matinée de présentation dans un showroom n’ont presque rien en commun, sinon le mot « événement ».",
+          "Un devis sérieux ne part donc pas d’une grille tarifaire, mais d’un brief. Il se construit ligne par ligne, à partir de quelques variables que vous connaissez déjà, souvent sans le savoir. Les voici."
+        ]
+      },
+      {
+        "h": "Ce qui fait le prix d’un événement",
+        "p": [
+          "Chaque ligne d’un devis renvoie à l’une de ces variables :"
+        ],
+        "list": [
+          "Le nombre d’invités : il fixe la taille de la salle, de la scène et de l’écran, la puissance du son et le nombre de personnes à l’accueil.",
+          "Le lieu : ce qu’il fournit déjà (mobilier, équipement technique, restauration) et ce qu’il faut apporter. Une halle vide demande plus qu’une salle de bal équipée.",
+          "La durée : une demi-journée, une journée ou plusieurs jours, avec ou sans soirée. Chaque jour ajoute des heures d’équipe et de location.",
+          "La scène et la technique : la taille de la scène, la surface et le pitch du {mur LED|guide:led-screen-rental}, le son, la lumière, la régie, et la captation si l’événement est filmé ou retransmis.",
+          "Le montage et le démontage : selon la salle et le dispositif, il faut parfois une journée ou une nuit entière avant l’événement, et du temps après. Ces jours-là, l’équipe travaille, et la salle peut être facturée.",
+          "L’impression et la signalétique : fonds de scène, photocall, totems, fléchage, badges.",
+          "L’accueil : hôtesses, inscriptions, badges, vestiaire.",
+          "Le calendrier : les derniers mois de l’année sont les plus chargés en conventions, et une date proche réduit le choix des lieux et du matériel disponibles."
+        ]
+      },
+      {
+        "h": "Le brief qui donne un devis juste",
+        "p": [
+          "Plus le brief est précis, plus le devis l’est. Il n’a pas besoin d’être long, mais il doit répondre à ces questions :"
+        ],
+        "list": [
+          "L’objectif, en une phrase : informer, motiver, remercier, lancer un produit.",
+          "La date, ou les dates possibles, et leur souplesse.",
+          "La ville et le lieu, s’ils sont déjà choisis ; sinon, le type de lieu souhaité.",
+          "Le nombre d’invités, et d’où ils viennent.",
+          "Le format : plénière, ateliers, dîner, soirée, et l’ordre de la journée.",
+          "Ce que le public doit voir et entendre : présentations, vidéos, intervenants à distance, interprétation, captation.",
+          "Ce qui est déjà pris en charge, par vous ou par le lieu.",
+          "Votre enveloppe budgétaire, si vous en avez une."
+        ],
+        "after": [
+          "Le dernier point gêne souvent. Pourtant, une enveloppe annoncée permet de proposer le dispositif qui lui correspond, plutôt qu’une proposition idéale qu’il faudra ensuite réduire. Notre {checklist du séminaire|guide:seminar-checklist} aide à rassembler tous ces éléments."
+        ]
+      },
+      {
+        "h": "Ce qu’un bon devis doit détailler",
+        "p": [
+          "Un total en bas de page ne suffit pas. Un devis lisible détaille :"
+        ],
+        "list": [
+          "Chaque poste, avec ses quantités et ses dimensions : la taille de la scène, la surface et le pitch de l’écran, le nombre de micros, de projecteurs et de caméras.",
+          "Les équipes : techniciens, régisseurs, hôtesses, et leurs horaires.",
+          "Les jours de montage, de répétition, d’événement et de démontage.",
+          "Le transport, la livraison et l’installation.",
+          "Ce qui est inclus et ce qui ne l’est pas : la salle, la restauration, les contenus des écrans, l’hébergement, les transferts.",
+          "Les options, chiffrées à part.",
+          "Si les montants sont hors taxes ou toutes taxes comprises, la durée de validité du devis, et les conditions de paiement et d’annulation."
+        ]
+      },
+      {
+        "h": "Comparer deux devis sans se tromper",
+        "p": [
+          "Deux devis ne se comparent que s’ils répondent au même brief. Envoyez donc le même document à chaque agence, puis comparez ligne à ligne plutôt que total contre total.",
+          "Un devis nettement plus bas peut cacher une ligne absente : pas de jour de montage, pas de répétition, un écran plus petit, un pitch plus grossier, un seul technicien pour le son et la lumière, ou pas de matériel de secours. À l’inverse, un devis plus élevé peut inclure ce que l’autre laisse à votre charge. Posez la même question à chaque agence : qu’est-ce qui n’est pas compris ? La réponse est souvent parlante.",
+          "Regardez enfin qui fera le travail. Demandez des réalisations comparables, avec des photos, et qui sera présent le jour J."
+        ]
+      },
+      {
+        "h": "Ajuster le budget sans abîmer l’événement",
+        "p": [
+          "Si le premier devis dépasse l’enveloppe, mieux vaut revoir le dispositif que tout réduire un peu. Quelques leviers :"
+        ],
+        "list": [
+          "Garder ce que le public voit et entend : un son clair et un écran lisible passent avant les effets.",
+          "Utiliser une seule salle pour plusieurs moments. Une salle de plénière peut devenir salle de dîner, {comme pour MTA à Tanger|project:mta-cycle-meeting} : cela évite de réserver une seconde salle, à condition de prévoir le temps de transformation.",
+          "Choisir un lieu accessible la veille : un montage de nuit, coincé entre deux événements, demande une équipe plus nombreuse.",
+          "Adapter la taille et la forme de l’écran à la salle, et non l’inverse.",
+          "Fixer la date tôt, pour garder le choix."
+        ]
+      },
+      {
+        "h": "À Casablanca, le lieu change tout",
+        "p": [
+          "Casablanca offre un large choix de lieux : salles de bal d’hôtel, centres de congrès, showrooms, halles industrielles. C’est une chance pour le budget, à condition de comparer les lieux avec la technique en tête : une salle équipée et accessible la veille ne représente pas le même travail qu’un espace vide à habiller du sol au plafond.",
+          "Au {forum WeXchange|project:wexchange-forum}, au Barceló Anfa, les tables rondes étaient captées en multicaméra et réalisées en direct depuis notre régie. Une captation de ce type se prévoit avec la scène et la lumière, et apparaît comme un poste à part entière dans le devis. Voir aussi notre page {agence événementielle à Casablanca|city:casablanca}."
+        ]
+      },
+      {
+        "h": "Les questions à poser avant de signer",
+        "p": [],
+        "list": [
+          "Le devis répond-il à tout le brief, et seulement au brief ?",
+          "Qu’est-ce qui n’est pas compris ?",
+          "Qui sera sur place le jour J, et qui décide en cas d’imprévu ?",
+          "Combien de temps dure le montage, et quand peut-il commencer ?",
+          "Une répétition est-elle prévue ?",
+          "Que se passe-t-il si le nombre d’invités ou le programme change ?",
+          "Jusqu’à quand le devis est-il valable ?"
+        ]
+      }
+    ]
+  },
+  "related": {
+    "events": [
+      "convention",
+      "seminar",
+      "gala"
+    ],
+    "services": [
+      "conferences",
+      "production"
+    ],
+    "cities": [
+      "casablanca"
+    ],
+    "guides": [
+      "seminar-checklist",
+      "technical-set-up"
+    ]
+  }
+}

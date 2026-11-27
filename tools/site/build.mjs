@@ -49,6 +49,8 @@ import { CITIES, CITY_WORDS, AGENCY, TEAM, COMPANY } from './pages.mjs';
 import { EVENTS, EVENT_WORDS } from './events.mjs';
 import { GUIDE_WORDS } from './guides.mjs';
 import { PRODUCTION, STAGE_OFFER, PRODUCTION_WORDS } from './production.mjs';
+import { CONTRACTS, ROLES, LANGUAGES, CAREER_WORDS, WORK_WORDS, FORM_WORDS } from './careers.mjs';
+import { REG_WORDS, SAMPLE_GUESTS } from './registration.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = 'https://www.ben.events';
@@ -107,6 +109,18 @@ const GUIDES = readdirSync(join(ROOT, 'content/blog')).filter(f => f.endsWith('.
   return !why;
 }).sort((a, b) => (a.order || 0) - (b.order || 0) || a.id.localeCompare(b.id));
 for (const g of GUIDES) g.related = g.related || {};
+// the open positions of the careers pages (content/careers.json, edited on /admin): a position closed, still a draft,
+// past its closing date or incomplete is left out, and its page goes
+const TODAY = new Date().toISOString().slice(0, 10);
+const CAREERS = (() => { try { return json('content/careers.json'); } catch (e) { WARN.push('content/careers.json cannot be read: ' + e.message); return { positions: [] }; } })();
+const POSITIONS = (CAREERS.positions || []).filter(p => {
+  if (!p || p.open === false || p.draft) return false;
+  const day = /^\d{4}-\d{2}-\d{2}$/;
+  const why = !SLUG.test(p.id || '') ? 'its id is not valid' : !(p.title && p.title.en && p.title.fr) ? 'its title is missing' : !CONTRACTS[p.contract] ? 'its kind of contract is not known'
+    : !day.test(p.posted || '') ? 'its date is not valid' : !(p.summary && p.summary.en && p.summary.fr) ? 'its summary is missing' : p.until && !day.test(p.until) ? 'its closing date is not valid' : '';
+  if (why) WARN.push(`content/careers.json: the position "${p.id}" left out: ${why}`);
+  return !why && !(p.until && p.until < TODAY);
+}).sort((a, b) => b.posted.localeCompare(a.posted) || a.id.localeCompare(b.id));
 for (const pr of PROJECTS) if (pr.city && !PLACES[pr.city]) throw new Error(`projects.js: the city "${pr.city}" of "${pr.id}" is not in the list of places`);
 // the cities that have a page are the same on both sides: PLACES (projects.js, "page: true") and CITIES (pages.mjs)
 for (const c of CITIES) if (!PLACES[c.id] || !PLACES[c.id].page) throw new Error(`the city "${c.id}" has a page (tools/site/pages.mjs) but is not marked "page: true" in the places of projects.js`);
@@ -162,6 +176,10 @@ const U = {
   event: (l, e) => EVENT_WORDS[l].folder + e.slug[l],
   events: l => EVENT_WORDS[l].index,
   guide: (l, g) => GUIDE_WORDS[l].folder + g.slug[l],
+  careers: l => CAREER_WORDS[l].folder,
+  position: (l, p) => CAREER_WORDS[l].folder + '/' + p.id,
+  work: l => WORK_WORDS[l].path,
+  regdemo: l => REG_WORDS[l].path,
   guides: l => GUIDE_WORDS[l].index
 };
 const fileOf = path => (path === '/' ? 'index' : path.slice(1)) + '.html';
@@ -416,6 +434,9 @@ function pageHref(l, page) {
   if (kind === 'events') return U.events(l);
   if (kind === 'guide') { const g = GUIDES.find(x => x.id === id); if (!g) throw new Error('unknown guide: ' + id); return U.guide(l, g); }
   if (kind === 'guides') return U.guides(l);
+  if (kind === 'careers') return U.careers(l);
+  if (kind === 'work') return U.work(l);
+  if (kind === 'regdemo') return U.regdemo(l);
   throw new Error('unknown page: ' + page);
 }
 write('fr.html', french(home));
@@ -524,6 +545,8 @@ ${main}
       <a href="${U.guides(l)}">${esc(w.guides)}</a>
       <a href="${U.at(l, '#process')}">${esc(w.approach)}</a>
       <a href="/presentation?lang=${l}">${esc(w.deck)}</a>
+      <a href="${U.careers(l)}">${esc(CAREER_WORDS[l].name)}</a>
+      <a href="${U.work(l)}">${esc(WORK_WORDS[l].name)}</a>
     </nav>
     <nav class="pfoot__col" aria-label="${att(w.cities)}">
       <h2>${esc(w.cities)}</h2>
@@ -709,7 +732,7 @@ for (const pr of PRODUCTION) {
     </ul>
   </div>
 </section>
-${offerSection(l, pr.offer)}
+${offerSection(l, pr.offer)}${pr.id === 'welcome' ? `\n<p class="pg__more pg__join"><a class="link-arrow" href="${U.regdemo(l)}">${esc(REG_WORDS[l].try)}</a><a class="link-arrow" href="${U.work(l)}">${esc(WORK_WORDS[l].join)}</a></p>` : ''}
 <section class="pg__sec">
   <h2 class="pg__h2">${esc(steps.title)}</h2>
   <p class="pg__lede pg__lede--wide">${esc(steps.intro)}</p>
@@ -978,15 +1001,17 @@ ${cta(l, a.endTitle, w.endText)}
 
 /* ---------- 3b. the kinds of events we produce, and the guides (their words are in tools/site/events.mjs and guides.mjs) ---------- */
 const serviceName = (l, s) => T[l]['srv.' + (SERVICES.indexOf(s) + 1) + '.t'];
-// in a guide, {words|kind:id} is a link to a page of the site: kind is guide, event, service, city or project
-const LINK_IN = /\{([^|{}]+)\|(guide|event|service|city|project):([a-z0-9-]+)\}/g;
-const linkTo = (l, kind, id) => {
+// in a guide, {words|kind:id} is a link to a page of the site: kind is guide, event, service, city, project or production
+// (the production pages: stands, printing, rental, welcome); a #part of the page may follow, as in {LED walls|service:production#led}
+const LINK_IN = /\{([^|{}]+)\|(guide|event|service|city|project|production):([a-z0-9-]+)(#[a-z0-9-]+)?\}/g;
+const linkTo = (l, kind, id, hash = '') => {
   const page = kind === 'guide' ? GUIDES.find(x => x.id === id) : kind === 'event' ? EVENTS.find(x => x.id === id)
-    : kind === 'service' ? SERVICES.find(x => x.id === id) : kind === 'city' ? CITIES.find(x => x.id === id) : byId[id];
+    : kind === 'service' ? SERVICES.find(x => x.id === id) : kind === 'city' ? CITIES.find(x => x.id === id)
+    : kind === 'production' ? PRODUCTION.find(x => x.id === id) : byId[id];
   if (!page) { WARN.push(`a link to the ${kind} "${id}", which does not exist: left as plain words`); return null; }
-  return U[kind](l, page);
+  return (kind === 'production' ? U.service : U[kind])(l, page) + hash;
 };
-const rich = (l, s) => esc(s).replace(LINK_IN, (m, words, kind, id) => { const href = linkTo(l, kind, id); return href ? `<a href="${href}">${words}</a>` : words; });
+const rich = (l, s) => esc(s).replace(LINK_IN, (m, words, kind, id, hash) => { const href = linkTo(l, kind, id, hash); return href ? `<a href="${href}">${words}</a>` : words; });
 const plain = s => s.replace(LINK_IN, (m, words) => words);
 const words = list => list.join(' ').split(/\s+/).filter(Boolean).length;
 const longDate = (l, d) => new Date(d + 'T12:00:00Z').toLocaleDateString(l === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
@@ -1194,6 +1219,260 @@ ${cta(l, gw.endTitle, gw.endText)}`;
   }
 }
 
+/* ---------- 3d. careers (positions from content/careers.json, edited on /admin) and "Work with us" (words: tools/site/careers.mjs) ---------- */
+// the form of an application: a position, a spontaneous application, or the pool of people who work on our events
+function applyForm(l, kind, position) {
+  const f = FORM_WORDS[l], pool = kind === 'pool';
+  const data = { sent: f.sent, failed: f.failed, missing: f.missing, sending: f.sending, subject: pool ? WORK_WORDS[l].name : CAREER_WORDS[l].name,
+    'l-position': CAREER_LABELS[l].position, 'l-roles': f.roles, 'l-languages': f.languages, 'l-city': f.city, 'l-phone': f.phone, 'l-links': f.links,
+    'l-availability': f.availability, 'l-experience': f.experience, 'l-message': f.message };
+  const chips = (name, list) => list.map(x => `<label class="chip"><input type="checkbox" name="${name}" value="${x.id}" data-label="${att(x[l])}"><span>${esc(x[l])}</span></label>`).join('\n        ');
+  return `<form class="form apply" data-apply data-kind="${kind}"${position ? ` data-position="${att(position)}"` : ''} ${Object.entries(data).map(([k, v]) => `data-${k}="${att(v)}"`).join(' ')} novalidate>
+      <label class="field"><span>${esc(f.name)}</span><input name="name" type="text" autocomplete="name" required></label>
+      <label class="field"><span>${esc(f.email)}</span><input name="email" type="email" autocomplete="email" required></label>
+      <label class="field"><span>${esc(f.phone)}</span><input name="phone" type="tel" autocomplete="tel"></label>
+      <label class="field"><span>${esc(f.city)}</span><input name="city" type="text" autocomplete="address-level2" placeholder="${att(f.cityPh)}"></label>${pool ? `
+      <fieldset class="apply__set field--full"><legend>${esc(f.roles)}</legend>
+        ${chips('roles', ROLES)}
+      </fieldset>
+      <fieldset class="apply__set field--full"><legend>${esc(f.languages)}</legend>
+        ${chips('languages', LANGUAGES)}
+      </fieldset>
+      <label class="field field--full"><span>${esc(f.availability)}</span><input name="availability" type="text" placeholder="${att(f.availabilityPh)}"></label>
+      <label class="field field--full"><span>${esc(f.experience)}</span><textarea name="experience" rows="4" placeholder="${att(f.experiencePh)}"></textarea></label>` : `
+      <label class="field field--full"><span>${esc(f.message)}</span><textarea name="message" rows="5" placeholder="${att(f.messagePh)}"></textarea></label>`}
+      <label class="field field--full"><span>${esc(f.links)}</span><input name="links" type="url" inputmode="url" placeholder="${att(f.linksPh)}"></label>
+      <label class="form__trap" aria-hidden="true">Leave this field empty<input name="hp" type="text" tabindex="-1" autocomplete="off"></label>
+      <label class="apply__consent field--full"><input type="checkbox" name="consent" required><span>${esc(f.consent)} <a href="${U.legal(l, 'privacy')}">${esc(f.privacy)}</a></span></label>
+      <div class="form__foot field--full">
+        <button class="btn" type="submit"><span>${esc(f.send)}</span></button>
+        <p class="form__note" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+    <script src="/assets/js/apply.js" defer></script>`;
+}
+const CAREER_LABELS = { en: { position: 'Position' }, fr: { position: 'Poste' } };
+const placeName = (l, p) => p.city && PLACES[p.city] ? tr(PLACES[p.city], l) : CAREER_WORDS[l].anyCity;
+{
+  const cover = ['assets/img/production-desk.jpg', 2000, 1125];
+  const alt = Object.fromEntries(LANGS.map(l => [l, U.careers(l)]));
+  pages.push({ alt, xdef: alt.fr, kind: 'careers', images: [cover[0]] });
+  for (const l of LANGS) {
+    const w = W[l], c = CAREER_WORDS[l], trail = [[w.homeName, U.home(l)], [c.name]];
+    const head = seoHead({
+      l, title: c.seo[0], desc: c.seo[1], alt, xdef: alt.fr, image: '/' + cover[0], imageAlt: c.coverAlt,
+      data: [{ '@type': 'CollectionPage', '@id': SITE + alt[l] + '#page', name: c.name, description: c.seo[1], url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, about: { '@id': ORG },
+        hasPart: POSITIONS.map(p => ({ '@type': 'JobPosting', title: p.title[l], url: SITE + U.position(l, p) })) }, crumbs(l, trail)]
+    });
+    const main = `${crumbNav(l, trail)}
+<header class="pg__head">
+  <div>
+    <p class="eyebrow"><i></i><span>${esc(c.eyebrow)}</span></p>
+    <h1 class="pg__title">${esc(c.title[0])} <em>${esc(c.title[1])}</em></h1>
+    <p class="pg__lede">${esc(c.lede)}</p>
+    <a class="btn" href="#positions"><span>${esc(c.open)}</span></a>
+  </div>
+  <figure class="pg__cover">${img(cover, c.coverAlt, ' fetchpriority="high"', 'cover')}</figure>
+</header>
+<section class="pg__sec" id="positions">
+  <h2 class="pg__h2">${esc(c.open)}</h2>${POSITIONS.length ? `
+  <ul class="jobs">
+    ${POSITIONS.map(p => `<li><a class="job" href="${U.position(l, p)}"><b>${esc(p.title[l])}</b><span>${esc(CONTRACTS[p.contract][l])} · ${esc(placeName(l, p))} · ${esc(c.posted)} ${esc(longDate(l, p.posted))}</span><i aria-hidden="true"></i></a></li>`).join('\n    ')}
+  </ul>` : `
+  <p class="jobs__none">${esc(c.none)}</p>`}
+</section>
+<section class="pg__sec jobs__pool">
+  <div>
+    <h2 class="pg__h2">${esc(c.poolTitle)}</h2>
+    <p>${esc(c.poolText)}</p>
+  </div>
+  <a class="btn btn--ghost" href="${U.work(l)}"><span>${esc(c.poolLink)}</span></a>
+</section>
+<section class="pg__sec" id="apply">
+  <h2 class="pg__h2">${esc(c.spontTitle)}</h2>
+  <p class="pg__intro">${esc(c.spontText)}</p>
+  ${applyForm(l, 'spontaneous')}
+</section>`;
+    write(fileOf(alt[l]), shell({ l, head, alt, main }));
+  }
+  // one page per open position, with its job posting for Google
+  for (const p of POSITIONS) {
+    const palt = Object.fromEntries(LANGS.map(l => [l, U.position(l, p)]));
+    pages.push({ alt: palt, xdef: palt.fr, kind: 'position', images: [cover[0]] });
+    for (const l of LANGS) {
+      const w = W[l], c = CAREER_WORDS[l], trail = [[w.homeName, U.home(l)], [c.name, U.careers(l)], [p.title[l]]];
+      const list = (h, items) => items && items[l] && items[l].length ? `<h2 class="pg__h">${esc(h)}</h2>\n    <ul>\n      ${items[l].map(x => `<li>${esc(x)}</li>`).join('\n      ')}\n    </ul>` : '';
+      const html = (h, items) => items && items[l] && items[l].length ? `<h3>${esc(h)}</h3><ul>${items[l].map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+      const desc = (p.summary[l] || '').slice(0, 155);
+      const posting = {
+        '@type': 'JobPosting', '@id': SITE + palt[l] + '#job', title: p.title[l], url: SITE + palt[l], inLanguage: l,
+        description: `<p>${esc(p.summary[l])}</p>${html(c.missions, p.missions)}${html(c.profile, p.profile)}${p.offer && p.offer[l] ? `<h3>${esc(c.offer)}</h3><p>${esc(p.offer[l])}</p>` : ''}`,
+        datePosted: p.posted, employmentType: CONTRACTS[p.contract].google, directApply: true,
+        hiringOrganization: { '@type': 'Organization', '@id': ORG, name: 'benevents agency', sameAs: SITE + '/', logo: SITE + '/assets/img/logo.png' },
+        jobLocation: { '@type': 'Place', address: Object.assign({ '@type': 'PostalAddress', addressCountry: 'MA' }, p.city && PLACES[p.city] ? { addressLocality: tr(PLACES[p.city], 'en') } : {}) }
+      };
+      if (p.until) posting.validThrough = p.until + 'T23:59:59+01:00';
+      const head = seoHead({ l, title: p.title[l] + ' | benevents agency', desc, alt: palt, xdef: palt.fr, image: '/' + cover[0], imageAlt: p.title[l], data: [posting, crumbs(l, trail)] });
+      const main = `${crumbNav(l, trail)}
+<header class="pg__head pg__head--text">
+  <div>
+    <p class="eyebrow"><i></i><span>${esc(c.eyebrow)}</span></p>
+    <h1 class="pg__title">${esc(p.title[l])}</h1>
+    <ul class="job__facts">
+      <li><span>${esc(c.contract)}</span>${esc(CONTRACTS[p.contract][l])}</li>
+      <li><span>${esc(c.city)}</span>${esc(placeName(l, p))}</li>
+      <li><span>${esc(c.posted)}</span>${esc(longDate(l, p.posted))}</li>${p.until ? `
+      <li><span>${esc(c.until)}</span>${esc(longDate(l, p.until))}</li>` : ''}
+    </ul>
+    <p class="pg__lede">${esc(p.summary[l])}</p>
+    <a class="btn" href="#apply"><span>${esc(c.applyTitle)}</span></a>
+  </div>
+</header>
+<section class="pg__cols">
+  <div class="pg__does">
+    ${list(c.missions, p.missions)}
+  </div>
+  <div class="pg__does">
+    ${list(c.profile, p.profile)}
+  </div>
+</section>${p.offer && p.offer[l] ? `
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(c.offer)}</h2>
+  <p class="pg__intro">${esc(p.offer[l])}</p>
+</section>` : ''}
+<section class="pg__sec" id="apply">
+  <h2 class="pg__h2">${esc(c.applyTitle)}</h2>
+  <p class="pg__intro">${esc(c.applyText)}</p>
+  ${applyForm(l, 'position', p.title[l])}
+  <p class="pg__more"><a class="link-arrow" href="${U.careers(l)}">${esc(c.back)}</a></p>
+</section>`;
+      write(fileOf(palt[l]), shell({ l, head, alt: palt, main }));
+    }
+  }
+}
+{
+  const cover = ['assets/img/wall/sound-desk-gala.jpg', 960, 1280];
+  const alt = Object.fromEntries(LANGS.map(l => [l, U.work(l)]));
+  pages.push({ alt, xdef: alt.fr, kind: 'work', images: [cover[0]] });
+  for (const l of LANGS) {
+    const w = W[l], k = WORK_WORDS[l], trail = [[w.homeName, U.home(l)], [k.name]];
+    const head = seoHead({
+      l, title: k.seo[0], desc: k.seo[1], alt, xdef: alt.fr, image: '/' + cover[0], imageAlt: k.coverAlt,
+      data: [{ '@type': 'WebPage', '@id': SITE + alt[l] + '#page', name: k.name, description: k.seo[1], url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, about: { '@id': ORG } }, crumbs(l, trail)]
+    });
+    const main = `${crumbNav(l, trail)}
+<header class="pg__head">
+  <div>
+    <p class="eyebrow"><i></i><span>${esc(k.eyebrow)}</span></p>
+    <h1 class="pg__title">${esc(k.title[0])} <em>${esc(k.title[1])}</em></h1>
+    <p class="pg__lede">${esc(k.lede)}</p>
+    <a class="btn" href="#apply"><span>${esc(k.formTitle)}</span></a>
+  </div>
+  <figure class="pg__cover">${img(cover, k.coverAlt, ' fetchpriority="high"', 'cover')}</figure>
+</header>
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(k.howTitle)}</h2>
+  <ol class="pg__notes">
+    ${k.how.map(s => `<li>${esc(s)}</li>`).join('\n    ')}
+  </ol>
+</section>
+<section class="pg__sec" id="apply">
+  <h2 class="pg__h2">${esc(k.formTitle)}</h2>
+  <p class="pg__intro">${esc(k.formText)}</p>
+  ${applyForm(l, 'pool')}
+  <p class="pg__more"><a class="link-arrow" href="${U.careers(l)}">${esc(k.careers)}</a></p>
+</section>`;
+    write(fileOf(alt[l]), shell({ l, head, alt, main }));
+  }
+}
+
+{
+  // the registration demo: a working sample of the registration, badges and check-in of the service "Hostesses & registration"
+  const welcome = PRODUCTION.find(x => x.id === 'welcome');
+  const alt = Object.fromEntries(LANGS.map(l => [l, U.regdemo(l)]));
+  pages.push({ alt, xdef: alt.fr, kind: 'regdemo', images: [welcome.photo[0]] });
+  const inJson = o => JSON.stringify(o).replace(/</g, '\\u003c');
+  for (const l of LANGS) {
+    const w = W[l], r = REG_WORDS[l], f = r.form, d = r.door, trail = [[w.homeName, U.home(l)], [r.service, U.service(l, welcome)], [r.name]];
+    const head = seoHead({
+      l, title: r.seo[0], desc: r.seo[1], alt, xdef: alt.fr, image: '/' + welcome.photo[0], imageAlt: tr(welcome.cover.caption, l),
+      data: [{ '@type': 'WebPage', '@id': SITE + alt[l] + '#page', name: r.name, description: r.seo[1], url: SITE + alt[l], inLanguage: l, isPartOf: { '@id': SITE + '/#site' }, about: { '@id': ORG } }, crumbs(l, trail)]
+    });
+    const tab = (n, label) => `<button type="button" role="tab" id="reg-t${n}" aria-controls="reg-${n}" data-step-btn="${n}" aria-selected="${n === 1}"${n === 1 ? '' : ' tabindex="-1"'}><i>${n}</i>${esc(label)}</button>`;
+    const main = `${crumbNav(l, trail)}
+<header class="pg__head">
+  <div>
+    <p class="eyebrow"><i></i><span>${esc(r.eyebrow)}</span></p>
+    <h1 class="pg__title pg__title--long">${esc(r.title[0])} <em>${esc(r.title[1])}</em></h1>
+    <p class="pg__lede">${esc(r.lede)}</p>
+    <p class="reg__privacy">${esc(r.privacy)}</p>
+  </div>
+  <figure class="pg__cover">${img(welcome.photo, tr(welcome.cover.caption, l), ' fetchpriority="high"', 'cover')}</figure>
+</header>
+<section class="pg__sec reg" data-reg>
+  <div class="reg__tabs" role="tablist" aria-label="${att(r.name)}">
+    ${r.steps.map((s, i) => tab(i + 1, s)).join('\n    ')}
+  </div>
+  <div class="reg__panel" id="reg-1" role="tabpanel" aria-labelledby="reg-t1" data-step="1">
+    <div class="reg__site">
+      <div class="reg__event"><span class="reg__tag">${esc(r.event.tag)}</span><h2>${esc(r.event.name)}</h2><p>${esc(r.event.when)} · ${esc(r.event.where)}</p></div>
+      <form class="form reg__form" novalidate>
+        <label class="field"><span>${esc(f.first)}</span><input name="first" type="text" autocomplete="given-name" required></label>
+        <label class="field"><span>${esc(f.last)}</span><input name="last" type="text" autocomplete="family-name" required></label>
+        <label class="field"><span>${esc(f.company)}</span><input name="company" type="text" autocomplete="organization"></label>
+        <label class="field"><span>${esc(f.role)}</span><input name="role" type="text" autocomplete="organization-title"></label>
+        <label class="field field--full"><span>${esc(f.email)}</span><input name="email" type="email" autocomplete="email" required></label>
+        <label class="apply__consent field--full"><input type="checkbox" name="gala"><span>${esc(f.gala)}</span></label>
+        <div class="form__foot field--full"><button class="btn" type="submit"><span>${esc(f.send)}</span></button><p class="form__note reg__note" role="status" aria-live="polite"></p></div>
+      </form>
+    </div>
+  </div>
+  <div class="reg__panel" id="reg-2" role="tabpanel" aria-labelledby="reg-t2" data-step="2" hidden>
+    <div class="reg__badge-wrap">
+      <div class="reg__badge-box"></div>
+      <div class="reg__badge-side">
+        <p>${esc(r.badge.mail)}</p>
+        <div class="reg__badge-actions">
+          <button class="btn" type="button" data-print><span>${esc(r.badge.print)}</span></button>
+          <button class="btn btn--ghost" type="button" data-next><span>${esc(r.badge.next)}</span></button>
+          <button class="reg__link" type="button" data-another>${esc(r.badge.another)}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reg__panel" id="reg-3" role="tabpanel" aria-labelledby="reg-t3" data-step="3" hidden>
+    <div class="reg__counts"><div><b data-count="registered">0</b><span>${esc(d.registered)}</span></div><div><b data-count="arrived">0</b><span>${esc(d.arrived)}</span></div></div>
+    <div class="reg__tools">
+      <label class="field reg__find"><span>${esc(d.search)}</span><input class="reg__search" type="search" autocomplete="off"></label>
+      <button class="btn btn--ghost" type="button" data-scan><span>${esc(d.scan)}</span></button>
+    </div>
+    <p class="reg__hint" id="reg-noscan" hidden>${esc(d.noScan)}</p>
+    <p class="reg__say" role="status" aria-live="polite"></p>
+    <ul class="reg__list"></ul>
+    <div class="reg__more">
+      <button class="reg__link" type="button" data-samples>${esc(d.samples)}</button>
+      <button class="reg__link" type="button" data-csv>${esc(d.csv)}</button>
+      <button class="reg__link" type="button" data-reset>${esc(d.reset)}</button>
+    </div>
+    <div class="reg__scan" hidden><video playsinline muted></video><p>${esc(d.camera)}</p><button class="btn btn--ghost btn--sm" type="button" data-scan-close><span>${esc(d.close)}</span></button></div>
+  </div>
+</section>
+<section class="pg__sec">
+  <h2 class="pg__h2">${esc(r.whatTitle)}</h2>
+  <ul class="pg__notes">
+    ${r.what.map(x => `<li>${esc(x)}</li>`).join('\n    ')}
+  </ul>
+  <p class="pg__more"><a class="link-arrow" href="${U.service(l, welcome)}">${esc(r.service)}</a></p>
+</section>
+${cta(l, r.endTitle, r.endText)}
+<script type="application/json" id="reg-words">${inJson({ event: r.event, form: r.form, badge: r.badge, door: r.door })}</script>
+<script type="application/json" id="reg-samples">${inJson(SAMPLE_GUESTS)}</script>
+<script src="/assets/js/qrcode.js" defer></script>
+<script src="/assets/js/regdemo.js" defer></script>`;
+    write(fileOf(alt[l]), shell({ l, head, alt, main }));
+  }
+}
+
 /* ---------- 3c. what the admin page (/admin) needs to know about the site as published ----------
    The names it offers in its lists, and when each project, article and the quotes were last saved: once the
    site in place shows that time, the admin page tells its user that the change is online. */
@@ -1205,7 +1484,8 @@ write('assets/admin/site.json', JSON.stringify({
   published: {
     projects: Object.fromEntries(PROJECTS.map(p => [p.id, (CONTENT.projects.find(x => x.id === p.id) || {}).saved || ''])),
     blog: Object.fromEntries(GUIDES.map(g => [g.id, g.saved || ''])),
-    voices: VOICES.saved || ''
+    voices: VOICES.saved || '',
+    careers: CAREERS.saved || ''
   }
 }, null, 1) + '\n');
 
@@ -1304,7 +1584,7 @@ ${urls.join('\n')}
 
 // pages of a project or service that no longer exists are removed
 const kept = new Set(pages.flatMap(pg => LANGS.map(l => fileOf(pg.alt[l]))));
-for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations', 'events', 'fr/evenements', 'blog', 'fr/blog', 'guides', 'fr/guides']) {
+for (const dir of ['services', 'projects', 'fr/services', 'fr/realisations', 'events', 'fr/evenements', 'blog', 'fr/blog', 'guides', 'fr/guides', 'careers', 'fr/carrieres']) {
   if (!existsSync(join(ROOT, dir))) continue;
   for (const f of readdirSync(join(ROOT, dir))) if (f.endsWith('.html') && !kept.has(dir + '/' + f)) { rmSync(join(ROOT, dir, f)); console.log('removed', dir + '/' + f); }
 }

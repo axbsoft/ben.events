@@ -1,0 +1,186 @@
+{
+  "id": "led-screen-rental",
+  "order": 6,
+  "draft": false,
+  "short": {
+    "en": "LED screen rental",
+    "fr": "Location d’écran LED"
+  },
+  "slug": {
+    "en": "led-screen-rental-in-morocco-how-to-choose",
+    "fr": "location-d-ecran-led-au-maroc-comment-choisir"
+  },
+  "date": "2026-11-27",
+  "image": [
+    "assets/img/led-stage-set.jpg",
+    1200,
+    1600
+  ],
+  "title": {
+    "en": [
+      "Renting an LED screen:",
+      "how to choose the right wall"
+    ],
+    "fr": [
+      "Location d’écran LED :",
+      "bien choisir son mur LED"
+    ]
+  },
+  "card": {
+    "en": "Indoors or outdoors, pitch, size, shape, rigging, power, control desk: the questions to ask before renting an LED wall.",
+    "fr": "Intérieur ou extérieur, pitch, taille, forme, accroche, électricité, régie : les questions à se poser avant de louer un mur LED."
+  },
+  "lede": {
+    "en": "What to know before renting an LED screen for an event in Morocco: how to choose the pitch and the size, prepare the content, install the wall and run it on the day.",
+    "fr": "Ce qu’il faut savoir avant de louer un écran LED pour un événement au Maroc : choisir le pitch et la taille, préparer les contenus, installer le mur et le faire vivre le jour J."
+  },
+  "seo": {
+    "title": {
+      "en": "LED Screen Rental in Morocco: a Guide | benevents agency",
+      "fr": "Location d’écran LED au Maroc : le guide | benevents agency"
+    },
+    "desc": {
+      "en": "LED screen rental in Morocco: indoors or outdoors, pixel pitch and viewing distance, size, curved walls, rigging, power, control desk and rehearsal.",
+      "fr": "Location d’écran LED au Maroc : intérieur ou extérieur, pitch et distance de vision, taille, mur incurvé, accroche, électricité, régie et répétition."
+    }
+  },
+  "body": {
+    "en": [
+      {
+        "h": "Why the LED wall has taken over",
+        "p": [
+          "An LED wall makes its own light. It stays bright in a lit room, is built to the size you need from modules put together, and can take almost any shape: wide, curved, upright or split into several screens. For most corporate events, it has replaced the projector.",
+          "Before any LED wall rental, a few questions decide the right model and the right size. Here they are, in order."
+        ]
+      },
+      {
+        "h": "Indoors or outdoors",
+        "p": [
+          "Indoor and outdoor modules are not the same. Outdoors, the screen must be much brighter to stay visible in daylight, and must withstand rain, dust and wind: its modules have a suitable protection rating, and its structure is designed for the wind load. An indoor screen should not be set up outside, even for one evening.",
+          "Indoors, the opposite is true: a screen that is too bright dazzles the audience and overexposes the cameras’ image. It is set to the light level of the room. In full sun, even an outdoor screen loses contrast: turn it away from the sun if you can, and think about the time of day."
+        ]
+      },
+      {
+        "h": "Pixel pitch and viewing distance",
+        "p": [
+          "The pitch is the distance, in millimetres, between the centres of two neighbouring pixels. The smaller it is, the finer the image, and the closer the audience can sit without seeing the dots.",
+          "A common rule of thumb: the minimum comfortable viewing distance, in metres, is roughly equal to the pitch, in millimetres. A screen with a 3 mm pitch is comfortable to watch from about 3 metres. The front row therefore decides the pitch, and the back row decides the size.",
+          "A finer pitch means more LEDs per square metre and weighs more in the quote: there is no point choosing it finer than the room needs. If the event is filmed, the screen also appears on camera: a fine pitch and a high refresh rate reduce moiré and flicker in the image."
+        ]
+      },
+      {
+        "h": "Size, shape and content",
+        "p": [
+          "An LED wall is built from modules: its size goes up in steps, and its resolution is simple to work out, by dividing its width and its height by the pitch. A wall 6 metres wide with a 3 mm pitch therefore shows 2,000 pixels across, barely more than a Full HD image.",
+          "The shape matters as much as the size. A wall wider than a 16:9 slide leaves empty bands, or a stretched image, if the content was not made for it. Give the speakers and the designers the exact resolution of the wall early, with a slide template, and decide what fills the sides: the visual of the event, the speaker’s name, the camera image.",
+          "In a long room, side screens bring the image closer to the back rows, {like the three screens of LEO’s regional conference|project:leo-regional-conference}."
+        ]
+      },
+      {
+        "h": "Curved walls, multiple screens, upright panels",
+        "p": [
+          "Some modules can be joined at an angle, which makes curved walls that wrap around the stage possible. We built one for the {“Femmes en jeu” masterclass|project:femmes-en-jeu} in Rabat, and a curved LED backdrop for the {UAE–Morocco economic partnership forum|project:uae-morocco-forum}. For the {RMA convention|project:rma-convention}, the curved wall stood between two printed backdrops.",
+          "Other set-ups split the image: a centre wall with upright LED panels on either side, as at {GSK Day|project:gsk-day} or {MTA’s cycle meeting|project:mta-cycle-meeting}. Each shape needs its own content, and a control desk able to send a different image to each surface."
+        ]
+      },
+      {
+        "h": "Flown or ground-supported",
+        "p": [
+          "An LED wall is heavy. It is either flown from the structure of the venue, with motors on rigging points, or ground-supported on a structure or on the stage itself. Flying it frees the floor and the view, but it depends on what the ceiling can carry: the venue says so, and the venue gives permission. On the ground, it needs a stable, ballasted base and a floor that can take the load.",
+          "Either way, check the ceiling height: the bottom of the screen must clear the heads of the seated audience, and the top must stay below chandeliers, ducts and detectors."
+        ]
+      },
+      {
+        "h": "Power",
+        "p": [
+          "An LED wall draws more power the larger and brighter it is, and the lighter the image. Ask the venue how much power is available at the exact spot where the stage will stand, and plan a dedicated supply for the screen, separate from the sound. Outdoors, a generator is often needed, and a second one as backup is a wise precaution."
+        ]
+      },
+      {
+        "h": "Control desk, content and rehearsal",
+        "p": [
+          "The wall does not run itself. A processor fits the image to its resolution, and at the control desk an operator moves from a slide to a video, from a camera to a visual, in time with the running order. Decide early who prepares the content, who plays it during the event, and in what format each speaker sends their presentation.",
+          "Then rehearse on the wall itself: colours do not look the same as on a laptop, a thin font can become unreadable, and a video can arrive without sound. Keep spare modules on site, and a backup computer with every presentation on it."
+        ],
+        "after": [
+          "Our offer of {LED screens and video|service:production#led} brings together LED walls, projection and screens, with the content prepared for them. Our {guide to the technical set-up|guide:technical-set-up} covers the sound and the light around them."
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "h": "Pourquoi le mur LED s’est imposé",
+        "p": [
+          "Un mur LED produit sa propre lumière. Il reste lumineux dans une salle éclairée, se construit à la taille voulue à partir de modules assemblés, et peut prendre presque toutes les formes : large, incurvé, vertical ou divisé en plusieurs écrans. Pour la plupart des événements d’entreprise, il a remplacé le vidéoprojecteur.",
+          "Avant toute location de mur LED, quelques questions décident du bon modèle et de la bonne taille. Les voici, dans l’ordre."
+        ]
+      },
+      {
+        "h": "Intérieur ou extérieur",
+        "p": [
+          "Les modules d’intérieur et d’extérieur ne sont pas les mêmes. En extérieur, l’écran doit être beaucoup plus lumineux pour rester visible en plein jour, et résister à la pluie, à la poussière et au vent : ses modules ont un indice de protection adapté, et sa structure est calculée pour la prise au vent. Un écran d’intérieur ne doit pas être installé dehors, même pour une soirée.",
+          "En intérieur, c’est l’inverse : un écran trop lumineux éblouit le public et sature l’image des caméras. Il se règle sur la lumière de la salle. En plein soleil, même un écran d’extérieur perd du contraste : orientez-le à l’abri du soleil si possible, et pensez à l’heure de la journée."
+        ]
+      },
+      {
+        "h": "Le pitch et la distance de vision",
+        "p": [
+          "Le pitch est la distance, en millimètres, entre le centre de deux pixels voisins. Plus il est petit, plus l’image est fine, et plus le public peut s’asseoir près sans voir les points.",
+          "Une règle empirique courante : la distance minimale de confort, en mètres, est à peu près égale au pitch, en millimètres. Un écran au pitch de 3 mm se regarde confortablement à partir d’environ 3 mètres. Le premier rang décide donc du pitch, et le dernier rang de la taille.",
+          "Un pitch plus fin demande plus de LED au mètre carré et pèse davantage dans le devis : inutile de le choisir plus fin que ce que la salle demande. Si l’événement est filmé, l’écran apparaît aussi à l’image : un pitch fin et un taux de rafraîchissement élevé limitent le moiré et le scintillement à la caméra."
+        ]
+      },
+      {
+        "h": "La taille, le format et les contenus",
+        "p": [
+          "Un mur LED se construit en modules : sa taille avance par paliers, et sa résolution se calcule simplement, en divisant sa largeur et sa hauteur par le pitch. Un mur de 6 mètres de large au pitch de 3 mm affiche ainsi 2 000 pixels de large, à peine plus qu’une image Full HD.",
+          "Le format compte autant que la taille. Un mur plus large qu’une slide en 16:9 laisse des bandes vides, ou une image étirée, si les contenus n’ont pas été faits pour lui. Donnez tôt aux intervenants et aux graphistes la résolution exacte du mur, avec un modèle de slide, et décidez de ce qui occupe les côtés : le visuel de l’événement, le nom de l’intervenant, l’image de la caméra.",
+          "Dans une salle longue, des écrans latéraux rapprochent l’image des derniers rangs, {comme les trois écrans de la conférence régionale de LEO|project:leo-regional-conference}."
+        ]
+      },
+      {
+        "h": "Mur incurvé, écrans multiples, panneaux verticaux",
+        "p": [
+          "Certains modules s’assemblent avec un angle, ce qui permet des murs incurvés qui enveloppent la scène. Nous en avons construit un pour la {masterclass « Femmes en jeu »|project:femmes-en-jeu} à Rabat, et un fond de scène LED incurvé pour le {forum de partenariat économique Émirats arabes unis–Maroc|project:uae-morocco-forum}. Pour la {convention RMA|project:rma-convention}, le mur incurvé était encadré par deux fonds imprimés.",
+          "D’autres dispositifs séparent l’image : un mur central et des panneaux LED verticaux de part et d’autre, comme au {GSK Day|project:gsk-day} ou au {cycle meeting de MTA|project:mta-cycle-meeting}. Chaque forme demande ses propres contenus, et une régie capable d’envoyer une image différente sur chaque surface."
+        ]
+      },
+      {
+        "h": "Accroché ou posé au sol",
+        "p": [
+          "Un mur LED est lourd. Il est soit accroché à la structure du lieu, par des moteurs sur des points d’accroche, soit posé au sol sur une structure ou sur la scène elle-même. L’accroche libère le sol et la vue, mais elle dépend de ce que le plafond peut porter : c’est le lieu qui le dit, et qui l’autorise. Au sol, il faut une base stable et lestée, et un plancher qui supporte la charge.",
+          "Dans les deux cas, vérifiez la hauteur sous plafond : le bas de l’écran doit passer au-dessus des têtes du public assis, et le haut rester sous les lustres, les gaines et les détecteurs."
+        ]
+      },
+      {
+        "h": "L’électricité",
+        "p": [
+          "Un mur LED consomme d’autant plus qu’il est grand, qu’il est lumineux et que l’image est claire. Demandez au lieu quelle puissance est disponible à l’endroit exact où sera la scène, et prévoyez une alimentation dédiée à l’écran, séparée de celle du son. En extérieur, un groupe électrogène est souvent nécessaire, et un second en secours est une sage précaution."
+        ]
+      },
+      {
+        "h": "La régie, les contenus et la répétition",
+        "p": [
+          "Le mur ne s’anime pas tout seul. Un processeur adapte l’image à sa résolution, et à la régie un opérateur passe d’une slide à une vidéo, d’une caméra à un visuel, au rythme du déroulé. Décidez tôt qui prépare les contenus, qui les envoie pendant l’événement, et sous quel format chaque intervenant transmet sa présentation.",
+          "Puis répétez sur le mur lui-même : les couleurs n’y rendent pas comme sur un ordinateur, une police fine peut devenir illisible, et une vidéo peut arriver sans son. Gardez sur place des modules de rechange, et un ordinateur de secours avec toutes les présentations."
+        ],
+        "after": [
+          "Notre offre {écrans LED et vidéo|service:production#led} réunit murs LED, projection et écrans, avec les contenus préparés pour eux. Notre {guide de la technique|guide:technical-set-up} traite du son et de la lumière qui les accompagnent."
+        ]
+      }
+    ]
+  },
+  "related": {
+    "events": [
+      "convention",
+      "gala"
+    ],
+    "services": [
+      "production"
+    ],
+    "guides": [
+      "technical-set-up",
+      "gala-dinner"
+    ]
+  }
+}

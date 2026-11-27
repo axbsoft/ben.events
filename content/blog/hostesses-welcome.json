@@ -1,0 +1,217 @@
+{
+  "id": "hostesses-welcome",
+  "order": 8,
+  "draft": false,
+  "short": {
+    "en": "Hostesses and welcome",
+    "fr": "Hôtesses et accueil"
+  },
+  "slug": {
+    "en": "event-hostesses-and-guest-welcome-in-morocco",
+    "fr": "hotesses-d-accueil-et-inscriptions-pour-votre-evenement-au-maroc"
+  },
+  "date": "2026-11-27",
+  "image": [
+    "assets/img/showroom-reception.jpg",
+    2000,
+    1334
+  ],
+  "title": {
+    "en": [
+      "Hostesses and registration:",
+      "welcoming your guests well"
+    ],
+    "fr": [
+      "Hôtesses d’accueil et inscriptions :",
+      "réussir l’accueil de vos invités"
+    ]
+  },
+  "card": {
+    "en": "Registration, badges, welcome desk, briefing the hostesses, languages, dress code, VIP guests and cloakroom: preparing the welcome of your guests.",
+    "fr": "Inscriptions, badges, banque d’accueil, briefing des hôtesses, langues, tenue, VIP et vestiaire : bien préparer l’accueil de vos invités."
+  },
+  "lede": {
+    "en": "Your guests judge an event in its first minutes. Here is how to prepare their welcome, from registration to the cloakroom, and what to tell the hostesses and hosts before the doors open.",
+    "fr": "Vos invités jugent un événement dans ses premières minutes. Voici comment préparer leur accueil, de l’inscription au vestiaire, et ce qu’il faut dire aux hôtesses et aux hôtes avant l’ouverture des portes."
+  },
+  "seo": {
+    "title": {
+      "en": "Event Hostesses and Guest Welcome | benevents agency",
+      "fr": "Hôtesses d’accueil pour votre événement | benevents agency"
+    },
+    "desc": {
+      "en": "Event hostesses in Morocco: registration, badges, the welcome desk, briefing, languages, dress code, speakers, VIP guests and cloakroom, step by step.",
+      "fr": "Hôtesses d’accueil pour un événement au Maroc : inscriptions, badges, banque d’accueil, briefing, langues, tenue, intervenants, VIP et vestiaire."
+    }
+  },
+  "body": {
+    "en": [
+      {
+        "h": "It all happens in the first minutes",
+        "p": [
+          "Before the first speech, your guests already have an opinion of the event: how clear the invitation was, how long they queued, whether someone recognised them. A smooth welcome puts them in the right frame of mind for everything that follows.",
+          "This welcome is prepared well before the day, in four parts: registration, badges, the welcome desk, and the team that runs it."
+        ]
+      },
+      {
+        "h": "Registration, ahead of time",
+        "p": [
+          "A simple registration form asks only for what will be used:"
+        ],
+        "list": [
+          "The name as it should appear on the badge, the company and the job title.",
+          "The type of guest: participant, speaker, VIP guest, press, partner.",
+          "The sessions or workshops chosen, and attendance at the dinner.",
+          "Dietary requirements and accessibility needs.",
+          "For a stay, such as a {seminar in Marrakech|guide:seminar-marrakech}: arrival and departure times."
+        ],
+        "after": [
+          "Each registration receives a confirmation with the practical information, then a reminder a few days before. The list of participants stays up to date until the last moment: it is the list that is used to print the badges and prepare the check-in. Collect only the data you need, and say what it is for."
+        ]
+      },
+      {
+        "h": "Badges that can be read",
+        "p": [
+          "A badge is read during a handshake. The first name and the surname in large letters, the company below, and a colour for each type of guest, so that the team recognises a speaker or a VIP guest at a glance. A code to scan speeds up the check-in at the entrance.",
+          "Print them in advance, sorted alphabetically, and keep a printer and blank badges on site for last-minute registrations and typing errors."
+        ]
+      },
+      {
+        "h": "The welcome desk",
+        "p": [
+          "The welcome desk must be visible from the entrance, with enough room in front of it for the queue not to block the way. With a large number of guests, split the check-in by alphabetical order or by type of guest, and plan a separate desk for speakers, VIP guests and the press.",
+          "It opens before the announced time, because some guests always arrive early. It needs power and a reliable connection for the check-in tablets, and a paper plan B if the connection drops. It also holds the programme, the map of the rooms and the answers to practical questions. The day before, test the tablets, the printer and the connection, and check each badge against the list."
+        ]
+      },
+      {
+        "h": "Briefing the hostesses and hosts",
+        "p": [
+          "A hostess or host can only tell a guest what they have been told. The briefing, written and then gone over on site before the doors open, covers:"
+        ],
+        "list": [
+          "The programme, the rooms and the times.",
+          "The names and faces of the speakers and VIP guests.",
+          "The answers to frequent questions: cloakroom, toilets, connection, taxis, lost property.",
+          "Who to call for what, and the venue’s safety instructions.",
+          "Each person’s post, and when it changes."
+        ],
+        "after": [
+          "Languages are chosen according to the guests: French, Arabic, English, or another language for a delegation from abroad. The dress code matches the event: sober for an institutional forum, in the brand’s colours for a launch, more formal for a gala dinner.",
+          "Finally, walk the route with the team, from the entrance to the rooms, before the first guest arrives: it is the best way to spot a misplaced sign or a locked door."
+        ]
+      },
+      {
+        "h": "Guiding the guests",
+        "p": [
+          "Signage shows the way; people make it easy. Place someone wherever guests hesitate: the entrance of the venue, the lifts, the crossings, the doors of the rooms. At a seated dinner, hostesses take each guest to their table. Between two sessions, they point people to the workshops; at the end, to the transfers.",
+          "Think of guests with reduced mobility: a step-free route, the lift clearly signed, seats kept near an aisle, and someone told when they arrive. The registration form will have told you in advance."
+        ]
+      },
+      {
+        "h": "Speakers and VIP guests",
+        "p": [
+          "Each speaker and each VIP guest is expected by someone who recognises them, takes them to their seat or backstage, brings them to the stage on time and back again. For an official event, the order of precedence decides the seats, the speeches and who greets whom, and it is prepared with the client from the start.",
+          "For the {UAE–Morocco economic partnership forum|project:uae-morocco-forum}, the round tables were set with name cards, flowers and the flags of both countries: a seating plan for official guests is prepared with the same care as the stage."
+        ]
+      },
+      {
+        "h": "The cloakroom, the departure and the day after",
+        "p": [
+          "A cloakroom staffed until the last guest leaves, with numbered tickets, avoids a crush at the end. The departure is prepared like the arrival: transfers announced, any gifts handed out at the exit, thanks said.",
+          "After the event, the attendance list tells you who came, and whom to follow up. Our page {Hostesses & registration|production:welcome} sets out what we take care of, from registration to access control."
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "h": "Tout se joue dans les premières minutes",
+        "p": [
+          "Avant la première prise de parole, vos invités ont déjà un avis sur l’événement : la clarté de l’invitation, le temps passé dans la file, la personne qui les a reconnus, ou non. Un accueil fluide les met dans de bonnes dispositions pour tout ce qui suit.",
+          "Cet accueil se prépare bien avant le jour J, en quatre temps : les inscriptions, les badges, la banque d’accueil, et l’équipe qui l’anime."
+        ]
+      },
+      {
+        "h": "Les inscriptions, en amont",
+        "p": [
+          "Un formulaire d’inscription simple ne demande que ce qui servira :"
+        ],
+        "list": [
+          "Le nom tel qu’il doit apparaître sur le badge, la société et la fonction.",
+          "Le type d’invité : participant, intervenant, invité VIP, presse, partenaire.",
+          "Les sessions ou ateliers choisis, et la présence au dîner.",
+          "Les régimes alimentaires et les besoins d’accessibilité.",
+          "Pour un séjour, comme un {séminaire à Marrakech|guide:seminar-marrakech} : les horaires d’arrivée et de départ."
+        ],
+        "after": [
+          "Chaque inscription reçoit une confirmation avec les informations pratiques, puis un rappel quelques jours avant. La liste des participants reste à jour jusqu’au dernier moment : c’est elle qui sert à imprimer les badges et à préparer l’enregistrement. Ne collectez que les données dont vous avez besoin, et dites à quoi elles servent."
+        ]
+      },
+      {
+        "h": "Des badges qui se lisent",
+        "p": [
+          "Un badge se lit le temps d’une poignée de main. Le prénom et le nom en grand, la société en dessous, et une couleur par type d’invité, pour que l’équipe reconnaisse d’un coup d’œil un intervenant ou un invité VIP. Un code à scanner accélère l’enregistrement à l’entrée.",
+          "Imprimez-les à l’avance, classés par ordre alphabétique, et gardez sur place une imprimante et des badges vierges pour les inscrits de dernière minute et les fautes de frappe."
+        ]
+      },
+      {
+        "h": "La banque d’accueil",
+        "p": [
+          "La banque d’accueil doit se voir dès l’entrée, avec assez d’espace devant elle pour que la file ne bloque pas le passage. Pour un grand nombre d’invités, répartissez l’enregistrement par ordre alphabétique ou par type d’invité, et prévoyez un comptoir à part pour les intervenants, les invités VIP et la presse.",
+          "Elle ouvre avant l’heure annoncée, car certains invités arrivent toujours en avance. Elle a besoin d’électricité et d’une connexion fiable pour les tablettes d’enregistrement, et d’un plan B sur papier si la connexion tombe. On y trouve aussi le programme, le plan des salles et les réponses aux questions pratiques. La veille, testez les tablettes, l’imprimante et la connexion, et vérifiez chaque badge par rapport à la liste."
+        ]
+      },
+      {
+        "h": "Briefer les hôtesses et les hôtes",
+        "p": [
+          "Une hôtesse ou un hôte ne peut renseigner un invité que sur ce qu’on lui a dit. Le briefing, écrit puis repris sur place avant l’ouverture des portes, couvre :"
+        ],
+        "list": [
+          "Le programme, les salles et les horaires.",
+          "Les noms et les visages des intervenants et des invités VIP.",
+          "Les réponses aux questions fréquentes : vestiaire, toilettes, connexion, taxis, objets trouvés.",
+          "Qui appeler pour quoi, et les consignes de sécurité du lieu.",
+          "Le poste de chacun, et le moment où il change."
+        ],
+        "after": [
+          "Les langues se choisissent selon les invités : français, arabe, anglais, ou une autre langue pour une délégation étrangère. La tenue s’accorde à l’événement : sobre pour un forum institutionnel, aux couleurs de la marque pour un lancement, plus habillée pour un dîner de gala.",
+          "Faites enfin le parcours avec l’équipe, de l’entrée jusqu’aux salles, avant l’arrivée du premier invité : c’est la meilleure façon de repérer un panneau mal placé ou une porte fermée."
+        ]
+      },
+      {
+        "h": "Guider les invités",
+        "p": [
+          "La signalétique indique le chemin, les personnes le rendent facile. Placez quelqu’un partout où l’on hésite : l’entrée du lieu, les ascenseurs, les croisements, les portes des salles. Pendant un dîner placé, des hôtesses accompagnent chacun à sa table. Entre deux sessions, elles orientent vers les ateliers ; à la fin, vers les transferts.",
+          "Pensez aux invités à mobilité réduite : un chemin sans marches, l’ascenseur bien signalé, des places réservées près d’une allée, et une personne prévenue de leur arrivée. Le formulaire d’inscription vous l’aura appris à l’avance."
+        ]
+      },
+      {
+        "h": "Intervenants et invités VIP",
+        "p": [
+          "Chaque intervenant et chaque invité VIP est attendu par une personne qui le reconnaît, l’accompagne à sa place ou en coulisses, le conduit sur scène à l’heure et le raccompagne. Pour un événement officiel, l’ordre protocolaire décide des places, des prises de parole et des accueils, et se prépare avec le client dès le départ.",
+          "Pour le {forum de partenariat économique Émirats arabes unis–Maroc|project:uae-morocco-forum}, les tables rondes étaient dressées avec chevalets, fleurs et drapeaux des deux pays : un plan de table pour des invités officiels se prépare avec le même soin que la scène."
+        ]
+      },
+      {
+        "h": "Le vestiaire, le départ et le lendemain",
+        "p": [
+          "Un vestiaire tenu jusqu’au dernier invité, avec des tickets numérotés, évite la cohue du départ. Le départ se prépare comme l’arrivée : transferts annoncés, cadeaux éventuels remis à la sortie, remerciements.",
+          "Après l’événement, la liste des présents vous dit qui est venu, et qui relancer. Notre page {Hôtesses & inscriptions|production:welcome} présente ce que nous prenons en charge, de l’inscription au contrôle d’accès."
+        ]
+      }
+    ]
+  },
+  "related": {
+    "events": [
+      "convention",
+      "seminar"
+    ],
+    "services": [
+      "conferences",
+      "receptions"
+    ],
+    "guides": [
+      "seminar-checklist",
+      "gala-dinner"
+    ]
+  }
+}

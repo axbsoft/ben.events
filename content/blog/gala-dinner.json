@@ -1,0 +1,215 @@
+{
+  "id": "gala-dinner",
+  "order": 7,
+  "draft": false,
+  "short": {
+    "en": "Gala dinner",
+    "fr": "Soirée de gala"
+  },
+  "slug": {
+    "en": "how-to-organise-a-gala-dinner-in-morocco",
+    "fr": "organiser-une-soiree-de-gala-au-maroc"
+  },
+  "date": "2026-11-27",
+  "image": [
+    "assets/img/wall/gala-tables-led-art.jpg",
+    1280,
+    1280
+  ],
+  "title": {
+    "en": [
+      "Organising a gala dinner,",
+      "from the brief to the last guest"
+    ],
+    "fr": [
+      "Organiser une soirée de gala,",
+      "du brief au dernier invité"
+    ]
+  },
+  "card": {
+    "en": "Room plan, stage, screen, light, sound, running order, awards and rehearsal: the steps of a successful gala dinner.",
+    "fr": "Plan de salle, scène, écran, lumière, son, déroulé, remises de prix et répétition : les étapes d’un dîner de gala réussi."
+  },
+  "lede": {
+    "en": "A gala dinner is remembered for its atmosphere, but it is prepared like a show. Here are the steps, from the brief to the evening itself, with what we have learnt producing evenings in Morocco.",
+    "fr": "Un dîner de gala se retient pour son atmosphère, mais il se prépare comme un spectacle. Voici les étapes, du brief au soir même, avec ce que nous avons appris en produisant des soirées au Maroc."
+  },
+  "seo": {
+    "title": {
+      "en": "How to Plan a Gala Night in Morocco | benevents agency",
+      "fr": "Dîner de gala au Maroc : les étapes | benevents agency"
+    },
+    "desc": {
+      "en": "Organising a gala evening or gala dinner in Morocco: room plan, stage and screen, lighting, sound, running order, awards on stage and the rehearsal.",
+      "fr": "Organiser une soirée ou un dîner de gala au Maroc : plan de salle, scène et écran, lumière, son, déroulé, remises de prix sur scène et répétition."
+    }
+  },
+  "body": {
+    "en": [
+      {
+        "h": "Start from the brief",
+        "p": [
+          "Before talking about décor, answer three questions. Why this evening: to thank a team, reward the best, celebrate an anniversary, close a convention? For whom: colleagues, clients, business partners, with or without spouses? And what must happen on stage: a speech, awards, a show, or nothing at all?",
+          "The answers decide the rest: the room, where the stage stands, how much of the evening goes to dinner, and how much is left to the party."
+        ]
+      },
+      {
+        "h": "The room plan",
+        "p": [
+          "The room plan is the first document to draw. It places the stage, the screen, the tables, the dance floor, the control desk, the bar and the service routes. A few rules:"
+        ],
+        "list": [
+          "Every table must see the stage. Round tables suit most dinners; long banquet tables create another mood, but make some guests turn round to face the stage.",
+          "The tables of honour close to the stage, with direct access for those who go up.",
+          "Aisles wide enough for the service, agreed with the caterer or the venue’s head waiter.",
+          "The control desk facing the stage, with a clear view.",
+          "Numbered tables and a seating plan at the entrance, or hostesses to show guests to their seats."
+        ],
+        "after": [
+          "The stage can also stand in the middle: for the {RMA convention|project:rma-convention}, the dinner tables were set all around a circular stage, linked to the LED wall by a runway."
+        ]
+      },
+      {
+        "h": "The stage and the screen",
+        "p": [
+          "The stage must be high enough to be seen from the back of the room, wide enough for what happens on it, and fitted with lit steps for those who climb them in evening dress. Behind it, an LED wall carries the visuals of the evening: the logo as guests arrive, the videos, the names of the winners, then a backdrop that lives through dinner.",
+          "At {MTA’s cycle meeting|project:mta-cycle-meeting}, at the Fairmont Tazi Palace in Tangier, the gala dinner was served in front of a wall of LED artwork, in the room that had hosted the plenary sessions the same day. Changing a room over in a few hours is possible, as long as there is a plan, a crew and a precise schedule."
+        ]
+      },
+      {
+        "h": "Light that sets the mood",
+        "p": [
+          "The light changes with the evening. As guests arrive, it tells them the evening has begun; during dinner, it stays soft and warm on the tables; when someone goes on stage, it lights their face for the audience and the cameras; at the end, it follows the music.",
+          "A colour on the walls, in the brand’s colours if you like, turns a hotel ballroom into your room. Moving heads give rhythm to the awards and the party. Each change is a cue written in the running order and sent from the control desk. Our {guide to the technical set-up|guide:technical-set-up} explains each of these tools."
+        ]
+      },
+      {
+        "h": "Sound: the speeches and the music",
+        "p": [
+          "A dinner is noisy: for the speeches to be understood at every table, the sound must cover the whole room without deafening the tables at the front. Plan wireless microphones for each speaker, a spare microphone, and someone at the mixing desk all evening.",
+          "Music has its moments: the guests’ arrival, the dinner, low enough to talk, the stings for the awards, then the party. A DJ or a band comes with a technical rider: send it to the technical team as soon as you have it. Outdoors, check the sound limits of the venue and the neighbourhood."
+        ]
+      },
+      {
+        "h": "The running order of the evening",
+        "p": [
+          "The running order is the score of the evening. It sets, minute by minute, the arrival, the seating, each speech, each course, each award and the moment the party starts. It is written with the caterer, because the service and the stage must not get in each other’s way: an award is not handed over while the main course is being served.",
+          "One version circulates, shared between the venue, the caterer, the artists, the hostesses and the control desk. And one person runs the evening: the producer, together with the master of ceremonies."
+        ]
+      },
+      {
+        "h": "Awards on stage",
+        "p": [
+          "A good awards ceremony is a precise mechanism. For each award, prepare:"
+        ],
+        "list": [
+          "The winner’s name, how to pronounce it, and their table.",
+          "A hostess or host to guide them to the stage.",
+          "The trophy, ready and in order, on a table backstage.",
+          "The music, the light and the visual on the screen.",
+          "The spot for the photo, and a photographer who knows it."
+        ],
+        "after": [
+          "The same principle applies to a graduation on stage, such as the one for {EFE Maroc’s “A Chance to Reset”|project:a-chance-to-reset}."
+        ]
+      },
+      {
+        "h": "The rehearsal",
+        "p": [
+          "The day before or in the afternoon, once the room is ready, rehearse: each lighting cue, each microphone, each video, the entrance of the master of ceremonies and the awards sequence, with the hostesses who will guide the winners. It is the moment to check that the screen can be read from the furthest table, and that the speech can be heard from the back of the room.",
+          "Keep a plan B for anything outdoors, and a backup computer for the videos. Our page on {gala evenings|event:gala} shows how we run an evening, scene after scene."
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "h": "Partir du brief",
+        "p": [
+          "Avant de parler de décor, répondez à trois questions. Pourquoi cette soirée : remercier une équipe, récompenser les meilleurs, fêter un anniversaire, clore une convention ? Pour qui : des collaborateurs, des clients, des partenaires, avec ou sans conjoints ? Et que doit-il se passer sur scène : un discours, des remises de prix, un spectacle, ou rien du tout ?",
+          "Les réponses décident du reste : la salle, la place de la scène, la part de la soirée consacrée au dîner, et celle laissée à la fête."
+        ]
+      },
+      {
+        "h": "Le plan de salle",
+        "p": [
+          "Le plan de salle est le premier document à dessiner. Il place la scène, l’écran, les tables, la piste, la régie, le bar et les circulations du service. Quelques règles :"
+        ],
+        "list": [
+          "Chaque table doit voir la scène. Les tables rondes conviennent à la plupart des dîners ; les grandes tables en longueur créent une autre ambiance, mais obligent une partie des invités à se retourner vers la scène.",
+          "Les tables d’honneur près de la scène, avec un accès direct pour ceux qui y montent.",
+          "Des allées assez larges pour le service, en accord avec le traiteur ou le maître d’hôtel du lieu.",
+          "La régie face à la scène, avec une vue dégagée.",
+          "Des tables numérotées et un plan de table à l’entrée, ou des hôtesses pour placer les invités."
+        ],
+        "after": [
+          "La scène peut aussi être au centre : pour la {convention RMA|project:rma-convention}, les tables du dîner étaient dressées tout autour d’une scène circulaire, reliée au mur LED par une passerelle."
+        ]
+      },
+      {
+        "h": "La scène et l’écran",
+        "p": [
+          "La scène doit être assez haute pour être vue du fond de la salle, assez large pour ce qui s’y passe, et équipée de marches éclairées pour ceux qui y montent en tenue de soirée. Derrière elle, un mur LED porte les visuels de la soirée : le logo à l’arrivée, les vidéos, les noms des lauréats, puis un décor qui vit pendant le dîner.",
+          "Au {cycle meeting de MTA|project:mta-cycle-meeting}, au Fairmont Tazi Palace de Tanger, le dîner de gala était servi devant un mur LED aux visuels artistiques, dans la salle qui avait accueilli les plénières le jour même. Transformer une salle en quelques heures est possible, à condition d’avoir un plan, une équipe et un horaire précis."
+        ]
+      },
+      {
+        "h": "La lumière qui fait l’ambiance",
+        "p": [
+          "La lumière change avec la soirée. À l’arrivée, elle dit aux invités que la soirée commence ; pendant le dîner, elle reste douce et chaude sur les tables ; quand quelqu’un monte sur scène, elle éclaire son visage pour le public et pour les caméras ; à la fin, elle accompagne la musique.",
+          "Une couleur sur les murs, aux couleurs de la marque si vous le souhaitez, transforme une salle de bal d’hôtel en votre salle. Les projecteurs asservis donnent du rythme aux remises de prix et à la fête. Chaque changement est un top écrit dans le déroulé, et envoyé depuis la régie. Notre {guide de la technique|guide:technical-set-up} détaille chacun de ces outils."
+        ]
+      },
+      {
+        "h": "Le son : les discours et la musique",
+        "p": [
+          "Un dîner est bruyant : pour que les discours soient compris à chaque table, le son doit couvrir toute la salle sans assourdir les premières tables. Prévoyez un micro sans fil par intervenant, un micro de secours, et quelqu’un à la console pendant toute la soirée.",
+          "La musique a ses moments : l’arrivée des invités, le dîner, assez bas pour se parler, les jingles des remises de prix, puis la fête. Un DJ ou un groupe arrive avec sa fiche technique : transmettez-la à l’équipe technique dès qu’elle est connue. En plein air, vérifiez les limites sonores du lieu et du voisinage."
+        ]
+      },
+      {
+        "h": "Le déroulé de la soirée",
+        "p": [
+          "Le déroulé est la partition de la soirée. Il fixe, minute par minute, l’arrivée, l’installation à table, chaque prise de parole, chaque plat, chaque remise de prix et le moment où la fête commence. Il s’écrit avec le traiteur, car le service et la scène ne doivent pas se gêner : on ne remet pas un prix pendant que l’on sert le plat principal.",
+          "Une seule version circule, partagée entre le lieu, le traiteur, les artistes, les hôtesses et la régie. Et une seule personne mène la soirée : le chef de projet, avec le maître de cérémonie."
+        ]
+      },
+      {
+        "h": "Les remises de prix sur scène",
+        "p": [
+          "Une remise de prix réussie est une mécanique précise. Pour chaque prix, prévoyez :"
+        ],
+        "list": [
+          "Le nom du lauréat, sa prononciation et sa table.",
+          "Une hôtesse ou un hôte pour le guider jusqu’à la scène.",
+          "Le trophée, prêt et rangé dans l’ordre, sur une table en coulisses.",
+          "La musique, la lumière et le visuel à l’écran.",
+          "La place de la photo, et un photographe qui la connaît."
+        ],
+        "after": [
+          "Le principe est le même pour une remise de diplômes sur scène, comme celle de {« A Chance to Reset » pour EFE Maroc|project:a-chance-to-reset}."
+        ]
+      },
+      {
+        "h": "La répétition",
+        "p": [
+          "La veille ou dans l’après-midi, une fois la salle prête, on répète : chaque top lumière, chaque micro, chaque vidéo, l’entrée du maître de cérémonie et l’enchaînement des remises de prix, avec les hôtesses qui guideront les lauréats. C’est le moment de vérifier que l’écran se lit depuis la table la plus éloignée, et que le discours s’entend du fond de la salle.",
+          "Gardez un plan B pour tout ce qui se passe en extérieur, et un ordinateur de secours pour les vidéos. Notre page {soirées de gala|event:gala} montre comment nous menons une soirée, tableau après tableau."
+        ]
+      }
+    ]
+  },
+  "related": {
+    "events": [
+      "gala",
+      "convention"
+    ],
+    "services": [
+      "ceremonies",
+      "production"
+    ],
+    "guides": [
+      "technical-set-up",
+      "hostesses-welcome"
+    ]
+  }
+}

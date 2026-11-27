@@ -176,6 +176,8 @@ window.BEN_I18N = {
 
     'ft.morocco': 'tout le Maroc',
     'ft.cookies': 'Gérer les cookies',
+    'ft.careers': 'Carrières',
+    'ft.work': 'Travailler avec nous',
     'ft.cta1': 'Votre prochain événement',
     'ft.cta2': 'commence ici.',
     'ft.explore': 'Explorer',

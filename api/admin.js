@@ -18,7 +18,7 @@
    Until both are set, the admin page says what is missing and changes nothing.
 
    What it accepts, and nothing else: the content files (content/projects.json, content/voices.json,
-   content/blog/<id>.json) and photos in the folders of the projects, of the blog and of their previews.
+   content/careers.json, content/blog/<id>.json) and photos in the folders of the projects, of the blog and of their previews.
    Each person signs in with their own name and password; their name is written on every change they make. */
 'use strict';
 const crypto = require('crypto');
@@ -269,6 +269,36 @@ function cleanVoices(v) {
   return { figures, quotes, saved: new Date().toISOString() };
 }
 
+// the positions of the careers pages (content/careers.json): the builder makes a page and a job posting for each open one
+const CONTRACT_KINDS = ['full-time', 'part-time', 'fixed-term', 'freelance', 'internship'];
+const DAY = /^\d{4}-\d{2}-\d{2}$/;
+function cleanCareers(v) {
+  const seen = new Set();
+  const positions = (Array.isArray(v.positions) ? v.positions : []).slice(0, 30).map(p => {
+    if (!p || typeof p !== 'object') return null;
+    const title = both(p.title, 120);
+    if (!title.en || !title.fr) bad('Each position needs a title in English and in French.');
+    let id = text(p.id, 80);
+    if (!SLUG.test(id)) id = title.en.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60).replace(/-+$/, '');
+    if (!SLUG.test(id)) bad('The position "' + title.en + '" needs a title made of letters or numbers.');
+    while (seen.has(id)) id += '-2';
+    seen.add(id);
+    const contract = CONTRACT_KINDS.includes(p.contract) ? p.contract : bad('Choose the kind of contract of "' + title.en + '".');
+    const posted = DAY.test(p.posted || '') ? p.posted : bad('The position "' + title.en + '" needs the date it is posted.');
+    const summary = both(p.summary, 600);
+    if (!summary.en || !summary.fr) bad('The position "' + title.en + '" needs its summary in English and in French.');
+    const o = { id, open: p.open !== false, title, contract, posted, summary };
+    const city = text(p.city, 40);
+    if (city && SLUG.test(city)) o.city = city;
+    if (p.until && DAY.test(p.until)) o.until = p.until;
+    for (const k of ['missions', 'profile']) { const l = bothLines(p[k], 240, 12); if (l.en.length || l.fr.length) o[k] = l; }
+    const offer = both(p.offer, 800);
+    if (filled(offer)) o.offer = offer;
+    return o;
+  }).filter(Boolean);
+  return { positions, saved: new Date().toISOString() };
+}
+
 // the copies and the preview made from a photo: what goes when the photo goes
 function companions(p) {
   const out = [p];
@@ -305,9 +335,9 @@ const json = s => JSON.stringify(s, null, 2) + '\n';
 const ACTIONS = {
   async load({ store }) {
     const head = await store.head();
-    const [projects, voices, names] = await Promise.all([store.read(head, 'content/projects.json'), store.read(head, 'content/voices.json'), store.list(head, 'content/blog')]);
+    const [projects, voices, careers, names] = await Promise.all([store.read(head, 'content/projects.json'), store.read(head, 'content/voices.json'), store.read(head, 'content/careers.json'), store.list(head, 'content/blog')]);
     const blog = (await Promise.all(names.filter(n => n.endsWith('.json')).map(n => store.read(head, n)))).filter(Boolean).map(s => JSON.parse(s));
-    return { content: JSON.parse(projects), voices: JSON.parse(voices || '{"figures":[],"quotes":[]}'), blog };
+    return { content: JSON.parse(projects), voices: JSON.parse(voices || '{"figures":[],"quotes":[]}'), careers: JSON.parse(careers || '{"positions":[]}'), blog };
   },
   async upload({ store, body }) {
     const p = text(body.path, 200), data = typeof body.data === 'string' ? body.data : '';
@@ -393,6 +423,11 @@ const ACTIONS = {
       return [{ path: 'content/blog/' + id + '.json', remove: true }, ...remove.map(x => ({ path: x, remove: true }))];
     });
   },
+  async saveCareers({ store, body, user }) {
+    const c = cleanCareers(body.careers || {});
+    const out = await change(store, user, 'Admin: careers, ' + c.positions.filter(p => p.open).length + ' open position(s) (by ' + user + ')', async () => [{ path: 'content/careers.json', text: json(c) }]);
+    return Object.assign(out, { saved: c.saved, positions: c.positions });
+  },
   async saveVoices({ store, body, user }) {
     const v = cleanVoices(body.voices || {});
     const out = await change(store, user, 'Admin: key figures and client quotes (by ' + user + ')', async () => [{ path: 'content/voices.json', text: json(v) }]);
@@ -453,3 +488,4 @@ module.exports = async function handler(req, res) {
 // for the tests
 module.exports.cleanProject = cleanProject;
 module.exports.cleanArticle = cleanArticle;
+module.exports.cleanCareers = cleanCareers;

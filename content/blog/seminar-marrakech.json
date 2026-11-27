@@ -1,0 +1,195 @@
+{
+  "id": "seminar-marrakech",
+  "order": 5,
+  "draft": false,
+  "short": {
+    "en": "A seminar in Marrakech",
+    "fr": "Séminaire à Marrakech"
+  },
+  "slug": {
+    "en": "how-to-organise-a-seminar-in-marrakech",
+    "fr": "organiser-un-seminaire-a-marrakech"
+  },
+  "date": "2026-11-27",
+  "image": [
+    "assets/img/projects/marrakech-cocktail/02.webp",
+    960,
+    1280
+  ],
+  "title": {
+    "en": [
+      "How to organise a seminar",
+      "in Marrakech"
+    ],
+    "fr": [
+      "Organiser un séminaire",
+      "à Marrakech"
+    ]
+  },
+  "card": {
+    "en": "Dates, venue, guests’ arrival, programme, technical set-up and welcome: the steps of a corporate seminar in Marrakech.",
+    "fr": "Dates, lieu, arrivée des invités, programme, technique et accueil : les étapes d’un séminaire d’entreprise à Marrakech."
+  },
+  "lede": {
+    "en": "In Marrakech, a seminar becomes a stay. Here is how to prepare it, from the dates to the evening, by way of the venue, the guests’ arrival, the programme and the technical side.",
+    "fr": "À Marrakech, un séminaire devient un séjour. Voici comment le préparer, des dates à la soirée, en passant par le lieu, l’arrivée des invités, le programme et la technique."
+  },
+  "seo": {
+    "title": {
+      "en": "Organising a Seminar in Marrakech | benevents agency",
+      "fr": "Organiser un séminaire à Marrakech | benevents agency"
+    },
+    "desc": {
+      "en": "Organising a seminar in Marrakech: dates and season, the venue, arrival through the airport, plenary, workshops and evening, technical set-up and welcome.",
+      "fr": "Organiser un séminaire à Marrakech : dates et saison, choix du lieu, arrivée par l’aéroport, plénière, ateliers et soirée, technique et accueil."
+    }
+  },
+  "body": {
+    "en": [
+      {
+        "h": "A seminar that becomes a stay",
+        "p": [
+          "In Marrakech, a seminar is most often a stay: people arrive the day before, work by day, meet in the evening, and leave with shared memories as well as an action plan. That is its strength, and it is also what needs the most preparation.",
+          "The city has direct flights from many European cities, which makes it a natural destination when some of the participants come from abroad. To go further on the city, see our page {event agency in Marrakech|city:marrakech} and our {guide to choosing the city|guide:choose-the-city}, which compares it with Casablanca, Rabat and Tangier."
+        ]
+      },
+      {
+        "h": "Choosing the dates",
+        "p": [
+          "Spring and autumn are the most pleasant seasons, and so the most sought-after: good hotels are booked early. In summer the days are hot; sessions stay indoors and outdoor evenings start late. Winter days are mild but the evenings are cool: an evening outdoors then needs heating, or a fallback indoors.",
+          "Look at the calendar as well: public holidays, Ramadan, whose date moves earlier every year, and large events that fill the city. They change the availability of hotels and the rhythm of the days. Once the date is fixed, book the bedrooms and the meeting rooms together: a hotel that has your bedrooms but not the plenary room on the right day solves nothing."
+        ]
+      },
+      {
+        "h": "The venue: everything on site, or several addresses",
+        "p": [
+          "The city’s large hotels bring everything together in one place: rooms, plenary room, workshop rooms, restaurants and gardens. That is the simplest choice for a large group. Riads and guesthouses have more character, but smaller spaces and sometimes narrow access for equipment, especially in the medina. Gardens, terraces and the Agafay desert usually host the evening rather than the working sessions.",
+          "Visit with the programme in hand: does the plenary room hold everyone in the layout you need, is the ceiling high enough for a stage and a screen, are the workshop rooms close by, and at what time can the technical team get in to set up?"
+        ]
+      },
+      {
+        "h": "The guests’ arrival",
+        "p": [
+          "Guests who fly in arrive at Marrakech-Menara airport, close to the city centre. The stay starts there: someone to meet them as they come out, a vehicle waiting, and a word of welcome at the hotel. A few things make the difference:"
+        ],
+        "list": [
+          "The list of flights, kept up to date until the last day, to group the transfers.",
+          "Someone at the airport, with a sign bearing the name of the event.",
+          "At the hotel, a welcome desk with the badges, the programme and practical information.",
+          "The same care for the departure: transfer times, luggage, a last meal."
+        ],
+        "after": [
+          "Guests who come by train or by road deserve the same care: tell them where to go, and who will be waiting for them."
+        ]
+      },
+      {
+        "h": "A programme that alternates",
+        "p": [
+          "A good seminar in Marrakech alternates its moments: the plenary in the morning, to share the message with everyone at once, then workshops in small groups, then some free time before the evening. The city is a reason to come: leaving a moment to enjoy it is part of the programme.",
+          "Plan breaks that really are breaks, and realistic transfers if a moment takes place outside the hotel. Our {seminar checklist|guide:seminar-checklist} covers writing the running order, and our page on {seminars|event:seminar} shows how we run them."
+        ]
+      },
+      {
+        "h": "The technical side, in a hotel room or outdoors",
+        "p": [
+          "Indoors, the rules are the same as anywhere else: a screen readable from the back row, clear sound in every seat, a stage lit for the audience and the cameras, and a control desk that follows the running order. Workshop rooms need their own screen and, depending on their size, a microphone.",
+          "Outdoors, everything changes: the set-up needs its own power supply, the sound limits of the venue and the neighbourhood must be respected, and there must be a plan B for wind, rain or cold. If the equipment comes from another city, build the time on the road and the set-up into the schedule. Our {guide to the technical set-up|guide:technical-set-up} explains these choices."
+        ]
+      },
+      {
+        "h": "The welcome, from the first day to the last",
+        "p": [
+          "On a seminar of several days, the welcome does not stop on the first morning. The welcome desk hands out badges and programmes, answers questions, points people to the workshops, deals with last-minute changes and reminds everyone of the transfer times. Hostesses and hosts briefed on the programme make this journey smooth; our article on {welcoming your guests|guide:hostesses-welcome} goes into the detail."
+        ]
+      },
+      {
+        "h": "The evening",
+        "p": [
+          "It is often the evening that people talk about afterwards. A gala dinner in the hotel ballroom, a cocktail in a garden or an atrium, a dinner outside the city: each has its own constraints of sound, light and access.",
+          "In Marrakech, we produced a {cocktail evening under a canopy of golden lanterns|project:marrakech-cocktail}: warm amber light in the atrium, a live DJ set, dressed cocktail tables and lounge areas. For a more formal evening, our guide to {organising a gala dinner|guide:gala-dinner} goes through the steps, from the room plan to the rehearsal."
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "h": "Un séminaire qui devient un séjour",
+        "p": [
+          "À Marrakech, un séminaire est le plus souvent un séjour : on arrive la veille, on travaille le jour, on se retrouve le soir, et l’on repart avec des souvenirs communs autant qu’avec un plan d’action. C’est sa force, et c’est aussi ce qui demande le plus de préparation.",
+          "La ville a des vols directs depuis de nombreuses villes européennes, ce qui en fait une destination naturelle quand une partie des participants vient de l’étranger. Pour aller plus loin sur la ville, voir notre page {agence événementielle à Marrakech|city:marrakech} et notre {guide pour choisir la ville|guide:choose-the-city}, qui la compare à Casablanca, Rabat et Tanger."
+        ]
+      },
+      {
+        "h": "Choisir les dates",
+        "p": [
+          "Le printemps et l’automne sont les saisons les plus agréables, et donc les plus demandées : les bons hôtels s’y réservent tôt. En été, les journées sont chaudes ; les sessions restent à l’intérieur et les soirées en plein air commencent tard. En hiver, les journées sont douces mais les soirées fraîches : une soirée en extérieur demande alors du chauffage, ou un repli à l’intérieur.",
+          "Regardez aussi le calendrier : jours fériés, Ramadan, dont la date avance chaque année, et grands événements qui remplissent la ville. Ils changent la disponibilité des hôtels et le rythme des journées. Une fois la date fixée, réservez ensemble les chambres et les salles : un hôtel qui a vos chambres mais pas la salle de plénière le bon jour ne règle rien."
+        ]
+      },
+      {
+        "h": "Le lieu : tout sur place, ou plusieurs adresses",
+        "p": [
+          "Les grands hôtels de la ville réunissent tout au même endroit : chambres, salle de plénière, salles d’ateliers, restaurants et jardins. C’est le choix le plus simple pour un groupe nombreux. Riads et maisons d’hôtes ont plus de caractère, mais des espaces plus petits et des accès parfois étroits pour le matériel, surtout dans la médina. Jardins, terrasses et désert d’Agafay accueillent plutôt la soirée que les sessions de travail.",
+          "Visitez avec le programme en main : la salle de plénière accueille-t-elle tout le monde dans la disposition voulue, la hauteur sous plafond permet-elle une scène et un écran, les salles d’ateliers sont-elles proches, et à quelle heure l’équipe technique peut-elle entrer pour installer ?"
+        ]
+      },
+      {
+        "h": "L’arrivée des invités",
+        "p": [
+          "Les invités qui viennent en avion arrivent à l’aéroport de Marrakech-Ménara, proche du centre-ville. Le séjour commence là : quelqu’un pour les accueillir à la sortie, un véhicule qui attend, et un mot de bienvenue à l’hôtel. Quelques détails font la différence :"
+        ],
+        "list": [
+          "La liste des vols, tenue à jour jusqu’au dernier jour, pour regrouper les transferts.",
+          "Une personne à l’aéroport, avec une pancarte au nom de l’événement.",
+          "À l’hôtel, une banque d’accueil avec les badges, le programme et les informations pratiques.",
+          "La même attention au départ : horaires des transferts, bagages, dernier repas."
+        ],
+        "after": [
+          "Ceux qui arrivent en train ou par la route méritent la même attention : dites-leur où aller, et qui les attend."
+        ]
+      },
+      {
+        "h": "Un programme qui alterne les temps",
+        "p": [
+          "Un bon séminaire à Marrakech alterne les temps : la plénière le matin, pour partager le message avec tout le monde en même temps, puis des ateliers en petits groupes, puis du temps libre avant la soirée. La ville est une raison de venir : laisser un moment pour en profiter fait partie du programme.",
+          "Prévoyez des pauses qui en sont vraiment, et des transferts réalistes si un temps fort se passe hors de l’hôtel. Notre {checklist du séminaire|guide:seminar-checklist} détaille l’écriture du déroulé, et notre page {séminaires|event:seminar} montre comment nous les menons."
+        ]
+      },
+      {
+        "h": "La technique, en salle ou en plein air",
+        "p": [
+          "En salle, les règles sont les mêmes qu’ailleurs : un écran lisible depuis le dernier rang, un son clair à chaque place, une scène éclairée pour le public et les caméras, et une régie qui suit le déroulé. Les salles d’ateliers ont besoin de leur propre écran et, selon leur taille, d’un micro.",
+          "En plein air, tout change : le dispositif demande sa propre alimentation électrique, le respect des limites sonores du lieu et du voisinage, et un plan B en cas de vent, de pluie ou de fraîcheur. Si le matériel vient d’une autre ville, intégrez le temps de route et de montage au planning. Notre {guide de la technique|guide:technical-set-up} explique ces choix."
+        ]
+      },
+      {
+        "h": "L’accueil, du premier au dernier jour",
+        "p": [
+          "Sur un séminaire de plusieurs jours, l’accueil ne s’arrête pas au premier matin. La banque d’accueil remet badges et programmes, répond aux questions, oriente vers les ateliers, gère les changements de dernière minute et rappelle les horaires des transferts. Des hôtesses et des hôtes briefés sur le programme rendent ce parcours fluide ; notre article sur {l’accueil des invités|guide:hostesses-welcome} entre dans le détail."
+        ]
+      },
+      {
+        "h": "La soirée",
+        "p": [
+          "C’est souvent d’elle que l’on reparle. Dîner de gala dans la salle de bal de l’hôtel, cocktail dans un jardin ou un atrium, dîner hors de la ville : chaque formule a ses contraintes de son, de lumière et d’accès.",
+          "À Marrakech, nous avons produit une {soirée cocktail sous une nuée de lanternes dorées|project:marrakech-cocktail} : lumière ambrée dans l’atrium, DJ set en direct, mange-debout habillés et espaces lounge. Pour une soirée plus formelle, notre guide pour {organiser une soirée de gala|guide:gala-dinner} reprend les étapes, du plan de salle à la répétition."
+        ]
+      }
+    ]
+  },
+  "related": {
+    "events": [
+      "seminar",
+      "gala"
+    ],
+    "services": [
+      "conferences"
+    ],
+    "cities": [
+      "marrakech"
+    ],
+    "guides": [
+      "seminar-checklist",
+      "choose-the-city"
+    ]
+  }
+}

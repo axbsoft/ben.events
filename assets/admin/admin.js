@@ -12,7 +12,7 @@
   var API = '/api/admin';
   var app = document.getElementById('app');
   var toastEl = document.querySelector('.toast');
-  var S = { user: null, content: null, blog: [], voices: null, site: null, order: null, pending: { projects: {}, blog: {}, voices: '' }, dirty: false };
+  var S = { user: null, content: null, blog: [], voices: null, site: null, order: null, careers: null, pending: { projects: {}, blog: {}, voices: '', careers: '' }, dirty: false };
 
   /* ---------- small tools ---------- */
   function h(tag, attrs) {
@@ -209,7 +209,7 @@
   }
   function load() {
     return Promise.all([call('load'), fetch('/assets/admin/site.json?t=' + Date.now()).then(function (r) { return r.json(); }).catch(function () { return null; })]).then(function (x) {
-      S.content = x[0].content; S.voices = x[0].voices; S.blog = x[0].blog; S.site = x[1] || { events: [], services: [], cities: [], published: { projects: {}, blog: {} } };
+      S.content = x[0].content; S.voices = x[0].voices; S.careers = x[0].careers || { positions: [] }; S.blog = x[0].blog; S.site = x[1] || { events: [], services: [], cities: [], published: { projects: {}, blog: {} } };
       S.order = null;
     });
   }
@@ -222,6 +222,7 @@
     if (what === 'article') return editArticle(id === 'new' ? null : S.blog.find(function (g) { return g.id === id; }));
     if (what === 'blog') return blogList();
     if (what === 'voices') return voicesEditor();
+    if (what === 'careers') return careersEditor();
     return projectList();
   }
   window.addEventListener('hashchange', function () {
@@ -251,12 +252,13 @@
         Object.keys(S.pending.projects).forEach(function (id) { if ((pub.projects || {})[id] === S.pending.projects[id]) { delete S.pending.projects[id]; changed = true; toast('The project is now online.'); } });
         Object.keys(S.pending.blog).forEach(function (id) { if ((pub.blog || {})[id] === S.pending.blog[id]) { delete S.pending.blog[id]; changed = true; toast('The article is now online.'); } });
         if (S.pending.voices && pub.voices === S.pending.voices) { S.pending.voices = ''; changed = true; toast('The quotes and figures are now online.'); }
-        var left = Object.keys(S.pending.projects).length + Object.keys(S.pending.blog).length + (S.pending.voices ? 1 : 0);
+        if (S.pending.careers && pub.careers === S.pending.careers) { S.pending.careers = ''; changed = true; toast('The careers page is now online.'); }
+        var left = Object.keys(S.pending.projects).length + Object.keys(S.pending.blog).length + (S.pending.voices ? 1 : 0) + (S.pending.careers ? 1 : 0);
         if (!left || Date.now() - watchStart > 8 * 60e3) {
           clearInterval(watching); watching = null;
           if (left) toast('Your change is saved, but the site has not shown it yet. Check the deployments in Vercel.', true);
         }
-        if (changed && !S.dirty && /^(#projects|#blog|#voices|)$/.test(location.hash)) route();
+        if (changed && !S.dirty && /^(#projects|#blog|#voices|#careers|)$/.test(location.hash)) route();
       }).catch(function () {});
     }, 10000);
   }
@@ -604,6 +606,60 @@
       var data = { figures: figs.map(function (f) { return f.get(); }).filter(Boolean), quotes: qEls.map(function (g2) { return g2(); }) };
       call('saveVoices', { voices: data }).then(function (r) {
         S.dirty = false; S.pending.voices = r.saved; watch();
+        toast('Saved. The site updates in about a minute; this page will say when it is online.');
+        return load().then(route);
+      }).catch(function (err) { saveBtn.disabled = false; msg.textContent = err.message; msg.className = 'save__msg is-bad'; });
+    });
+  }
+
+  /* ---------- careers: the open positions (content/careers.json) ---------- */
+  var CONTRACT_NAMES = [['full-time', 'Full-time (CDI)'], ['part-time', 'Part-time'], ['fixed-term', 'Fixed-term (CDD)'], ['freelance', 'Freelance'], ['internship', 'Internship (stage)']];
+  function careersEditor() {
+    var c = clone(S.careers || { positions: [] });
+    var list = c.positions || [], els = [];
+    var box = h('div', { class: 'parts' });
+    var places = (S.site && S.site.places) || {};
+    var draw = function () {
+      box.textContent = ''; els = [];
+      list.forEach(function (p, i) {
+        var open = h('input', { type: 'checkbox' }); open.checked = p.open !== false;
+        var title = pair('Title', p.title, { ph: { en: 'Event production manager', fr: 'Chef de projet production événementielle' }, max: 120 });
+        var contract = h('select', null, CONTRACT_NAMES.map(function (k) { var o = h('option', { value: k[0], text: k[1] }); if (p.contract === k[0]) o.selected = true; return o; }));
+        var city = h('select', null, [h('option', { value: '', text: 'Morocco (several cities)' })].concat(Object.keys(places).map(function (k) { var o = h('option', { value: k, text: tr(places[k], 'en') }); if (p.city === k) o.selected = true; return o; })));
+        var posted = h('input', { type: 'date', value: p.posted || today() }), until = h('input', { type: 'date', value: p.until || '' });
+        var summary = pair('Summary', p.summary, { area: true, max: 600, note: 'two or three sentences, shown at the top and in Google' });
+        var missions = pair('What they will do', { en: ((p.missions || {}).en || []).join('\n'), fr: ((p.missions || {}).fr || []).join('\n') }, { area: true, note: 'one per line' });
+        var profile = pair('Who we are looking for', { en: ((p.profile || {}).en || []).join('\n'), fr: ((p.profile || {}).fr || []).join('\n') }, { area: true, note: 'one per line' });
+        var offer = pair('What we offer', p.offer, { area: true, note: 'optional' });
+        els.push(function () {
+          return { id: p.id || '', open: open.checked, title: title.get(), contract: contract.value, city: city.value, posted: posted.value, until: until.value,
+            summary: summary.get(), missions: { en: linesOf(missions.ins.en.value), fr: linesOf(missions.ins.fr.value) }, profile: { en: linesOf(profile.ins.en.value), fr: linesOf(profile.ins.fr.value) }, offer: offer.get() };
+        });
+        var where = p.id ? h('a', { href: '/careers/' + p.id, target: '_blank', rel: 'noopener', text: 'ben.events/careers/' + p.id }) : h('em', { text: 'its page is made when you save' });
+        box.appendChild(h('div', { class: 'part' },
+          h('div', { class: 'part__top' }, h('b', { text: (tr(p.title, 'en') || 'New position') }), h('button', { type: 'button', text: 'Remove', onclick: function () { if (!confirm('Remove this position from the site?')) return; list = els.map(function (g) { return g(); }); list.splice(i, 1); S.dirty = true; draw(); } })),
+          h('label', { class: 'check' }, open, h('span', { text: 'Open: shown on the careers page, with its own page and a job posting for Google' })),
+          h('p', { class: 'hint' }, 'Page: ', where),
+          h('div', { class: 'grid' }, title.el), h('div', { class: 'grid grid--3' }, field('Contract', contract), field('Place', city), field('Posted on', posted)),
+          h('div', { class: 'grid grid--3' }, field('Applications until', until, 'optional: the page goes after that day')),
+          h('div', { class: 'grid' }, summary.el, missions.el, profile.el, offer.el)));
+      });
+      box.appendChild(h('button', { class: 'btn btn--ghost btn--sm', type: 'button', text: '+ Add a position', onclick: function () { list = els.map(function (g) { return g(); }); list.unshift({ open: true, posted: today(), contract: 'full-time' }); S.dirty = true; draw(); } }));
+    };
+    draw();
+    var live = S.site && S.site.published && S.site.published.careers;
+    var state = S.pending.careers ? h('span', { class: 'badge badge--wait', text: 'Going online…' }) : live && live === (S.careers || {}).saved ? h('span', { class: 'badge badge--live', text: 'Online' }) : (S.careers || {}).saved ? h('span', { class: 'badge badge--wait', text: 'Not online yet' }) : null;
+    var msg = h('span', { class: 'save__msg' }), saveBtn = h('button', { class: 'btn', type: 'button', text: 'Save' });
+    var form = h('div', { class: 'form' },
+      h('div', { class: 'bar' }, h('div', null, h('h1', { text: 'Careers' }, state), h('p', { class: 'lead' }, 'The open positions of the careers page (', h('a', { href: '/careers', target: '_blank', rel: 'noopener', text: 'ben.events/careers' }), '). Each open position gets its own page, in English and in French, and appears in Google’s job search. Untick “Open” to take a position off the site without losing it. Applications arrive like the enquiries of the contact form.'))),
+      h('section', { class: 'box' }, h('h2', { text: 'Positions' }), box));
+    watchDirty(form);
+    screen(form, h('div', { class: 'save' }, msg, saveBtn));
+    saveBtn.addEventListener('click', function () {
+      saveBtn.disabled = true;
+      msg.textContent = 'Saving…'; msg.className = 'save__msg';
+      call('saveCareers', { careers: { positions: els.map(function (g) { return g(); }) } }).then(function (r) {
+        S.dirty = false; S.pending.careers = r.saved; watch();
         toast('Saved. The site updates in about a minute; this page will say when it is online.');
         return load().then(route);
       }).catch(function (err) { saveBtn.disabled = false; msg.textContent = err.message; msg.className = 'save__msg is-bad'; });

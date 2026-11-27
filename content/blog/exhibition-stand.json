@@ -1,0 +1,229 @@
+{
+  "id": "exhibition-stand",
+  "order": 9,
+  "draft": false,
+  "short": {
+    "en": "Exhibition stand",
+    "fr": "Stand d’exposition"
+  },
+  "slug": {
+    "en": "exhibition-stand-in-morocco-from-design-to-set-up",
+    "fr": "stand-d-exposition-au-maroc-de-la-conception-au-montage"
+  },
+  "date": "2026-11-27",
+  "image": [
+    "assets/img/wall/exhibition-stand.jpg",
+    960,
+    1280
+  ],
+  "title": {
+    "en": [
+      "Exhibition stands:",
+      "from design to set-up"
+    ],
+    "fr": [
+      "Stand d’exposition :",
+      "de la conception au montage"
+    ]
+  },
+  "card": {
+    "en": "Brief, floor plan and the rules of the show, structure, printing, screens, light, furniture, set-up and take-down: the steps of a good stand.",
+    "fr": "Brief, plan et règlement du salon, structure, impression, écrans, lumière, mobilier, montage et démontage : les étapes d’un stand réussi."
+  },
+  "lede": {
+    "en": "A stand has a few seconds to stop a visitor walking down the aisle. Here is how to design and build it, from the brief to the take-down, within the rules of each show.",
+    "fr": "Un stand a quelques secondes pour arrêter un visiteur dans l’allée. Voici comment le concevoir et le construire, du brief au démontage, en respectant les règles de chaque salon."
+  },
+  "seo": {
+    "title": {
+      "en": "Exhibition Stands in Morocco: a Guide | benevents agency",
+      "fr": "Stand d’exposition au Maroc : le guide | benevents agency"
+    },
+    "desc": {
+      "en": "Exhibition stands in Morocco: the brief, the floor plan and rules of the show, trade fair stand design, structure, printing, screens, light and set-up.",
+      "fr": "Stand d’exposition au Maroc : brief, plan et règlement du salon, conception de stand de salon, structure, impression, écrans, lumière et montage."
+    }
+  },
+  "body": {
+    "en": [
+      {
+        "h": "What a stand has to do",
+        "p": [
+          "A stand has three moments to get right. From a distance, it must tell a visitor walking down the aisle who you are. Up close, it must welcome people comfortably, show your products and leave room to talk. And it must look as good on the last day of the show as on the first.",
+          "Before drawing anything, decide what visitors should do on the stand: discover a product, book a meeting, leave their details, watch a demonstration. The design follows from that."
+        ]
+      },
+      {
+        "h": "The brief for the stand",
+        "p": [
+          "A good brief fits on one page:"
+        ],
+        "list": [
+          "The show, its dates, the hall and the stand number.",
+          "The surface and the type of space: one side open, a corner, a peninsula or an island.",
+          "The objective and the main messages.",
+          "The products to display, with their dimensions and weight.",
+          "How many people will work on the stand, and the meetings to hold: is a table enough, or is a closed space needed?",
+          "The screens and demonstrations planned.",
+          "Storage: brochures, gifts, personal belongings.",
+          "The budget, and whether the stand must be used again at other shows."
+        ],
+        "after": [
+          "Attach the floor plan of the hall: where the stand sits in the aisle, its neighbours and the entrances all change the design."
+        ]
+      },
+      {
+        "h": "The floor plan and the rules of the show",
+        "p": [
+          "Each organiser has its own rules, gathered in its exhibitor manual or technical guide. Read it as soon as the space is booked: it sets what the stand is allowed to do, and the deadlines not to miss. It usually covers:"
+        ],
+        "list": [
+          "The maximum height, and the rules for anything hung above the stand.",
+          "The sides that must stay open, and the setbacks from the neighbours.",
+          "Requirements for materials, in particular how they behave in a fire.",
+          "Ordering the electrical connection and, if needed, water or internet.",
+          "The plans to submit for approval, and their deadline.",
+          "The set-up and take-down times, and access for contractors."
+        ],
+        "after": [
+          "When a rule is unclear, ask the organiser in writing, before anything is built."
+        ]
+      },
+      {
+        "h": "The structure: made to measure or modular",
+        "p": [
+          "A made-to-measure stand, built in a workshop, allows any shape and any finish. A modular stand, with an aluminium structure and tension-fabric walls, is lighter, quicker to set up, and reusable from one show to the next. The two can be combined: a modular structure for the walls, and made-to-measure pieces for the counter or the display case.",
+          "A raised floor hides the cables and marks the edge of the stand. It must stay easy to step onto: a ramp or a low edge avoids putting some visitors off."
+        ],
+        "after": [
+          "Our page {Exhibition stands|production:stands} sets out the design, construction and installation we take care of."
+        ]
+      },
+      {
+        "h": "Printing and signage",
+        "p": [
+          "What is seen from afar is what is high up: the logo and a short sentence, placed above the visitors’ heads. The rest is read up close: the products, the arguments, how to get in touch.",
+          "Printed fabric stretched in frames (SEG) gives walls without creases, and can be backlit to stay bright under the lights of the hall. Vinyl dresses counters, windows and floors. Files are prepared at real size, with a proof approved for each visual before printing. Our page {Printing & signage|production:printing} presents the materials available."
+        ]
+      },
+      {
+        "h": "Screens and light on the stand",
+        "p": [
+          "The light in an exhibition hall is often flat. Spotlights on the products, a backlit wall or an illuminated logo make the stand catch the eye from the aisle. A screen shows a video loop or a demonstration; if it plays sound, check what the rules allow, and think of the neighbours.",
+          "Screens and light depend on the electrical connection ordered from the organiser: work out the power you need before the ordering deadline. For a video wall, our {guide to LED screen rental|guide:led-screen-rental} helps to choose the pitch and the size."
+        ]
+      },
+      {
+        "h": "Furniture and circulation",
+        "p": [
+          "Furniture is chosen for what happens on the stand: a counter in your colours with storage, high tables for quick conversations, seating for meetings, displays for the products. Keep the entrance clear: a counter set across the way stops visitors instead of inviting them in.",
+          "Plan a closed storeroom, however small, for coats, stock and boxes. And if hostesses welcome visitors on the stand, brief them as for any event: our article on {welcoming your guests|guide:hostesses-welcome} gives the method."
+        ]
+      },
+      {
+        "h": "Set-up, the show and take-down",
+        "p": [
+          "The set-up days are fixed by the organiser, and often short. The pieces are therefore made and checked in the workshop, then assembled on site. The stand must be ready, cleaned and lit before the opening, after a last round of checks: sockets, screens, light, stability.",
+          "During the show, someone must be able to come and deal with a lamp, a screen or a sticker coming loose. The take-down is done within the time allowed, leaving the space empty; what will be used again is packed and stored for the next show."
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "h": "Ce qu’un stand doit faire",
+        "p": [
+          "Un stand a trois moments à réussir. De loin, il doit dire qui vous êtes au visiteur qui avance dans l’allée. De près, il doit accueillir confortablement, montrer vos produits et permettre de parler. Et il doit rester aussi beau le dernier jour du salon que le premier.",
+          "Avant de dessiner quoi que ce soit, fixez ce que les visiteurs doivent faire sur le stand : découvrir un produit, prendre rendez-vous, laisser leurs coordonnées, assister à une démonstration. La conception en découle."
+        ]
+      },
+      {
+        "h": "Le brief du stand",
+        "p": [
+          "Un bon brief tient en une page :"
+        ],
+        "list": [
+          "Le salon, ses dates, le hall et le numéro du stand.",
+          "La surface et le type d’emplacement : un côté ouvert, en angle, en péninsule ou en îlot.",
+          "L’objectif et les messages principaux.",
+          "Les produits à exposer, avec leurs dimensions et leur poids.",
+          "Le nombre de personnes sur le stand, et les rendez-vous à tenir : une table suffit-elle, ou faut-il un espace fermé ?",
+          "Les écrans et les démonstrations prévus.",
+          "Le rangement : documentation, cadeaux, effets personnels.",
+          "L’enveloppe budgétaire, et si le stand doit resservir sur d’autres salons."
+        ],
+        "after": [
+          "Joignez-y le plan du hall : la place du stand dans l’allée, ses voisins et les entrées changent la conception."
+        ]
+      },
+      {
+        "h": "Le plan et le règlement du salon",
+        "p": [
+          "Chaque organisateur a ses propres règles, réunies dans son guide de l’exposant ou son dossier technique. Lisez-le dès la réservation de l’emplacement : il fixe ce que le stand a le droit de faire, et les dates à ne pas manquer. On y trouve en général :"
+        ],
+        "list": [
+          "La hauteur maximale, et les règles pour les éléments suspendus au-dessus du stand.",
+          "Les côtés qui doivent rester ouverts, et les retraits par rapport aux voisins.",
+          "Les exigences sur les matériaux, notamment leur comportement au feu.",
+          "La commande du branchement électrique et, si besoin, de l’eau ou d’internet.",
+          "Les plans à soumettre pour validation, et leur date limite.",
+          "Les horaires de montage et de démontage, et les accès pour les prestataires."
+        ],
+        "after": [
+          "Quand une règle n’est pas claire, posez la question à l’organisateur par écrit, avant de fabriquer."
+        ]
+      },
+      {
+        "h": "La structure : sur mesure ou modulaire",
+        "p": [
+          "Un stand sur mesure, construit en atelier, permet toutes les formes et toutes les finitions. Un stand modulaire, avec une structure en aluminium et des murs en textile tendu, est plus léger, plus rapide à monter, et réutilisable d’un salon à l’autre. Les deux peuvent se combiner : une structure modulaire pour les murs, et des éléments sur mesure pour le comptoir ou la vitrine.",
+          "Un plancher surélevé cache les câbles et marque la limite du stand. Il doit rester facile d’accès : une rampe ou un rebord bas évite de décourager une partie des visiteurs."
+        ],
+        "after": [
+          "Notre page {Stands d’exposition|production:stands} détaille la conception, la fabrication et le montage que nous prenons en charge."
+        ]
+      },
+      {
+        "h": "Impression et signalétique",
+        "p": [
+          "Ce qui se voit de loin, c’est ce qui est en hauteur : le logo et une phrase courte, placés au-dessus des têtes des visiteurs. Le reste se lit de près : les produits, les arguments, les moyens de vous joindre.",
+          "Le textile imprimé tendu dans des cadres (SEG) donne des murs sans plis, et peut être rétroéclairé pour rester lumineux sous l’éclairage du hall. Les adhésifs habillent comptoirs, vitrines et sol. Les fichiers se préparent aux dimensions réelles, avec un bon à tirer validé pour chaque visuel avant impression. Notre page {Impression & signalétique|production:printing} présente les supports possibles."
+        ]
+      },
+      {
+        "h": "Écrans et lumière sur le stand",
+        "p": [
+          "La lumière d’un hall d’exposition est souvent plate. Des spots sur les produits, un mur rétroéclairé ou un logo lumineux font ressortir le stand dans l’allée. Un écran montre une vidéo en boucle ou une démonstration ; s’il diffuse du son, vérifiez ce que le règlement autorise, et pensez aux voisins.",
+          "Les écrans et la lumière dépendent du branchement électrique commandé à l’organisateur : calculez la puissance nécessaire avant la date limite de commande. Pour un mur d’images, notre {guide de la location d’écran LED|guide:led-screen-rental} aide à choisir le pitch et la taille."
+        ]
+      },
+      {
+        "h": "Mobilier et circulation",
+        "p": [
+          "Le mobilier se choisit pour ce qui se passe sur le stand : un comptoir à vos couleurs avec du rangement, des mange-debout pour les échanges rapides, des assises pour les rendez-vous, des présentoirs pour les produits. Gardez l’entrée dégagée : un comptoir posé en travers du passage arrête les visiteurs au lieu de les inviter.",
+          "Prévoyez une réserve fermée, même petite, pour les manteaux, le stock et les cartons. Et si des hôtesses accueillent sur le stand, briefez-les comme pour tout événement : notre article sur {l’accueil des invités|guide:hostesses-welcome} en donne la méthode."
+        ]
+      },
+      {
+        "h": "Montage, salon et démontage",
+        "p": [
+          "Les jours de montage sont fixés par l’organisateur, et souvent courts. Les éléments sont donc fabriqués et vérifiés en atelier, puis assemblés sur place. Le stand doit être prêt, nettoyé et éclairé avant l’ouverture, après un dernier tour de vérification : prises, écrans, lumière, stabilité.",
+          "Pendant le salon, quelqu’un doit pouvoir intervenir pour une lampe, un écran ou un adhésif qui se décolle. Le démontage se fait dans le temps imparti, en laissant l’emplacement libre ; ce qui doit resservir est emballé et stocké pour le prochain salon."
+        ]
+      }
+    ]
+  },
+  "related": {
+    "events": [
+      "launch",
+      "openday"
+    ],
+    "services": [
+      "production",
+      "receptions"
+    ],
+    "guides": [
+      "led-screen-rental",
+      "hostesses-welcome"
+    ]
+  }
+}

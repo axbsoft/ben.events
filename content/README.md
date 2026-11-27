@@ -8,10 +8,15 @@ What the team changes most often lives here, as data, and is edited on the admin
 | `projects.json` | the portfolio: each project, its photos and facts; the kinds of events and the places | home page, /projects, each project's page, the pages of the cities and the events |
 | `blog/<id>.json` | one article of the blog each | /blog, each article |
 | `voices.json` | key figures and client quotes | home page (under the client logos), /agency |
+| `careers.json` | the positions of the careers page; an open one gets its own page and a job posting for Google | /careers, /careers/<id> (and /fr/carrieres) |
 
 Each save on the admin page is a commit to this repository, signed with the name of the person who made it.
 Vercel then builds the site again (`node tools/site/build.mjs && node tools/site/dist.mjs`, set in `vercel.json`) and puts it online,
 about a minute later. A project or an article marked **draft** stays off the site.
+
+Applications (a position, a spontaneous application, or “Work with us”: hostesses, technicians, crew) arrive like the
+enquiries of the contact form, at the same webhook (`CONTACT_WEBHOOK_URL`), with a type such as “Application — <position>”
+or “Work with us — <roles>”. To receive them somewhere else, set `CAREERS_WEBHOOK_URL` in Vercel (see `api/apply.js`).
 
 These files are not published: Vercel builds the site and publishes only `dist/` (`tools/site/dist.mjs`),
 without `content/`, `tools/` or `api/`. Anyone who can read this repository can read them, drafts included:
