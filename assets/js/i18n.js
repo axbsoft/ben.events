@@ -37,12 +37,6 @@ window.BEN_I18N = {
     'hero.cta2': 'Voir nos réalisations',
     'hero.scroll': 'Faites défiler',
 
-    'mq.1': 'Conférences',
-    'mq.2': 'Conventions',
-    'mq.3': 'Soirées de gala',
-    'mq.4': 'Cérémonies',
-    'mq.5': 'Lancements de marque',
-    'mq.6': 'Production audiovisuelle',
 
     'about.eyebrow': 'L’Agence',
     'about.title': 'Une seule équipe, de la conception à la production.',

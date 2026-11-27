@@ -325,16 +325,6 @@ ul, ol { padding: 0; list-style: none; }
 @keyframes cue { 0% { transform: translateY(-101%); } 55%, 100% { transform: translateY(101%); } }
 
 /* ---------- Marquee ---------- */
-/* the band under the hero: the kinds of events, in one serif italic, between two hairlines, with small gold diamonds; slow */
-.marquee { position: relative; overflow: hidden; padding: clamp(26px, 3.4vw, 46px) 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-.marquee::before, .marquee::after { content: ""; position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(246, 245, 241, .16) 20%, rgba(246, 245, 241, .16) 80%, transparent); }
-.marquee::before { top: 0; }
-.marquee::after { bottom: 0; }
-.marquee__track { display: flex; width: max-content; animation: marquee 90s linear infinite; }
-.marquee:hover .marquee__track { animation-play-state: paused; }
-.marquee__group { display: flex; align-items: center; flex: none; }
-.marquee span { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -.005em; font-size: clamp(30px, 3.6vw, 58px); line-height: 1.1; color: rgba(246, 245, 241, .82); padding: 0 clamp(26px, 3vw, 52px); white-space: nowrap; }
-.marquee i { flex: none; width: 6px; height: 6px; transform: rotate(45deg); background: #d9b47a; opacity: .75; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 
